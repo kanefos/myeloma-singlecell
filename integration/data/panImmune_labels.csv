@@ -1,0 +1,31 @@
+﻿leiden_0.6,lineage,pheno
+0,T cell,CTL
+1,T cell,CD4.Tm
+2,T cell,CD4.Tn
+3,Myeloid,MonoCD14
+4,PC,PC
+5,NK cell,NK cell
+6,B cell,B memory
+7,T cell,CD8.Tn
+8,T cell,CD8.Tm
+9,Progenitor,GMP
+10,Progenitor,Erythroid
+11,T cell,CD4.Tcm
+12,Myeloid,MonoCD14
+13,Progenitor,HSC
+14,Progenitor,HSC
+15,Myeloid,MonoCD16
+16,Progenitor,B progenitor
+17,Myeloid,pDC
+18,B cell,B naive
+19,Doublet,Doublet
+20,T cell,MAIT_gdT
+21,Platelet,Platelet
+22,PC,PC
+23,T cell,T prolif
+24,Nonhaem,Nonhaem
+25,PC,PC
+26,Neutrophil,Neutrophil
+27,Progenitor,BaEoMa
+28,Myeloid,Mac
+29,Myeloid,cDC
