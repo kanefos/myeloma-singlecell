@@ -8,23 +8,28 @@ _Overview of methods vs directly implementable, but could be_
 
 Contents
 - .yaml
-- workbook
+- workbooks
 
-Input: `raw_data.h5ad`? 
-- Pre-processed/labelled identically to the Zenodo data
+Extra inputs: 
+- `raw_data.h5ad`? Pre-processed/labelled identically to the Zenodo data, does not exist in dataset
+- Validation data, raw and processed (processed is included in this dir)
 
-Yields Zenodo .h5ad
+Yields Zenodo .h5ad files
 
 ### preprocessing
 
-1. `import.R` Takes Zenodo data as input, generates processed data for analysis (must specify Zenodo DOI)
+_All being input onto Snakefile_
 
-Other data
+1. `import.R` downloads data from Zenodo to local environment
+2. `process.py` generates working objects from .h5ad
+3. `abundances.R` generates `comp` and `ords` objects
+
+Other input data
 - Granja CITE-seq
 - External labels?
 - TCR database (used version)
-- CoMMpass (or, omit?)
-- Another Zenodo, including `raw_data.h5ad`?
+- CoMMpass _(or, omit?)_
+- Another Zenodo for all this?
 
 
 ### notesbooks / figures
