@@ -1,0 +1,81 @@
+#SAMPLES = filenames_df[1].to_list()
+#print(SAMPLES)
+
+#rule all:
+#    input:
+#        #expand("data/TCRseq_processed/{sample}.csv", sample = SAMPLES)
+#        # Some final psuedo-fig when all ran?
+        "dummy file to include in rule all"
+
+
+rule import_data:
+    output:
+        "data/import/dataDescription.xlsx"
+        "data/import/metadata-donor.csv"
+        "data/import/panImmune.h5ad"
+        "data/import/Tcell-scTCR.csv"
+        "data/import/Tcell.h5ad"
+    shell:
+        "/Users/kaneucl/miniconda3/envs/R-4.2.3/bin/Rscript scr/import.R"
+
+rule process_imported_data:
+    input:
+        "data/import/metadata-donor.csv"
+        "data/import/panImmune.h5ad"
+        "data/import/Tcell.h5ad"
+        "data/markers.csv" #move to other dir, which is consistent in github? vs generated?
+    output:
+        "data/panImm_obs.csv"
+        "data/import/PC.h5ad"
+        "data/panImm_exp.csv"
+        "data/Tcell_obs.csv"
+        "data/Tcell_exp.csv"
+    shell:
+        "/Users/kaneucl/miniconda3/envs/Increate22/bin/python scr/process.py"
+
+rule abundance_prep:
+    input:
+        "data/panImm_obs.csv"
+        "data/Tcell_obs.csv"
+        "data/validation_obs.csv" #???
+    output:
+        "data/comp.RData"
+        "data/ords.RData"
+    shell:
+        "Rscript scr/abundances.R"
+
+
+rule abundance_prep:
+    input:
+        ""
+    output:
+        ""
+    shell:
+        ""
+
+rule abundance_prep:
+    input:
+        ""
+    output:
+        ""
+    shell:
+        ""
+
+rule abundance_prep:
+    input:
+        ""
+    output:
+        ""
+    shell:
+
+
+
+
+rule consolidate_data:
+    input:
+        "ALL PREVIOUS GENERATED FILES? OR JUST THOSE PROCESSED?"
+    output:
+        "dummy file to include in rule all"
+        "i.e. check all others installed?"
+    shell:
+        "dummy line"

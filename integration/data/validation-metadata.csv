@@ -1,0 +1,23 @@
+﻿study,sample_id,donor,diagnosis,stage_risk,age,sex,PP_g.dL,pct_CD138
+Botta2023,Healthy1,Healthy1,Non,N/A,43,F,,
+Botta2023,Healthy2,Healthy2,Non,N/A,72,F,,
+Botta2023,Healthy3,Healthy3,Non,N/A,52,,,
+Botta2023,Healthy4,Healthy4,Non,N/A,90,,,
+Botta2023,MGUSSMM1,MGUS/SMM1,MGUS,N/A,68,M,,
+Botta2023,MGUSSMM2,MGUS/SMM2,MGUS,CTG_high risk,87,M,,
+Botta2023,MGUSSMM3,MGUS/SMM3,MGUS,CTG_standard risk,67,F,,
+Botta2023,MGUSSMM4,MGUS/SMM4,MGUS,CTG_standard risk,55,M,,
+Botta2023,MGUSSMM5,MGUS/SMM5,SMM,N/A,35,M,1.2,9
+Botta2023,MGUSSMM6,MGUS/SMM6,SMM,N/A,51,F,,
+Botta2023,MGUSSMM7,MGUS/SMM7,SMM,N/A,51,M,0.51,
+Botta2023,MGUSSMM8,MGUS/SMM8,SMM,CTG_standard risk,42,,3.43,
+Botta2023,MM1,MM1,MM,CTG_standard risk,55,,,
+Botta2023,MM2,MM2,MM,CTG_standard risk,54,,,
+Botta2023,MM3,MM3,MM,CTG_standard risk,50,,4.6,10
+Botta2023,MM4,MM4,MM,CTG_standard risk,58,,4.408,48.6
+Botta2023,MM5,MM5,MM,CTG_standard risk,64,,6.11,15
+Botta2023,MM6,MM6,MM,CTG_high risk,51,,1.42,15
+Botta2023,MM7,MM7,MM,CTG_standard risk,71,,2.7,13
+Botta2023,MM8,MM8,MM,CTG_standard risk,73,,,
+Botta2023,MM9,MM9,MM,CTG_high risk,66,,,
+Botta2023,MM10,MM10,MM,CTG_standard risk,,,,
