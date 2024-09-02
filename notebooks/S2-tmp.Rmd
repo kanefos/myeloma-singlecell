@@ -1,0 +1,631 @@
+---
+title: "S2"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+# ...
+## Setup
+
+```{r setup-import, eval=T, hide=T}
+source('../resources/aes.R')
+da_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% mutate(diagnosis=cohort)
+# PC_scores
+# PC_Ig
+# PC_DEG
+# PC_DEG + pw
+
+dir.create('../figures/S2')
+```
+
+# [move, 1I WIP] 1
+
+## 1G
+
+```{r 1G, fig.height=1.5, fig.width=3, eval=T, hide=T}
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+dat = m_id %>% mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
+  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  left_join(da_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct() %>% 
+  mutate(clonal=factor(ifelse(mPC=='mPC','Clonal','Non-clonal'),c('Non-clonal','Clonal')))
+  
+dat %>% 
+  mutate(donor_id = factor(donor_id,arrange(dat[dat$mPC=='mPC',],pct)$donor_id)) %>% 
+  ggplot(aes(donor_id,pct,fill=clonal))+
+  geom_bar(stat='identity', width = 1)+
+  scale_fill_manual(values = mPC_col)+
+  labs(x='Patient (n = 46)',y='% plasma cells',fill='Immunoglobulin')+
+  scale_y_continuous(limits=c(70,100), breaks = c(75,100),oob = scales::rescale_none)+
+  theme(
+    axis.text.x = element_blank(), axis.ticks.x = element_blank()
+  ) -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/1/1G.pdf',width=3,height=1.5, dpi="retina")
+
+
+```
+
+
+## 1H
+
+```{r 1H, fig.width=5, fig.height=2, eval=T, hide=T}
+
+load('../preprocessing/data/tumour_modules_scr.RData')
+pathways = read.csv('resources/pathways.csv')
+pathways_neat = pathways %>% select(-gene) %>% distinct()
+scr_gavish = scr[1:40,]
+scr_gavish$max = rownames(scr_gavish)[apply(assay(scr_gavish),2,FUN = which.max)]
+
+dat = data.frame(table(scr_gavish$max)) %>% mutate(Var1=as.vector(Var1)) %>% arrange(-Freq) %>% 
+  left_join(pathways_neat[1:40,] %>% mutate(Var1=rownames(scr)[1:40])) %>% 
+  mutate(Var1=replace(pathway_neat, Freq < 2000 ,'Other')) %>% 
+  group_by(Var1) %>% summarise(Freq=sum(Freq)) %>% 
+  arrange(Freq) %>% mutate(Var1=factor(Var1,unique(Var1))) %>% 
+  mutate(pct=round(Freq/sum(Freq)*100,2))
+  
+dat %>% 
+  ggplot(aes(x="", y=Freq, fill=Var1))+
+  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.75)+
+  coord_polar("y", start=0)+
+  labs(fill='Dominant pathway')+
+  scale_fill_brewer(palette = 'Set1',direction = -1, breaks=rev(dat$Var1))+
+  #guides(fill=guide_legend(ncol=2))+
+  theme_void()+
+  theme(
+    #plot.margin = margin(1,1,1,1, "cm"),
+    legend.key.size = unit(0.5, "cm"),
+    legend.text=element_text(size=10),
+    legend.title=element_blank()
+  ) -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/1/1H.pdf',width=5,height=2, dpi="retina")
+
+```
+
+
+
+## 1I
+
+comp.RData
+PC_scores
+_da_testing_
+
+# [move] S2
+
+## Overview N donor/cells ig predicted
+
+```{r Ncells, eval=T, hide=T}
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+m_id %>% filter(!donor_id %in% donors.longit) %>% dim()
+m_id %>% filter(!donor_id %in% donors.longit) %>% pull(donor_id) %>% unique() %>% length()
+pc_n = m_id %>% filter(!donor_id %in% donors.longit) %>% group_by(donor_id) %>% tally() %>% .$n 
+median(pc_n)
+range(pc_n)
+```
+
+## S2A
+
+Data prep
+```{r S2A-prep, eval=T, hide=T}
+
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+gene_n = m_id %>% select(donor_id,lightV1,lightV2,IGHV1,IGHV2,IGHC1,IGHC2) %>% 
+  pivot_longer(!donor_id,names_to='gene') %>% filter(value!='') %>% 
+  group_by(donor_id,gene,value) %>% tally() %>% ungroup() %>% 
+  left_join(data.frame(gene=c('lightV1','lightV2','IGHV1','IGHV2','IGHC1','IGHC2'),
+    group=c('light','light','IGHV','IGHV','IGHC','IGHC'),
+    rank=c(1,2,1,2,1,2))) %>% 
+  arrange(-n)
+
+ig_gene_group = data.frame()
+for (g in c('lightV','IGHC','IGHV')){
+  gs=unique(c(m_id[[paste0(g,1)]],m_id[[paste0(g,1)]]))
+  ig_gene_group = rbind(ig_gene_group,data.frame(gene=gs,group=rep(g,length(gs))) ) 
+}
+ig_gene_group = ig_gene_group %>% filter(gene!='')
+
+m_id_pl = m_id %>% filter(!donor_id %in% donors.longit) %>% 
+  select(donor_id,lightV1,IGHV1,IGHC1) %>% pivot_longer(!donor_id,names_to='chain',values_to='g') %>% 
+  filter(g!='') %>% 
+  group_by(donor_id,chain,g) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id,chain) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  mutate(x=paste0(donor_id,chain,g)) %>% arrange(pct) %>% mutate(x=factor(x,x)) %>% 
+  arrange(-n) %>% group_by(donor_id,chain) %>% 
+  mutate(rank=row_number()) %>% ungroup() %>% 
+  mutate(rank=factor(ifelse(rank %in% 1:2,rank,'<2'),c(1,2,'<2'))) %>% 
+  left_join(data.frame(
+    chain=c("lightV1","IGHC1","IGHV1"),
+    chain.pl=c('Light variable','Heavy constant','Heavy variable')
+  )) %>% mutate(chain.pl=factor(chain.pl, c('Light variable','Heavy constant','Heavy variable')))
+
+# Quantify rank 1 %s
+tmp = m_id_pl %>% filter(rank==1) %>% group_by(chain.pl) %>% 
+  summarise(med=median(pct), r1=range(pct)[1], r2=range(pct)[2])
+print(tmp)
+```
+
+Plotting
+```{r S2A, fig.height=2.5, fig.width=5, eval=T, hide=T}
+donor.order = m_id_pl %>% filter(chain=='lightV1',rank==1) %>% arrange(-pct) %>% pull(donor_id)
+m_id_pl_sub = m_id_pl %>% filter(donor_id==donor.order[27],rank!='<2',chain=='lightV1')
+
+m_id_pl %>% 
+  mutate(rank=ifelse(rank==1,1,'<1')) %>% 
+  ggplot(aes(donor_id,pct))+facet_grid(~chain.pl)+
+  geom_point(aes(color=rank),size=1.25)+
+    scale_color_manual(values = setNames(c('#eb676e','grey77'),c(1,'<1')))+
+  labs(x='Patient',y='% plasma cells\nexpressing gene',color='Gene rank')+
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+        legend.position = 'bottom') -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/S2/A.pdf',width=5,height=2.5, dpi="retina")
+```
+
+
+## Quantify most abundant Ig chains
+
+- https://ashpublications.org/blood/article/110/9/3112/23967/Immunoglobulin-gene-rearrangements-and-the
+  - VH3-30 (*IGHV*) has been consistently found to be preferentially rearranged in myeloma, followed by VH5-51, VH1-69, and VH3-23. H3-30 and VH3-23 are the most frequently used gene segments both in normal and malignant B-cell populations, not MM-specific
+  - Most of the studies show a clear preference for Vκ1 (*IGKV*) family usage (53% of the total), followed by Vκ3 (25%); align w healthy B
+  - a few Vκ1 (*IGKV*) gene segments seem to be used very often; these include the Vκ1-33/1D-33, Vκ1-39/1D-39, and Vκ1-6 gene segments
+  - Studies dealing with Vλ (*IGLV*) usage in Igλ myeloma cases show largely equal Vλ1 (27%), Vλ2 (29%), and Vλ3 (41%) family usage (Table 4).46,59,77,78  Within these families, no clear preference for individual gene segments was observed.
+  
+```{r S2A-abundantIg, eval=T, hide=T}
+
+m_id_pl %>% filter(rank==1,chain!='IGHC1') %>% 
+  group_by(chain,g) %>% tally() %>% arrange(-n) %>% filter(n>1)
+
+common.IGH = c('IGHV3-30',"IGHV5-51", 'IGHV1-69', 'IGHV3-23')
+for (g in common.IGH ){print(paste0(g,'   ', g %in% unique(c(m_id$IGHV1,m_id$IGHV2))))}
+
+common.lightV = c('IGKV1-33','IGKV1D-33','IGKV1-39','IGKV1D-39','IGKV1-6')
+for (g in common.lightV ){print(paste0(g,'   ', g %in% unique(c(m_id$lightV1,m_id$lightV2))))}
+
+m_id_pl %>% filter(rank==1,chain!='IGHC1') %>% group_by(chain,g) %>% 
+  group_by(chain,g) %>% tally() %>% arrange(-n) %>% filter(n>1) %>% 
+  mutate(is = g %in% c(common.IGH,common.lightV)) %>% filter(is) %>% 
+  mutate(pct=n/length(unique(m_id_pl$donor_id))*100)
+
+```
+
+### Thresholding 
+
+
+Overview
+
+
+## S2B
+
+PC_Ig
+import/PC.h5ad
+
+
+```{r S2B, fig.height=5, fig.width=12, eval=T, hide=T}
+library(ComplexHeatmap)
+library(circlize)
+
+sce = zellkonverter::readH5AD('../preprocessing/data/import/PC.h5ad')
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+# Subset Ig genes
+sce = sce[rownames(sce) %in% unique(c(m_id$lightV1,m_id$lightV2,m_id$IGHC1,m_id$IGHC2,m_id$IGHV1,m_id$IGHV2)),]
+# Min expressed one cell
+sce = sce[rowSums(assay(sce))>0,]
+
+# Select donors
+sce = sce[,sce$donor_id %in% m_id$donor_id]
+sce = sce[,!sce$donor_id %in% donors.longit]
+
+# Subset to mPC
+sce = sce[,colnames(sce) %in% m_id$obs_names]
+
+# Subset 50 cells per donor
+index.plot = as_tibble(colData(sce)) %>% mutate(x=colnames(sce)) %>% 
+  select(donor_id,x) %>% group_by(donor_id) %>% slice_head(n = 50) %>% pull(x)
+sce=sce[,index.plot]
+
+# Expresion
+mat = as.matrix(assay(sce))
+mat <- t(scale(t(mat)))
+
+# Ig gene groups
+genes=rownames(mat)
+genes_gr = bind_rows(list(
+  lightV=data.frame(gene=rownames(sce)[startsWith(rownames(sce),c('IGKV', 'IGLV'))]),
+  IGHV=data.frame(gene=rownames(sce)[startsWith(rownames(sce),c('IGHV'))]),
+  IGHC=data.frame(gene=c('IGHA2', 'IGHE', 'IGHG4', 'IGHG2', 'IGHGP', 'IGHA1', 'IGHG1', 'IGHG3', 'IGHD', 'IGHM'))
+),.id='group') %>% 
+  left_join(
+    data.frame(group=c("lightV","IGHC","IGHV"),
+               group_pl=c('Light\nvariable','Heavy\nconstant','Heavy\nvariable'))
+  )
+genes_gr = as_tibble(rowData(sce)) %>% left_join(genes_gr) %>% pull(group_pl)
+
+# Donor col split
+patient = sce$donor_id
+donor_id_gr=sce$donor_id
+
+#pl
+hm_name='Scaled\nexpression'
+titleSettings <- gpar(fontsize = 10)
+textSettings_dims <- gpar(fontsize = 10)
+  
+hm <- Heatmap(mat, ##[,cell_order], 
+  name = hm_name, column_title_side = 'top', row_title_side = 'left',
+  col = colorRamp2(c(-0.5,0,1,3), cividis(4)),
+  # Clustering data
+  cluster_rows = F, cluster_columns = F,
+  show_row_dend = F, show_column_dend = F, 
+  show_row_names = F, # show gene names (usually yes)
+  show_column_names = F, # !!! cell names, never enable!
+  row_names_gp = textSettings_dims, column_names_gp = textSettings_dims,
+  column_names_rot = 45, row_names_rot = 0,
+  row_labels=genes,
+  #Splitting rows/columns
+  row_split = genes_gr, #factor(gene_groups, levels=unique(gene_groups)),
+  column_split = donor_id_gr,
+  row_gap = unit(0.5, "mm"),
+  #cluster_column_slices=F,#this controls slice order!
+  #ROW
+  row_title_gp = titleSettings, # or set each individually
+  row_title_rot = 0,  # only +/- units of 90 (vertical or horoz)
+  #COL
+  column_title = NULL,
+  #column_title_gp = gpar(fontsize = 8), 
+  #column_title_rot = 90, # only +/- units of 90 (vertical or horoz)
+  # Annotation
+  #top_annotation = column_ha,
+  # Plotting
+  use_raster=T,raster_quality=10
+)
+
+draw(hm)
+#grDevices::png("../figures/S2/B.png", height = 350, width = 1000)
+#ComplexHeatmap::draw(hm)
+#grDevices::dev.off()
+```
+
+
+
+## S2C
+
+- NSD2 = MMSET
+- CCND1
+
+```{r S2C, ffig.height=3.5, fig.width=6, eval=T, hide=T}
+
+# Published translocation information
+donor_transloc = data.frame(
+  donor_id=c('Maura_2023.PT03','Maura_2023.PT12','Foster_2024.SMM8','Foster_2024.SMM10','Maura_2023.PT30','Maura_2023.PT63'),
+  group=c('(4;14)+','(4;14)+','(4;14)+','(4;14)+','(11;14)+','(11;14)+'),
+  donor_pl=c("Maura 2023\nPT03\nt(4;14)+","Maura 2023\nPT12\nt(4;14)+",'This study\nSMM-8\nt(4;14)+', 'This study\nSMM-10\nt(4;14)+',"Maura 2023\nPT30\nt(11;14)+","Maura 2023\nPT63\nt(11;14)+"))
+
+# Expression
+sce = zellkonverter::readH5AD('../preprocessing/data/import/PC.h5ad')
+sce = sce[c('CCND1','NSD2'),sce$donor_id %in% donor_transloc$donor_id]
+
+dat.pl = data.frame(donor_id=sce$donor_id, CCND1=as.vector(assay(sce['CCND1',])),
+           MMSET=as.vector(assay(sce['NSD2',]))) %>% 
+  mutate(mPC = colnames(sce) %in% m_id[m_id$mPC=='True',]$obs_names) %>% 
+  mutate(mPC = ifelse(mPC,'Tumour (clonal)','Non-tumour (non-clonal)')) %>% 
+  left_join(donor_transloc) %>% 
+  select(donor_id,donor_pl,mPC,group,CCND1,MMSET) %>% 
+  pivot_longer(!c(donor_id:group)) %>% 
+  mutate(mPC=factor(mPC,levels=c('Non-tumour (non-clonal)','Tumour (clonal)'))) %>% 
+  mutate(name=factor(name,c('MMSET','CCND1'))) %>% 
+  mutate(donor_pl=factor(donor_pl,donor_transloc$donor_pl)) 
+
+pl.col = c('Tumour (clonal)'='#CB6651','Non-tumour (non-clonal)'='#CBD5E8')  
+
+dat.pl %>% 
+  ggplot(aes(mPC,value))+facet_grid(name~donor_pl)+
+  geom_violin(aes(fill=mPC))+geom_boxplot(alpha=0)+
+  scale_fill_manual(values = pl.col)+
+  stat_summary(fun.data = function(x){c(y = max(x)+0.5, label = length(x))}, 
+    geom = "text", fun.y = median, size=3)+
+  ggpubr::stat_compare_means(aes(label = paste0(after_stat(p.format))), 
+    method='wilcox.test', label.y=5.75,label.x=1.25, size=3)+
+  ylim(c(0,6.25))+
+  labs(y='Expression', fill='')+
+  theme(
+    legend.position = 'bottom',
+    legend.text = element_text(size=10),
+    panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+    axis.title.x=element_blank(),axis.text.x = element_blank(),
+    axis.text.y = element_text(size=11),
+    strip.background=element_blank(),
+    strip.text.x = element_text(size=9), strip.text.y=element_text(angle=0, hjust=1, size=11)
+  )->pl
+pl
+#ggsave(plot=pl,filename = '../figures/S2/S2C.pdf',width=6,height=3.5, dpi="retina")
+
+```
+
+
+## S2D
+
+```{r S2D, fig.height=3, fig.width=1.5, eval=T, hide=T}
+
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+dat = m_id %>% 
+  filter(!donor_id %in% donors.longit) %>% 
+  mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
+  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  left_join(da_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct()
+  
+dat %>% filter(mPC=='mPC') %>% 
+  ggplot(aes(x = diagnosis, y = pct, fill=diagnosis))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('SMM','MM')),method = 'wilcox.test',size=3.5,label.y=102.5)+
+  scale_y_continuous(limits = c(70,107.5), breaks = c(80,90,100))+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(x='',y='% clonal plasma cells',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=11), 
+    axis.text.y = element_text(size=11)
+    )-> pl
+pl
+#ggsave(plot=pl,filename = '../figures/S2/S2D.pdf',width=1.5,height=3, dpi="retina")
+```
+
+## S2E
+
+PC_scores
+
+# [move, 5G WIP] 5
+
+## 5F
+
+Data prep
+```{r 5F, fig.height=6, fig,width=7, eval=T, hide=T}
+library(ComplexHeatmap)
+tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
+load(file='../preprocessing/data/tumour_DE_fgsea.RData')
+
+fgseas.select = fgseas[fgseas$pathway=='KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION',] 
+donor.sigAPP = fgseas.select[(fgseas.select$pval<0.05)&(fgseas.select$NES>0),]$donor_id
+
+# Selected genes
+KEGG_APC.g = c('HLA-A','HLA-B','HLA-C', 'B2M','HLA-DRA','HLA-DPA1','CD74','HLA-E','HLA-F','TAP1','TAP2','TAPBP','PSME1','PSME2')
+
+donor.order = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>% group_by(donor_id) %>%
+  summarise(logFC=mean(logFC)) %>% arrange(logFC) %>% pull(donor_id)
+
+dat.in = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>%
+    mutate(is = donor_id %in% donor.sigAPP) %>%
+    mutate(donor_id = factor(donor_id,donor.order)) %>%
+    group_by(gene) %>% mutate(logFC=as.vector(scale(logFC)))
+
+dat.mat = dat.in %>% select(donor_id,gene,logFC) %>%
+  mutate(donor_id=factor(donor_id,donor.order)) %>% 
+  pivot_wider(names_from='donor_id',values_from='logFC',values_fill=NA) %>% 
+  relocate(any_of(c('gene',donor.order))) %>% 
+  mutate(gene=factor(gene,KEGG_APC.g)) %>% arrange(gene) %>% 
+  data.frame() %>% column_to_rownames('gene') %>% as.matrix()
+
+logFC.max=round(max(dat.in$logFC),2)
+logFC.min=round(min(dat.in$logFC),2)
+col_fun = circlize::colorRamp2(c(logFC.min, 0, logFC.max), c("dodgerblue", "white", "red"))
+
+column_donor_md = dat.in %>% ungroup() %>% select(donor_id) %>% distinct() %>% 
+  mutate(is_de = donor_id %in% donor.sigAPP) %>%
+  left_join(
+    read.csv('../preprocessing/data/import/metadata-donor.csv') %>% 
+      select(donor_id,cohort) %>% distinct()
+  ) %>% 
+  mutate(donor_id=factor(donor_id,donor.order)) %>% arrange(donor_id) 
+
+```
+
+Plotting/saving
+```{r fig.height=3, fig.width=4}
+
+column_ha = columnAnnotation(
+  " " = column_donor_md$cohort,
+  col = list(` `=diagnosis_col),
+  height = unit(4, "cm"),
+  gp = gpar(col = "black"), gap = unit(0, "points"),
+  annotation_name_side = "right", show_legend=F
+)
+
+row_ha = rowAnnotation(gene = anno_mark(at = 1:length(rownames(dat.mat)), labels = rownames(dat.mat)))
+
+Heatmap(
+  dat.mat,
+  color=col_fun,
+  na_col = 'grey80',
+  top_annotation = column_ha,
+  show_heatmap_legend=F,
+  cluster_rows = F, cluster_columns = F,
+  show_row_names = F, show_column_names = F, 
+  right_annotation = row_ha, 
+  row_names_gp = gpar(fontface='italic'),
+  column_split = column_donor_md$is_de, border = TRUE, 
+  column_title = c('MHC low', 'MHC high'),
+  width = unit(6, "cm"), height = unit(4, "cm")
+  ) -> hm
+
+lgd_list = list(
+  Legend(col_fun = col_fun, title = "Scaled log fold-change\ntumour / normal", at = c(logFC.min, 0, logFC.max), 
+    direction = "horizontal",title_position = "topcenter",
+    labels = c('Min', '', 'Max'),
+    title_gp=gpar(fontface='plain')
+  ))
+
+draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
+
+#grDevices::pdf("../figures/5/F.pdf", width = 4, height = 3)
+#draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
+#grDevices::dev.off()
+
+```
+
+
+## 5G
+
+PC_DEG + pw
+_nonviv_
+
+# S9
+
+## S9C
+
+```{r S9C, fig.height=4, fig.width=6, eval=T, hide=T}
+tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
+load(file='../preprocessing/data/tumour_DE_fgsea.RData')
+
+# Top DEP dotplot
+#fgseas %>% group_by(pathway,de) %>% tally() %>% arrange(desc(de),-n) #manually select
+
+shared.in = read.csv('../resources/Fig-S9C.csv')
+sig.pl = shared.in$pathway
+name.pl = shared.in$name_pl
+
+fgseas %>%
+  filter(pathway %in% sig.pl, NES>0) %>%
+  left_join(shared.in) %>% 
+  mutate(name_pl=factor(name_pl,rev(name.pl))) %>% 
+  filter(!is.na(name_pl)) %>% 
+  ggplot(aes(donor_id,name_pl,fill=NES, size=-log10(padj)))+geom_point(shape=21)+
+  scale_y_discrete(label = function(x) stringr::str_trunc(x, 50))+
+  scale_fill_gradient2(low='dodgerblue',mid='white',high='red')+
+  scale_size_continuous(range = c(0.5,5))+
+  labs(x='Patient',
+    fill='Normalised\nenrichment\nrelative to\nnormal PC', size='-log10 FDR')+
+  coord_fixed()+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=11),
+    axis.text.x=element_blank(),axis.ticks.x=element_blank(),
+    axis.title.y=element_blank(), 
+    axis.line=element_blank(), panel.border = element_rect(colour = "black", fill=NA, size=1)
+  )->pl
+pl
+#ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
+
+```
+
+# SPACE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

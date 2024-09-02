@@ -1,0 +1,4106 @@
+pathway,pathway_neat,gene
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,TOP2A
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,UBE2C
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,HMGB2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,NUSAP1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CENPF
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CCNB1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,TPX2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CKS2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,BIRC5
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,PRC1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,PTTG1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,KPNA2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,MKI67
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CDC20
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CDK1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CCNB2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CDKN3
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,SMC4
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,NUF2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,ARL6IP1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CKAP2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,ASPM
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,PLK1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CKS1B
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CCNA2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,AURKA
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,MAD2L1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,GTSE1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,HMMR
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,UBE2T
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CENPE
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CENPA
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,KIF20B
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,AURKB
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CDCA3
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CDCA8
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,UBE2S
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,KNSTRN
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,KIF2C
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,PBK
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,TUBA1B
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,DLGAP5
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,TACC3
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,STMN1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,DEPDC1
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,ECT2
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,CENPW
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,ZWINT
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,HIST1H4C
+MP1  Cell Cycle - G2/M,Cell Cycle - G2/M,KIF23
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,PCNA
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RRM2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,FEN1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,GINS2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,TYMS
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM3
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,GMNN
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,HIST1H4C
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CLSPN
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,ATAD2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,TK1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,KIAA0101
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,DUT
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,HELLS
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM7
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,UBE2T
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM4
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CENPU
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,DHFR
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,ZWINT
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,ASF1B
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM5
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,DNAJC9
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RFC4
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,HMGB2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CDC6
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RRM1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,ORC6
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CDK1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RAD51AP1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RNASEH2A
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CHAF1A
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CENPK
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CDCA5
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,SLBP
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM6
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,TMEM106C
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CENPM
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MYBL2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,E2F1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,USP1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,DNMT1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,PKMYT1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MAD2L1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,PSMC3IP
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CDCA4
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,RFC2
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,CDC45
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,UHRF1
+MP2  Cell Cycle - G1/S,Cell Cycle - G1/S,MCM2
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,STMN1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,TUBA1B
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,H2AFZ
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,DUT
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,TUBB
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,PCNA
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HMGB2
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,KIAA0101
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HMGB1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,RANBP1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,RAN
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,TYMS
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,H2AFV
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SLC25A5
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,CKS1B
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPG
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,COX8A
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HSPE1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPB
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,ANAPC11
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SLIRP
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HMGN1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,NAA38
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPD1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPE
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,ATP5G3
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HIST1H4C
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HSPD1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,NME1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,TK1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HMGN2
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,MIF
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPF
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,ATP5G1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,TPI1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,COX5A
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,ERH
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HMGA1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HNRNPA2B1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,MCM7
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,NUCB2
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SIVA1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SRSF7
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,YBX1
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,LSM4
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,ANP32B
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,UQCRQ
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,HSPB11
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SUMO2
+MP3  Cell Cylce HMG-rich,Cell Cycle HMG-rich,SNRPD3
+MP4  Chromatin,Chromatin,MT-ND6
+MP4  Chromatin,Chromatin,DST
+MP4  Chromatin,Chromatin,SMARCA5
+MP4  Chromatin,Chromatin,SPEN
+MP4  Chromatin,Chromatin,PCM1
+MP4  Chromatin,Chromatin,GOLGA4
+MP4  Chromatin,Chromatin,GOLGB1
+MP4  Chromatin,Chromatin,KCNQ1OT1
+MP4  Chromatin,Chromatin,PHF3
+MP4  Chromatin,Chromatin,PTPN11
+MP4  Chromatin,Chromatin,TRIM44
+MP4  Chromatin,Chromatin,ZNF638
+MP4  Chromatin,Chromatin,CEP350
+MP4  Chromatin,Chromatin,GOLIM4
+MP4  Chromatin,Chromatin,HIST1H1E
+MP4  Chromatin,Chromatin,MSH6
+MP4  Chromatin,Chromatin,ROCK2
+MP4  Chromatin,Chromatin,SMC1A
+MP4  Chromatin,Chromatin,SMCHD1
+MP4  Chromatin,Chromatin,ASH1L
+MP4  Chromatin,Chromatin,ATAD2
+MP4  Chromatin,Chromatin,ATAD5
+MP4  Chromatin,Chromatin,BAZ1B
+MP4  Chromatin,Chromatin,NOP14
+MP4  Chromatin,Chromatin,RIF1
+MP4  Chromatin,Chromatin,SYNE2
+MP4  Chromatin,Chromatin,TJP1
+MP4  Chromatin,Chromatin,TRIP11
+MP4  Chromatin,Chromatin,ENAH
+MP4  Chromatin,Chromatin,HIST1H1C
+MP4  Chromatin,Chromatin,HIST2H2AC
+MP4  Chromatin,Chromatin,NRD1
+MP4  Chromatin,Chromatin,RANBP2
+MP4  Chromatin,Chromatin,SMC5
+MP4  Chromatin,Chromatin,ARGLU1
+MP4  Chromatin,Chromatin,BDP1
+MP4  Chromatin,Chromatin,SETD2
+MP4  Chromatin,Chromatin,SLK
+MP4  Chromatin,Chromatin,SPAG9
+MP4  Chromatin,Chromatin,SUZ12
+MP4  Chromatin,Chromatin,AHCTF1
+MP4  Chromatin,Chromatin,CLINT1
+MP4  Chromatin,Chromatin,FAM208B
+MP4  Chromatin,Chromatin,KMT2A
+MP4  Chromatin,Chromatin,MACF1
+MP4  Chromatin,Chromatin,PAXBP1
+MP4  Chromatin,Chromatin,HIST1H1B
+MP4  Chromatin,Chromatin,UACA
+MP4  Chromatin,Chromatin,SENP6
+MP4  Chromatin,Chromatin,ZMYM4
+MP5 Stress,Stress,ATF3
+MP5 Stress,Stress,EGR1
+MP5 Stress,Stress,FOS
+MP5 Stress,Stress,PPP1R15A
+MP5 Stress,Stress,JUN
+MP5 Stress,Stress,DUSP1
+MP5 Stress,Stress,JUNB
+MP5 Stress,Stress,FOSB
+MP5 Stress,Stress,IER2
+MP5 Stress,Stress,GADD45B
+MP5 Stress,Stress,BTG2
+MP5 Stress,Stress,ZFP36
+MP5 Stress,Stress,DNAJB1
+MP5 Stress,Stress,NR4A1
+MP5 Stress,Stress,SERTAD1
+MP5 Stress,Stress,DDIT3
+MP5 Stress,Stress,KLF6
+MP5 Stress,Stress,NFKBIA
+MP5 Stress,Stress,HSPA1A
+MP5 Stress,Stress,HSPA1B
+MP5 Stress,Stress,CYR61
+MP5 Stress,Stress,MAFF
+MP5 Stress,Stress,NFKBIZ
+MP5 Stress,Stress,IER3
+MP5 Stress,Stress,CCNL1
+MP5 Stress,Stress,MCL1
+MP5 Stress,Stress,RHOB
+MP5 Stress,Stress,SOCS3
+MP5 Stress,Stress,IRF1
+MP5 Stress,Stress,CDKN1A
+MP5 Stress,Stress,HES1
+MP5 Stress,Stress,ID2
+MP5 Stress,Stress,KLF4
+MP5 Stress,Stress,KLF10
+MP5 Stress,Stress,CXCL2
+MP5 Stress,Stress,ID1
+MP5 Stress,Stress,TOB1
+MP5 Stress,Stress,TRIB1
+MP5 Stress,Stress,HSPH1
+MP5 Stress,Stress,RASD1
+MP5 Stress,Stress,SAT1
+MP5 Stress,Stress,DDIT4
+MP5 Stress,Stress,EGR2
+MP5 Stress,Stress,HERPUD1
+MP5 Stress,Stress,PLK2
+MP5 Stress,Stress,DNAJA1
+MP5 Stress,Stress,HSPA6
+MP5 Stress,Stress,PMAIP1
+MP5 Stress,Stress,CITED2
+MP5 Stress,Stress,ID3
+MP6 Hypoxia,Hypoxia,NDRG1
+MP6 Hypoxia,Hypoxia,BNIP3
+MP6 Hypoxia,Hypoxia,SLC2A1
+MP6 Hypoxia,Hypoxia,P4HA1
+MP6 Hypoxia,Hypoxia,VEGFA
+MP6 Hypoxia,Hypoxia,ENO2
+MP6 Hypoxia,Hypoxia,ADM
+MP6 Hypoxia,Hypoxia,HILPDA
+MP6 Hypoxia,Hypoxia,PGK1
+MP6 Hypoxia,Hypoxia,BNIP3L
+MP6 Hypoxia,Hypoxia,FAM162A
+MP6 Hypoxia,Hypoxia,PLOD2
+MP6 Hypoxia,Hypoxia,EGLN3
+MP6 Hypoxia,Hypoxia,LDHA
+MP6 Hypoxia,Hypoxia,MT1X
+MP6 Hypoxia,Hypoxia,NRN1
+MP6 Hypoxia,Hypoxia,DDIT4
+MP6 Hypoxia,Hypoxia,DDIT3
+MP6 Hypoxia,Hypoxia,ERO1A
+MP6 Hypoxia,Hypoxia,ANGPTL4
+MP6 Hypoxia,Hypoxia,IGFBP3
+MP6 Hypoxia,Hypoxia,PFKP
+MP6 Hypoxia,Hypoxia,INSIG2
+MP6 Hypoxia,Hypoxia,NDUFA4L2
+MP6 Hypoxia,Hypoxia,PDK1
+MP6 Hypoxia,Hypoxia,CA9
+MP6 Hypoxia,Hypoxia,AKAP12
+MP6 Hypoxia,Hypoxia,C4ORF3
+MP6 Hypoxia,Hypoxia,IGFBP5
+MP6 Hypoxia,Hypoxia,GBE1
+MP6 Hypoxia,Hypoxia,LGALS3
+MP6 Hypoxia,Hypoxia,TMEM45A
+MP6 Hypoxia,Hypoxia,WSB1
+MP6 Hypoxia,Hypoxia,GPI
+MP6 Hypoxia,Hypoxia,S100A10
+MP6 Hypoxia,Hypoxia,SLC16A3
+MP6 Hypoxia,Hypoxia,EPB41L4A-AS1
+MP6 Hypoxia,Hypoxia,ALDOA
+MP6 Hypoxia,Hypoxia,ANKRD37
+MP6 Hypoxia,Hypoxia,CAV1
+MP6 Hypoxia,Hypoxia,AK4
+MP6 Hypoxia,Hypoxia,DNAJB9
+MP6 Hypoxia,Hypoxia,ERRFI1
+MP6 Hypoxia,Hypoxia,MT2A
+MP6 Hypoxia,Hypoxia,SLC3A2
+MP6 Hypoxia,Hypoxia,VIM
+MP6 Hypoxia,Hypoxia,ENO1
+MP6 Hypoxia,Hypoxia,PFKFB3
+MP6 Hypoxia,Hypoxia,HK2
+MP6 Hypoxia,Hypoxia,CA12
+MP7 Stress (in vitro),Stress (in vitro),DDIT3
+MP7 Stress (in vitro),Stress (in vitro),SLC3A2
+MP7 Stress (in vitro),Stress (in vitro),TRIB3
+MP7 Stress (in vitro),Stress (in vitro),ASNS
+MP7 Stress (in vitro),Stress (in vitro),HERPUD1
+MP7 Stress (in vitro),Stress (in vitro),PPP1R15A
+MP7 Stress (in vitro),Stress (in vitro),EPB41L4A-AS1
+MP7 Stress (in vitro),Stress (in vitro),SNHG12
+MP7 Stress (in vitro),Stress (in vitro),GARS
+MP7 Stress (in vitro),Stress (in vitro),GADD45A
+MP7 Stress (in vitro),Stress (in vitro),MTHFD2
+MP7 Stress (in vitro),Stress (in vitro),XBP1
+MP7 Stress (in vitro),Stress (in vitro),CEBPG
+MP7 Stress (in vitro),Stress (in vitro),TAF1D
+MP7 Stress (in vitro),Stress (in vitro),NUPR1
+MP7 Stress (in vitro),Stress (in vitro),SARS
+MP7 Stress (in vitro),Stress (in vitro),SNHG8
+MP7 Stress (in vitro),Stress (in vitro),ZFAS1
+MP7 Stress (in vitro),Stress (in vitro),DDIT4
+MP7 Stress (in vitro),Stress (in vitro),PHGDH
+MP7 Stress (in vitro),Stress (in vitro),SHMT2
+MP7 Stress (in vitro),Stress (in vitro),TXNIP
+MP7 Stress (in vitro),Stress (in vitro),ATF4
+MP7 Stress (in vitro),Stress (in vitro),HSPA5
+MP7 Stress (in vitro),Stress (in vitro),GDF15
+MP7 Stress (in vitro),Stress (in vitro),CARS
+MP7 Stress (in vitro),Stress (in vitro),MAP1LC3B
+MP7 Stress (in vitro),Stress (in vitro),SQSTM1
+MP7 Stress (in vitro),Stress (in vitro),YARS
+MP7 Stress (in vitro),Stress (in vitro),DNAJB9
+MP7 Stress (in vitro),Stress (in vitro),PSAT1
+MP7 Stress (in vitro),Stress (in vitro),GADD45B
+MP7 Stress (in vitro),Stress (in vitro),ATF3
+MP7 Stress (in vitro),Stress (in vitro),SNHG15
+MP7 Stress (in vitro),Stress (in vitro),RSRC2
+MP7 Stress (in vitro),Stress (in vitro),CEBPB
+MP7 Stress (in vitro),Stress (in vitro),ARF4
+MP7 Stress (in vitro),Stress (in vitro),EIF1B
+MP7 Stress (in vitro),Stress (in vitro),OSER1
+MP7 Stress (in vitro),Stress (in vitro),BTG1
+MP7 Stress (in vitro),Stress (in vitro),SNHG7
+MP7 Stress (in vitro),Stress (in vitro),WARS
+MP7 Stress (in vitro),Stress (in vitro),ZFAND2A
+MP7 Stress (in vitro),Stress (in vitro),C6ORF48
+MP7 Stress (in vitro),Stress (in vitro),STC2
+MP7 Stress (in vitro),Stress (in vitro),ZNF622
+MP7 Stress (in vitro),Stress (in vitro),HSPA9
+MP7 Stress (in vitro),Stress (in vitro),PDRG1
+MP7 Stress (in vitro),Stress (in vitro),UPP1
+MP7 Stress (in vitro),Stress (in vitro),CCDC174
+MP8 Proteasomal degradation,Proteasomal degradation,PSMA3
+MP8 Proteasomal degradation,Proteasomal degradation,PSMC4
+MP8 Proteasomal degradation,Proteasomal degradation,MDH1
+MP8 Proteasomal degradation,Proteasomal degradation,PRDX1
+MP8 Proteasomal degradation,Proteasomal degradation,PSMA4
+MP8 Proteasomal degradation,Proteasomal degradation,PSMC2
+MP8 Proteasomal degradation,Proteasomal degradation,EIF4A3
+MP8 Proteasomal degradation,Proteasomal degradation,MRPL13
+MP8 Proteasomal degradation,Proteasomal degradation,PGK1
+MP8 Proteasomal degradation,Proteasomal degradation,PSMB3
+MP8 Proteasomal degradation,Proteasomal degradation,PSME2
+MP8 Proteasomal degradation,Proteasomal degradation,CCT8
+MP8 Proteasomal degradation,Proteasomal degradation,ANXA1
+MP8 Proteasomal degradation,Proteasomal degradation,DCAF13
+MP8 Proteasomal degradation,Proteasomal degradation,PRMT1
+MP8 Proteasomal degradation,Proteasomal degradation,SSBP1
+MP8 Proteasomal degradation,Proteasomal degradation,PSMB1
+MP8 Proteasomal degradation,Proteasomal degradation,LAPTM4A
+MP8 Proteasomal degradation,Proteasomal degradation,PSMB6
+MP8 Proteasomal degradation,Proteasomal degradation,CCT5
+MP8 Proteasomal degradation,Proteasomal degradation,NDUFS2
+MP8 Proteasomal degradation,Proteasomal degradation,PDHA1
+MP8 Proteasomal degradation,Proteasomal degradation,CCT7
+MP8 Proteasomal degradation,Proteasomal degradation,CDC123
+MP8 Proteasomal degradation,Proteasomal degradation,CCNB1
+MP8 Proteasomal degradation,Proteasomal degradation,PCMT1
+MP8 Proteasomal degradation,Proteasomal degradation,POLR2G
+MP8 Proteasomal degradation,Proteasomal degradation,HSPA5
+MP8 Proteasomal degradation,Proteasomal degradation,XRCC6
+MP8 Proteasomal degradation,Proteasomal degradation,NDUFA9
+MP8 Proteasomal degradation,Proteasomal degradation,DPM1
+MP8 Proteasomal degradation,Proteasomal degradation,SSB
+MP8 Proteasomal degradation,Proteasomal degradation,EIF3I
+MP8 Proteasomal degradation,Proteasomal degradation,MCTS1
+MP8 Proteasomal degradation,Proteasomal degradation,SLC3A2
+MP8 Proteasomal degradation,Proteasomal degradation,ECH1
+MP8 Proteasomal degradation,Proteasomal degradation,PSMD13
+MP8 Proteasomal degradation,Proteasomal degradation,TUBB4B
+MP8 Proteasomal degradation,Proteasomal degradation,SNRPB2
+MP8 Proteasomal degradation,Proteasomal degradation,DDX39A
+MP8 Proteasomal degradation,Proteasomal degradation,NQO1
+MP8 Proteasomal degradation,Proteasomal degradation,EIF4A1
+MP8 Proteasomal degradation,Proteasomal degradation,SPCS2
+MP8 Proteasomal degradation,Proteasomal degradation,IMPDH2
+MP8 Proteasomal degradation,Proteasomal degradation,RTCB
+MP8 Proteasomal degradation,Proteasomal degradation,GSTO1
+MP8 Proteasomal degradation,Proteasomal degradation,PDIA3
+MP8 Proteasomal degradation,Proteasomal degradation,PRDX2
+MP8 Proteasomal degradation,Proteasomal degradation,NUP37
+MP8 Proteasomal degradation,Proteasomal degradation,ILF2
+MP9 Unfolded protein response,Unfolded protein response,PDIA3
+MP9 Unfolded protein response,Unfolded protein response,MANF
+MP9 Unfolded protein response,Unfolded protein response,PDIA4
+MP9 Unfolded protein response,Unfolded protein response,CRELD2
+MP9 Unfolded protein response,Unfolded protein response,HSPA5
+MP9 Unfolded protein response,Unfolded protein response,SDF2L1
+MP9 Unfolded protein response,Unfolded protein response,CALR
+MP9 Unfolded protein response,Unfolded protein response,MYDGF
+MP9 Unfolded protein response,Unfolded protein response,TMED9
+MP9 Unfolded protein response,Unfolded protein response,ARF4
+MP9 Unfolded protein response,Unfolded protein response,DNAJB9
+MP9 Unfolded protein response,Unfolded protein response,SELENOK
+MP9 Unfolded protein response,Unfolded protein response,SELENOS
+MP9 Unfolded protein response,Unfolded protein response,CDK2AP2
+MP9 Unfolded protein response,Unfolded protein response,DNAJC3
+MP9 Unfolded protein response,Unfolded protein response,DNAJB11
+MP9 Unfolded protein response,Unfolded protein response,ERLEC1
+MP9 Unfolded protein response,Unfolded protein response,FKBP11
+MP9 Unfolded protein response,Unfolded protein response,HYOU1
+MP9 Unfolded protein response,Unfolded protein response,PDIA6
+MP9 Unfolded protein response,Unfolded protein response,SEC61G
+MP9 Unfolded protein response,Unfolded protein response,HERPUD1
+MP9 Unfolded protein response,Unfolded protein response,HSP90B1
+MP9 Unfolded protein response,Unfolded protein response,HSP90B2P
+MP9 Unfolded protein response,Unfolded protein response,OSTC
+MP9 Unfolded protein response,Unfolded protein response,CCPG1
+MP9 Unfolded protein response,Unfolded protein response,ISG20
+MP9 Unfolded protein response,Unfolded protein response,KDELR2
+MP9 Unfolded protein response,Unfolded protein response,PLPP5
+MP9 Unfolded protein response,Unfolded protein response,PPIB
+MP9 Unfolded protein response,Unfolded protein response,RRBP1
+MP9 Unfolded protein response,Unfolded protein response,SLC35B1
+MP9 Unfolded protein response,Unfolded protein response,PRDX4
+MP9 Unfolded protein response,Unfolded protein response,RPN2
+MP9 Unfolded protein response,Unfolded protein response,SRPRB
+MP9 Unfolded protein response,Unfolded protein response,AC068631.2
+MP9 Unfolded protein response,Unfolded protein response,FKBP2
+MP9 Unfolded protein response,Unfolded protein response,HM13
+MP9 Unfolded protein response,Unfolded protein response,LMAN1
+MP9 Unfolded protein response,Unfolded protein response,LMAN2
+MP9 Unfolded protein response,Unfolded protein response,SEL1L
+MP9 Unfolded protein response,Unfolded protein response,SRPRA
+MP9 Unfolded protein response,Unfolded protein response,AC012181.2
+MP9 Unfolded protein response,Unfolded protein response,CKAP4
+MP9 Unfolded protein response,Unfolded protein response,MLEC
+MP9 Unfolded protein response,Unfolded protein response,SEC63
+MP9 Unfolded protein response,Unfolded protein response,SLC3A2
+MP9 Unfolded protein response,Unfolded protein response,TXNDC15
+MP9 Unfolded protein response,Unfolded protein response,ATF4
+MP9 Unfolded protein response,Unfolded protein response,LAPTM4A
+MP10 Protein maturation,Protein maturation,RPN2
+MP10 Protein maturation,Protein maturation,PDIA3
+MP10 Protein maturation,Protein maturation,ATP6AP2
+MP10 Protein maturation,Protein maturation,HSPA5
+MP10 Protein maturation,Protein maturation,PDIA6
+MP10 Protein maturation,Protein maturation,LGALS3BP
+MP10 Protein maturation,Protein maturation,GRN
+MP10 Protein maturation,Protein maturation,LAPTM4A
+MP10 Protein maturation,Protein maturation,HSP90B1
+MP10 Protein maturation,Protein maturation,LAMP1
+MP10 Protein maturation,Protein maturation,TMEM59
+MP10 Protein maturation,Protein maturation,EPCAM
+MP10 Protein maturation,Protein maturation,GDF15
+MP10 Protein maturation,Protein maturation,HLA-C
+MP10 Protein maturation,Protein maturation,OS9
+MP10 Protein maturation,Protein maturation,PDIA4
+MP10 Protein maturation,Protein maturation,APLP2
+MP10 Protein maturation,Protein maturation,AZGP1
+MP10 Protein maturation,Protein maturation,CLU
+MP10 Protein maturation,Protein maturation,CTSA
+MP10 Protein maturation,Protein maturation,DDOST
+MP10 Protein maturation,Protein maturation,HLA-A
+MP10 Protein maturation,Protein maturation,ITM2B
+MP10 Protein maturation,Protein maturation,LRPAP1
+MP10 Protein maturation,Protein maturation,NEAT1
+MP10 Protein maturation,Protein maturation,PSAP
+MP10 Protein maturation,Protein maturation,SIL1
+MP10 Protein maturation,Protein maturation,SLC3A2
+MP10 Protein maturation,Protein maturation,TIMP1
+MP10 Protein maturation,Protein maturation,APMAP
+MP10 Protein maturation,Protein maturation,APP
+MP10 Protein maturation,Protein maturation,CTSL
+MP10 Protein maturation,Protein maturation,LAMP2
+MP10 Protein maturation,Protein maturation,LMAN2
+MP10 Protein maturation,Protein maturation,MAGED2
+MP10 Protein maturation,Protein maturation,PIGT
+MP10 Protein maturation,Protein maturation,PRDX4
+MP10 Protein maturation,Protein maturation,SERPINE2
+MP10 Protein maturation,Protein maturation,TM9SF2
+MP10 Protein maturation,Protein maturation,TSPAN1
+MP10 Protein maturation,Protein maturation,ATP6AP1
+MP10 Protein maturation,Protein maturation,CFI
+MP10 Protein maturation,Protein maturation,EPHX1
+MP10 Protein maturation,Protein maturation,EPRS
+MP10 Protein maturation,Protein maturation,GGH
+MP10 Protein maturation,Protein maturation,HEXB
+MP10 Protein maturation,Protein maturation,MALAT1
+MP10 Protein maturation,Protein maturation,PPIB
+MP10 Protein maturation,Protein maturation,SPP1
+MP10 Protein maturation,Protein maturation,SERPINA1
+MP11 Translation initiation,Translation initiation,EPB41L4A-AS1
+MP11 Translation initiation,Translation initiation,IMPDH2
+MP11 Translation initiation,Translation initiation,AHCY
+MP11 Translation initiation,Translation initiation,NOB1
+MP11 Translation initiation,Translation initiation,OXA1L
+MP11 Translation initiation,Translation initiation,EIF2A
+MP11 Translation initiation,Translation initiation,IGBP1
+MP11 Translation initiation,Translation initiation,LETMD1
+MP11 Translation initiation,Translation initiation,RPL22L1
+MP11 Translation initiation,Translation initiation,SNHG7
+MP11 Translation initiation,Translation initiation,SNHG8
+MP11 Translation initiation,Translation initiation,ZNF581
+MP11 Translation initiation,Translation initiation,APEX1
+MP11 Translation initiation,Translation initiation,C19ORF48
+MP11 Translation initiation,Translation initiation,EIF3M
+MP11 Translation initiation,Translation initiation,HIST3H2A
+MP11 Translation initiation,Translation initiation,LTA4H
+MP11 Translation initiation,Translation initiation,MYC
+MP11 Translation initiation,Translation initiation,SNHG19
+MP11 Translation initiation,Translation initiation,C11ORF1
+MP11 Translation initiation,Translation initiation,C6ORF48
+MP11 Translation initiation,Translation initiation,CCDC85B
+MP11 Translation initiation,Translation initiation,CCNG1
+MP11 Translation initiation,Translation initiation,EIF2S3
+MP11 Translation initiation,Translation initiation,EIF3D
+MP11 Translation initiation,Translation initiation,EIF3F
+MP11 Translation initiation,Translation initiation,RGS10
+MP11 Translation initiation,Translation initiation,TKT
+MP11 Translation initiation,Translation initiation,ABHD14B
+MP11 Translation initiation,Translation initiation,EIF4B
+MP11 Translation initiation,Translation initiation,LYRM4
+MP11 Translation initiation,Translation initiation,PPP1R14B
+MP11 Translation initiation,Translation initiation,QARS
+MP11 Translation initiation,Translation initiation,RSL1D1
+MP11 Translation initiation,Translation initiation,SLC27A5
+MP11 Translation initiation,Translation initiation,SRM
+MP11 Translation initiation,Translation initiation,NME1
+MP11 Translation initiation,Translation initiation,NBEAL1
+MP11 Translation initiation,Translation initiation,EIF3E
+MP11 Translation initiation,Translation initiation,CCNB1IP1
+MP11 Translation initiation,Translation initiation,MRPL10
+MP11 Translation initiation,Translation initiation,HSD17B11
+MP11 Translation initiation,Translation initiation,TOP1MT
+MP11 Translation initiation,Translation initiation,NOA1
+MP11 Translation initiation,Translation initiation,FBL
+MP11 Translation initiation,Translation initiation,MRPL45
+MP11 Translation initiation,Translation initiation,ZNF277
+MP11 Translation initiation,Translation initiation,PAICS
+MP11 Translation initiation,Translation initiation,EXOSC5
+MP11 Translation initiation,Translation initiation,ZFAS1
+MP12 EMT-I,EMT-I,COL1A2
+MP12 EMT-I,EMT-I,SPARC
+MP12 EMT-I,EMT-I,COL1A1
+MP12 EMT-I,EMT-I,COL3A1
+MP12 EMT-I,EMT-I,IGFBP7
+MP12 EMT-I,EMT-I,TAGLN
+MP12 EMT-I,EMT-I,C1S
+MP12 EMT-I,EMT-I,FN1
+MP12 EMT-I,EMT-I,MGP
+MP12 EMT-I,EMT-I,TIMP1
+MP12 EMT-I,EMT-I,TIMP3
+MP12 EMT-I,EMT-I,BGN
+MP12 EMT-I,EMT-I,C1R
+MP12 EMT-I,EMT-I,VIM
+MP12 EMT-I,EMT-I,COL6A2
+MP12 EMT-I,EMT-I,COL4A2
+MP12 EMT-I,EMT-I,COL6A1
+MP12 EMT-I,EMT-I,MMP2
+MP12 EMT-I,EMT-I,DCN
+MP12 EMT-I,EMT-I,COL4A1
+MP12 EMT-I,EMT-I,FSTL1
+MP12 EMT-I,EMT-I,NNMT
+MP12 EMT-I,EMT-I,TPM1
+MP12 EMT-I,EMT-I,TSC22D3
+MP12 EMT-I,EMT-I,CCDC80
+MP12 EMT-I,EMT-I,CTGF
+MP12 EMT-I,EMT-I,CXCL12
+MP12 EMT-I,EMT-I,ID3
+MP12 EMT-I,EMT-I,LUM
+MP12 EMT-I,EMT-I,MYL9
+MP12 EMT-I,EMT-I,PRSS23
+MP12 EMT-I,EMT-I,TGFBI
+MP12 EMT-I,EMT-I,TPM2
+MP12 EMT-I,EMT-I,CAV1
+MP12 EMT-I,EMT-I,CYR61
+MP12 EMT-I,EMT-I,IGFBP5
+MP12 EMT-I,EMT-I,LGALS1
+MP12 EMT-I,EMT-I,SPARCL1
+MP12 EMT-I,EMT-I,A2M
+MP12 EMT-I,EMT-I,ACTA2
+MP12 EMT-I,EMT-I,CALD1
+MP12 EMT-I,EMT-I,COL6A3
+MP12 EMT-I,EMT-I,CTSK
+MP12 EMT-I,EMT-I,FBLN1
+MP12 EMT-I,EMT-I,IGFBP4
+MP12 EMT-I,EMT-I,POSTN
+MP12 EMT-I,EMT-I,RARRES2
+MP12 EMT-I,EMT-I,SERPING1
+MP12 EMT-I,EMT-I,SNAI2
+MP12 EMT-I,EMT-I,TCF4
+MP13 EMT-II,EMT-II,LAMC2
+MP13 EMT-II,EMT-II,LAMB3
+MP13 EMT-II,EMT-II,LAMA3
+MP13 EMT-II,EMT-II,EMP3
+MP13 EMT-II,EMT-II,TGFBI
+MP13 EMT-II,EMT-II,TNFRSF12A
+MP13 EMT-II,EMT-II,FLNA
+MP13 EMT-II,EMT-II,PLAU
+MP13 EMT-II,EMT-II,PMEPA1
+MP13 EMT-II,EMT-II,CAV1
+MP13 EMT-II,EMT-II,KRT17
+MP13 EMT-II,EMT-II,PRSS23
+MP13 EMT-II,EMT-II,LGALS1
+MP13 EMT-II,EMT-II,VIM
+MP13 EMT-II,EMT-II,S100A2
+MP13 EMT-II,EMT-II,COL17A1
+MP13 EMT-II,EMT-II,FSTL3
+MP13 EMT-II,EMT-II,CST6
+MP13 EMT-II,EMT-II,IL32
+MP13 EMT-II,EMT-II,PDLIM7
+MP13 EMT-II,EMT-II,SERPINE1
+MP13 EMT-II,EMT-II,ANXA3
+MP13 EMT-II,EMT-II,IGFBP7
+MP13 EMT-II,EMT-II,DCBLD2
+MP13 EMT-II,EMT-II,F3
+MP13 EMT-II,EMT-II,MT2A
+MP13 EMT-II,EMT-II,TNC
+MP13 EMT-II,EMT-II,ITGB6
+MP13 EMT-II,EMT-II,KRT7
+MP13 EMT-II,EMT-II,PLAUR
+MP13 EMT-II,EMT-II,PRKCDBP
+MP13 EMT-II,EMT-II,SERPINE2
+MP13 EMT-II,EMT-II,ITGB1
+MP13 EMT-II,EMT-II,RBP1
+MP13 EMT-II,EMT-II,ITGA3
+MP13 EMT-II,EMT-II,CDKN1A
+MP13 EMT-II,EMT-II,THBS1
+MP13 EMT-II,EMT-II,FN1
+MP13 EMT-II,EMT-II,MMP7
+MP13 EMT-II,EMT-II,TGM2
+MP13 EMT-II,EMT-II,C15ORF48
+MP13 EMT-II,EMT-II,ITGA6
+MP13 EMT-II,EMT-II,PTHLH
+MP13 EMT-II,EMT-II,TPM1
+MP13 EMT-II,EMT-II,CDA
+MP13 EMT-II,EMT-II,IGFBP6
+MP13 EMT-II,EMT-II,PDPN
+MP13 EMT-II,EMT-II,RHOD
+MP13 EMT-II,EMT-II,INHBA
+MP13 EMT-II,EMT-II,ITGAV
+MP14 EMT-III,EMT-III,ANXA2
+MP14 EMT-III,EMT-III,KRT19
+MP14 EMT-III,EMT-III,S100A6
+MP14 EMT-III,EMT-III,TNFRSF12A
+MP14 EMT-III,EMT-III,KRT7
+MP14 EMT-III,EMT-III,LGALS1
+MP14 EMT-III,EMT-III,ANXA1
+MP14 EMT-III,EMT-III,TM4SF1
+MP14 EMT-III,EMT-III,S100A10
+MP14 EMT-III,EMT-III,LGALS3
+MP14 EMT-III,EMT-III,S100A16
+MP14 EMT-III,EMT-III,TAGLN2
+MP14 EMT-III,EMT-III,LMNA
+MP14 EMT-III,EMT-III,CRIP1
+MP14 EMT-III,EMT-III,EZR
+MP14 EMT-III,EMT-III,KRT18
+MP14 EMT-III,EMT-III,S100A11
+MP14 EMT-III,EMT-III,S100A4
+MP14 EMT-III,EMT-III,EMP3
+MP14 EMT-III,EMT-III,HSPB1
+MP14 EMT-III,EMT-III,KRT8
+MP14 EMT-III,EMT-III,TUBA1A
+MP14 EMT-III,EMT-III,VIM
+MP14 EMT-III,EMT-III,IL32
+MP14 EMT-III,EMT-III,KLF6
+MP14 EMT-III,EMT-III,ANXA3
+MP14 EMT-III,EMT-III,SH3BGRL3
+MP14 EMT-III,EMT-III,TMSB4X
+MP14 EMT-III,EMT-III,C19ORF33
+MP14 EMT-III,EMT-III,CKB
+MP14 EMT-III,EMT-III,CLIC1
+MP14 EMT-III,EMT-III,EMP1
+MP14 EMT-III,EMT-III,IFI27
+MP14 EMT-III,EMT-III,ISG15
+MP14 EMT-III,EMT-III,MDK
+MP14 EMT-III,EMT-III,MMP7
+MP14 EMT-III,EMT-III,PHLDA2
+MP14 EMT-III,EMT-III,PLP2
+MP14 EMT-III,EMT-III,CLDN4
+MP14 EMT-III,EMT-III,MYADM
+MP14 EMT-III,EMT-III,RHOC
+MP14 EMT-III,EMT-III,S100A14
+MP14 EMT-III,EMT-III,CD24
+MP14 EMT-III,EMT-III,CRIP2
+MP14 EMT-III,EMT-III,MYL12A
+MP14 EMT-III,EMT-III,RAB11FIP1
+MP14 EMT-III,EMT-III,S100P
+MP14 EMT-III,EMT-III,STMN1
+MP14 EMT-III,EMT-III,FXYD3
+MP14 EMT-III,EMT-III,FLNA
+MP15 EMT IV,EMT IV,KRT15
+MP15 EMT IV,EMT IV,CXCL14
+MP15 EMT IV,EMT IV,ALDH3A1
+MP15 EMT IV,EMT IV,DAPL1
+MP15 EMT IV,EMT IV,DST
+MP15 EMT IV,EMT IV,CCL2
+MP15 EMT IV,EMT IV,TXNIP
+MP15 EMT IV,EMT IV,C12ORF75
+MP15 EMT IV,EMT IV,COL17A1
+MP15 EMT IV,EMT IV,DCN
+MP15 EMT IV,EMT IV,HOPX
+MP15 EMT IV,EMT IV,MOXD1
+MP15 EMT IV,EMT IV,SDCBP
+MP15 EMT IV,EMT IV,SEPP1
+MP15 EMT IV,EMT IV,THBS2
+MP15 EMT IV,EMT IV,TIMP1
+MP15 EMT IV,EMT IV,ASS1
+MP15 EMT IV,EMT IV,GLUL
+MP15 EMT IV,EMT IV,NFIB
+MP15 EMT IV,EMT IV,NTRK2
+MP15 EMT IV,EMT IV,SERPINH1
+MP15 EMT IV,EMT IV,SOX4
+MP15 EMT IV,EMT IV,ANTXR1
+MP15 EMT IV,EMT IV,C1R
+MP15 EMT IV,EMT IV,C1S
+MP15 EMT IV,EMT IV,C6ORF48
+MP15 EMT IV,EMT IV,CAV1
+MP15 EMT IV,EMT IV,FTH1
+MP15 EMT IV,EMT IV,IGFBP5
+MP15 EMT IV,EMT IV,NCOA7
+MP15 EMT IV,EMT IV,NINJ1
+MP15 EMT IV,EMT IV,PNRC1
+MP15 EMT IV,EMT IV,SERPINE2
+MP15 EMT IV,EMT IV,SERPINF1
+MP15 EMT IV,EMT IV,SLC47A2
+MP15 EMT IV,EMT IV,SNAI2
+MP15 EMT IV,EMT IV,SOCS3
+MP15 EMT IV,EMT IV,SPARC
+MP15 EMT IV,EMT IV,TSC22D1
+MP15 EMT IV,EMT IV,ASPN
+MP15 EMT IV,EMT IV,LTF
+MP15 EMT IV,EMT IV,SFRP1
+MP15 EMT IV,EMT IV,TP53AIP1
+MP15 EMT IV,EMT IV,CD74
+MP15 EMT IV,EMT IV,EGR1
+MP15 EMT IV,EMT IV,BCAM
+MP15 EMT IV,EMT IV,SESN3
+MP15 EMT IV,EMT IV,IFITM1
+MP15 EMT IV,EMT IV,HTRA1
+MP15 EMT IV,EMT IV,IFIT3
+MP16 MES (glioma),MES (glioma),EMP1
+MP16 MES (glioma),MES (glioma),GAP43
+MP16 MES (glioma),MES (glioma),TNFRSF12A
+MP16 MES (glioma),MES (glioma),CD44
+MP16 MES (glioma),MES (glioma),TNC
+MP16 MES (glioma),MES (glioma),LYST
+MP16 MES (glioma),MES (glioma),PLAT
+MP16 MES (glioma),MES (glioma),WWTR1
+MP16 MES (glioma),MES (glioma),ANXA2
+MP16 MES (glioma),MES (glioma),GADD45A
+MP16 MES (glioma),MES (glioma),LMNA
+MP16 MES (glioma),MES (glioma),VMP1
+MP16 MES (glioma),MES (glioma),IGFBP3
+MP16 MES (glioma),MES (glioma),SCG2
+MP16 MES (glioma),MES (glioma),HIVEP3
+MP16 MES (glioma),MES (glioma),METTL7B
+MP16 MES (glioma),MES (glioma),RCAN1
+MP16 MES (glioma),MES (glioma),ZYX
+MP16 MES (glioma),MES (glioma),CAMK2D
+MP16 MES (glioma),MES (glioma),IL1RAP
+MP16 MES (glioma),MES (glioma),JAG1
+MP16 MES (glioma),MES (glioma),NAMPT
+MP16 MES (glioma),MES (glioma),PGM2L1
+MP16 MES (glioma),MES (glioma),VIM
+MP16 MES (glioma),MES (glioma),ACTN1
+MP16 MES (glioma),MES (glioma),AKAP12
+MP16 MES (glioma),MES (glioma),IGF2BP2
+MP16 MES (glioma),MES (glioma),MIR4435-2HG
+MP16 MES (glioma),MES (glioma),NRP2
+MP16 MES (glioma),MES (glioma),PDLIM4
+MP16 MES (glioma),MES (glioma),ANXA1
+MP16 MES (glioma),MES (glioma),BCAT1
+MP16 MES (glioma),MES (glioma),CLIC4
+MP16 MES (glioma),MES (glioma),CREB5
+MP16 MES (glioma),MES (glioma),DIRAS3
+MP16 MES (glioma),MES (glioma),EGR1
+MP16 MES (glioma),MES (glioma),ELL2
+MP16 MES (glioma),MES (glioma),F3
+MP16 MES (glioma),MES (glioma),FRMD5
+MP16 MES (glioma),MES (glioma),IGFBP7
+MP16 MES (glioma),MES (glioma),LINC00152
+MP16 MES (glioma),MES (glioma),S100A16
+MP16 MES (glioma),MES (glioma),VCL
+MP16 MES (glioma),MES (glioma),SAMD4A
+MP16 MES (glioma),MES (glioma),ADAMTS9-AS2
+MP16 MES (glioma),MES (glioma),SLC4A7
+MP16 MES (glioma),MES (glioma),GFAP
+MP16 MES (glioma),MES (glioma),CADPS
+MP16 MES (glioma),MES (glioma),GNG12
+MP16 MES (glioma),MES (glioma),KLHL4
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),ISG15
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),CD74
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFI6
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DRA
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DRB1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFIT3
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),PSMB9
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFI44L
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),RARRES3
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),STAT1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DPA1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),MX1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),UBE2L6
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFITM3
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),BST2
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),OAS1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),GBP1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFI27
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFIT1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),TAP1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-B
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFITM1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DMA
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),ISG20
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),TNFSF10
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFI35
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFI44
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DPB1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-E
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-C
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),PARP14
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),WARS
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DQB1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),LAP3
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),PSMB8
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),C1S
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DRB5
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),PLSCR1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),TYMP
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),C1R
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),SAA1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-F
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),IFIT2
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),SOD2
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),GBP2
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-A
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),CXCL10
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),HLA-DQA1
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),PARP9
+MP17 Interferon/MHC-II (I),Interferon/MHC-II (I),B2M
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CD74
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),HLA-DRA
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),HLA-DRB1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),ALDH1A1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),HLA-DPA1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),IFITM2
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CD9
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CLU
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CRYAB
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),NNMT
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),S100A10
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),TMEM176B
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),C1R
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),C1S
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),DHRS3
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),GPM6B
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),HLA-DRB5
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),IFI6
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),IFITM3
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),PLP1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),RARRES2
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),S100B
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),SERPING1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),TMEM176A
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),ANXA1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),C3
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CTNNAL1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),GFRA3
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),MT2A
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),PDK4
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),PLAT
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),PMP22
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),SEPP1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),C10ORF10
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),EGFL8
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),GPX3
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),HLA-DMA
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),MT1X
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),SEMA3B
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),UCHL1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),MMP7
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),LGALS1
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CTSD
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),ARPC1B
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),ISG15
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),WFDC2
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),LGALS3BP
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),CALM2
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),TUBA1A
+MP18 Interferon/MHC-II (II),Interferon/MHC-II (II),A2M
+MP19 Epithelial Senescence,Epithelial Senescence,SLPI
+MP19 Epithelial Senescence,Epithelial Senescence,S100A9
+MP19 Epithelial Senescence,Epithelial Senescence,LCN2
+MP19 Epithelial Senescence,Epithelial Senescence,S100A8
+MP19 Epithelial Senescence,Epithelial Senescence,KRT16
+MP19 Epithelial Senescence,Epithelial Senescence,C15ORF48
+MP19 Epithelial Senescence,Epithelial Senescence,SPRR1B
+MP19 Epithelial Senescence,Epithelial Senescence,LY6D
+MP19 Epithelial Senescence,Epithelial Senescence,S100P
+MP19 Epithelial Senescence,Epithelial Senescence,KRT6B
+MP19 Epithelial Senescence,Epithelial Senescence,PI3
+MP19 Epithelial Senescence,Epithelial Senescence,WFDC2
+MP19 Epithelial Senescence,Epithelial Senescence,CEACAM6
+MP19 Epithelial Senescence,Epithelial Senescence,PDZK1IP1
+MP19 Epithelial Senescence,Epithelial Senescence,S100A7
+MP19 Epithelial Senescence,Epithelial Senescence,TSPAN1
+MP19 Epithelial Senescence,Epithelial Senescence,KRT13
+MP19 Epithelial Senescence,Epithelial Senescence,TACSTD2
+MP19 Epithelial Senescence,Epithelial Senescence,PSCA
+MP19 Epithelial Senescence,Epithelial Senescence,IL1RN
+MP19 Epithelial Senescence,Epithelial Senescence,LYPD3
+MP19 Epithelial Senescence,Epithelial Senescence,SAA1
+MP19 Epithelial Senescence,Epithelial Senescence,SERPINB3
+MP19 Epithelial Senescence,Epithelial Senescence,AQP3
+MP19 Epithelial Senescence,Epithelial Senescence,CLDN4
+MP19 Epithelial Senescence,Epithelial Senescence,CXCL17
+MP19 Epithelial Senescence,Epithelial Senescence,KRT17
+MP19 Epithelial Senescence,Epithelial Senescence,CRABP2
+MP19 Epithelial Senescence,Epithelial Senescence,ELF3
+MP19 Epithelial Senescence,Epithelial Senescence,KRT6A
+MP19 Epithelial Senescence,Epithelial Senescence,MAL2
+MP19 Epithelial Senescence,Epithelial Senescence,SPRR3
+MP19 Epithelial Senescence,Epithelial Senescence,IGFBP3
+MP19 Epithelial Senescence,Epithelial Senescence,PRSS22
+MP19 Epithelial Senescence,Epithelial Senescence,SPRR2D
+MP19 Epithelial Senescence,Epithelial Senescence,DSC2
+MP19 Epithelial Senescence,Epithelial Senescence,GPRC5A
+MP19 Epithelial Senescence,Epithelial Senescence,KRT7
+MP19 Epithelial Senescence,Epithelial Senescence,SPRR2A
+MP19 Epithelial Senescence,Epithelial Senescence,ANXA1
+MP19 Epithelial Senescence,Epithelial Senescence,MALL
+MP19 Epithelial Senescence,Epithelial Senescence,CEACAM5
+MP19 Epithelial Senescence,Epithelial Senescence,MUC4
+MP19 Epithelial Senescence,Epithelial Senescence,SERPINB1
+MP19 Epithelial Senescence,Epithelial Senescence,AGR2
+MP19 Epithelial Senescence,Epithelial Senescence,CLIC3
+MP19 Epithelial Senescence,Epithelial Senescence,SERPINB4
+MP19 Epithelial Senescence,Epithelial Senescence,FABP5
+MP19 Epithelial Senescence,Epithelial Senescence,SULT2B1
+MP19 Epithelial Senescence,Epithelial Senescence,CLDN7
+MP20 MYC,MYC,NME1
+MP20 MYC,MYC,C1QBP
+MP20 MYC,MYC,FABP5
+MP20 MYC,MYC,SRM
+MP20 MYC,MYC,EBNA1BP2
+MP20 MYC,MYC,HSPE1
+MP20 MYC,MYC,DCTPP1
+MP20 MYC,MYC,NOP16
+MP20 MYC,MYC,NHP2
+MP20 MYC,MYC,MRPL12
+MP20 MYC,MYC,DKC1
+MP20 MYC,MYC,HSPD1
+MP20 MYC,MYC,RANBP1
+MP20 MYC,MYC,CCT5
+MP20 MYC,MYC,DDX21
+MP20 MYC,MYC,ATP5G1
+MP20 MYC,MYC,PA2G4
+MP20 MYC,MYC,GPATCH4
+MP20 MYC,MYC,TOMM40
+MP20 MYC,MYC,GNL3
+MP20 MYC,MYC,PAICS
+MP20 MYC,MYC,RAN
+MP20 MYC,MYC,PPA1
+MP20 MYC,MYC,RUVBL1
+MP20 MYC,MYC,CCT2
+MP20 MYC,MYC,EIF4EBP1
+MP20 MYC,MYC,MYC
+MP20 MYC,MYC,LDHB
+MP20 MYC,MYC,TIMM13
+MP20 MYC,MYC,ODC1
+MP20 MYC,MYC,CYCS
+MP20 MYC,MYC,EIF5A
+MP20 MYC,MYC,NIFK
+MP20 MYC,MYC,NOLC1
+MP20 MYC,MYC,SNRPD1
+MP20 MYC,MYC,MRPL3
+MP20 MYC,MYC,MRTO4
+MP20 MYC,MYC,SLIRP
+MP20 MYC,MYC,LDHA
+MP20 MYC,MYC,NOP56
+MP20 MYC,MYC,PHB
+MP20 MYC,MYC,PNO1
+MP20 MYC,MYC,DCAF13
+MP20 MYC,MYC,ENO1
+MP20 MYC,MYC,NCL
+MP20 MYC,MYC,NOP58
+MP20 MYC,MYC,PRMT1
+MP20 MYC,MYC,BZW2
+MP20 MYC,MYC,CMSS1
+MP20 MYC,MYC,FKBP4
+MP21 Respiration,Respiration,SLIRP
+MP21 Respiration,Respiration,ROMO1
+MP21 Respiration,Respiration,ATP5I
+MP21 Respiration,Respiration,COX7B
+MP21 Respiration,Respiration,PET100
+MP21 Respiration,Respiration,ATP5G1
+MP21 Respiration,Respiration,OST4
+MP21 Respiration,Respiration,TMEM258
+MP21 Respiration,Respiration,NDUFA3
+MP21 Respiration,Respiration,NDUFB2
+MP21 Respiration,Respiration,RPL21
+MP21 Respiration,Respiration,USMG5
+MP21 Respiration,Respiration,H3F3A
+MP21 Respiration,Respiration,NDUFA1
+MP21 Respiration,Respiration,SNRPD2
+MP21 Respiration,Respiration,ATP5E
+MP21 Respiration,Respiration,COX6B1
+MP21 Respiration,Respiration,NDUFS5
+MP21 Respiration,Respiration,NME1
+MP21 Respiration,Respiration,ATP5J2
+MP21 Respiration,Respiration,NDUFB1
+MP21 Respiration,Respiration,NOP10
+MP21 Respiration,Respiration,ATOX1
+MP21 Respiration,Respiration,PSMB3
+MP21 Respiration,Respiration,UQCR10
+MP21 Respiration,Respiration,NDUFS6
+MP21 Respiration,Respiration,NEDD8
+MP21 Respiration,Respiration,TIMM8B
+MP21 Respiration,Respiration,MYEOV2
+MP21 Respiration,Respiration,NDUFA12
+MP21 Respiration,Respiration,NDUFC1
+MP21 Respiration,Respiration,SHFM1
+MP21 Respiration,Respiration,COX17
+MP21 Respiration,Respiration,MIR4461
+MP21 Respiration,Respiration,NDUFAB1
+MP21 Respiration,Respiration,NDUFB4
+MP21 Respiration,Respiration,SEC61G
+MP21 Respiration,Respiration,UBL5
+MP21 Respiration,Respiration,APRT
+MP21 Respiration,Respiration,RPS29
+MP21 Respiration,Respiration,SNRPG
+MP21 Respiration,Respiration,LGALS1
+MP21 Respiration,Respiration,NHP2
+MP21 Respiration,Respiration,SNRPF
+MP21 Respiration,Respiration,PFDN2
+MP21 Respiration,Respiration,LSM7
+MP21 Respiration,Respiration,NDUFB8
+MP21 Respiration,Respiration,NDUFA7
+MP21 Respiration,Respiration,RPS21
+MP21 Respiration,Respiration,COA3
+MP22 Secreted I,Secreted I,CXCL8
+MP22 Secreted I,Secreted I,PHLDA1
+MP22 Secreted I,Secreted I,MAFF
+MP22 Secreted I,Secreted I,KDM6B
+MP22 Secreted I,Secreted I,EPHA2
+MP22 Secreted I,Secreted I,ERRFI1
+MP22 Secreted I,Secreted I,IER3
+MP22 Secreted I,Secreted I,TNFRSF12A
+MP22 Secreted I,Secreted I,PHLDA2
+MP22 Secreted I,Secreted I,TM4SF1
+MP22 Secreted I,Secreted I,TRIB1
+MP22 Secreted I,Secreted I,DUSP5
+MP22 Secreted I,Secreted I,FOSL1
+MP22 Secreted I,Secreted I,HBEGF
+MP22 Secreted I,Secreted I,ICAM1
+MP22 Secreted I,Secreted I,AREG
+MP22 Secreted I,Secreted I,BIRC3
+MP22 Secreted I,Secreted I,CXCL1
+MP22 Secreted I,Secreted I,EMP1
+MP22 Secreted I,Secreted I,ITPKC
+MP22 Secreted I,Secreted I,MIDN
+MP22 Secreted I,Secreted I,PIM3
+MP22 Secreted I,Secreted I,ARID5B
+MP22 Secreted I,Secreted I,CCL2
+MP22 Secreted I,Secreted I,CDKN1A
+MP22 Secreted I,Secreted I,CSRNP1
+MP22 Secreted I,Secreted I,CXCL2
+MP22 Secreted I,Secreted I,MYC
+MP22 Secreted I,Secreted I,ARL14
+MP22 Secreted I,Secreted I,ARL5B
+MP22 Secreted I,Secreted I,GEM
+MP22 Secreted I,Secreted I,MYADM
+MP22 Secreted I,Secreted I,PIM1
+MP22 Secreted I,Secreted I,PLAUR
+MP22 Secreted I,Secreted I,TNFAIP3
+MP22 Secreted I,Secreted I,ANXA1
+MP22 Secreted I,Secreted I,CCL20
+MP22 Secreted I,Secreted I,CYR61
+MP22 Secreted I,Secreted I,DDX21
+MP22 Secreted I,Secreted I,EDN1
+MP22 Secreted I,Secreted I,FOSL2
+MP22 Secreted I,Secreted I,LIF
+MP22 Secreted I,Secreted I,LUCAT1
+MP22 Secreted I,Secreted I,MLF1
+MP22 Secreted I,Secreted I,NAMPT
+MP22 Secreted I,Secreted I,NCOA7
+MP22 Secreted I,Secreted I,PFKFB3
+MP22 Secreted I,Secreted I,ZBTB43
+MP22 Secreted I,Secreted I,ZC3H12A
+MP22 Secreted I,Secreted I,FHL2
+MP23 Secreted II,Secreted II,LCN2
+MP23 Secreted II,Secreted II,CP
+MP23 Secreted II,Secreted II,WFDC2
+MP23 Secreted II,Secreted II,AGR2
+MP23 Secreted II,Secreted II,C3
+MP23 Secreted II,Secreted II,CXCL1
+MP23 Secreted II,Secreted II,CXCL8
+MP23 Secreted II,Secreted II,SAA1
+MP23 Secreted II,Secreted II,CLU
+MP23 Secreted II,Secreted II,MDK
+MP23 Secreted II,Secreted II,TSPAN8
+MP23 Secreted II,Secreted II,BPIFB1
+MP23 Secreted II,Secreted II,CFB
+MP23 Secreted II,Secreted II,KLK11
+MP23 Secreted II,Secreted II,PDZK1IP1
+MP23 Secreted II,Secreted II,SAA2
+MP23 Secreted II,Secreted II,SLPI
+MP23 Secreted II,Secreted II,TSPAN1
+MP23 Secreted II,Secreted II,CXCL2
+MP23 Secreted II,Secreted II,ELF3
+MP23 Secreted II,Secreted II,LTF
+MP23 Secreted II,Secreted II,PIGR
+MP23 Secreted II,Secreted II,SCGB3A1
+MP23 Secreted II,Secreted II,TFF3
+MP23 Secreted II,Secreted II,TGM2
+MP23 Secreted II,Secreted II,AKR1C1
+MP23 Secreted II,Secreted II,CD24
+MP23 Secreted II,Secreted II,CLDN4
+MP23 Secreted II,Secreted II,CTSC
+MP23 Secreted II,Secreted II,GSTA1
+MP23 Secreted II,Secreted II,KRT19
+MP23 Secreted II,Secreted II,MMP7
+MP23 Secreted II,Secreted II,MSMB
+MP23 Secreted II,Secreted II,NCOA7
+MP23 Secreted II,Secreted II,S100A9
+MP23 Secreted II,Secreted II,SCGB1A1
+MP23 Secreted II,Secreted II,SPINK1
+MP23 Secreted II,Secreted II,IGFBP3
+MP23 Secreted II,Secreted II,VMO1
+MP23 Secreted II,Secreted II,MUC5B
+MP23 Secreted II,Secreted II,SERPINF1
+MP23 Secreted II,Secreted II,TNFSF10
+MP23 Secreted II,Secreted II,FMO2
+MP23 Secreted II,Secreted II,FAM3D
+MP23 Secreted II,Secreted II,PRSS23
+MP23 Secreted II,Secreted II,RDH10
+MP23 Secreted II,Secreted II,CD82
+MP23 Secreted II,Secreted II,RARRES1
+MP23 Secreted II,Secreted II,KYNU
+MP23 Secreted II,Secreted II,NDRG2
+MP24 Cilia,Cilia,C9ORF116
+MP24 Cilia,Cilia,CAPS
+MP24 Cilia,Cilia,RSPH1
+MP24 Cilia,Cilia,TPPP3
+MP24 Cilia,Cilia,FAM183A
+MP24 Cilia,Cilia,MORN2
+MP24 Cilia,Cilia,WDR54
+MP24 Cilia,Cilia,CETN2
+MP24 Cilia,Cilia,ODF3B
+MP24 Cilia,Cilia,C9ORF24
+MP24 Cilia,Cilia,PIFO
+MP24 Cilia,Cilia,C11ORF88
+MP24 Cilia,Cilia,C5ORF49
+MP24 Cilia,Cilia,DYNLRB2
+MP24 Cilia,Cilia,C1ORF194
+MP24 Cilia,Cilia,EFHC1
+MP24 Cilia,Cilia,FAM229B
+MP24 Cilia,Cilia,IQCG
+MP24 Cilia,Cilia,PSENEN
+MP24 Cilia,Cilia,SPA17
+MP24 Cilia,Cilia,TSPAN1
+MP24 Cilia,Cilia,C20ORF85
+MP24 Cilia,Cilia,DNALI1
+MP24 Cilia,Cilia,FOXJ1
+MP24 Cilia,Cilia,LRRC23
+MP24 Cilia,Cilia,LRRIQ1
+MP24 Cilia,Cilia,IGFBP7
+MP24 Cilia,Cilia,MS4A8
+MP24 Cilia,Cilia,TCTEX1D2
+MP24 Cilia,Cilia,DPCD
+MP24 Cilia,Cilia,KIF9
+MP24 Cilia,Cilia,TUBA1A
+MP24 Cilia,Cilia,FABP6
+MP24 Cilia,Cilia,MRPS31
+MP24 Cilia,Cilia,ZMYND10
+MP24 Cilia,Cilia,C12ORF75
+MP24 Cilia,Cilia,CAPSL
+MP24 Cilia,Cilia,CES1
+MP24 Cilia,Cilia,DNAAF1
+MP24 Cilia,Cilia,IFT57
+MP24 Cilia,Cilia,IGFBP2
+MP24 Cilia,Cilia,MLF1
+MP24 Cilia,Cilia,OSCP1
+MP24 Cilia,Cilia,PLAC8
+MP24 Cilia,Cilia,DNAH5
+MP24 Cilia,Cilia,CRIP1
+MP24 Cilia,Cilia,RP11-295M3.4
+MP24 Cilia,Cilia,GSTA1
+MP24 Cilia,Cilia,SLC44A4
+MP24 Cilia,Cilia,NUCB2
+MP25 Astrocytes,Astrocytes,SPARCL1
+MP25 Astrocytes,Astrocytes,GFAP
+MP25 Astrocytes,Astrocytes,CLU
+MP25 Astrocytes,Astrocytes,CRYAB
+MP25 Astrocytes,Astrocytes,TTYH1
+MP25 Astrocytes,Astrocytes,SLC1A3
+MP25 Astrocytes,Astrocytes,CST3
+MP25 Astrocytes,Astrocytes,ID3
+MP25 Astrocytes,Astrocytes,AGT
+MP25 Astrocytes,Astrocytes,APOE
+MP25 Astrocytes,Astrocytes,EDNRB
+MP25 Astrocytes,Astrocytes,ALDOC
+MP25 Astrocytes,Astrocytes,AQP4
+MP25 Astrocytes,Astrocytes,GATM
+MP25 Astrocytes,Astrocytes,NDRG2
+MP25 Astrocytes,Astrocytes,SPARC
+MP25 Astrocytes,Astrocytes,MT2A
+MP25 Astrocytes,Astrocytes,MT3
+MP25 Astrocytes,Astrocytes,BCAN
+MP25 Astrocytes,Astrocytes,HEPN1
+MP25 Astrocytes,Astrocytes,NTRK2
+MP25 Astrocytes,Astrocytes,PMP2
+MP25 Astrocytes,Astrocytes,PON2
+MP25 Astrocytes,Astrocytes,ATP1A2
+MP25 Astrocytes,Astrocytes,HEY1
+MP25 Astrocytes,Astrocytes,MLC1
+MP25 Astrocytes,Astrocytes,PLTP
+MP25 Astrocytes,Astrocytes,ATP1B2
+MP25 Astrocytes,Astrocytes,ITM2C
+MP25 Astrocytes,Astrocytes,MT1X
+MP25 Astrocytes,Astrocytes,VIM
+MP25 Astrocytes,Astrocytes,S100B
+MP25 Astrocytes,Astrocytes,AHCYL1
+MP25 Astrocytes,Astrocytes,RAMP1
+MP25 Astrocytes,Astrocytes,SCRG1
+MP25 Astrocytes,Astrocytes,C1ORF61
+MP25 Astrocytes,Astrocytes,IGFBP7
+MP25 Astrocytes,Astrocytes,RASSF4
+MP25 Astrocytes,Astrocytes,ID1
+MP25 Astrocytes,Astrocytes,IFITM3
+MP25 Astrocytes,Astrocytes,CPE
+MP25 Astrocytes,Astrocytes,CD9
+MP25 Astrocytes,Astrocytes,FABP7
+MP25 Astrocytes,Astrocytes,GRAMD3
+MP25 Astrocytes,Astrocytes,ZFP36
+MP25 Astrocytes,Astrocytes,F3
+MP25 Astrocytes,Astrocytes,PLP1
+MP25 Astrocytes,Astrocytes,ID4
+MP25 Astrocytes,Astrocytes,PSAT1
+MP25 Astrocytes,Astrocytes,GJA1
+MP26 NPC Glioma,NPC Glioma,STMN2
+MP26 NPC Glioma,NPC Glioma,DCX
+MP26 NPC Glioma,NPC Glioma,STMN4
+MP26 NPC Glioma,NPC Glioma,TAGLN3
+MP26 NPC Glioma,NPC Glioma,ELAVL4
+MP26 NPC Glioma,NPC Glioma,MLLT11
+MP26 NPC Glioma,NPC Glioma,NREP
+MP26 NPC Glioma,NPC Glioma,MIAT
+MP26 NPC Glioma,NPC Glioma,TUBB2A
+MP26 NPC Glioma,NPC Glioma,CD24
+MP26 NPC Glioma,NPC Glioma,HMP19
+MP26 NPC Glioma,NPC Glioma,RND3
+MP26 NPC Glioma,NPC Glioma,SOX11
+MP26 NPC Glioma,NPC Glioma,SOX4
+MP26 NPC Glioma,NPC Glioma,TUBB3
+MP26 NPC Glioma,NPC Glioma,MAP1B
+MP26 NPC Glioma,NPC Glioma,NSG1
+MP26 NPC Glioma,NPC Glioma,SNAP25
+MP26 NPC Glioma,NPC Glioma,FNBP1L
+MP26 NPC Glioma,NPC Glioma,HN1
+MP26 NPC Glioma,NPC Glioma,IGFBPL1
+MP26 NPC Glioma,NPC Glioma,PKIA
+MP26 NPC Glioma,NPC Glioma,NNAT
+MP26 NPC Glioma,NPC Glioma,RBP1
+MP26 NPC Glioma,NPC Glioma,SCG3
+MP26 NPC Glioma,NPC Glioma,DLX6-AS1
+MP26 NPC Glioma,NPC Glioma,KLHDC8A
+MP26 NPC Glioma,NPC Glioma,MEG3
+MP26 NPC Glioma,NPC Glioma,RBFOX2
+MP26 NPC Glioma,NPC Glioma,SCG2
+MP26 NPC Glioma,NPC Glioma,STMN1
+MP26 NPC Glioma,NPC Glioma,TMEM161B-AS1
+MP26 NPC Glioma,NPC Glioma,ARL4D
+MP26 NPC Glioma,NPC Glioma,BEX2
+MP26 NPC Glioma,NPC Glioma,DDAH2
+MP26 NPC Glioma,NPC Glioma,DLX5
+MP26 NPC Glioma,NPC Glioma,GAP43
+MP26 NPC Glioma,NPC Glioma,CRMP1
+MP26 NPC Glioma,NPC Glioma,ENO2
+MP26 NPC Glioma,NPC Glioma,TCEAL7
+MP26 NPC Glioma,NPC Glioma,UCHL1
+MP26 NPC Glioma,NPC Glioma,BASP1
+MP26 NPC Glioma,NPC Glioma,CXADR
+MP26 NPC Glioma,NPC Glioma,GNG3
+MP26 NPC Glioma,NPC Glioma,GPC2
+MP26 NPC Glioma,NPC Glioma,KIF5C
+MP26 NPC Glioma,NPC Glioma,PAK3
+MP26 NPC Glioma,NPC Glioma,RTN1
+MP26 NPC Glioma,NPC Glioma,TERF2IP
+MP26 NPC Glioma,NPC Glioma,SYT1
+MP27 Oligo Progenitor,Oligo Progenitor,SIRT2
+MP27 Oligo Progenitor,Oligo Progenitor,GPR17
+MP27 Oligo Progenitor,Oligo Progenitor,OLIG1
+MP27 Oligo Progenitor,Oligo Progenitor,APOD
+MP27 Oligo Progenitor,Oligo Progenitor,DLL3
+MP27 Oligo Progenitor,Oligo Progenitor,PLP1
+MP27 Oligo Progenitor,Oligo Progenitor,NEU4
+MP27 Oligo Progenitor,Oligo Progenitor,BCAN
+MP27 Oligo Progenitor,Oligo Progenitor,SOX8
+MP27 Oligo Progenitor,Oligo Progenitor,TNR
+MP27 Oligo Progenitor,Oligo Progenitor,OMG
+MP27 Oligo Progenitor,Oligo Progenitor,TMEM206
+MP27 Oligo Progenitor,Oligo Progenitor,LPPR1
+MP27 Oligo Progenitor,Oligo Progenitor,NKAIN4
+MP27 Oligo Progenitor,Oligo Progenitor,FIBIN
+MP27 Oligo Progenitor,Oligo Progenitor,SGK1
+MP27 Oligo Progenitor,Oligo Progenitor,SLC1A1
+MP27 Oligo Progenitor,Oligo Progenitor,CA10
+MP27 Oligo Progenitor,Oligo Progenitor,LMF1
+MP27 Oligo Progenitor,Oligo Progenitor,PTGDS
+MP27 Oligo Progenitor,Oligo Progenitor,SERINC5
+MP27 Oligo Progenitor,Oligo Progenitor,ASCL1
+MP27 Oligo Progenitor,Oligo Progenitor,DLL1
+MP27 Oligo Progenitor,Oligo Progenitor,OLIG2
+MP27 Oligo Progenitor,Oligo Progenitor,PSAT1
+MP27 Oligo Progenitor,Oligo Progenitor,RAB33A
+MP27 Oligo Progenitor,Oligo Progenitor,SCRG1
+MP27 Oligo Progenitor,Oligo Progenitor,CNP
+MP27 Oligo Progenitor,Oligo Progenitor,LIMA1
+MP27 Oligo Progenitor,Oligo Progenitor,THY1
+MP27 Oligo Progenitor,Oligo Progenitor,TUBB4A
+MP27 Oligo Progenitor,Oligo Progenitor,BCAS1
+MP27 Oligo Progenitor,Oligo Progenitor,CNTN1
+MP27 Oligo Progenitor,Oligo Progenitor,HES6
+MP27 Oligo Progenitor,Oligo Progenitor,LHFPL3
+MP27 Oligo Progenitor,Oligo Progenitor,PDGFRA
+MP27 Oligo Progenitor,Oligo Progenitor,RGR
+MP27 Oligo Progenitor,Oligo Progenitor,SCD5
+MP27 Oligo Progenitor,Oligo Progenitor,ANGPTL2
+MP27 Oligo Progenitor,Oligo Progenitor,DHCR7
+MP27 Oligo Progenitor,Oligo Progenitor,FGF12
+MP27 Oligo Progenitor,Oligo Progenitor,MPZL1
+MP27 Oligo Progenitor,Oligo Progenitor,MSMO1
+MP27 Oligo Progenitor,Oligo Progenitor,P2RX7
+MP27 Oligo Progenitor,Oligo Progenitor,RTKN
+MP27 Oligo Progenitor,Oligo Progenitor,TNFRSF21
+MP27 Oligo Progenitor,Oligo Progenitor,SMOC1
+MP27 Oligo Progenitor,Oligo Progenitor,ACAT2
+MP27 Oligo Progenitor,Oligo Progenitor,FDFT1
+MP27 Oligo Progenitor,Oligo Progenitor,PGRMC1
+MP28 Oligo normal,Oligo normal,APOD
+MP28 Oligo normal,Oligo normal,MBP
+MP28 Oligo normal,Oligo normal,PLA2G16
+MP28 Oligo normal,Oligo normal,PLP1
+MP28 Oligo normal,Oligo normal,PPP1R14A
+MP28 Oligo normal,Oligo normal,SEPP1
+MP28 Oligo normal,Oligo normal,TF
+MP28 Oligo normal,Oligo normal,GSN
+MP28 Oligo normal,Oligo normal,PTGDS
+MP28 Oligo normal,Oligo normal,APLP1
+MP28 Oligo normal,Oligo normal,CLDN11
+MP28 Oligo normal,Oligo normal,CLDND1
+MP28 Oligo normal,Oligo normal,CNP
+MP28 Oligo normal,Oligo normal,RNASE1
+MP28 Oligo normal,Oligo normal,SCD
+MP28 Oligo normal,Oligo normal,Sep-04
+MP28 Oligo normal,Oligo normal,ANLN
+MP28 Oligo normal,Oligo normal,CRYAB
+MP28 Oligo normal,Oligo normal,ELOVL1
+MP28 Oligo normal,Oligo normal,HSPA2
+MP28 Oligo normal,Oligo normal,PLLP
+MP28 Oligo normal,Oligo normal,SIRT2
+MP28 Oligo normal,Oligo normal,SLC44A1
+MP28 Oligo normal,Oligo normal,BIN1
+MP28 Oligo normal,Oligo normal,CMTM5
+MP28 Oligo normal,Oligo normal,ERMN
+MP28 Oligo normal,Oligo normal,FAM107B
+MP28 Oligo normal,Oligo normal,LARP6
+MP28 Oligo normal,Oligo normal,LHPP
+MP28 Oligo normal,Oligo normal,MAG
+MP28 Oligo normal,Oligo normal,MOBP
+MP28 Oligo normal,Oligo normal,PLEKHB1
+MP28 Oligo normal,Oligo normal,QDPR
+MP28 Oligo normal,Oligo normal,S100A1
+MP28 Oligo normal,Oligo normal,SLAIN1
+MP28 Oligo normal,Oligo normal,SLC48A1
+MP28 Oligo normal,Oligo normal,TUBB4A
+MP28 Oligo normal,Oligo normal,TMEM144
+MP28 Oligo normal,Oligo normal,ABCA2
+MP28 Oligo normal,Oligo normal,CA2
+MP28 Oligo normal,Oligo normal,KLK6
+MP28 Oligo normal,Oligo normal,MAL
+MP28 Oligo normal,Oligo normal,SPOCK3
+MP28 Oligo normal,Oligo normal,HAPLN2
+MP28 Oligo normal,Oligo normal,UGT8
+MP28 Oligo normal,Oligo normal,STMN4
+MP28 Oligo normal,Oligo normal,ATP1B1
+MP28 Oligo normal,Oligo normal,Sep-08
+MP28 Oligo normal,Oligo normal,PACS2
+MP28 Oligo normal,Oligo normal,ANKS1B
+MP29 NPC/OPC,NPC/OPC,BTG2
+MP29 NPC/OPC,NPC/OPC,SOX6
+MP29 NPC/OPC,NPC/OPC,BAZ2B
+MP29 NPC/OPC,NPC/OPC,SOX4
+MP29 NPC/OPC,NPC/OPC,DSEL
+MP29 NPC/OPC,NPC/OPC,MXD4
+MP29 NPC/OPC,NPC/OPC,PNRC1
+MP29 NPC/OPC,NPC/OPC,SOX5
+MP29 NPC/OPC,NPC/OPC,CHD7
+MP29 NPC/OPC,NPC/OPC,GRIA2
+MP29 NPC/OPC,NPC/OPC,MAP3K1
+MP29 NPC/OPC,NPC/OPC,OLIG1
+MP29 NPC/OPC,NPC/OPC,SESN3
+MP29 NPC/OPC,NPC/OPC,UBE2H
+MP29 NPC/OPC,NPC/OPC,ABAT
+MP29 NPC/OPC,NPC/OPC,DCX
+MP29 NPC/OPC,NPC/OPC,DOCK10
+MP29 NPC/OPC,NPC/OPC,GLCCI1
+MP29 NPC/OPC,NPC/OPC,KCNQ1OT1
+MP29 NPC/OPC,NPC/OPC,KDM5B
+MP29 NPC/OPC,NPC/OPC,KLHL24
+MP29 NPC/OPC,NPC/OPC,MAP2
+MP29 NPC/OPC,NPC/OPC,OLIG2
+MP29 NPC/OPC,NPC/OPC,PEAK1
+MP29 NPC/OPC,NPC/OPC,RAB3IP
+MP29 NPC/OPC,NPC/OPC,RFTN2
+MP29 NPC/OPC,NPC/OPC,RFX4
+MP29 NPC/OPC,NPC/OPC,TANC2
+MP29 NPC/OPC,NPC/OPC,TRIO
+MP29 NPC/OPC,NPC/OPC,VCAN
+MP29 NPC/OPC,NPC/OPC,ZNF91
+MP29 NPC/OPC,NPC/OPC,FAM181B
+MP29 NPC/OPC,NPC/OPC,STMN4
+MP29 NPC/OPC,NPC/OPC,DLL3
+MP29 NPC/OPC,NPC/OPC,BTG1
+MP29 NPC/OPC,NPC/OPC,TXNIP
+MP29 NPC/OPC,NPC/OPC,LDLRAD3
+MP29 NPC/OPC,NPC/OPC,SOX11
+MP29 NPC/OPC,NPC/OPC,HIP1
+MP29 NPC/OPC,NPC/OPC,FGFBP3
+MP29 NPC/OPC,NPC/OPC,MTSS1
+MP29 NPC/OPC,NPC/OPC,SPRY4
+MP29 NPC/OPC,NPC/OPC,REV3L
+MP29 NPC/OPC,NPC/OPC,MMP16
+MP29 NPC/OPC,NPC/OPC,KLF12
+MP29 NPC/OPC,NPC/OPC,TFDP2
+MP29 NPC/OPC,NPC/OPC,CADM2
+MP29 NPC/OPC,NPC/OPC,ARHGEF7
+MP29 NPC/OPC,NPC/OPC,GOLGB1
+MP29 NPC/OPC,NPC/OPC,ZMYM2
+MP30 PDAC-classical,PDAC-classical,TFF1
+MP30 PDAC-classical,PDAC-classical,TFF3
+MP30 PDAC-classical,PDAC-classical,CEACAM6
+MP30 PDAC-classical,PDAC-classical,AGR2
+MP30 PDAC-classical,PDAC-classical,LGALS4
+MP30 PDAC-classical,PDAC-classical,PHGR1
+MP30 PDAC-classical,PDAC-classical,PLAC8
+MP30 PDAC-classical,PDAC-classical,SLC40A1
+MP30 PDAC-classical,PDAC-classical,TM4SF4
+MP30 PDAC-classical,PDAC-classical,TSPAN8
+MP30 PDAC-classical,PDAC-classical,ANXA10
+MP30 PDAC-classical,PDAC-classical,LYZ
+MP30 PDAC-classical,PDAC-classical,TFF2
+MP30 PDAC-classical,PDAC-classical,CTSE
+MP30 PDAC-classical,PDAC-classical,GCNT3
+MP30 PDAC-classical,PDAC-classical,GPX2
+MP30 PDAC-classical,PDAC-classical,MUC13
+MP30 PDAC-classical,PDAC-classical,MUC5AC
+MP30 PDAC-classical,PDAC-classical,MUC5B
+MP30 PDAC-classical,PDAC-classical,PIGR
+MP30 PDAC-classical,PDAC-classical,CEACAM5
+MP30 PDAC-classical,PDAC-classical,CLDN18
+MP30 PDAC-classical,PDAC-classical,FAM3D
+MP30 PDAC-classical,PDAC-classical,SPINK1
+MP30 PDAC-classical,PDAC-classical,AGR3
+MP30 PDAC-classical,PDAC-classical,DUOX2
+MP30 PDAC-classical,PDAC-classical,PLA2G10
+MP30 PDAC-classical,PDAC-classical,REG4
+MP30 PDAC-classical,PDAC-classical,DUOXA2
+MP30 PDAC-classical,PDAC-classical,PDE4C
+MP30 PDAC-classical,PDAC-classical,PSCA
+MP30 PDAC-classical,PDAC-classical,TSPAN1
+MP30 PDAC-classical,PDAC-classical,VSIG2
+MP30 PDAC-classical,PDAC-classical,CA2
+MP30 PDAC-classical,PDAC-classical,HPGD
+MP30 PDAC-classical,PDAC-classical,DPCR1
+MP30 PDAC-classical,PDAC-classical,OLFM4
+MP30 PDAC-classical,PDAC-classical,AKR7A3
+MP30 PDAC-classical,PDAC-classical,CDH17
+MP30 PDAC-classical,PDAC-classical,FXYD3
+MP30 PDAC-classical,PDAC-classical,PDZK1IP1
+MP30 PDAC-classical,PDAC-classical,TCN1
+MP30 PDAC-classical,PDAC-classical,CEACAM1
+MP30 PDAC-classical,PDAC-classical,ISG20
+MP30 PDAC-classical,PDAC-classical,LINC01133
+MP30 PDAC-classical,PDAC-classical,SLC44A4
+MP30 PDAC-classical,PDAC-classical,VSIG1
+MP30 PDAC-classical,PDAC-classical,CEACAM7
+MP30 PDAC-classical,PDAC-classical,CXCL17
+MP30 PDAC-classical,PDAC-classical,CES2
+MP31 Alveolar,Alveolar,SFTPA1
+MP31 Alveolar,Alveolar,SFTPA2
+MP31 Alveolar,Alveolar,SFTPD
+MP31 Alveolar,Alveolar,LRRK2
+MP31 Alveolar,Alveolar,PGC
+MP31 Alveolar,Alveolar,SFTPC
+MP31 Alveolar,Alveolar,C4BPA
+MP31 Alveolar,Alveolar,SFTPB
+MP31 Alveolar,Alveolar,AQP1
+MP31 Alveolar,Alveolar,ABCA3
+MP31 Alveolar,Alveolar,PEBP4
+MP31 Alveolar,Alveolar,SCD
+MP31 Alveolar,Alveolar,HSD17B6
+MP31 Alveolar,Alveolar,MFSD2A
+MP31 Alveolar,Alveolar,NAPSA
+MP31 Alveolar,Alveolar,NNMT
+MP31 Alveolar,Alveolar,PIGR
+MP31 Alveolar,Alveolar,SCGB3A2
+MP31 Alveolar,Alveolar,SERPINA1
+MP31 Alveolar,Alveolar,SPINK5
+MP31 Alveolar,Alveolar,C16ORF89
+MP31 Alveolar,Alveolar,C3
+MP31 Alveolar,Alveolar,CACNA2D2
+MP31 Alveolar,Alveolar,EPHX1
+MP31 Alveolar,Alveolar,MID1IP1
+MP31 Alveolar,Alveolar,RNASE1
+MP31 Alveolar,Alveolar,ALPL
+MP31 Alveolar,Alveolar,DHCR24
+MP31 Alveolar,Alveolar,HOPX
+MP31 Alveolar,Alveolar,LPCAT1
+MP31 Alveolar,Alveolar,SCGB3A1
+MP31 Alveolar,Alveolar,SFTA2
+MP31 Alveolar,Alveolar,PTPN13
+MP31 Alveolar,Alveolar,S100A9
+MP31 Alveolar,Alveolar,SFTA3
+MP31 Alveolar,Alveolar,SUSD2
+MP31 Alveolar,Alveolar,DMBT1
+MP31 Alveolar,Alveolar,NPC2
+MP31 Alveolar,Alveolar,SLC22A31
+MP31 Alveolar,Alveolar,TFPI
+MP31 Alveolar,Alveolar,ALOX15B
+MP31 Alveolar,Alveolar,SLPI
+MP31 Alveolar,Alveolar,SFTA1P
+MP31 Alveolar,Alveolar,AK1
+MP31 Alveolar,Alveolar,DUOX1
+MP31 Alveolar,Alveolar,FASN
+MP31 Alveolar,Alveolar,FABP5
+MP31 Alveolar,Alveolar,CXCL17
+MP31 Alveolar,Alveolar,SDR16C5
+MP31 Alveolar,Alveolar,LAMP3
+MP32 Skin-pigmentation,Skin-pigmentation,PHACTR1
+MP32 Skin-pigmentation,Skin-pigmentation,TBC1D7
+MP32 Skin-pigmentation,Skin-pigmentation,MLANA
+MP32 Skin-pigmentation,Skin-pigmentation,ASAH1
+MP32 Skin-pigmentation,Skin-pigmentation,DCT
+MP32 Skin-pigmentation,Skin-pigmentation,LGALS3
+MP32 Skin-pigmentation,Skin-pigmentation,CAPN3
+MP32 Skin-pigmentation,Skin-pigmentation,GDF15
+MP32 Skin-pigmentation,Skin-pigmentation,GPNMB
+MP32 Skin-pigmentation,Skin-pigmentation,GPR137B
+MP32 Skin-pigmentation,Skin-pigmentation,MBP
+MP32 Skin-pigmentation,Skin-pigmentation,MITF
+MP32 Skin-pigmentation,Skin-pigmentation,PMEL
+MP32 Skin-pigmentation,Skin-pigmentation,TNFRSF14
+MP32 Skin-pigmentation,Skin-pigmentation,BIRC7
+MP32 Skin-pigmentation,Skin-pigmentation,CHCHD6
+MP32 Skin-pigmentation,Skin-pigmentation,LINC00518
+MP32 Skin-pigmentation,Skin-pigmentation,MXI1
+MP32 Skin-pigmentation,Skin-pigmentation,NOV
+MP32 Skin-pigmentation,Skin-pigmentation,TRPM1
+MP32 Skin-pigmentation,Skin-pigmentation,APOE
+MP32 Skin-pigmentation,Skin-pigmentation,FXYD3
+MP32 Skin-pigmentation,Skin-pigmentation,ISG20
+MP32 Skin-pigmentation,Skin-pigmentation,NBL1
+MP32 Skin-pigmentation,Skin-pigmentation,PLP1
+MP32 Skin-pigmentation,Skin-pigmentation,QDPR
+MP32 Skin-pigmentation,Skin-pigmentation,QPCT
+MP32 Skin-pigmentation,Skin-pigmentation,SH3BP5
+MP32 Skin-pigmentation,Skin-pigmentation,TIMP2
+MP32 Skin-pigmentation,Skin-pigmentation,TRIM2
+MP32 Skin-pigmentation,Skin-pigmentation,AVPI1
+MP32 Skin-pigmentation,Skin-pigmentation,DAB2
+MP32 Skin-pigmentation,Skin-pigmentation,GJB1
+MP32 Skin-pigmentation,Skin-pigmentation,GPR143
+MP32 Skin-pigmentation,Skin-pigmentation,GYPC
+MP32 Skin-pigmentation,Skin-pigmentation,LYST
+MP32 Skin-pigmentation,Skin-pigmentation,NSG1
+MP32 Skin-pigmentation,Skin-pigmentation,PIR
+MP32 Skin-pigmentation,Skin-pigmentation,RAB38
+MP32 Skin-pigmentation,Skin-pigmentation,RRAGD
+MP32 Skin-pigmentation,Skin-pigmentation,S100B
+MP32 Skin-pigmentation,Skin-pigmentation,SLC45A2
+MP32 Skin-pigmentation,Skin-pigmentation,SNCA
+MP32 Skin-pigmentation,Skin-pigmentation,TBC1D16
+MP32 Skin-pigmentation,Skin-pigmentation,TYRP1
+MP32 Skin-pigmentation,Skin-pigmentation,WIPI1
+MP32 Skin-pigmentation,Skin-pigmentation,SPON2
+MP32 Skin-pigmentation,Skin-pigmentation,ZNF106
+MP32 Skin-pigmentation,Skin-pigmentation,BCL2A1
+MP32 Skin-pigmentation,Skin-pigmentation,SNX10
+MP33 RBCs,RBCs,BLVRB
+MP33 RBCs,RBCs,HBB
+MP33 RBCs,RBCs,APOC1
+MP33 RBCs,RBCs,CA1
+MP33 RBCs,RBCs,HBD
+MP33 RBCs,RBCs,AHSP
+MP33 RBCs,RBCs,PRDX2
+MP33 RBCs,RBCs,REXO2
+MP33 RBCs,RBCs,CNRIP1
+MP33 RBCs,RBCs,HMBS
+MP33 RBCs,RBCs,S100A6
+MP33 RBCs,RBCs,HAGH
+MP33 RBCs,RBCs,PLIN2
+MP33 RBCs,RBCs,RHAG
+MP33 RBCs,RBCs,CD36
+MP33 RBCs,RBCs,FAM178B
+MP33 RBCs,RBCs,FBXO7
+MP33 RBCs,RBCs,FECH
+MP33 RBCs,RBCs,HES6
+MP33 RBCs,RBCs,KCNH2
+MP33 RBCs,RBCs,KLF1
+MP33 RBCs,RBCs,MYC
+MP33 RBCs,RBCs,TFRC
+MP33 RBCs,RBCs,ANK1
+MP33 RBCs,RBCs,APOE
+MP33 RBCs,RBCs,CASP3
+MP33 RBCs,RBCs,CAST
+MP33 RBCs,RBCs,HBA1
+MP33 RBCs,RBCs,HBG2
+MP33 RBCs,RBCs,MPC2
+MP33 RBCs,RBCs,NFIA
+MP33 RBCs,RBCs,STRADB
+MP33 RBCs,RBCs,SYNGR1
+MP33 RBCs,RBCs,TFR2
+MP33 RBCs,RBCs,TMEM14C
+MP33 RBCs,RBCs,UBAC1
+MP33 RBCs,RBCs,CA2
+MP33 RBCs,RBCs,GATA1
+MP33 RBCs,RBCs,GYPB
+MP33 RBCs,RBCs,HBA2
+MP33 RBCs,RBCs,HBQ1
+MP33 RBCs,RBCs,SMIM10
+MP33 RBCs,RBCs,EPCAM
+MP33 RBCs,RBCs,FAM45A
+MP33 RBCs,RBCs,FCGRT
+MP33 RBCs,RBCs,SLC25A37
+MP33 RBCs,RBCs,LMNA
+MP33 RBCs,RBCs,HBG1
+MP33 RBCs,RBCs,UROD
+MP33 RBCs,RBCs,CSF2RB
+MP34 Platelet-activation,Platelet-activation,RGS18
+MP34 Platelet-activation,Platelet-activation,PDLIM1
+MP34 Platelet-activation,Platelet-activation,ITGA2B
+MP34 Platelet-activation,Platelet-activation,PLEK
+MP34 Platelet-activation,Platelet-activation,C6ORF25
+MP34 Platelet-activation,Platelet-activation,FERMT3
+MP34 Platelet-activation,Platelet-activation,RAP1B
+MP34 Platelet-activation,Platelet-activation,CLU
+MP34 Platelet-activation,Platelet-activation,LIMS1
+MP34 Platelet-activation,Platelet-activation,CD9
+MP34 Platelet-activation,Platelet-activation,NRGN
+MP34 Platelet-activation,Platelet-activation,PBX1
+MP34 Platelet-activation,Platelet-activation,PF4
+MP34 Platelet-activation,Platelet-activation,PKM
+MP34 Platelet-activation,Platelet-activation,RP11-354E11.2
+MP34 Platelet-activation,Platelet-activation,SDPR
+MP34 Platelet-activation,Platelet-activation,SLC44A1
+MP34 Platelet-activation,Platelet-activation,STOM
+MP34 Platelet-activation,Platelet-activation,TMSB4X
+MP34 Platelet-activation,Platelet-activation,C2ORF88
+MP34 Platelet-activation,Platelet-activation,CMTM5
+MP34 Platelet-activation,Platelet-activation,GP9
+MP34 Platelet-activation,Platelet-activation,GSN
+MP34 Platelet-activation,Platelet-activation,HBD
+MP34 Platelet-activation,Platelet-activation,LAT
+MP34 Platelet-activation,Platelet-activation,MAX
+MP34 Platelet-activation,Platelet-activation,VCL
+MP34 Platelet-activation,Platelet-activation,ACTN1
+MP34 Platelet-activation,Platelet-activation,DAD1
+MP34 Platelet-activation,Platelet-activation,FYB
+MP34 Platelet-activation,Platelet-activation,MGLL
+MP34 Platelet-activation,Platelet-activation,MMRN1
+MP34 Platelet-activation,Platelet-activation,PPIF
+MP34 Platelet-activation,Platelet-activation,TPM1
+MP34 Platelet-activation,Platelet-activation,BIN2
+MP34 Platelet-activation,Platelet-activation,CCND3
+MP34 Platelet-activation,Platelet-activation,FCER1A
+MP34 Platelet-activation,Platelet-activation,FCER1G
+MP34 Platelet-activation,Platelet-activation,FLI1
+MP34 Platelet-activation,Platelet-activation,GATA2
+MP34 Platelet-activation,Platelet-activation,GUCY1B3
+MP34 Platelet-activation,Platelet-activation,PRKAR2B
+MP34 Platelet-activation,Platelet-activation,TGFB1
+MP34 Platelet-activation,Platelet-activation,TPM4
+MP34 Platelet-activation,Platelet-activation,VASP
+MP34 Platelet-activation,Platelet-activation,RAB27B
+MP34 Platelet-activation,Platelet-activation,PIM1
+MP34 Platelet-activation,Platelet-activation,CD36
+MP34 Platelet-activation,Platelet-activation,LGALS1
+MP34 Platelet-activation,Platelet-activation,CKB
+MP35 Hemato-related-I,Hemato-related-I,CSF3R
+MP35 Hemato-related-I,Hemato-related-I,SPINK2
+MP35 Hemato-related-I,Hemato-related-I,VAMP5
+MP35 Hemato-related-I,Hemato-related-I,AZU1
+MP35 Hemato-related-I,Hemato-related-I,SELL
+MP35 Hemato-related-I,Hemato-related-I,C1QTNF4
+MP35 Hemato-related-I,Hemato-related-I,CFD
+MP35 Hemato-related-I,Hemato-related-I,CTSG
+MP35 Hemato-related-I,Hemato-related-I,ELANE
+MP35 Hemato-related-I,Hemato-related-I,HOPX
+MP35 Hemato-related-I,Hemato-related-I,ITM2C
+MP35 Hemato-related-I,Hemato-related-I,NPDC1
+MP35 Hemato-related-I,Hemato-related-I,AVP
+MP35 Hemato-related-I,Hemato-related-I,C1ORF228
+MP35 Hemato-related-I,Hemato-related-I,CD52
+MP35 Hemato-related-I,Hemato-related-I,CLEC11A
+MP35 Hemato-related-I,Hemato-related-I,CRHBP
+MP35 Hemato-related-I,Hemato-related-I,CST7
+MP35 Hemato-related-I,Hemato-related-I,MBOAT7
+MP35 Hemato-related-I,Hemato-related-I,MDK
+MP35 Hemato-related-I,Hemato-related-I,PLAC8
+MP35 Hemato-related-I,Hemato-related-I,PRTN3
+MP35 Hemato-related-I,Hemato-related-I,RNASE2
+MP35 Hemato-related-I,Hemato-related-I,BAALC
+MP35 Hemato-related-I,Hemato-related-I,BST2
+MP35 Hemato-related-I,Hemato-related-I,C19ORF77
+MP35 Hemato-related-I,Hemato-related-I,CD44
+MP35 Hemato-related-I,Hemato-related-I,GLIPR1
+MP35 Hemato-related-I,Hemato-related-I,ICAM3
+MP35 Hemato-related-I,Hemato-related-I,KLF6
+MP35 Hemato-related-I,Hemato-related-I,MPO
+MP35 Hemato-related-I,Hemato-related-I,MS4A3
+MP35 Hemato-related-I,Hemato-related-I,PRSS57
+MP35 Hemato-related-I,Hemato-related-I,RAB32
+MP35 Hemato-related-I,Hemato-related-I,SRGN
+MP35 Hemato-related-I,Hemato-related-I,TSC22D3
+MP35 Hemato-related-I,Hemato-related-I,ZFP36L2
+MP35 Hemato-related-I,Hemato-related-I,FOS
+MP35 Hemato-related-I,Hemato-related-I,SERPINB1
+MP35 Hemato-related-I,Hemato-related-I,IGLL1
+MP35 Hemato-related-I,Hemato-related-I,LYZ
+MP35 Hemato-related-I,Hemato-related-I,MGST1
+MP35 Hemato-related-I,Hemato-related-I,TNFSF13B
+MP35 Hemato-related-I,Hemato-related-I,HLA-DQB1
+MP35 Hemato-related-I,Hemato-related-I,CD74
+MP35 Hemato-related-I,Hemato-related-I,PTPRCAP
+MP35 Hemato-related-I,Hemato-related-I,ANKRD28
+MP35 Hemato-related-I,Hemato-related-I,CD34
+MP35 Hemato-related-I,Hemato-related-I,CPA3
+MP35 Hemato-related-I,Hemato-related-I,KIAA0125
+MP36 IG,Immunoglobulin,IGLC2
+MP36 IG,Immunoglobulin,IGLC3
+MP36 IG,Immunoglobulin,IGHA2
+MP36 IG,Immunoglobulin,IGHA1
+MP36 IG,Immunoglobulin,IGHG4
+MP36 IG,Immunoglobulin,IGKC
+MP36 IG,Immunoglobulin,CD79A
+MP36 IG,Immunoglobulin,IGHG1
+MP36 IG,Immunoglobulin,IGHG3
+MP36 IG,Immunoglobulin,IGHG2
+MP36 IG,Immunoglobulin,IGHGP
+MP36 IG,Immunoglobulin,IGLJ2
+MP36 IG,Immunoglobulin,IGLC1
+MP36 IG,Immunoglobulin,DERL3
+MP36 IG,Immunoglobulin,IGHM
+MP36 IG,Immunoglobulin,IGLC7
+MP36 IG,Immunoglobulin,SELENOM
+MP36 IG,Immunoglobulin,CD63
+MP36 IG,Immunoglobulin,IGLV3-1
+MP36 IG,Immunoglobulin,IGLV3-7
+MP36 IG,Immunoglobulin,IGLV6-57
+MP36 IG,Immunoglobulin,JSRP1
+MP36 IG,Immunoglobulin,CCPG1
+MP36 IG,Immunoglobulin,DNAJB9
+MP36 IG,Immunoglobulin,IGKV1-12
+MP36 IG,Immunoglobulin,IGLJ1
+MP36 IG,Immunoglobulin,KLF6
+MP36 IG,Immunoglobulin,TSC22D3
+MP36 IG,Immunoglobulin,AC134669.2
+MP36 IG,Immunoglobulin,ADA2
+MP36 IG,Immunoglobulin,CD27
+MP36 IG,Immunoglobulin,CITED2
+MP36 IG,Immunoglobulin,FCRL5
+MP36 IG,Immunoglobulin,HERPUD1
+MP36 IG,Immunoglobulin,HLA-F
+MP36 IG,Immunoglobulin,IGKV4-1
+MP36 IG,Immunoglobulin,IGLC5
+MP36 IG,Immunoglobulin,IGLC6
+MP36 IG,Immunoglobulin,IGLJ3
+MP36 IG,Immunoglobulin,IGLL5
+MP36 IG,Immunoglobulin,IGLV3-21
+MP36 IG,Immunoglobulin,ITGB7
+MP36 IG,Immunoglobulin,JCHAIN
+MP36 IG,Immunoglobulin,TXNIP
+MP36 IG,Immunoglobulin,MIR4539
+MP36 IG,Immunoglobulin,SEL1L3
+MP36 IG,Immunoglobulin,PRDX4
+MP36 IG,Immunoglobulin,IRF4
+MP36 IG,Immunoglobulin,MAN1A2
+MP36 IG,Immunoglobulin,TNFRSF17
+MP37 Hemato-related-II,Hemato-related-II,CTNNBL1
+MP37 Hemato-related-II,Hemato-related-II,FCER1A
+MP37 Hemato-related-II,Hemato-related-II,GATA2
+MP37 Hemato-related-II,Hemato-related-II,CD84
+MP37 Hemato-related-II,Hemato-related-II,PDZD8
+MP37 Hemato-related-II,Hemato-related-II,SLC40A1
+MP37 Hemato-related-II,Hemato-related-II,TESPA1
+MP37 Hemato-related-II,Hemato-related-II,ZMYND8
+MP37 Hemato-related-II,Hemato-related-II,CYTL1
+MP37 Hemato-related-II,Hemato-related-II,MINPP1
+MP37 Hemato-related-II,Hemato-related-II,PDCD4
+MP37 Hemato-related-II,Hemato-related-II,PKIG
+MP37 Hemato-related-II,Hemato-related-II,RP11-354E11.2
+MP37 Hemato-related-II,Hemato-related-II,SOD2
+MP37 Hemato-related-II,Hemato-related-II,STAM
+MP37 Hemato-related-II,Hemato-related-II,ABCC4
+MP37 Hemato-related-II,Hemato-related-II,ALDH1A1
+MP37 Hemato-related-II,Hemato-related-II,ATP6V0A2
+MP37 Hemato-related-II,Hemato-related-II,CD82
+MP37 Hemato-related-II,Hemato-related-II,CNRIP1
+MP37 Hemato-related-II,Hemato-related-II,CPA3
+MP37 Hemato-related-II,Hemato-related-II,CPPED1
+MP37 Hemato-related-II,Hemato-related-II,DEPTOR
+MP37 Hemato-related-II,Hemato-related-II,GMPR
+MP37 Hemato-related-II,Hemato-related-II,HBD
+MP37 Hemato-related-II,Hemato-related-II,HPGDS
+MP37 Hemato-related-II,Hemato-related-II,IL1B
+MP37 Hemato-related-II,Hemato-related-II,KLF1
+MP37 Hemato-related-II,Hemato-related-II,LXN
+MP37 Hemato-related-II,Hemato-related-II,NFE2
+MP37 Hemato-related-II,Hemato-related-II,PLEK
+MP37 Hemato-related-II,Hemato-related-II,PLIN2
+MP37 Hemato-related-II,Hemato-related-II,RAB37
+MP37 Hemato-related-II,Hemato-related-II,RGS18
+MP37 Hemato-related-II,Hemato-related-II,TPSB2
+MP37 Hemato-related-II,Hemato-related-II,ZEB2
+MP37 Hemato-related-II,Hemato-related-II,STXBP6
+MP37 Hemato-related-II,Hemato-related-II,KCNQ1OT1
+MP37 Hemato-related-II,Hemato-related-II,BMP2K
+MP37 Hemato-related-II,Hemato-related-II,EREG
+MP37 Hemato-related-II,Hemato-related-II,LINC00152
+MP37 Hemato-related-II,Hemato-related-II,FREM1
+MP37 Hemato-related-II,Hemato-related-II,PBX1
+MP37 Hemato-related-II,Hemato-related-II,PDLIM1
+MP37 Hemato-related-II,Hemato-related-II,MPP1
+MP37 Hemato-related-II,Hemato-related-II,SOX4
+MP37 Hemato-related-II,Hemato-related-II,FAM117A
+MP37 Hemato-related-II,Hemato-related-II,FAM19A2
+MP37 Hemato-related-II,Hemato-related-II,ICAM4
+MP37 Hemato-related-II,Hemato-related-II,CASP3
+MP38 Glutathione,Glutathione,NAT8
+MP38 Glutathione,Glutathione,ACSM2B
+MP38 Glutathione,Glutathione,LGALS2
+MP38 Glutathione,Glutathione,AMN
+MP38 Glutathione,Glutathione,BBOX1
+MP38 Glutathione,Glutathione,KHK
+MP38 Glutathione,Glutathione,MIOX
+MP38 Glutathione,Glutathione,SMIM24
+MP38 Glutathione,Glutathione,AQP1
+MP38 Glutathione,Glutathione,C11ORF54
+MP38 Glutathione,Glutathione,CUBN
+MP38 Glutathione,Glutathione,GSTA1
+MP38 Glutathione,Glutathione,GLYAT
+MP38 Glutathione,Glutathione,ACSM2A
+MP38 Glutathione,Glutathione,AOC1
+MP38 Glutathione,Glutathione,APOM
+MP38 Glutathione,Glutathione,GAL3ST1
+MP38 Glutathione,Glutathione,GSTA2
+MP38 Glutathione,Glutathione,SLC6A13
+MP38 Glutathione,Glutathione,AZGP1
+MP38 Glutathione,Glutathione,GLYATL1
+MP38 Glutathione,Glutathione,LRP2
+MP38 Glutathione,Glutathione,PCSK1N
+MP38 Glutathione,Glutathione,PEPD
+MP38 Glutathione,Glutathione,SLC17A3
+MP38 Glutathione,Glutathione,SLC5A12
+MP38 Glutathione,Glutathione,CDHR5
+MP38 Glutathione,Glutathione,MSRA
+MP38 Glutathione,Glutathione,PDZK1
+MP38 Glutathione,Glutathione,PXMP2
+MP38 Glutathione,Glutathione,SLC16A9
+MP38 Glutathione,Glutathione,SLC22A18
+MP38 Glutathione,Glutathione,AGT
+MP38 Glutathione,Glutathione,CES2
+MP38 Glutathione,Glutathione,CLDN10
+MP38 Glutathione,Glutathione,DDC
+MP38 Glutathione,Glutathione,TMEM27
+MP38 Glutathione,Glutathione,TNFAIP6
+MP38 Glutathione,Glutathione,AGXT2
+MP38 Glutathione,Glutathione,CFI
+MP38 Glutathione,Glutathione,FOLR1
+MP38 Glutathione,Glutathione,GAMT
+MP38 Glutathione,Glutathione,HRSP12
+MP38 Glutathione,Glutathione,RBP5
+MP38 Glutathione,Glutathione,TSPAN1
+MP38 Glutathione,Glutathione,GPX3
+MP38 Glutathione,Glutathione,CXCL14
+MP38 Glutathione,Glutathione,PRAP1
+MP38 Glutathione,Glutathione,LACTB2
+MP38 Glutathione,Glutathione,GCHFR
+MP39 Metal-response,Metal-response,MT1X
+MP39 Metal-response,Metal-response,CAV1
+MP39 Metal-response,Metal-response,MT1E
+MP39 Metal-response,Metal-response,C5ORF46
+MP39 Metal-response,Metal-response,TGFBI
+MP39 Metal-response,Metal-response,CEBPB
+MP39 Metal-response,Metal-response,CKB
+MP39 Metal-response,Metal-response,EPB41L4A-AS1
+MP39 Metal-response,Metal-response,IGFBP5
+MP39 Metal-response,Metal-response,LGALS1
+MP39 Metal-response,Metal-response,LOX
+MP39 Metal-response,Metal-response,MT1M
+MP39 Metal-response,Metal-response,MT2A
+MP39 Metal-response,Metal-response,MT3
+MP39 Metal-response,Metal-response,NOL3
+MP39 Metal-response,Metal-response,STC1
+MP39 Metal-response,Metal-response,TUBA1A
+MP39 Metal-response,Metal-response,C10ORF10
+MP39 Metal-response,Metal-response,C1S
+MP39 Metal-response,Metal-response,CP
+MP39 Metal-response,Metal-response,DDIT4
+MP39 Metal-response,Metal-response,EMP3
+MP39 Metal-response,Metal-response,GLUL
+MP39 Metal-response,Metal-response,MT1F
+MP39 Metal-response,Metal-response,NPTX2
+MP39 Metal-response,Metal-response,PLP2
+MP39 Metal-response,Metal-response,SMIM3
+MP39 Metal-response,Metal-response,SNHG7
+MP39 Metal-response,Metal-response,SOX4
+MP39 Metal-response,Metal-response,BGN
+MP39 Metal-response,Metal-response,EDN1
+MP39 Metal-response,Metal-response,ID1
+MP39 Metal-response,Metal-response,ID4
+MP39 Metal-response,Metal-response,IER2
+MP39 Metal-response,Metal-response,MT1A
+MP39 Metal-response,Metal-response,PMP22
+MP39 Metal-response,Metal-response,RSL24D1
+MP39 Metal-response,Metal-response,TSC22D3
+MP39 Metal-response,Metal-response,VCAM1
+MP39 Metal-response,Metal-response,VCAN
+MP39 Metal-response,Metal-response,FSTL3
+MP39 Metal-response,Metal-response,TMEM45A
+MP39 Metal-response,Metal-response,ZBTB16
+MP39 Metal-response,Metal-response,TMEM91
+MP39 Metal-response,Metal-response,FKBP5
+MP39 Metal-response,Metal-response,S100A6
+MP39 Metal-response,Metal-response,C1R
+MP39 Metal-response,Metal-response,MMP7
+MP39 Metal-response,Metal-response,KLF4
+MP39 Metal-response,Metal-response,ANXA1
+MP40 PDAC-related,PDAC-related,ISG20
+MP40 PDAC-related,PDAC-related,KLK10
+MP40 PDAC-related,PDAC-related,CEACAM1
+MP40 PDAC-related,PDAC-related,F3
+MP40 PDAC-related,PDAC-related,LMO7
+MP40 PDAC-related,PDAC-related,PLAUR
+MP40 PDAC-related,PDAC-related,SLPI
+MP40 PDAC-related,PDAC-related,ANKRD36C
+MP40 PDAC-related,PDAC-related,CD55
+MP40 PDAC-related,PDAC-related,CEACAM6
+MP40 PDAC-related,PDAC-related,EPS8L1
+MP40 PDAC-related,PDAC-related,LCN2
+MP40 PDAC-related,PDAC-related,PSCA
+MP40 PDAC-related,PDAC-related,TIMP2
+MP40 PDAC-related,PDAC-related,C15ORF48
+MP40 PDAC-related,PDAC-related,KLF2
+MP40 PDAC-related,PDAC-related,KLK6
+MP40 PDAC-related,PDAC-related,KLK7
+MP40 PDAC-related,PDAC-related,KRT23
+MP40 PDAC-related,PDAC-related,LAMC2
+MP40 PDAC-related,PDAC-related,S100A4
+MP40 PDAC-related,PDAC-related,TNFRSF12A
+MP40 PDAC-related,PDAC-related,ALDH1A3
+MP40 PDAC-related,PDAC-related,ANXA1
+MP40 PDAC-related,PDAC-related,APOL1
+MP40 PDAC-related,PDAC-related,CLDN23
+MP40 PDAC-related,PDAC-related,CLIC3
+MP40 PDAC-related,PDAC-related,COL6A1
+MP40 PDAC-related,PDAC-related,CST6
+MP40 PDAC-related,PDAC-related,EMP1
+MP40 PDAC-related,PDAC-related,FLNB
+MP40 PDAC-related,PDAC-related,IL1RN
+MP40 PDAC-related,PDAC-related,IL32
+MP40 PDAC-related,PDAC-related,KLK11
+MP40 PDAC-related,PDAC-related,KRT16
+MP40 PDAC-related,PDAC-related,KRT17
+MP40 PDAC-related,PDAC-related,LDLR
+MP40 PDAC-related,PDAC-related,MALL
+MP40 PDAC-related,PDAC-related,MMP7
+MP40 PDAC-related,PDAC-related,RAB11FIP1
+MP40 PDAC-related,PDAC-related,SLC16A3
+MP40 PDAC-related,PDAC-related,TFF2
+MP40 PDAC-related,PDAC-related,CEACAM5
+MP40 PDAC-related,PDAC-related,MUC5AC
+MP40 PDAC-related,PDAC-related,SDCBP2
+MP40 PDAC-related,PDAC-related,SMIM5
+MP40 PDAC-related,PDAC-related,ISG15
+MP40 PDAC-related,PDAC-related,SLC2A1
+MP40 PDAC-related,PDAC-related,LRRC8A
+MP40 PDAC-related,PDAC-related,MT1X
+BIOCARTA_DEATH_PATHWAY,,APAF1
+BIOCARTA_DEATH_PATHWAY,,BCL2
+BIOCARTA_DEATH_PATHWAY,,BID
+BIOCARTA_DEATH_PATHWAY,,BIRC2
+BIOCARTA_DEATH_PATHWAY,,BIRC3
+BIOCARTA_DEATH_PATHWAY,,CASP10
+BIOCARTA_DEATH_PATHWAY,,CASP3
+BIOCARTA_DEATH_PATHWAY,,CASP6
+BIOCARTA_DEATH_PATHWAY,,CASP7
+BIOCARTA_DEATH_PATHWAY,,CASP8
+BIOCARTA_DEATH_PATHWAY,,CASP9
+BIOCARTA_DEATH_PATHWAY,,CFLAR
+BIOCARTA_DEATH_PATHWAY,,CHUK
+BIOCARTA_DEATH_PATHWAY,,DFFA
+BIOCARTA_DEATH_PATHWAY,,DFFB
+BIOCARTA_DEATH_PATHWAY,,FADD
+BIOCARTA_DEATH_PATHWAY,,GAS2
+BIOCARTA_DEATH_PATHWAY,,LMNA
+BIOCARTA_DEATH_PATHWAY,,MAP3K14
+BIOCARTA_DEATH_PATHWAY,,MAP3K14
+BIOCARTA_DEATH_PATHWAY,,NFKB1
+BIOCARTA_DEATH_PATHWAY,,NFKBIA
+BIOCARTA_DEATH_PATHWAY,,RELA
+BIOCARTA_DEATH_PATHWAY,,RIPK1
+BIOCARTA_DEATH_PATHWAY,,SPTAN1
+BIOCARTA_DEATH_PATHWAY,,TNFRSF25
+BIOCARTA_DEATH_PATHWAY,,TNFSF10
+BIOCARTA_DEATH_PATHWAY,,TRADD
+BIOCARTA_DEATH_PATHWAY,,TRAF2
+BIOCARTA_DEATH_PATHWAY,,XIAP
+REACTOME_PROGRAMMED_CELL_DEATH,,ACIN1
+REACTOME_PROGRAMMED_CELL_DEATH,,ADD1
+REACTOME_PROGRAMMED_CELL_DEATH,,AKT1
+REACTOME_PROGRAMMED_CELL_DEATH,,AKT2
+REACTOME_PROGRAMMED_CELL_DEATH,,AKT3
+REACTOME_PROGRAMMED_CELL_DEATH,,APAF1
+REACTOME_PROGRAMMED_CELL_DEATH,,APC
+REACTOME_PROGRAMMED_CELL_DEATH,,APIP
+REACTOME_PROGRAMMED_CELL_DEATH,,APPL1
+REACTOME_PROGRAMMED_CELL_DEATH,,ARHGAP10
+REACTOME_PROGRAMMED_CELL_DEATH,,AVEN
+REACTOME_PROGRAMMED_CELL_DEATH,,BAD
+REACTOME_PROGRAMMED_CELL_DEATH,,BAK1
+REACTOME_PROGRAMMED_CELL_DEATH,,BAX
+REACTOME_PROGRAMMED_CELL_DEATH,,BBC3
+REACTOME_PROGRAMMED_CELL_DEATH,,BCAP31
+REACTOME_PROGRAMMED_CELL_DEATH,,BCL2
+REACTOME_PROGRAMMED_CELL_DEATH,,BCL2L1
+REACTOME_PROGRAMMED_CELL_DEATH,,BCL2L11
+REACTOME_PROGRAMMED_CELL_DEATH,,BID
+REACTOME_PROGRAMMED_CELL_DEATH,,BIRC2
+REACTOME_PROGRAMMED_CELL_DEATH,,BIRC3
+REACTOME_PROGRAMMED_CELL_DEATH,,BMF
+REACTOME_PROGRAMMED_CELL_DEATH,,BMX
+REACTOME_PROGRAMMED_CELL_DEATH,,C1QBP
+REACTOME_PROGRAMMED_CELL_DEATH,,CARD8
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP1
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP3
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP4
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP5
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP6
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP7
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP8
+REACTOME_PROGRAMMED_CELL_DEATH,,CASP9
+REACTOME_PROGRAMMED_CELL_DEATH,,CD14
+REACTOME_PROGRAMMED_CELL_DEATH,,CDC37
+REACTOME_PROGRAMMED_CELL_DEATH,,CDH1
+REACTOME_PROGRAMMED_CELL_DEATH,,CDKN2A
+REACTOME_PROGRAMMED_CELL_DEATH,,CFLAR
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP2A
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP2B
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP3
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP4A
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP4B
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP4C
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP6
+REACTOME_PROGRAMMED_CELL_DEATH,,CHMP7
+REACTOME_PROGRAMMED_CELL_DEATH,,CLSPN
+REACTOME_PROGRAMMED_CELL_DEATH,,CTNNB1
+REACTOME_PROGRAMMED_CELL_DEATH,,CYCS
+REACTOME_PROGRAMMED_CELL_DEATH,,DAPK1
+REACTOME_PROGRAMMED_CELL_DEATH,,DAPK2
+REACTOME_PROGRAMMED_CELL_DEATH,,DAPK3
+REACTOME_PROGRAMMED_CELL_DEATH,,DBNL
+REACTOME_PROGRAMMED_CELL_DEATH,,DCC
+REACTOME_PROGRAMMED_CELL_DEATH,,DFFA
+REACTOME_PROGRAMMED_CELL_DEATH,,DFFB
+REACTOME_PROGRAMMED_CELL_DEATH,,DIABLO
+REACTOME_PROGRAMMED_CELL_DEATH,,DNM1L
+REACTOME_PROGRAMMED_CELL_DEATH,,DSG1
+REACTOME_PROGRAMMED_CELL_DEATH,,DSG2
+REACTOME_PROGRAMMED_CELL_DEATH,,DSG3
+REACTOME_PROGRAMMED_CELL_DEATH,,DSP
+REACTOME_PROGRAMMED_CELL_DEATH,,DYNLL1
+REACTOME_PROGRAMMED_CELL_DEATH,,DYNLL2
+REACTOME_PROGRAMMED_CELL_DEATH,,E2F1
+REACTOME_PROGRAMMED_CELL_DEATH,,ELANE
+REACTOME_PROGRAMMED_CELL_DEATH,,FADD
+REACTOME_PROGRAMMED_CELL_DEATH,,FAS
+REACTOME_PROGRAMMED_CELL_DEATH,,FASLG
+REACTOME_PROGRAMMED_CELL_DEATH,,FLOT1
+REACTOME_PROGRAMMED_CELL_DEATH,,FLOT2
+REACTOME_PROGRAMMED_CELL_DEATH,,FNTA
+REACTOME_PROGRAMMED_CELL_DEATH,,GAS2
+REACTOME_PROGRAMMED_CELL_DEATH,,GSDMD
+REACTOME_PROGRAMMED_CELL_DEATH,,GSDME
+REACTOME_PROGRAMMED_CELL_DEATH,,GSN
+REACTOME_PROGRAMMED_CELL_DEATH,,GZMB
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-0
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-1
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-2
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-3
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-4
+REACTOME_PROGRAMMED_CELL_DEATH,,H1-5
+REACTOME_PROGRAMMED_CELL_DEATH,,HMGB1
+REACTOME_PROGRAMMED_CELL_DEATH,,HMGB2
+REACTOME_PROGRAMMED_CELL_DEATH,,HSP90AA1
+REACTOME_PROGRAMMED_CELL_DEATH,,IL18
+REACTOME_PROGRAMMED_CELL_DEATH,,IL1A
+REACTOME_PROGRAMMED_CELL_DEATH,,IL1B
+REACTOME_PROGRAMMED_CELL_DEATH,,IRF1
+REACTOME_PROGRAMMED_CELL_DEATH,,IRF2
+REACTOME_PROGRAMMED_CELL_DEATH,,KPNA1
+REACTOME_PROGRAMMED_CELL_DEATH,,KPNB1
+REACTOME_PROGRAMMED_CELL_DEATH,,LMNA
+REACTOME_PROGRAMMED_CELL_DEATH,,LMNB1
+REACTOME_PROGRAMMED_CELL_DEATH,,LY96
+REACTOME_PROGRAMMED_CELL_DEATH,,MAGED1
+REACTOME_PROGRAMMED_CELL_DEATH,,MAPK1
+REACTOME_PROGRAMMED_CELL_DEATH,,MAPK3
+REACTOME_PROGRAMMED_CELL_DEATH,,MAPK8
+REACTOME_PROGRAMMED_CELL_DEATH,,MAPT
+REACTOME_PROGRAMMED_CELL_DEATH,,MLKL
+REACTOME_PROGRAMMED_CELL_DEATH,,NMT1
+REACTOME_PROGRAMMED_CELL_DEATH,,OCLN
+REACTOME_PROGRAMMED_CELL_DEATH,,OGT
+REACTOME_PROGRAMMED_CELL_DEATH,,OMA1
+REACTOME_PROGRAMMED_CELL_DEATH,,OPA1
+REACTOME_PROGRAMMED_CELL_DEATH,,PAK2
+REACTOME_PROGRAMMED_CELL_DEATH,,PDCD6IP
+REACTOME_PROGRAMMED_CELL_DEATH,,PELI1
+REACTOME_PROGRAMMED_CELL_DEATH,,PKP1
+REACTOME_PROGRAMMED_CELL_DEATH,,PLEC
+REACTOME_PROGRAMMED_CELL_DEATH,,PMAIP1
+REACTOME_PROGRAMMED_CELL_DEATH,,PPP1R13B
+REACTOME_PROGRAMMED_CELL_DEATH,,PPP3CC
+REACTOME_PROGRAMMED_CELL_DEATH,,PPP3R1
+REACTOME_PROGRAMMED_CELL_DEATH,,PRKCD
+REACTOME_PROGRAMMED_CELL_DEATH,,PRKCQ
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA1
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA2
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA3
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA4
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA5
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA6
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA7
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMA8
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB1
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB10
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB11
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB2
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB3
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB4
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB5
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB6
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB7
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB8
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMB9
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC1
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC2
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC3
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC4
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC5
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMC6
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD1
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD10
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD11
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD12
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD13
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD14
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD2
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD3
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD4
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD5
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD6
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD7
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD8
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMD9
+REACTOME_PROGRAMMED_CELL_DEATH,,PSME1
+REACTOME_PROGRAMMED_CELL_DEATH,,PSME2
+REACTOME_PROGRAMMED_CELL_DEATH,,PSME3
+REACTOME_PROGRAMMED_CELL_DEATH,,PSME4
+REACTOME_PROGRAMMED_CELL_DEATH,,PSMF1
+REACTOME_PROGRAMMED_CELL_DEATH,,PTK2
+REACTOME_PROGRAMMED_CELL_DEATH,,RIPK1
+REACTOME_PROGRAMMED_CELL_DEATH,,RIPK3
+REACTOME_PROGRAMMED_CELL_DEATH,,ROCK1
+REACTOME_PROGRAMMED_CELL_DEATH,,RPS27A
+REACTOME_PROGRAMMED_CELL_DEATH,,SATB1
+REACTOME_PROGRAMMED_CELL_DEATH,,SDCBP
+REACTOME_PROGRAMMED_CELL_DEATH,,SEM1
+REACTOME_PROGRAMMED_CELL_DEATH,,SEPTIN4
+REACTOME_PROGRAMMED_CELL_DEATH,,SFN
+REACTOME_PROGRAMMED_CELL_DEATH,,SPTAN1
+REACTOME_PROGRAMMED_CELL_DEATH,,STAT3
+REACTOME_PROGRAMMED_CELL_DEATH,,STK24
+REACTOME_PROGRAMMED_CELL_DEATH,,STK26
+REACTOME_PROGRAMMED_CELL_DEATH,,STUB1
+REACTOME_PROGRAMMED_CELL_DEATH,,TFDP1
+REACTOME_PROGRAMMED_CELL_DEATH,,TFDP2
+REACTOME_PROGRAMMED_CELL_DEATH,,TICAM1
+REACTOME_PROGRAMMED_CELL_DEATH,,TICAM2
+REACTOME_PROGRAMMED_CELL_DEATH,,TJP1
+REACTOME_PROGRAMMED_CELL_DEATH,,TJP2
+REACTOME_PROGRAMMED_CELL_DEATH,,TLR4
+REACTOME_PROGRAMMED_CELL_DEATH,,TNFRSF10A
+REACTOME_PROGRAMMED_CELL_DEATH,,TNFRSF10B
+REACTOME_PROGRAMMED_CELL_DEATH,,TNFSF10
+REACTOME_PROGRAMMED_CELL_DEATH,,TP53
+REACTOME_PROGRAMMED_CELL_DEATH,,TP53BP2
+REACTOME_PROGRAMMED_CELL_DEATH,,TP63
+REACTOME_PROGRAMMED_CELL_DEATH,,TP73
+REACTOME_PROGRAMMED_CELL_DEATH,,TRADD
+REACTOME_PROGRAMMED_CELL_DEATH,,TRAF2
+REACTOME_PROGRAMMED_CELL_DEATH,,UACA
+REACTOME_PROGRAMMED_CELL_DEATH,,UBA52
+REACTOME_PROGRAMMED_CELL_DEATH,,UBB
+REACTOME_PROGRAMMED_CELL_DEATH,,UBC
+REACTOME_PROGRAMMED_CELL_DEATH,,UNC5A
+REACTOME_PROGRAMMED_CELL_DEATH,,UNC5B
+REACTOME_PROGRAMMED_CELL_DEATH,,VIM
+REACTOME_PROGRAMMED_CELL_DEATH,,XIAP
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAB
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAE
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAG
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAH
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAQ
+REACTOME_PROGRAMMED_CELL_DEATH,,YWHAZ
+Chu2023_Naive,,IL7R
+Chu2023_Naive,,CCR7
+Chu2023_Naive,,SELL
+Chu2023_Naive,,FOXP1
+Chu2023_Naive,,KLF2
+Chu2023_Naive,,KLF3
+Chu2023_Naive,,LEF1
+Chu2023_Naive,,TCF7
+Chu2023_Naive,,ACTN1
+Chu2023_Naive,,BTG1
+Chu2023_Naive,,BTG2
+Chu2023_Naive,,TOB1
+Chu2023_Cytotoxicity,,GZMA
+Chu2023_Cytotoxicity,,GZMB
+Chu2023_Cytotoxicity,,GZMH
+Chu2023_Cytotoxicity,,GZMK
+Chu2023_Cytotoxicity,,GZMM
+Chu2023_Cytotoxicity,,GNLY
+Chu2023_Cytotoxicity,,PRF1
+Chu2023_Cytotoxicity,,IFNG
+Chu2023_Cytotoxicity,,TNF
+Chu2023_Cytotoxicity,,SERPINB9
+Chu2023_Cytotoxicity,,CTSA
+Chu2023_Cytotoxicity,,CTSB
+Chu2023_Cytotoxicity,,CTSC
+Chu2023_Cytotoxicity,,CTSD
+Chu2023_Cytotoxicity,,CTSH
+Chu2023_Cytotoxicity,,CTSW
+Chu2023_Cytotoxicity,,CST7
+Chu2023_Cytotoxicity,,CAPN2
+Chu2023_Cytotoxicity,,PLEK
+CD8.TEMRA_score,,GZMH
+CD8.TEMRA_score,,GNLY
+CD8.TEMRA_score,,NKG7
+CD8.TEMRA_score,,GZMB
+CD8.TEMRA_score,,CST7
+CD8.TEMRA_score,,FCGR3A
+CD8.TEMRA_score,,CCL5
+CD8.TEMRA_score,,GZMA
+CD8.TEMRA_score,,KLRD1
+CD8.TEMRA_score,,FGFBP2
+CD8.TEMRA_score,,HOPX
+CD8.TEMRA_score,,ZEB2
+CD8.TEMRA_score,,PLEK
+CD8.TEMRA_score,,CCL4
+CD8.TEMRA_score,,TYROBP
+CD8.TEMRA_score,,PRF1
+CD8.TEMRA_score,,EFHD2
+CD8.TEMRA_score,,LGALS1
+CD8.TEMRA_score,,AHNAK
+CD8.TEMRA_score,,C12orf75
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,B2M
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CALR
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CANX
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CD4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CD74
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CD8A
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CD8B
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CIITA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CREB1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CTSB
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CTSL
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,CTSS
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-A
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-B
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-C
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DMA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DMB
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DOA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DOB
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DPA1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DPB1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DQA1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DQA2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DQB1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DRA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DRB1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DRB3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DRB4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-DRB5
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-E
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-F
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HLA-G
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSP90AA1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSP90AB1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA1A
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA1B
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA1L
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA5
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA6
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,HSPA8
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFI30
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA10
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA13
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA14
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA16
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA17
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA21
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA5
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA6
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA7
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,IFNA8
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DL1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DL2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DL3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DL4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DL5A
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DS1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DS3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DS4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR2DS5
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR3DL1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR3DL2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KIR3DL3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KLRC1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KLRC2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KLRC3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KLRC4
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,KLRD1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,LGMN
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,LTA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,NFYA
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,NFYB
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,NFYC
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,PDIA3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,PSME1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,PSME2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,PSME3
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,RFX5
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,RFXANK
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,RFXAP
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,TAP1
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,TAP2
+KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION,,TAPBP
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ACAD9
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ACO2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ADHFE1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5F1A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5F1B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5F1C
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5F1D
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5F1E
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5MC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5MC2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5MC3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5ME
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5MF
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5MG
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5PB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5PD
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5PF
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ATP5PO
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,BSG
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COA1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COQ10A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COQ10B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX11
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX14
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX16
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX18
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX19
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX20
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX4I1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX5A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX5B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX6A1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX6B1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX6C
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX7A2L
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX7B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX7C
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,COX8A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,CS
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,CYC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,CYCS
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,D2HGDH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,DLAT
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,DLD
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,DLST
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,DMAC2L
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ECSIT
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ETFA
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ETFB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ETFDH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,FAHD1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,FH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,GLO1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,GSTZ1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,HAGH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,IDH2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,IDH3A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,IDH3B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,IDH3G
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,L2HGDH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LDHA
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LDHAL6A
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LDHAL6B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LDHB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LDHC
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,LRPPRC
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MDH2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ME1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ME2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,ME3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MPC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MPC2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ATP6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ATP8
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CYB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND5
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA10
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA11
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA12
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA13
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA5
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA7
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA8
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA9
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAB1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF5
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF7
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB10
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB11
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB5
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB7
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB8
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB9
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFC2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS5
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS6
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS7
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS8
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NNT
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,NUBPL
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,OGDH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDHA1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDHA2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDHB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDHX
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDK1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDK2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDK3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDK4
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDP1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDP2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PDPR
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PM20D1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,PPARD
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,RXRA
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SCO1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SCO2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SDHA
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SDHB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SDHC
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SDHD
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SLC16A1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SLC16A3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SLC16A8
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SLC25A14
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SLC25A27
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SUCLA2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SUCLG1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SUCLG2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,SURF1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,TACO1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,TIMMDC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,TMEM126B
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,TMEM186
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,TRAP1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UCP1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UCP2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UCP3
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCR10
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCR11
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRB
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRC1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRC2
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRFS1
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRH
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRQ
+REACTOME_THE_CITRIC_ACID_TCA_CYCLE_AND_RESPIRATORY_ELECTRON_TRANSPORT,,VDAC1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,ACAD9
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COA1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COQ10A
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COQ10B
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX11
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX14
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX16
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX18
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX19
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX20
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX4I1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX5A
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX5B
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX6A1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX6B1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX6C
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX7A2L
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX7B
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX7C
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,COX8A
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,CYC1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,CYCS
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,ECSIT
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,ETFA
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,ETFB
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,ETFDH
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,LRPPRC
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CO3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-CYB
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND4
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND5
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,MT-ND6
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA10
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA11
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA12
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA13
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA4
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA5
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA6
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA7
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA8
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFA9
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAB1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF4
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF5
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF6
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFAF7
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB10
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB11
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB4
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB5
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB6
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB7
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB8
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFB9
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFC1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFC2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS4
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS5
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS6
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS7
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFS8
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NDUFV3
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,NUBPL
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SCO1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SCO2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SDHA
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SDHB
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SDHC
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SDHD
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,SURF1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,TACO1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,TIMMDC1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,TMEM126B
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,TMEM186
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,TRAP1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCR10
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCR11
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRB
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRC1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRC2
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRFS1
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRH
+REACTOME_RESPIRATORY_ELECTRON_TRANSPORT,,UQCRQ
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AGO1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AGO2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AGO3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AGO4
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AKT1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AKT2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,AKT3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX11
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX14
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX16
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX18
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX19
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX20
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX4I1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX5A
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX5B
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX6A1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX6B1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX6C
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX7A2L
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX7B
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX7C
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,COX8A
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,CYCS
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,DDIT4
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,G6PD
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,GLS
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,GLS2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,GPI
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,GPX2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,GSR
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LAMTOR1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LAMTOR2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LAMTOR3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LAMTOR4
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LAMTOR5
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,LRPPRC
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MLST8
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MOV10
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MT-CO1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MT-CO2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MT-CO3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,MTOR
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,NDUFA4
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRDX1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRDX2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRDX5
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAA1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAA2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAB1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAB2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAG1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAG2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PRKAG3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,PTEN
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RHEB
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RPTOR
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RRAGA
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RRAGB
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RRAGC
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RRAGD
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,RRM2B
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SCO1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SCO2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SESN1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SESN2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SESN3
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SFN
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SLC38A9
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,SURF1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TACO1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TIGAR
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TNRC6A
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TNRC6B
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TNRC6C
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TP53
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TP63
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TSC1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TSC2
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TXN
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,TXNRD1
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAB
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAE
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAG
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAH
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAQ
+REACTOME_TP53_REGULATES_METABOLIC_GENES,,YWHAZ
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,ABCE1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,ADAR
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,BST2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,EGR1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,GBP2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-A
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-B
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-C
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-E
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-F
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-G
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,HLA-H
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFI27
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFI35
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFI6
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFIT1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFIT2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFIT3
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFIT5
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFITM1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFITM2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFITM3
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA10
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA13
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA14
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA16
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA17
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA21
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA4
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA5
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA6
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA7
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNA8
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNAR1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNAR2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IFNB1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IP6K2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF3
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF4
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF5
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF6
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF7
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF8
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,IRF9
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,ISG15
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,ISG20
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,JAK1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,MX1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,MX2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,OAS1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,OAS2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,OAS3
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,OASL
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,PSMB8
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,PTPN1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,PTPN11
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,PTPN6
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,RNASEL
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,RSAD2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,SAMHD1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,SOCS1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,SOCS3
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,STAT1
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,STAT2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,TYK2
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,USP18
+REACTOME_INTERFERON_ALPHA_BETA_SIGNALING,,XAF1
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,B2M
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,BCAP31
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,CALR
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,CANX
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,ERAP1
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,ERAP2
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-A
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-B
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-C
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-E
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-F
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HLA-G
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,HSPA5
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,PDIA3
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SAR1B
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC13
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC23A
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC24A
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC24B
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC24C
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC24D
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,SEC31A
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,TAP1
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,TAP2
+REACTOME_ANTIGEN_PRESENTATION_FOLDING_ASSEMBLY_AND_PEPTIDE_LOADING_OF_CLASS_I_MHC,,TAPBP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AAAS
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ABCE1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ABL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ADAM17
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ADAR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AGER
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AIP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AKT1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AKT2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,AKT3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ALOX15
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ALOX5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ANXA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ANXA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,APP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ARF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ARIH1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ATF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ATF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,B2M
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BATF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BCL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BCL2L1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BCL2L11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BCL6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BIRC2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BIRC3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BIRC5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BLNK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BOLA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BOLA2B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BRWD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BST2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,BTRC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CAMK2A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CAMK2B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CAMK2D
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CAMK2G
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CANX
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CAPZA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CASP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CASP3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CBL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL19
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL20
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL22
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL3L1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL3L3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCL5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCND1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCR2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CCR5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD27
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD36
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD40
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD40LG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD44
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD70
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD80
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CD86
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CDC42
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CDKN1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CDKN1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CEBPD
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CFL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CHUK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CIITA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CISH
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CLCF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CNN2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CNTF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CNTFR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,COL1A2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CREB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CRK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CRKL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CRLF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CRLF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF1R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF2RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF2RB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSF3R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSH1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CSK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CTF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CTSG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CUL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CUL5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CXCL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CXCL10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CXCL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,CXCL8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,DDX58
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,DUSP3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,DUSP4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,DUSP6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,DUSP7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EBI3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EDA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EDA2R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EDAR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EDARADD
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EGR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF2AK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4A1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4A2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4A3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4E
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4E2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4E3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4G1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4G2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,EIF4G3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ELK1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ELOB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ELOC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,F13A1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FASLG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FBXW11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FCER2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FCGR1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FCGR1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FGF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FLNA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FLNB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FLT3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FLT3LG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FN1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FOS
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FOXO1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FOXO3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FPR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FSCN1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,FYN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GAB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GATA3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GBP7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GH1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GH2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GHR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GRAP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GRB10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GRB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GSDMD
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GSTA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,GSTO1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C15
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,H3C8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HAVCR2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HCK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HERC5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HGF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HIF1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-C
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DPA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DPB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DQA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DQA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DQB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DQB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DRA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DRB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DRB3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DRB4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-DRB5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-E
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-F
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-G
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HLA-H
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HMGB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HMOX1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HNRNPA2B1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HNRNPDL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HNRNPF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HRAS
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HSP90AA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HSP90B1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HSPA8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,HSPA9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ICAM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFI27
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFI30
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFI35
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFI6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFIT1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFIT2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFIT3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFIT5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFITM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFITM2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFITM3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA16
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA17
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA21
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNA8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNAR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNAR2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNGR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNGR2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNL3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IFNLR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IGHE
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IGHG1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IGHG4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IKBKB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IKBKG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL10RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL10RB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL11RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL12A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL12B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL12RB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL12RB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL13RA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL13RA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL15
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL15RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL16
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17C
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17F
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17RB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17RC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL17RE
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL18
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL18BP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL18R1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL18RAP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL19
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1F10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1R1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1R2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1RAP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1RAPL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1RL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1RL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL1RN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL20
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL20RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL20RB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL21
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL21R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL22
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL22RA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL22RA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL23A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL23R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL24
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL25
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL26
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL27
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL27RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL2RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL2RB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL2RG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL31
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL31RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL32
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL33
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL34
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL36A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL36B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL36G
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL36RN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL37
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL3RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL4R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL5RA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL6R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL6ST
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL7R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IL9R
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,INPP5D
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,INPPL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IP6K2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRAK1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRAK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRAK3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRAK4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRF9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,IRS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ISG15
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ISG20
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ITGAM
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ITGAX
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ITGB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ITGB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,JAK1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,JAK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,JAK3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,JUN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,JUNB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNA7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KPNB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,KRAS
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LAMA5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LBP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LCK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LCN2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LCP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LGALS9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LIF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LIFR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LMNB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LTA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LTB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LTBR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,LYN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAOA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP2K1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP2K3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP2K4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP2K6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP2K7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP3K14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP3K3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP3K7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAP3K8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPK9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPKAPK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MAPKAPK3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MCL1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MEF2A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MEF2C
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MID1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MIF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MMP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MMP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MMP3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MMP9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MSN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MT2A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MTAP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MUC1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MX1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MX2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MYC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,MYD88
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NANOG
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NCAM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NDC1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NDN
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NEDD4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NFKB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NFKB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NFKBIA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NFKBIB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NKIRAS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NKIRAS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NOD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NOD2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NOS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NRAS
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP107
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP133
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP153
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP155
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP160
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP188
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP205
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP210
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP214
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP35
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP37
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP42
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP43
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP50
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP54
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP58
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP62
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP85
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP88
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP93
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,NUP98
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OAS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OAS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OAS3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OASL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OPRD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OPRM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OSM
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,OSMR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,P4HB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PAK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PDCD4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PDE12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PELI1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PELI2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PELI3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIAS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3CA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3CB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3CD
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3R1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3R2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIK3R3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PIN1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PITPNA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PLCG1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PML
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,POM121
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,POM121C
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,POMC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,POU2F1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPIA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPM1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPP2CA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPP2CB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPP2R1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPP2R1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PPP2R5D
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PRKACA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PRKCD
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PRL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PRLR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PRTN3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMA8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMB9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMC6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMD9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSME1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSME2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSME3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSME4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PSMF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTAFR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTGS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTK2B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN18
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN20
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN23
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPN9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPRJ
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,PTPRZ1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RAE1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RAG1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RAG2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RALA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RANBP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RAP1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RAPGEF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RBX1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RELA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RELB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RHOU
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RIPK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RNASEL
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RNF7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RORA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RORC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPLP0
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPS27A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPS6KA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPS6KA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPS6KA3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RPS6KA5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,RSAD2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,S100A12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,S100B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,S1PR1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SAA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SAMHD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SDC1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SEC13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SEH1L
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SEM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SERPINB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SH2B1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SH2B3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SHC1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SIGIRR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SKP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SLA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SLA2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SMAD3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SMARCA4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SNAP25
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SNRPA1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOCS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOCS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOCS3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOCS5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOCS6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOD1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOD2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOS1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOS2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SOX2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SP100
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SQSTM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT5A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT5B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STAT6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STX1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STX3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STX4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,STXBP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SUMO1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,SYK
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TAB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TAB2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TAB3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TALDO1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TBK1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TCP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TEC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TGFB1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TIMP1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNF
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF11A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF11B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF12A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF13B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF13C
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF17
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF18
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF1A
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF1B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF25
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF6B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFRSF9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF11
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF12
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF13
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF13B
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF15
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF18
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF4
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNFSF9
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TNIP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TOLLIP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TP53
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TPR
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRAF2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRAF3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRAF6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM10
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM14
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM17
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM21
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM22
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM25
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM26
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM29
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM31
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM34
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM35
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM38
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM45
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM46
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM48
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM5
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM62
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM68
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TRIM8
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TSLP
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TWIST1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TXLNA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,TYK2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBA3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBA52
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBA7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBB
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBC
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2D1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2D2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2D3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2E1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2L6
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2M
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2N
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,UBE2V1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,USP18
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,USP41
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VAMP2
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VAMP7
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VAV1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VCAM1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VEGFA
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VIM
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,VRK3
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,XAF1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,YES1
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,YWHAZ
+REACTOME_CYTOKINE_SIGNALING_IN_IMMUNE_SYSTEM,,ZEB1
+REACTOME_SELECTIVE_AUTOPHAGY,,ARL13B
+REACTOME_SELECTIVE_AUTOPHAGY,,ATG12
+REACTOME_SELECTIVE_AUTOPHAGY,,ATG5
+REACTOME_SELECTIVE_AUTOPHAGY,,ATM
+REACTOME_SELECTIVE_AUTOPHAGY,,CETN1
+REACTOME_SELECTIVE_AUTOPHAGY,,CFTR
+REACTOME_SELECTIVE_AUTOPHAGY,,CSNK2A1
+REACTOME_SELECTIVE_AUTOPHAGY,,CSNK2A2
+REACTOME_SELECTIVE_AUTOPHAGY,,CSNK2B
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNC1H1
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNC1I1
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNC1I2
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNC1LI1
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNC1LI2
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNLL1
+REACTOME_SELECTIVE_AUTOPHAGY,,DYNLL2
+REACTOME_SELECTIVE_AUTOPHAGY,,EPAS1
+REACTOME_SELECTIVE_AUTOPHAGY,,FUNDC1
+REACTOME_SELECTIVE_AUTOPHAGY,,HDAC6
+REACTOME_SELECTIVE_AUTOPHAGY,,HSF1
+REACTOME_SELECTIVE_AUTOPHAGY,,HSP90AA1
+REACTOME_SELECTIVE_AUTOPHAGY,,HSPA8
+REACTOME_SELECTIVE_AUTOPHAGY,,IFT88
+REACTOME_SELECTIVE_AUTOPHAGY,,MAP1LC3A
+REACTOME_SELECTIVE_AUTOPHAGY,,MAP1LC3B
+REACTOME_SELECTIVE_AUTOPHAGY,,MFN1
+REACTOME_SELECTIVE_AUTOPHAGY,,MFN2
+REACTOME_SELECTIVE_AUTOPHAGY,,MTERF3
+REACTOME_SELECTIVE_AUTOPHAGY,,NBR1
+REACTOME_SELECTIVE_AUTOPHAGY,,PARK7
+REACTOME_SELECTIVE_AUTOPHAGY,,PCNT
+REACTOME_SELECTIVE_AUTOPHAGY,,PEX5
+REACTOME_SELECTIVE_AUTOPHAGY,,PGAM5
+REACTOME_SELECTIVE_AUTOPHAGY,,PINK1
+REACTOME_SELECTIVE_AUTOPHAGY,,PLIN2
+REACTOME_SELECTIVE_AUTOPHAGY,,PLIN3
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAA2
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAB1
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAB2
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAG1
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAG2
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKAG3
+REACTOME_SELECTIVE_AUTOPHAGY,,PRKN
+REACTOME_SELECTIVE_AUTOPHAGY,,RPS27A
+REACTOME_SELECTIVE_AUTOPHAGY,,SQSTM1
+REACTOME_SELECTIVE_AUTOPHAGY,,SRC
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM20
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM22
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM40
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM5
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM6
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM7
+REACTOME_SELECTIVE_AUTOPHAGY,,TOMM70
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA1A
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA1B
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA1C
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA3C
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA3D
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA3E
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA4A
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA4B
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBA8
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBAL3
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB1
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB2A
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB2B
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB3
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB4A
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB4B
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB6
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB8
+REACTOME_SELECTIVE_AUTOPHAGY,,TUBB8B
+REACTOME_SELECTIVE_AUTOPHAGY,,UBA52
+REACTOME_SELECTIVE_AUTOPHAGY,,UBB
+REACTOME_SELECTIVE_AUTOPHAGY,,UBC
+REACTOME_SELECTIVE_AUTOPHAGY,,UBE2N
+REACTOME_SELECTIVE_AUTOPHAGY,,UBE2V1
+REACTOME_SELECTIVE_AUTOPHAGY,,ULK1
+REACTOME_SELECTIVE_AUTOPHAGY,,USP30
+REACTOME_SELECTIVE_AUTOPHAGY,,VCP
+REACTOME_SELECTIVE_AUTOPHAGY,,VDAC1
+REACTOME_SELECTIVE_AUTOPHAGY,,VIM
+REACTOME_SIGNALING_BY_INTERLEUKINS,,AGER
+REACTOME_SIGNALING_BY_INTERLEUKINS,,AIP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,AKT1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ALOX15
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ALOX5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ANXA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ANXA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,APP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ARF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ATF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ATF2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BATF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BCL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BCL2L1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BCL6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BIRC5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BLNK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BOLA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BOLA2B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BRWD1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,BTRC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CANX
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CAPZA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CASP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CASP3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CBL
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL19
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL20
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL22
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL3L1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL3L3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCL5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCND1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCR1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCR2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CCR5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CD36
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CD4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CD80
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CD86
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CDC42
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CDKN1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CEBPD
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CFL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CHUK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CISH
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CLCF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CNN2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CNTF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CNTFR
+REACTOME_SIGNALING_BY_INTERLEUKINS,,COL1A2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CREB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CRK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CRKL
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CRLF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CRLF2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF1R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF2RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF2RB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CSF3R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CTF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CTSG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CUL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CXCL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CXCL10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CXCL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,CXCL8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,DUSP3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,DUSP4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,DUSP6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,DUSP7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,EBI3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ELK1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,F13A1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FASLG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FBXW11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FCER2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FGF2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FN1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FOS
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FOXO1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FOXO3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FPR1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FSCN1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,FYN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GAB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GATA3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GRB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GSDMD
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GSTA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,GSTO1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C12
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C13
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C14
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C15
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,H3C8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HAVCR2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HCK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HGF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HIF1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HMGB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HMOX1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HNRNPA2B1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HNRNPDL
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HNRNPF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HSP90AA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HSP90B1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HSPA8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,HSPA9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ICAM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IFNG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IFNL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IFNL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IFNL3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IFNLR1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IGHE
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IGHG1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IGHG4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IKBKB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IKBKG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL10RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL10RB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL11RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL12A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL12B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL12RB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL12RB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL13
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL13RA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL13RA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL15
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL15RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL16
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17C
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17F
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17RB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17RC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL17RE
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL18
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL18BP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL18R1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL18RAP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL19
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1F10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1R1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1R2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1RAP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1RAPL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1RL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1RL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL1RN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL20
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL20RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL20RB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL21
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL21R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL22
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL22RA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL22RA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL23A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL23R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL24
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL25
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL26
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL27
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL27RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL2RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL2RB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL2RG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL31
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL31RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL32
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL33
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL34
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL36A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL36B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL36G
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL36RN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL37
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL3RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL4R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL5RA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL6R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL6ST
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL7R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IL9R
+REACTOME_SIGNALING_BY_INTERLEUKINS,,INPP5D
+REACTOME_SIGNALING_BY_INTERLEUKINS,,INPPL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRAK1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRAK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRAK3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRAK4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRF4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRS1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,IRS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ITGAM
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ITGAX
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ITGB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ITGB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,JAK1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,JAK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,JAK3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,JUN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,JUNB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LAMA5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LBP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LCK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LCN2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LCP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LGALS9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LIF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LIFR
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LMNB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,LYN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAOA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP2K1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP2K3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP2K4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP2K6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP2K7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP3K3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP3K7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAP3K8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK14
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPK9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPKAPK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MAPKAPK3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MCL1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MEF2A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MEF2C
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MIF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MMP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MMP2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MMP3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MMP9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MSN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MTAP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MUC1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MYC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,MYD88
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NANOG
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NDN
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NFKB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NFKB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NFKBIA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NFKBIB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NKIRAS1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NKIRAS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NOD1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NOD2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,NOS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,OPRD1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,OPRM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,OSM
+REACTOME_SIGNALING_BY_INTERLEUKINS,,OSMR
+REACTOME_SIGNALING_BY_INTERLEUKINS,,P4HB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PAK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PDCD4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PELI1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PELI2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PELI3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3CA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3CB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3CD
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3R1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3R2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIK3R3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PIM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PITPNA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,POMC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,POU2F1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPIA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPP2CA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPP2CB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPP2R1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPP2R1B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PPP2R5D
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PRKACA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PRTN3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMA8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMB9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMC6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD10
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD12
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD13
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD14
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD8
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMD9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSME1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSME2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSME3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSME4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PSMF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTAFR
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTGS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTK2B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN11
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN12
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN13
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN14
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN18
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN20
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN23
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPN9
+REACTOME_SIGNALING_BY_INTERLEUKINS,,PTPRZ1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RAG1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RAG2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RALA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RAP1B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RAPGEF1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RBX1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RELA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RHOU
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RIPK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RORA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RORC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPLP0
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPS27A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPS6KA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPS6KA2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPS6KA3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,RPS6KA5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,S100A12
+REACTOME_SIGNALING_BY_INTERLEUKINS,,S100B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,S1PR1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SAA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SDC1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SEM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SERPINB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SHC1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SIGIRR
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SKP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SMAD3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SMARCA4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SNAP25
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SNRPA1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOCS1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOCS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOCS3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOCS5
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOD1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOD2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOS1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOS2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SOX2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SQSTM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT5A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT5B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STAT6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STX1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STX3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STX4
+REACTOME_SIGNALING_BY_INTERLEUKINS,,STXBP2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,SYK
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TAB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TAB2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TAB3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TALDO1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TBK1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TCP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TEC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TGFB1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TIMP1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TNF
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TNFRSF1A
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TNFRSF1B
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TNIP2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TOLLIP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TP53
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TRAF6
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TSLP
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TWIST1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TXLNA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,TYK2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,UBA52
+REACTOME_SIGNALING_BY_INTERLEUKINS,,UBB
+REACTOME_SIGNALING_BY_INTERLEUKINS,,UBC
+REACTOME_SIGNALING_BY_INTERLEUKINS,,UBE2N
+REACTOME_SIGNALING_BY_INTERLEUKINS,,UBE2V1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VAMP2
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VAMP7
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VAV1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VCAM1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VEGFA
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VIM
+REACTOME_SIGNALING_BY_INTERLEUKINS,,VRK3
+REACTOME_SIGNALING_BY_INTERLEUKINS,,YES1
+REACTOME_SIGNALING_BY_INTERLEUKINS,,YWHAZ
+REACTOME_SIGNALING_BY_INTERLEUKINS,,ZEB1

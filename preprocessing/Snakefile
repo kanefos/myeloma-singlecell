@@ -5,7 +5,7 @@
 #    input:
 #        #expand("data/TCRseq_processed/{sample}.csv", sample = SAMPLES)
 #        # Some final psuedo-fig when all ran?
-        "dummy file to include in rule all"
+#        "dummy file to include in rule all"
 
 
 rule import_data:
@@ -23,7 +23,7 @@ rule process_imported_data:
         "data/import/metadata-donor.csv"
         "data/import/panImmune.h5ad"
         "data/import/Tcell.h5ad"
-        "data/markers.csv" #move to other dir, which is consistent in github? vs generated?
+        "../resources/markers.csv"
     output:
         "data/panImm_obs.csv"
         "data/import/PC.h5ad"
@@ -44,6 +44,26 @@ rule abundance_prep:
     shell:
         "Rscript scr/abundances.R"
 
+rule PC_Ig:
+    input:
+        "data/import/PC.h5ad"
+    output:
+        "data/mPC_id.csv"
+    shell:
+        "/Users/kaneucl/miniconda3/envs/Increate22/bin/python scr/PC_Ig.py"
+
+rule PC_analysis:
+    input:
+        "/data/import/PC.h5ad"
+        "data/mPC_id.csv"
+        "../resources/pathways.csv"
+    output:
+        "data/tumour_modules_scr.RData"
+    shell:
+        ""
+
+
+
 
 rule abundance_prep:
     input:
@@ -59,16 +79,22 @@ rule abundance_prep:
     output:
         ""
     shell:
-        ""
 
-rule abundance_prep:
+
+# FINAL STEPS ##################################################################
+
+rule notesbooks_and_figures:
     input:
-        ""
+        "FIG-x.Rmd"
+        #repeat for all
     output:
-        ""
-    shell:
-
-
+        "FIG-x.html"
+        directory("figures/FIG-x")
+        #repeat for all figs
+    R:
+        "rmarkdown::render('notebooks/tmp.Rmd',params=list(args = 'myarg'))"
+        #this requires some fidelling to run on cmd line, but is possible:
+        "Rscript -e 'rmarkdown:: ...etc'"
 
 
 rule consolidate_data:

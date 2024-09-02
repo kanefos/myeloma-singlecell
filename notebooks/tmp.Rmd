@@ -1,0 +1,22 @@
+---
+title: "S2"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+  args: myarg
+---
+
+## Setup
+
+```{r setup-import, eval=T, hide=F}
+
+library(tidyverse)
+
+as_tibble(mtcars) %>% ggplot(aes(qsec,wt))+geom_point(size=3)+theme_classic()
+
+```
+

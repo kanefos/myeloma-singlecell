@@ -6,6 +6,8 @@ output:
     toc: true # table of content true
     toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
     number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
 ---
 
 ```{r}
@@ -16,6 +18,7 @@ output:
 
 
 # mkdir/save figures to
+dir.create('../figures/S6')
 '../figures/S6'
 
 ```

@@ -4,7 +4,7 @@ import scanpy as sc
 
 # Process .h5ad data ###########################################################
 
-markers = pd.read_csv('data/markers.csv')
+markers = pd.read_csv('../resources/markers.csv')
 
 #panImm_obs
 #PC_subset
