@@ -9,9 +9,9 @@ library(fgsea)
 
 # Plasma cell pathway scores ###################################################
 
-sce = readH5AD('preprocessing/data/import/PC.h5ad')
-mPC_id = read.csv('preprocessing/data/mPC_id.csv') %>% filter(mPC=='True')
-pathways = read.csv('resources/pathways.csv')
+sce = readH5AD('data/import/PC.h5ad')
+mPC_id = read.csv('data/mPC_id.csv') %>% filter(mPC=='True')
+pathways = read.csv('../resources/pathways.csv')
 gs = list()
 for ( g in unique(pathways$pathway)[1:40]){gs[[g]]=pathways[pathways$pathway==g,]$gene}
 
@@ -22,13 +22,46 @@ ucell.scores <- UCell::ScoreSignatures_UCell(sce.mat, features=gs)
 ucell.scores = data.frame(ucell.scores)
 colnames(ucell.scores) = str_remove(colnames(ucell.scores), '_UCell')
 scr = SingleCellExperiment(assay=list(scores=t(ucell.scores)), colData=colData(sce))
-save(scr, file='preprocessing/data/tumour_modules_scr.RData')
+save(scr, file='data/tumour_modules_scr.RData')
+
+# Plasma cell pathway scores, high/low quantification ##########################
+
+load('data/tumour_modules_scr.RData')
+pathways = read.csv('../resources/pathways.csv')[,1:2] %>% distinct() %>% .[1:40,]
+rowData(scr) = DataFrame(data.frame(
+  p=rownames(scr),pathway=pathways$pathway,pathway_neat=pathways$pathway_neat))
+mPC_id = read.csv('data/mPC_id.csv') %>% filter(mPC=='True')
+
+# Patients with sufficient tumour cells
+full = as.data.frame(scater::makePerCellDF(
+  scr,rownames(scr),exprs_values='scores')) %>%
+  filter(colnames(scr) %in% mPC_id$obs_names)
+full = full %>% filter(donor_id %in% names(table(full$donor_id) %>% .[.>30]))
+
+# For each pathway, calculate the fraction of cells 1sd > median
+# (highly expressing said pathway)
+res.list = list()
+for ( mod in rownames(scr) ){
+  # Expression
+  full$pl = full[,mod]
+  # Pathway thr
+  thr = median(full$pl)+sd(full$pl)
+  # Quantify % above thr
+  res.list[[mod]] = full %>% mutate(is = pl > thr) %>%
+    group_by(donor_id,is) %>% tally() %>% ungroup() %>%
+    group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>%
+    filter(is) %>% select(donor_id,pct)
+}
+
+bind_rows(res.list,.id='p') %>% as_tibble() %>%
+  left_join(data.frame(rowData(scr))) %>%
+  write.csv('data/tumour_modules_pct.csv',row.names=F)
 
 # Tumour/non-tumour DEG ########################################################
 
-sce = readH5AD('preprocessing/data/import/PC.h5ad')
-mPC_id = read.csv('preprocessing/data/mPC_id.csv')
-Foster_2024_batch_id = read.csv('resources/Foster_2024_batch_id.csv')
+sce = readH5AD('data/import/PC.h5ad')
+mPC_id = read.csv('data/mPC_id.csv')
+Foster_2024_batch_id = read.csv('../resources/Foster_2024_batch_id.csv')
 
 # mPC calls
 sce$mPC = colnames(sce) %in% mPC_id[mPC_id$mPC=='True',]$obs_names
@@ -41,7 +74,7 @@ mPC_donor = unique(mPC_id[mPC_id$mPC=='True',]$donor)
 mPC_batch = as_tibble(colData(sce)) %>%
   filter(donor_id %in% mPC_donor, !mPC) %>% pull(study_id) %>% unique()
 # Control donors
-donor_Non = read.csv('preprocessing/data/import/metadata-donor.csv') %>%
+donor_Non = read.csv('data/import/metadata-donor.csv') %>%
   .[.$cohort=='Non',] %>% pull(donor_id)
 # Final subset (used Foster_2024 batch1 and batch2)
 Foster_2024_use = Foster_2024_batch_id[Foster_2024_batch_id$batch_id %in%
@@ -86,8 +119,8 @@ for ( donor.i in intersect(mPC_donor,unique(sce$donor_id)) ){
 }
 
 # Remove certain gene groups, remove longitudinal donors
-ig_genes = read.csv('resources/ig_genes.csv')$gene
-ribo_genes = read.csv('resources/ribo_genes.csv')$gene
+ig_genes = read.csv('../resources/ig_genes.csv')$gene
+ribo_genes = read.csv('../resources/ribo_genes.csv')$gene
 mt_genes = as_tibble(rowData(sce)) %>% filter(mt) %>% pull(gene)
 donors.longit = c('Foster_2024.MM4',"Foster_2024.MM3",'Foster_2024.SMM13')
 
@@ -99,7 +132,7 @@ tumour_DE = bind_rows(donor.res, .id='donor_id') %>%
   # Remove noise-associated gene groups
   filter(!gene %in% c(ig_genes,mt_genes,ribo_genes))
 
-tumour_DE %>% write.csv('preprocessing/data/tumour_DE.csv')
+tumour_DE %>% write.csv('data/tumour_DE.csv')
 
 # Tumour/non-tumour DEG pathway analysis #######################################
 
@@ -123,7 +156,7 @@ for ( i in unique(tumour_DE$donor_id)){
   fgseas[[i]] = as_tibble(fgsea(gs, ranks, maxSize=500)) %>% filter(padj<0.1)
 }
 fgseas = bind_rows(fgseas, .id='donor_id') %>% mutate(de=ifelse(NES>0,'tum','non'))
-save(fgseas,file='preprocessing/data/tumour_DE_fgsea.RData')
+save(fgseas,file='data/tumour_DE_fgsea.RData')
 
 
 

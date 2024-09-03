@@ -112,6 +112,25 @@ ords[['Tcell']] = comp$Tcell %>%
 
 ords[['Tcell']]$PCA = ords[['Tcell']]$CA$u[,1:5] %>% data.frame() %>% rownames_to_column('sample_id') %>% as_tibble()
 
+# Exaggerated aging-like skewing ###############################################
+
+dat = ords$Tcell$PCA %>%
+  left_join(comp[['Tcell']] %>% select(sample_id,cohort,age) %>% distinct()) %>%
+  filter(!is.na(age))
+
+# Get model of effect of age on T cell skewing across cohorts
+dat.non = dat %>% filter(cohort=='Non')
+dat.pcd = dat %>% filter(cohort!='Non')
+
+# Model in non-cancer
+model.non = lm(PC1 ~ age, dat.non)
+
+# Predict in patients using non-cancer model
+dat.pcd$predicted = predict(model.non, newdata = dat.pcd)
+dat.pcd$residuals = dat.pcd$PC1 - dat.pcd$predicted
+
+ords[['exag_skewing']] = dat.pcd
+
 # Validation data PCA re-calculation ###########################################
 
 comp.dat = comp$valid %>% filter(!celltype %in% c('CD8.Tex','CD8.Trm'))
