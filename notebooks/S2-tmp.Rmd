@@ -99,7 +99,7 @@ comp.RData
 PC_scores
 _da_testing_
 
-# [move] S2
+# S2
 
 ## Overview N donor/cells ig predicted
 
@@ -486,43 +486,6 @@ draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
 PC_DEG + pw
 _nonviv_
 
-# S9
-
-## S9C
-
-```{r S9C, fig.height=4, fig.width=6, eval=T, hide=T}
-tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
-load(file='../preprocessing/data/tumour_DE_fgsea.RData')
-
-# Top DEP dotplot
-#fgseas %>% group_by(pathway,de) %>% tally() %>% arrange(desc(de),-n) #manually select
-
-shared.in = read.csv('../resources/Fig-S9C.csv')
-sig.pl = shared.in$pathway
-name.pl = shared.in$name_pl
-
-fgseas %>%
-  filter(pathway %in% sig.pl, NES>0) %>%
-  left_join(shared.in) %>% 
-  mutate(name_pl=factor(name_pl,rev(name.pl))) %>% 
-  filter(!is.na(name_pl)) %>% 
-  ggplot(aes(donor_id,name_pl,fill=NES, size=-log10(padj)))+geom_point(shape=21)+
-  scale_y_discrete(label = function(x) stringr::str_trunc(x, 50))+
-  scale_fill_gradient2(low='dodgerblue',mid='white',high='red')+
-  scale_size_continuous(range = c(0.5,5))+
-  labs(x='Patient',
-    fill='Normalised\nenrichment\nrelative to\nnormal PC', size='-log10 FDR')+
-  coord_fixed()+
-  theme(
-    plot.title = element_text(hjust = 0.5, size=11),
-    axis.text.x=element_blank(),axis.ticks.x=element_blank(),
-    axis.title.y=element_blank(), 
-    axis.line=element_blank(), panel.border = element_rect(colour = "black", fill=NA, size=1)
-  )->pl
-pl
-#ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
-
-```
 
 # SPACE 
 

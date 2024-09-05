@@ -1,0 +1,143 @@
+---
+title: "S1"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+## Setup
+
+```{r setup-import, eval=T, hide=T}
+
+library(tidyverse)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+source('../resources/aes.R')
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+load(file = '../preprocessing/data/tcr_analysis.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+dir.create('../figures/S1')
+'../figures/S1'
+
+```
+
+## .
+
+```{r fig.height=2, fig.width=2, eval=T, hide=T}
+```
+
+## SPACE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

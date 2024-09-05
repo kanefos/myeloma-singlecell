@@ -1,0 +1,183 @@
+---
+title: "5"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+```{r}
+
+# mkdir/save figures to
+dir.create('../figures/5')
+'../figures/5'
+
+```
+
+
+## Setup
+
+```{r setup-import, eval=T, hide=T}
+
+library(tidyverse)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+source('../resources/aes.R')
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+load(file = '../preprocessing/data/tcr_analysis.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+
+```
+
+```{r 5, fig.height=2, fig.width=2, eval=T, hide=T}
+
+```
+
+
+## 5A
+
+```{r fig.height=3, fig.width=5.5, eval=T, hide=T}
+
+dat.pl = read_csv('../preprocessing/data/tcell_tum_association_results.csv')
+
+i.order=c('Paraprotein','B2m','Aspirate % CD138+','% tumour expressing\nstress pathway')
+j.order=c('T cell skewing','Exaggerated T cell aging','CD8.TEMRA\n(normalised % T cells)','Repertoire clonality',"Teff.IFIT2\n(normalised % T cells)" ,'Effector signature\n(CD69, TNF, IFNG)','Non-viral specificity\nscore')
+
+dat.pl %>% 
+  mutate(j.pl=factor(j.pl,j.order)) %>% mutate(i.pl=factor(i.pl,rev(i.order))) %>% 
+  ggplot(aes(j.pl,i.pl))+
+  geom_tile(aes(fill=r), color='black', size=0.25)+
+  geom_text(data = . %>% filter(sig_gr!=''), 
+            aes(label=sig_gr),position = position_nudge(x = -0, y= -0.1), size=5.5)+
+  labs(fill='Correlation  ')+
+  scale_fill_gradient2(
+    low='dodgerblue',mid='white',high='#eb676e', na.value = 'grey50',
+    breaks=c(-0.25,0,0.25,0.75), labels=c('-0.25','0','0.25','0.75')
+  )+
+  theme_void()+
+  theme(
+    legend.position = 'bottom',legend.ticks = element_blank(),
+    legend.key.height = unit(0.2, "cm"),
+    legend.key.width = unit(0.5, "cm"), legend.title = element_text(size=9),
+    axis.text.y = element_text(size=11, hjust = 1),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=10)
+  )-> pl
+pl
+##ggsave(plot=pl,filename = '../figures/5/A.pdf',width=5.5,height=3, dpi="retina")
+```
+
+
+# SPACE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

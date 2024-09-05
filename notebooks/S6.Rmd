@@ -10,20 +10,6 @@ params:
     args: myarg
 ---
 
-```{r}
-'../integration/data/validation/Tcell2_validT_run1-obs.csv'
-
-#valid_comp = 
-#valid_ords = 
-
-
-# mkdir/save figures to
-dir.create('../figures/S6')
-'../figures/S6'
-
-```
-
-
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
@@ -36,36 +22,13 @@ source('aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = 'data/abundances/abundances.RData')
 load(file = 'data/ordination/ords.RData')
-
-# obs
-#obs = read.csv('data/obs/Tcell.csv') %>% filter(!subset %in% c('DN','QC','CD3_neg'))
-#read.csv('data/obs/Tcell-pheno-merge.csv')
-obs = read.csv('data/validation_data/Tcell2_validT_run1-obs.csv') %>% 
-  left_join(read.csv('data/validation_data/Tcell2_validT_run1.csv')) %>% 
-  filter(study=='Botta2023') %>% 
-  filter(!pheno_pred %in% c('Unknown','Myeloid','CD3_neg','Doublet')) 
-
-obs = obs %>% filter(pheno_pred %in% names(table(obs$pheno_pred)[table(obs$pheno_pred)>10]))
-
-# md 
-md = as_tibble(read.csv('data/validation_data/validation-metadata.csv'))
-valid_names_neat=data.frame(study=c('Botta2023','Lasry2023'),
-                            name_neat=c('Botta et al. (2023)','Lasry et al (2023)'))
-
-# comp
-thr=0.2 #as recommended
-valid_comp = read.csv(paste0('data/validation_data/comp-CertThr',thr,'.csv')) %>% as_tibble()
-# ords
-pca = read.csv(paste0('data/validation_data/pca-CertThr',thr,'.csv')) %>% as_tibble()
-
-# scores
-load(file='data/validation_data/validT_20240212-gsT.RData') #scr
+dir.create('../figures/S6')
+'../figures/S6'
 
 ```
 
 
-
-
+# v1 figures
 
 ## Schematic mde
 
@@ -78,12 +41,11 @@ obs %>%
   theme_void()+
   theme(legend.position = 'none')-> pl
 pl
-ggsave(plot=pl,filename = 'figures/Valid/mde-schem.png',width=2,height=2, dpi="retina")
+##ggsave(plot=pl,filename = 'figures/Valid/mde-schem.png',width=2,height=2, dpi="retina")
 
 ```
 
 ## Phenotype mde
-
 
 ```{r fig.height=3, fig.width=3}
 
@@ -101,7 +63,7 @@ obs.pl %>%
   guides(color=guide_legend(ncol=3,override.aes = list(size=3)))+
   theme(legend.position = 'none')-> pl
 pl
-ggsave(plot=pl,filename = 'figures/Valid/mde-pheno.png',width=3,height=3, dpi="retina")
+##ggsave(plot=pl,filename = 'figures/Valid/mde-pheno.png',width=3,height=3, dpi="retina")
 
 ```
 
@@ -122,7 +84,7 @@ obs.pl.med %>% mutate(pheno_pred=factor(pheno_pred,rev(Tcell_order))) %>%
   )->pl
 pl = ggpubr::as_ggplot(ggpubr::get_legend(pl))
 pl
-ggsave(plot=pl,filename = 'figures/Valid/umap-legend.pdf',width=1.25,height=2.2, dpi="retina")
+##ggsave(plot=pl,filename = 'figures/Valid/umap-legend.pdf',width=1.25,height=2.2, dpi="retina")
 
 ```
 
@@ -257,8 +219,6 @@ for(i in which(grepl("strip-t", pg$layout$name))){pg$grobs[[i]]$layout$clip <- "
 ggsave(plot=pg,filename = 'figures/Valid/umap-markers.png',width=4,height=4, dpi="retina")
 
 ```
-
-
 
 
 ## Boxplots

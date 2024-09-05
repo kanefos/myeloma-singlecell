@@ -68,6 +68,7 @@ valid = read.csv('../integration/data/validation_Tcell-obs.csv') %>%
   filter(!pheno_pred %in% c('Unknown','Myeloid','CD3_neg','Doublet')) %>%
   filter(pheno_uncertainty < 0.2)
 valid_md = as_tibble(read.csv('../integration/data/validation-metadata.csv'))
+sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
 
 # Compositional data ###########################################################
 
@@ -108,6 +109,8 @@ donors.remove = c(donors.longit,donor.Tex_hi)
 
 ords[['Tcell']] = comp$Tcell %>%
   filter(sampleSize>100, !donor_id %in% donors.remove, tissue=='BM') %>%
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
   comp.ord() %>% .$ord
 
 ords[['Tcell']]$PCA = ords[['Tcell']]$CA$u[,1:5] %>% data.frame() %>% rownames_to_column('sample_id') %>% as_tibble()

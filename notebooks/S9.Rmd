@@ -1,0 +1,208 @@
+---
+title: "S9"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+```{r}
+
+# mkdir/save figures to
+dir.create('../figures/S9')
+'../figures/S9'
+
+```
+
+
+## Setup
+
+```{r setup-import, eval=T, hide=T}
+
+library(tidyverse)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+source('../resources/aes.R')
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+load(file = '../preprocessing/data/tcr_analysis.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+
+```
+
+```{r 9, fig.height=2, fig.width=2, eval=T, hide=T}
+
+```
+
+## B
+
+
+```{r fig.width=3, fig.height=3, eval=T, hide=T}
+
+mhc.path = c("Interferon/MHC-II (I)","Interferon/MHC-II (II)")
+
+read_csv('../preprocessing/data/Nonviral_tumour_modules.csv') %>% 
+  ggplot(aes(r,-log10(fdr)))+
+  geom_point(data = . %>% filter(fdr>=0.1), color='grey70')+
+  geom_point(data = . %>% filter(fdr<0.1), color=diagnosis_col['MM'])+
+  geom_point(data = . %>% filter(fdr<0.1 | pathway %in% mhc.path), shape=21)+
+  ggrepel::geom_text_repel(data = . %>% filter(fdr<0.1 | pathway %in% mhc.path), 
+    aes(label=pathway),size=3.5)+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  labs(x='Correlation with non-viral score', y='-log10 FDR')+
+  theme_classic() ->pl
+pl
+#ggsave(plot=pl,filename = 'figures/TRT/vln-nonvir_TumMod.pdf',height=2.5,width=2.5, dpi="retina")
+
+```
+
+## C
+
+```{r S9C, fig.height=4, fig.width=6, eval=T, hide=T}
+tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
+load(file='../preprocessing/data/tumour_DE_fgsea.RData')
+
+# Top DEP dotplot
+#fgseas %>% group_by(pathway,de) %>% tally() %>% arrange(desc(de),-n) #manually select
+
+shared.in = read.csv('../resources/Fig-S9C.csv')
+sig.pl = shared.in$pathway
+name.pl = shared.in$name_pl
+
+fgseas %>%
+  filter(pathway %in% sig.pl, NES>0) %>%
+  left_join(shared.in) %>% 
+  mutate(name_pl=factor(name_pl,rev(name.pl))) %>% 
+  filter(!is.na(name_pl)) %>% 
+  ggplot(aes(donor_id,name_pl,fill=NES, size=-log10(padj)))+geom_point(shape=21)+
+  scale_y_discrete(label = function(x) stringr::str_trunc(x, 50))+
+  scale_fill_gradient2(low='dodgerblue',mid='white',high='red')+
+  scale_size_continuous(range = c(0.5,5))+
+  labs(x='Patient',
+    fill='Normalised\nenrichment\nrelative to\nnormal PC', size='-log10 FDR')+
+  coord_fixed()+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=11),
+    axis.text.x=element_blank(),axis.ticks.x=element_blank(),
+    axis.title.y=element_blank(), 
+    axis.line=element_blank(), panel.border = element_rect(colour = "black", fill=NA, size=1)
+  )->pl
+pl
+#ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
+
+```
+
+
+# SPACE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

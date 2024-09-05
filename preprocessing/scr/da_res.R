@@ -120,7 +120,9 @@ test.comparisons = list(
 # Diagnosis, panImm
 results$Tcell[['cohort']] = list()
 dat = comp$Tcell %>% filter(
-  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100)
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) 
 cohort.n = dat %>% select(donor_id,cohort) %>% distinct() %>% group_by(cohort) %>% tally()
 for (formula in names(test.formulae)) {
   #print(formula)
