@@ -1,5 +1,5 @@
 ---
-title: "S7"
+title: "3"
 output:
   html_document:
     code_folding: hide
@@ -10,19 +10,9 @@ params:
     args: myarg
 ---
 
-```{r}
-
-# mkdir/save figures to
-dir.create('../figures/2')
-'../figures/2'
-
-```
-
-
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
-
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
@@ -35,13 +25,11 @@ load(file = '../preprocessing/data/tcr_analysis.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
-
+da_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% 
+  mutate(diagnosis=cohort)
+dir.create('../figures/2')
+'../figures/2'
 ```
-
-```{r S7_, fig.height=2, fig.width=2, eval=T, hide=T}
-
-```
-
 
 ## When plotting abundance boxplots, remove undesired samples, tissues and sorts
 
@@ -55,9 +43,6 @@ comp$Tcell %>% filter(
 
 ```
 
-
-
-
 ## 2B
 
 ```{r}
@@ -69,7 +54,6 @@ comp$Tcell %>% filter(
 
 
 ```
-
 
 # SPACE 
 

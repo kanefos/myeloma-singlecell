@@ -10,96 +10,13 @@ params:
     args: myarg
 ---
 
-# ...
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
 source('../resources/aes.R')
 da_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% mutate(diagnosis=cohort)
-# PC_scores
-# PC_Ig
-# PC_DEG
-# PC_DEG + pw
-
 dir.create('../figures/S2')
 ```
-
-# [move, 1I WIP] 1
-
-## 1G
-
-```{r 1G, fig.height=1.5, fig.width=3, eval=T, hide=T}
-m_id = read.csv('../preprocessing/data/mPC_id.csv')
-
-dat = m_id %>% mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
-  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
-  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
-  left_join(da_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
-  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct() %>% 
-  mutate(clonal=factor(ifelse(mPC=='mPC','Clonal','Non-clonal'),c('Non-clonal','Clonal')))
-  
-dat %>% 
-  mutate(donor_id = factor(donor_id,arrange(dat[dat$mPC=='mPC',],pct)$donor_id)) %>% 
-  ggplot(aes(donor_id,pct,fill=clonal))+
-  geom_bar(stat='identity', width = 1)+
-  scale_fill_manual(values = mPC_col)+
-  labs(x='Patient (n = 46)',y='% plasma cells',fill='Immunoglobulin')+
-  scale_y_continuous(limits=c(70,100), breaks = c(75,100),oob = scales::rescale_none)+
-  theme(
-    axis.text.x = element_blank(), axis.ticks.x = element_blank()
-  ) -> pl
-pl
-#ggsave(plot=pl,filename = '../figures/1/1G.pdf',width=3,height=1.5, dpi="retina")
-
-
-```
-
-
-## 1H
-
-```{r 1H, fig.width=5, fig.height=2, eval=T, hide=T}
-
-load('../preprocessing/data/tumour_modules_scr.RData')
-pathways = read.csv('resources/pathways.csv')
-pathways_neat = pathways %>% select(-gene) %>% distinct()
-scr_gavish = scr[1:40,]
-scr_gavish$max = rownames(scr_gavish)[apply(assay(scr_gavish),2,FUN = which.max)]
-
-dat = data.frame(table(scr_gavish$max)) %>% mutate(Var1=as.vector(Var1)) %>% arrange(-Freq) %>% 
-  left_join(pathways_neat[1:40,] %>% mutate(Var1=rownames(scr)[1:40])) %>% 
-  mutate(Var1=replace(pathway_neat, Freq < 2000 ,'Other')) %>% 
-  group_by(Var1) %>% summarise(Freq=sum(Freq)) %>% 
-  arrange(Freq) %>% mutate(Var1=factor(Var1,unique(Var1))) %>% 
-  mutate(pct=round(Freq/sum(Freq)*100,2))
-  
-dat %>% 
-  ggplot(aes(x="", y=Freq, fill=Var1))+
-  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.75)+
-  coord_polar("y", start=0)+
-  labs(fill='Dominant pathway')+
-  scale_fill_brewer(palette = 'Set1',direction = -1, breaks=rev(dat$Var1))+
-  #guides(fill=guide_legend(ncol=2))+
-  theme_void()+
-  theme(
-    #plot.margin = margin(1,1,1,1, "cm"),
-    legend.key.size = unit(0.5, "cm"),
-    legend.text=element_text(size=10),
-    legend.title=element_blank()
-  ) -> pl
-pl
-#ggsave(plot=pl,filename = '../figures/1/1H.pdf',width=5,height=2, dpi="retina")
-
-```
-
-
-
-## 1I
-
-comp.RData
-PC_scores
-_da_testing_
-
-# S2
 
 ## Overview N donor/cells ig predicted
 
@@ -392,6 +309,83 @@ pl
 
 PC_scores
 
+## SPACE 
+
+# [move, 1I WIP] 1
+
+## 1G
+
+```{r 1G, fig.height=1.5, fig.width=3, eval=T, hide=T}
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+dat = m_id %>% mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
+  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  left_join(da_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct() %>% 
+  mutate(clonal=factor(ifelse(mPC=='mPC','Clonal','Non-clonal'),c('Non-clonal','Clonal')))
+  
+dat %>% 
+  mutate(donor_id = factor(donor_id,arrange(dat[dat$mPC=='mPC',],pct)$donor_id)) %>% 
+  ggplot(aes(donor_id,pct,fill=clonal))+
+  geom_bar(stat='identity', width = 1)+
+  scale_fill_manual(values = mPC_col)+
+  labs(x='Patient (n = 46)',y='% plasma cells',fill='Immunoglobulin')+
+  scale_y_continuous(limits=c(70,100), breaks = c(75,100),oob = scales::rescale_none)+
+  theme(
+    axis.text.x = element_blank(), axis.ticks.x = element_blank()
+  ) -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/1/1G.pdf',width=3,height=1.5, dpi="retina")
+
+
+```
+
+
+## 1H
+
+```{r 1H, fig.width=5, fig.height=2, eval=T, hide=T}
+
+load('../preprocessing/data/tumour_modules_scr.RData')
+pathways = read.csv('resources/pathways.csv')
+pathways_neat = pathways %>% select(-gene) %>% distinct()
+scr_gavish = scr[1:40,]
+scr_gavish$max = rownames(scr_gavish)[apply(assay(scr_gavish),2,FUN = which.max)]
+
+dat = data.frame(table(scr_gavish$max)) %>% mutate(Var1=as.vector(Var1)) %>% arrange(-Freq) %>% 
+  left_join(pathways_neat[1:40,] %>% mutate(Var1=rownames(scr)[1:40])) %>% 
+  mutate(Var1=replace(pathway_neat, Freq < 2000 ,'Other')) %>% 
+  group_by(Var1) %>% summarise(Freq=sum(Freq)) %>% 
+  arrange(Freq) %>% mutate(Var1=factor(Var1,unique(Var1))) %>% 
+  mutate(pct=round(Freq/sum(Freq)*100,2))
+  
+dat %>% 
+  ggplot(aes(x="", y=Freq, fill=Var1))+
+  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.75)+
+  coord_polar("y", start=0)+
+  labs(fill='Dominant pathway')+
+  scale_fill_brewer(palette = 'Set1',direction = -1, breaks=rev(dat$Var1))+
+  #guides(fill=guide_legend(ncol=2))+
+  theme_void()+
+  theme(
+    #plot.margin = margin(1,1,1,1, "cm"),
+    legend.key.size = unit(0.5, "cm"),
+    legend.text=element_text(size=10),
+    legend.title=element_blank()
+  ) -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/1/1H.pdf',width=5,height=2, dpi="retina")
+
+```
+
+
+
+## 1I
+
+comp.RData
+PC_scores
+_da_testing_
+
 # [move, 5G WIP] 5
 
 ## 5F
@@ -487,7 +481,6 @@ PC_DEG + pw
 _nonviv_
 
 
-# SPACE 
 
 
 

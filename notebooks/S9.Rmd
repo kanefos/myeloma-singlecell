@@ -10,15 +10,6 @@ params:
     args: myarg
 ---
 
-```{r}
-
-# mkdir/save figures to
-dir.create('../figures/S9')
-'../figures/S9'
-
-```
-
-
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
@@ -35,15 +26,12 @@ load(file = '../preprocessing/data/tcr_analysis.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
-
-```
-
-```{r 9, fig.height=2, fig.width=2, eval=T, hide=T}
+dir.create('../figures/S9')
+'../figures/S9'
 
 ```
 
 ## B
-
 
 ```{r fig.width=3, fig.height=3, eval=T, hide=T}
 
@@ -101,7 +89,7 @@ pl
 ```
 
 
-# SPACE 
+## SPACE 
 
 
 

@@ -10,15 +10,6 @@ params:
     args: myarg
 ---
 
-```{r}
-
-# mkdir/save figures to
-dir.create('../figures/5')
-'../figures/5'
-
-```
-
-
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
@@ -35,13 +26,10 @@ load(file = '../preprocessing/data/tcr_analysis.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+dir.create('../figures/5')
+'../figures/5'
 
 ```
-
-```{r 5, fig.height=2, fig.width=2, eval=T, hide=T}
-
-```
-
 
 ## 5A
 
@@ -75,8 +63,7 @@ pl
 ##ggsave(plot=pl,filename = '../figures/5/A.pdf',width=5.5,height=3, dpi="retina")
 ```
 
-
-# SPACE 
+## SPACE 
 
 
 
