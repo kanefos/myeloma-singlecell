@@ -1,3 +1,10 @@
+# ENVS
+#Rscript ... = default R env, which runs normally. need to package up
+#     collate all R packages/versions?...   
+#conda Increate22 = generic Py scRNA env
+#conda tcrdist3_env = specific for tcrdist3 work
+
+
 #SAMPLES = filenames_df[1].to_list()
 #print(SAMPLES)
 
@@ -57,28 +64,48 @@ rule PC_analysis:
         "/data/import/PC.h5ad"
         "data/mPC_id.csv"
         "../resources/pathways.csv"
+        "data/import/metadata-donor.csv"
     output:
         "data/tumour_modules_scr.RData"
+        "data/tumour_modules_pct.csv"
+        "data/tumour_DE.csv"
+        "data/tumour_DE_fgsea.RData"
     shell:
-        ""
+        "Rscript scr/PC_analysis.R"
 
+rule abundance_testing:
+    input:
+        "data/comp.RData"
+        "data/ords.RData"
+    output:
+        "data/da_results.RData"
+    shell:
+        "Rscript scr/da_res.R"
 
+rule tcr_clustering:
+    input:
+        "data/import/Tcell-scTCR.csv"
+    output:
+        "data/tcr_clustering.csv"
+    shell:
+        "/Users/kaneucl/miniconda3/envs/tcrdist3_env/bin/python3.8 scr/tcr_clustering.py"
 
+rule tcr_analysis:
+    input:
+        "data/import/Tcell-scTCR.csv"
+        "data/Tcell_obs.csv"
+    output:
+        "data/tcr_analysis.RData"
+    shell:
+        "Rscript scr/tcr_analysis.R"
 
-rule abundance_prep:
+rule tcell_tumour:
     input:
         ""
     output:
         ""
     shell:
-        ""
-
-rule abundance_prep:
-    input:
-        ""
-    output:
-        ""
-    shell:
+        "Rscript scr/tcell_tumour_associations.R"      
 
 
 # FINAL STEPS ##################################################################

@@ -36,7 +36,6 @@ source('aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = 'data/abundances/abundances.RData')
 load(file = 'data/ordination/ords.RData')
-donors.longit = c("COSMOS22:C035","COSMOS22:C018",'COSMOS22:C005','Liu2021:37692_SMM','Liu2021:47491_SMM ','Liu2021:58408_SMM','oetjen2018:C_T2','oetjen2018:S_T2')
 
 # obs
 #obs = read.csv('data/obs/Tcell.csv') %>% filter(!subset %in% c('DN','QC','CD3_neg'))

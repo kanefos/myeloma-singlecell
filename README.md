@@ -1,6 +1,6 @@
 # Code to reproduce _Tumour-intrinsic features shape T-cell differentiation through myeloma disease evolution_
 
-As single-cell data from [Sklavenitis-Pistofidis et al.](https://doi.org/10.1016/j.ccell.2022.10.017) and extended clinical data from [Maura et al.](https://doi.org/10.1038/s43018-023-00657-1) (i.e. paraprotein) are omitted (and must be acquired through direct contact with these authors), this reposityory will not perfectly recreate figures seen in the manuscript. However, the underlying analysis and plotting code is unchanged, so acquiring and integrating this data will generate manuscript figures.
+As single-cell data from [Sklavenitis-Pistofidis et al.](https://doi.org/10.1016/j.ccell.2022.10.017) and extended clinical data from [Maura et al.](https://doi.org/10.1038/s43018-023-00657-1) (i.e. paraprotein) are omitted (and must be acquired through direct contact with these authors), this repository will not perfectly recreate figures seen in the manuscript. However, the underlying analysis and plotting code is unchanged, so acquiring and integrating this data will generate manuscript figures.
 
 ## Overview
 

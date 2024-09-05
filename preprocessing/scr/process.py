@@ -10,14 +10,14 @@ markers = pd.read_csv('../resources/markers.csv')
 #PC_subset
 #panImm_exp 
 adata = sc.read('data/import/panImmune.h5ad')
-adata.obs.to_csv('data/panImm_obs.csv',index=False)
+adata.obs.to_csv('data/panImm_obs.csv')
 adata[adata.obs.lineage=='PC',].write('data/import/PC.h5ad',compression='gzip')
 sc.get.obs_df(adata, markers.loc[markers['plot']=='panImm',]['gene'].to_list()
-              ).to_csv('data/panImm_exp.csv',index=False)
+              ).to_csv('data/panImm_exp.csv')
 
 #Tcell_obs
 #Tcell_exp
 adata = sc.read('data/import/Tcell.h5ad')
-adata.obs.to_csv('data/Tcell_obs.csv',index=False)
+adata.obs.to_csv('data/Tcell_obs.csv')
 sc.get.obs_df(adata, markers.loc[markers['plot']=='Tcell',]['gene'].to_list()
-              ).to_csv('data/Tcell_exp.csv',index=False)
+              ).to_csv('data/Tcell_exp.csv')

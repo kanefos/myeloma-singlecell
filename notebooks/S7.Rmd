@@ -1,0 +1,380 @@
+---
+title: "S7"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+```{r}
+
+# mkdir/save figures to
+dir.create('../figures/S7')
+'../figures/S7'
+
+```
+
+
+## Setup
+
+```{r setup-import, eval=T, hide=T}
+
+library(tidyverse)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+source('../resources/aes.R')
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+load(file = '../preprocessing/data/tcr_analysis.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+
+```
+
+```{r S7_, fig.height=2, fig.width=2, eval=T, hide=T}
+
+```
+
+# 4-tmp
+
+## 4C-tmp
+
+```{r}
+# Example network plots
+
+library(igraph)
+library(ggraph)
+graph_from_clone2clus = function(input,attach_col=c()){
+
+  nodes = unique(input$clone_id)
+  groups = input$clus_id %>% .[!is.na(.)]
+
+  # Initialize an empty graph
+  g <- graph.empty(n = length(nodes),directed = F)
+
+  # Add nodes from the 'samples' column
+  V(g)$name <- nodes
+
+  if ( !length(attach_col)==0 ){
+    for ( col in attach_col){ V(g)[[col]] = input[[col]] }
+  }
+
+  # Add edges between samples within the same group
+  for (group in unique(groups)) {
+    samples_in_group <- input$clone_id[(input$clus_id == group) & (!is.na(input$clus_id))]
+    if ( length(samples_in_group)==1){next}
+    edges <- combn(samples_in_group, 2)
+    g = add_edges(g, t(edges))
+  }
+
+  # Remove self-loops
+  g <- delete.edges(g, which(ends(g, E(g))[,1] == ends(g, E(g))[,2]))
+
+  return(g)
+}
+
+donors_pl = c('Maura_2023.PT85','Foster_2024.SMM10')
+i=donors_pl[1]
+
+as_tibble(obs) %>% select(clone_id,donor_id) %>% distinct() %>% 
+  filter(donor_id==i, clone_id!='',!is.na(clone_id)) %>%
+  filter(clone_id %in% tcr[tcr$clone_size>1,]$clone_id) %>% 
+  left_join(tcr_analysis$clus$clon_clus) %>%
+  graph_from_clone2clus() %>%
+  ggraph(layout = 'fr')+geom_edge_link()+geom_node_point(size=1.5)+
+  ggtitle('title')+
+  coord_fixed()+
+  theme_void()+theme(plot.title = element_text(hjust = 0.5, size=14))
+
+```
+
+
+## 4D-tmp
+
+```{r fig.width=1.25, fig.height=3}
+
+clustered = tcr_analysis$clus[['pct']] %>% mutate(diagnosis=cohort)
+
+psuedo0 = min(clustered$clustered[clustered$clustered>0])
+
+clustered %>% filter(diagnosis!='MGUS') %>% 
+  mutate(diagnosis=factor(diagnosis,c('SMM','MM'))) %>% 
+  ggplot(aes(diagnosis,log10(clustered+psuedo0),fill=diagnosis))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.4)+
+  ggpubr::stat_compare_means(comparisons = list(c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  #scale_y_log10(limits=c(1,65),breaks=c(1,10))+
+  #scale_y_continuous(limits=c(0,42.5),breaks=c(0,10,20,30,40))+
+  scale_y_continuous(breaks=c(0,1,log10(50)), limits=c(0,log10(50)+0.1), labels=c(1,10,50))+
+  annotation_logticks(sides='l',short=unit(0.1,'cm'),mid=unit(0.1,'cm'),long=unit(0.1,'cm'))+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='% expanded repertoire clustered',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=11), 
+    axis.text.y = element_text(size=11)
+  )-> pl
+pl
+
+
+```
+
+
+
+# S7
+
+## S7C
+
+```{r, eval=T, hide=T, fig.height=4, fig.width=8}
+
+dat.ph = tcr_analysis$clus$pheno %>% 
+  # >1 clone
+  filter(clus_id %in% tcr_analysis$clus$Nclone[tcr_analysis$clus$Nclone$exp,]$clus_id) %>% 
+  group_by(clus_id,pheno) %>% summarise(n=sum(n)) %>% ungroup() %>% 
+  group_by(clus_id) %>% mutate(pct=n/sum(n)*100) %>% 
+  select(clus_id,pheno,pct) %>% 
+  pivot_wider(names_from='clus_id',values_from='pct',values_fill=0) %>% 
+  as.data.frame() %>% column_to_rownames('pheno')
+
+# Column donor md
+clus_id.md = data.frame(clus_id=colnames(dat.ph)) %>% 
+  left_join(
+    tcr_analysis$clus$pheno %>% ungroup() %>% select(clus_id,donor_id) %>% distinct() %>%
+      left_join(donor_md %>% select(donor_id,cohort)) %>% distinct() %>% rename(Cohort=cohort)
+  ) %>% 
+  #Donor
+  rename(Donor=donor_id) %>% 
+  #A/B
+  left_join(metaclone_id %>% select(clus_id,chain) %>% distinct()) %>% rename(Chain=chain) %>%
+  mutate(Chain=ifelse(Chain=='TRA','Alpha','Beta')) %>% 
+  #Clones
+  left_join(clone_id.clus_id.nClone) %>% mutate(Clones = n) %>% select(-n) %>% 
+  #N cells
+  #left_join(clone_id.clus_id.ph %>% group_by(clus_id) %>% summarise(Cells=sum(n))) %>% 
+  data.frame() %>% column_to_rownames('clus_id')
+
+# Donor color palette
+library(RColorBrewer)
+n <- length(unique(clus_id.md$Donor))
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+donor_cols=setNames(col_vector[1:n],unique(clus_id.md$Donor))
+
+# md col
+annot_col = list(
+  Clones = c("grey90", "firebrick"), 
+  #Cells = c("grey90", "firebrick"),
+  Chain = c('Alpha'='pink','Beta'='skyblue'),
+  Diagnosis=diagnosis_col[c('Non','MGUS','SMM','MM')],
+  Donor=donor_cols
+)
+
+#pl
+dat.ph %>% pheatmap::pheatmap(
+  show_colnames = F, border_color=NA,
+  color=viridis::cividis(50,direction=1),
+  annotation_col = clus_id.md %>% select(-exp),
+  annotation_colors= annot_col,
+  treeheight_row = 20, treeheight_col = 20
+)-> ph
+
+#save_pheatmap_pdf(ph, "../figures/S6/C.pdf", height=4, width = 8)
+
+```
+
+
+## S7D
+
+```{r, eval=T, hide=T, fig.height=2.5, fig.width=2}
+
+tcr.exp = tcr %>% group_by(clone_id) %>% tally() %>% filter(n>1)
+
+tcr %>% 
+  filter(clone_id %in% tcr.exp$clone_id) %>% 
+  mutate(id=paste0(CDR3aa,v_gene,j_gene)) %>% 
+  select(donor_id,chain,id) %>% distinct() %>% 
+  group_by(donor_id,chain) %>% tally() %>% arrange(n) %>% 
+  ggplot(aes('',n))+geom_boxplot(outliers = F)+scale_y_log10(breaks=c(1,10,100,1000))+
+  facet_grid(~chain)+
+  geom_jitter(width=0.2,height=0,size=0.5)+
+  labs(x='N input chains\nper donor',y="Counts") -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/S6/D-1.pdf',height=2.5,width=2, dpi="retina")
+
+tcr_analysis$clus$pheno %>% ungroup() %>% select(donor_id,clus_id) %>% distinct() %>% 
+  group_by(donor_id) %>% tally() %>% arrange(n) %>% 
+  ggplot(aes('',n))+geom_boxplot()+scale_y_log10(breaks=c(1,10))+
+  geom_jitter(width=0.2,height=0,size=0.5)+
+  labs(x='N clusters\nper donor',y='Counts',title='') -> pl
+pl
+#ggsave(plot=pl,filename = '../figures/S6/D-2.pdf',height=2.5,width=2, dpi="retina")
+
+```
+
+
+## S7E
+
+Boxplot, counts per individual
+```{r fig.height=2.25, fig.width=1.75}
+
+viral_hits = read.csv('../resources/viral_hits.csv')
+
+obs %>% filter(donor_id %in% viral_hits$donor_id) %>% 
+  left_join(viral_hits %>% select(clone_id,hit)) %>% 
+  mutate(hit=ifelse(!is.na(hit),'Viral','None')) %>% 
+  group_by(donor_id,hit) %>% tally() %>% 
+  ggplot(aes(hit,n))+
+  geom_boxplot(outlier.alpha = 0)+geom_point()+geom_line(aes(group=donor_id))+
+  scale_y_log10()+
+  labs(x='Annotation', y='Counts per patient repertoire')+
+  theme(axis.title.y=element_text(size=10))-> pl
+pl
+#ggsave(plot=pl,filename = '../figures/S6/E-1.pdf',width=1.75,height=2.25, dpi="retina")
+
+```
+
+Bar chart
+```{r}
+
+viral_hits = read.csv('../resources/viral_hits.csv')
+
+obs %>% filter(donor_id %in% viral_hits$donor_id, clone_id!='') %>% 
+  left_join(viral_hits %>% select(clone_id,hit,annot)) %>% filter(!is.na(hit)) %>% 
+  select(pheno,clone_id,annot) %>% distinct() %>% 
+  group_by(pheno,annot) %>% tally() %>% 
+  left_join(
+    obs %>% filter(donor_id %in% viral_hits$donor_id, clone_id!='') %>% 
+      group_by(pheno) %>% tally(name='total')
+  ) %>% 
+  ggplot(aes(n/total,pheno))+geom_col(aes(fill=annot))
+
+
+```
+
+
+## S7F
+
+```{r}
+
+viral_hits = read.csv('../resources/viral_hits.csv')
+
+```
+
+
+# SPACE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
