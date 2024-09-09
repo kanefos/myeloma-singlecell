@@ -36,6 +36,62 @@ dir.create('../figures/S3')
 ```{r fig.height=2, fig.width=2, eval=T, hide=T}
 ```
 
+
+## S3A *
+
+
+
+## S3B *
+
+
+## S3D *
+
+
+## S3E *
+
+
+## S3F *
+
+
+
+
+
+
+## S3G *
+
+[SUPP] expression in zhang2021:MM-P20190122-T vs others
+```{r fig.height=2.5, fig.width=5}
+
+pheno.pl = c('CD8.TemActive','CD8.Tex')
+gene.pl = c('PDCD1','TIGIT','LAG3','HAVCR2','TOX','TOX2','LAYN')
+tex.donor = 'zhang2021:MM-P20190122-T'
+
+dat.pl = scater::makePerCellDF(sce[gene.pl,],gene.pl,assay.type="X")
+dat.pl$pheno = NULL
+dat.pl = dat.pl %>% left_join(obs %>% select(index,pheno)) %>% filter(pheno %in% pheno.pl)
+
+dat.pl %>% 
+  select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% 
+  filter(pheno=='CD8.Tex') %>% mutate(outlier = ifelse(sample_id==tex.donor,'Single donor','Others')) %>% 
+  ggplot(aes(outlier,value,fill=outlier))+facet_grid(~name)+
+  geom_violin()+geom_boxplot(alpha=0,show.legend=F)+
+  scale_fill_manual(values=c('Single donor'='#666666',Others='grey80'))+
+  labs(y='Scaled nexpression', fill='Donor')+
+  theme_classic()+
+  theme(
+    legend.position = 'bottom',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    ) -> pl
+pl
+ggsave(plot=pl,filename = 'figures/Tcell-ph/vln-Tex-outlier.pdf',width=5,height=2, dpi="retina")
+
+```
+
+
+
+## S3I * 
 ## SPACE 
 
 
