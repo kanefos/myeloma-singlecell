@@ -86,7 +86,7 @@ m_id_pl %>%
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),
         legend.position = 'bottom') -> pl
 pl
-#ggsave(plot=pl,filename = '../figures/S2/A.pdf',width=5,height=2.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S2/A.pdf',width=5,height=2.5, dpi="retina")
 ```
 
 
@@ -116,17 +116,7 @@ m_id_pl %>% filter(rank==1,chain!='IGHC1') %>% group_by(chain,g) %>%
 
 ```
 
-### Thresholding 
-
-
-Overview
-
-
 ## S2B
-
-PC_Ig
-import/PC.h5ad
-
 
 ```{r S2B, fig.height=5, fig.width=12, eval=T, hide=T}
 library(ComplexHeatmap)
@@ -139,6 +129,8 @@ m_id = read.csv('../preprocessing/data/mPC_id.csv')
 sce = sce[rownames(sce) %in% unique(c(m_id$lightV1,m_id$lightV2,m_id$IGHC1,m_id$IGHC2,m_id$IGHV1,m_id$IGHV2)),]
 # Min expressed one cell
 sce = sce[rowSums(assay(sce))>0,]
+# Remove NULL
+mat=mat[!is.na(rowSums(mat)),]
 
 # Select donors
 sce = sce[,sce$donor_id %in% m_id$donor_id]
@@ -157,17 +149,21 @@ mat = as.matrix(assay(sce))
 mat <- t(scale(t(mat)))
 
 # Ig gene groups
+mat=mat[!is.na(rowSums(mat)),]
+mat=mat[rowSums(mat)>0,]
 genes=rownames(mat)
 genes_gr = bind_rows(list(
-  lightV=data.frame(gene=rownames(sce)[startsWith(rownames(sce),c('IGKV', 'IGLV'))]),
-  IGHV=data.frame(gene=rownames(sce)[startsWith(rownames(sce),c('IGHV'))]),
+  lightV=data.frame(gene=genes[startsWith(genes,c('IGKV'))]) %>%  
+         rbind(data.frame(gene=genes[startsWith(genes,c('IGLV'))])),
+  IGHV=data.frame(gene=genes[startsWith(genes,c('IGHV'))]),
   IGHC=data.frame(gene=c('IGHA2', 'IGHE', 'IGHG4', 'IGHG2', 'IGHGP', 'IGHA1', 'IGHG1', 'IGHG3', 'IGHD', 'IGHM'))
 ),.id='group') %>% 
   left_join(
     data.frame(group=c("lightV","IGHC","IGHV"),
                group_pl=c('Light\nvariable','Heavy\nconstant','Heavy\nvariable'))
   )
-genes_gr = as_tibble(rowData(sce)) %>% left_join(genes_gr) %>% pull(group_pl)
+genes_gr = genes_gr %>% filter(gene %in% rownames(mat)) %>% 
+  mutate(gene=factor(gene,genes)) %>% arrange(gene) %>% pull(group_pl)
 
 # Donor col split
 patient = sce$donor_id
@@ -205,12 +201,15 @@ hm <- Heatmap(mat, ##[,cell_order],
   #top_annotation = column_ha,
   # Plotting
   use_raster=T,raster_quality=10
+  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  # EDIT RASTER QUALITY TO INCREASE QUALITY
+  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 )
 
 draw(hm)
-#grDevices::png("../figures/S2/B.png", height = 350, width = 1000)
-#ComplexHeatmap::draw(hm)
-#grDevices::dev.off()
+grDevices::png("../figures/S2/B.png", height = 350, width = 1000)
+ComplexHeatmap::draw(hm)
+grDevices::dev.off()
 ```
 
 
@@ -219,8 +218,7 @@ draw(hm)
 
 - NSD2 = MMSET
 - CCND1
-
-```{r S2C, ffig.height=3.5, fig.width=6, eval=T, hide=T}
+```{r fig.height=3.5, fig.width=6, eval=T, hide=T}
 
 # Published translocation information
 donor_transloc = data.frame(
@@ -265,14 +263,14 @@ dat.pl %>%
     strip.text.x = element_text(size=9), strip.text.y=element_text(angle=0, hjust=1, size=11)
   )->pl
 pl
-#ggsave(plot=pl,filename = '../figures/S2/S2C.pdf',width=6,height=3.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S2/C.pdf',width=6,height=3.5, dpi="retina")
 
 ```
 
 
 ## S2D
 
-```{r S2D, fig.height=3, fig.width=1.5, eval=T, hide=T}
+```{r fig.height=3, fig.width=1.5, eval=T, hide=T}
 
 m_id = read.csv('../preprocessing/data/mPC_id.csv')
 
@@ -302,286 +300,33 @@ dat %>% filter(mPC=='mPC') %>%
     axis.text.y = element_text(size=11)
     )-> pl
 pl
-#ggsave(plot=pl,filename = '../figures/S2/S2D.pdf',width=1.5,height=3, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S2/S2D.pdf',width=1.5,height=3, dpi="retina")
 ```
 
 ## S2E
 
-PC_scores
-
-## SPACE 
-
-# [move, 1I WIP] 1
-
-## 1G
-
-```{r 1G, fig.height=1.5, fig.width=3, eval=T, hide=T}
-m_id = read.csv('../preprocessing/data/mPC_id.csv')
-
-dat = m_id %>% mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
-  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
-  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
-  left_join(da_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
-  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct() %>% 
-  mutate(clonal=factor(ifelse(mPC=='mPC','Clonal','Non-clonal'),c('Non-clonal','Clonal')))
-  
-dat %>% 
-  mutate(donor_id = factor(donor_id,arrange(dat[dat$mPC=='mPC',],pct)$donor_id)) %>% 
-  ggplot(aes(donor_id,pct,fill=clonal))+
-  geom_bar(stat='identity', width = 1)+
-  scale_fill_manual(values = mPC_col)+
-  labs(x='Patient (n = 46)',y='% plasma cells',fill='Immunoglobulin')+
-  scale_y_continuous(limits=c(70,100), breaks = c(75,100),oob = scales::rescale_none)+
-  theme(
-    axis.text.x = element_blank(), axis.ticks.x = element_blank()
-  ) -> pl
-pl
-#ggsave(plot=pl,filename = '../figures/1/1G.pdf',width=3,height=1.5, dpi="retina")
-
-
-```
-
-
-## 1H
-
-```{r 1H, fig.width=5, fig.height=2, eval=T, hide=T}
-
+```{r fig.height=3, fig.width=10}
 load('../preprocessing/data/tumour_modules_scr.RData')
-pathways = read.csv('resources/pathways.csv')
-pathways_neat = pathways %>% select(-gene) %>% distinct()
-scr_gavish = scr[1:40,]
-scr_gavish$max = rownames(scr_gavish)[apply(assay(scr_gavish),2,FUN = which.max)]
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+full = as.data.frame(scater::makePerCellDF(scr,rownames(scr),exprs_values='scores'))
+full = full[rownames(full) %in% m_id$obs_names,]
 
-dat = data.frame(table(scr_gavish$max)) %>% mutate(Var1=as.vector(Var1)) %>% arrange(-Freq) %>% 
-  left_join(pathways_neat[1:40,] %>% mutate(Var1=rownames(scr)[1:40])) %>% 
-  mutate(Var1=replace(pathway_neat, Freq < 2000 ,'Other')) %>% 
-  group_by(Var1) %>% summarise(Freq=sum(Freq)) %>% 
-  arrange(Freq) %>% mutate(Var1=factor(Var1,unique(Var1))) %>% 
-  mutate(pct=round(Freq/sum(Freq)*100,2))
-  
-dat %>% 
-  ggplot(aes(x="", y=Freq, fill=Var1))+
-  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.75)+
-  coord_polar("y", start=0)+
-  labs(fill='Dominant pathway')+
-  scale_fill_brewer(palette = 'Set1',direction = -1, breaks=rev(dat$Var1))+
-  #guides(fill=guide_legend(ncol=2))+
-  theme_void()+
-  theme(
-    #plot.margin = margin(1,1,1,1, "cm"),
-    legend.key.size = unit(0.5, "cm"),
-    legend.text=element_text(size=10),
-    legend.title=element_blank()
-  ) -> pl
+dat.pl = full %>% 
+  select(any_of(rownames(scr))) %>% sample_n(10000) %>% 
+  pivot_longer(everything(),names_to='p') %>% 
+  left_join(data.frame(p=rownames(scr),pathway=unique(read.csv('../resources/pathways.csv')$pathway_neat)[1:40]))
+
+dat.pl.order = dat.pl %>% group_by(pathway) %>% 
+  summarise(m=median(value)) %>% arrange(-m) %>% pull(pathway)
+
+dat.pl %>% 
+  mutate(name_pl=factor(pathway,dat.pl.order)) %>% 
+  ggplot(aes(name_pl,value))+geom_violin()+
+  geom_boxplot(outlier.size = 0.5, outlier.colour = 'blue', outlier.alpha = 0.5)+
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+  labs(y='\n\n\n\n\nScore',x='')-> pl
 pl
-#ggsave(plot=pl,filename = '../figures/1/1H.pdf',width=5,height=2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S2/E.png',width=10,height=3, dpi="retina")
 
 ```
-
-
-
-## 1I
-
-comp.RData
-PC_scores
-_da_testing_
-
-# [move, 5G WIP] 5
-
-## 5F
-
-Data prep
-```{r 5F, fig.height=6, fig,width=7, eval=T, hide=T}
-library(ComplexHeatmap)
-tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
-load(file='../preprocessing/data/tumour_DE_fgsea.RData')
-
-fgseas.select = fgseas[fgseas$pathway=='KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION',] 
-donor.sigAPP = fgseas.select[(fgseas.select$pval<0.05)&(fgseas.select$NES>0),]$donor_id
-
-# Selected genes
-KEGG_APC.g = c('HLA-A','HLA-B','HLA-C', 'B2M','HLA-DRA','HLA-DPA1','CD74','HLA-E','HLA-F','TAP1','TAP2','TAPBP','PSME1','PSME2')
-
-donor.order = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>% group_by(donor_id) %>%
-  summarise(logFC=mean(logFC)) %>% arrange(logFC) %>% pull(donor_id)
-
-dat.in = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>%
-    mutate(is = donor_id %in% donor.sigAPP) %>%
-    mutate(donor_id = factor(donor_id,donor.order)) %>%
-    group_by(gene) %>% mutate(logFC=as.vector(scale(logFC)))
-
-dat.mat = dat.in %>% select(donor_id,gene,logFC) %>%
-  mutate(donor_id=factor(donor_id,donor.order)) %>% 
-  pivot_wider(names_from='donor_id',values_from='logFC',values_fill=NA) %>% 
-  relocate(any_of(c('gene',donor.order))) %>% 
-  mutate(gene=factor(gene,KEGG_APC.g)) %>% arrange(gene) %>% 
-  data.frame() %>% column_to_rownames('gene') %>% as.matrix()
-
-logFC.max=round(max(dat.in$logFC),2)
-logFC.min=round(min(dat.in$logFC),2)
-col_fun = circlize::colorRamp2(c(logFC.min, 0, logFC.max), c("dodgerblue", "white", "red"))
-
-column_donor_md = dat.in %>% ungroup() %>% select(donor_id) %>% distinct() %>% 
-  mutate(is_de = donor_id %in% donor.sigAPP) %>%
-  left_join(
-    read.csv('../preprocessing/data/import/metadata-donor.csv') %>% 
-      select(donor_id,cohort) %>% distinct()
-  ) %>% 
-  mutate(donor_id=factor(donor_id,donor.order)) %>% arrange(donor_id) 
-
-```
-
-Plotting/saving
-```{r fig.height=3, fig.width=4}
-
-column_ha = columnAnnotation(
-  " " = column_donor_md$cohort,
-  col = list(` `=diagnosis_col),
-  height = unit(4, "cm"),
-  gp = gpar(col = "black"), gap = unit(0, "points"),
-  annotation_name_side = "right", show_legend=F
-)
-
-row_ha = rowAnnotation(gene = anno_mark(at = 1:length(rownames(dat.mat)), labels = rownames(dat.mat)))
-
-Heatmap(
-  dat.mat,
-  color=col_fun,
-  na_col = 'grey80',
-  top_annotation = column_ha,
-  show_heatmap_legend=F,
-  cluster_rows = F, cluster_columns = F,
-  show_row_names = F, show_column_names = F, 
-  right_annotation = row_ha, 
-  row_names_gp = gpar(fontface='italic'),
-  column_split = column_donor_md$is_de, border = TRUE, 
-  column_title = c('MHC low', 'MHC high'),
-  width = unit(6, "cm"), height = unit(4, "cm")
-  ) -> hm
-
-lgd_list = list(
-  Legend(col_fun = col_fun, title = "Scaled log fold-change\ntumour / normal", at = c(logFC.min, 0, logFC.max), 
-    direction = "horizontal",title_position = "topcenter",
-    labels = c('Min', '', 'Max'),
-    title_gp=gpar(fontface='plain')
-  ))
-
-draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
-
-#grDevices::pdf("../figures/5/F.pdf", width = 4, height = 3)
-#draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
-#grDevices::dev.off()
-
-```
-
-
-## 5G
-
-PC_DEG + pw
-_nonviv_
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

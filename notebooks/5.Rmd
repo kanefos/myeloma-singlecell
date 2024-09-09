@@ -63,6 +63,99 @@ pl
 ##ggsave(plot=pl,filename = '../figures/5/A.pdf',width=5.5,height=3, dpi="retina")
 ```
 
+
+## 5F
+
+Data prep
+```{r 5F, fig.height=6, fig,width=7, eval=T, hide=T}
+library(ComplexHeatmap)
+tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
+load(file='../preprocessing/data/tumour_DE_fgsea.RData')
+
+fgseas.select = fgseas[fgseas$pathway=='KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION',] 
+donor.sigAPP = fgseas.select[(fgseas.select$pval<0.05)&(fgseas.select$NES>0),]$donor_id
+
+# Selected genes
+KEGG_APC.g = c('HLA-A','HLA-B','HLA-C', 'B2M','HLA-DRA','HLA-DPA1','CD74','HLA-E','HLA-F','TAP1','TAP2','TAPBP','PSME1','PSME2')
+
+donor.order = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>% group_by(donor_id) %>%
+  summarise(logFC=mean(logFC)) %>% arrange(logFC) %>% pull(donor_id)
+
+dat.in = tumour_DE %>% filter(gene %in% KEGG_APC.g) %>%
+    mutate(is = donor_id %in% donor.sigAPP) %>%
+    mutate(donor_id = factor(donor_id,donor.order)) %>%
+    group_by(gene) %>% mutate(logFC=as.vector(scale(logFC)))
+
+dat.mat = dat.in %>% select(donor_id,gene,logFC) %>%
+  mutate(donor_id=factor(donor_id,donor.order)) %>% 
+  pivot_wider(names_from='donor_id',values_from='logFC',values_fill=NA) %>% 
+  relocate(any_of(c('gene',donor.order))) %>% 
+  mutate(gene=factor(gene,KEGG_APC.g)) %>% arrange(gene) %>% 
+  data.frame() %>% column_to_rownames('gene') %>% as.matrix()
+
+logFC.max=round(max(dat.in$logFC),2)
+logFC.min=round(min(dat.in$logFC),2)
+col_fun = circlize::colorRamp2(c(logFC.min, 0, logFC.max), c("dodgerblue", "white", "red"))
+
+column_donor_md = dat.in %>% ungroup() %>% select(donor_id) %>% distinct() %>% 
+  mutate(is_de = donor_id %in% donor.sigAPP) %>%
+  left_join(
+    read.csv('../preprocessing/data/import/metadata-donor.csv') %>% 
+      select(donor_id,cohort) %>% distinct()
+  ) %>% 
+  mutate(donor_id=factor(donor_id,donor.order)) %>% arrange(donor_id) 
+
+```
+
+Plotting/saving
+```{r fig.height=3, fig.width=4}
+
+column_ha = columnAnnotation(
+  " " = column_donor_md$cohort,
+  col = list(` `=diagnosis_col),
+  height = unit(4, "cm"),
+  gp = gpar(col = "black"), gap = unit(0, "points"),
+  annotation_name_side = "right", show_legend=F
+)
+
+row_ha = rowAnnotation(gene = anno_mark(at = 1:length(rownames(dat.mat)), labels = rownames(dat.mat)))
+
+Heatmap(
+  dat.mat,
+  color=col_fun,
+  na_col = 'grey80',
+  top_annotation = column_ha,
+  show_heatmap_legend=F,
+  cluster_rows = F, cluster_columns = F,
+  show_row_names = F, show_column_names = F, 
+  right_annotation = row_ha, 
+  row_names_gp = gpar(fontface='italic'),
+  column_split = column_donor_md$is_de, border = TRUE, 
+  column_title = c('MHC low', 'MHC high'),
+  width = unit(6, "cm"), height = unit(4, "cm")
+  ) -> hm
+
+lgd_list = list(
+  Legend(col_fun = col_fun, title = "Scaled log fold-change\ntumour / normal", at = c(logFC.min, 0, logFC.max), 
+    direction = "horizontal",title_position = "topcenter",
+    labels = c('Min', '', 'Max'),
+    title_gp=gpar(fontface='plain')
+  ))
+
+draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
+
+#grDevices::pdf("../figures/5/F.pdf", width = 4, height = 3)
+#draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
+#grDevices::dev.off()
+
+```
+
+
+## 5G
+
+PC_DEG + pw
+_nonviv_
+
 ## SPACE 
 
 

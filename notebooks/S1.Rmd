@@ -15,28 +15,194 @@ params:
 ```{r setup-import, eval=T, hide=T}
 
 library(tidyverse)
+library(SingleCellExperiment)
 library(ggpubr)
 library(RColorBrewer)
 library(viridis)
 source('../resources/aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = '../preprocessing/data/comp.RData')
-load(file = '../preprocessing/data/ords.RData')
-load(file = '../preprocessing/data/tcr_analysis.RData')
-obs = read.csv('../preprocessing/data/Tcell_obs.csv')
-tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
-donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
-dir.create('../figures/S1')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% mutate(diagnosis=cohort)
+obs = read.csv('../preprocessing/data/panImm_obs.csv')
+dir.create('../figures/S1/')
 '../figures/S1'
 
 ```
 
-## .
+## S1A
 
-```{r fig.height=2, fig.width=2, eval=T, hide=T}
+Data
+```{r, eval=T, hide=T}
+
+# Assembling data
+md = obs %>% select(study_id,sample_id,donor_id) %>% left_join(donor_md) %>% 
+  select(study_id,sample_id,donor_id,age,sex,diagnosis) %>% distinct() %>% 
+  group_by(donor_id) %>% summarise(
+    study_id=unique(study_id),
+    nSamples = n(),
+    age = unique(age),
+    sex = unique(sex),
+    diagnosis = unique(diagnosis) )
+  
+# Tissue(BM,PB,BM & PB)
+donor_tissue = list(
+  BM=obs[obs$tissue=='BM',]$donor_id,  PB=obs[obs$tissue=='PB',]$donor_id,
+  BM_PB= obs %>% select(donor_id,tissue) %>% distinct() %>% 
+    group_by(donor_id) %>% tally() %>% filter(n>1) %>% pull(donor_id)
+)
+for (i in c('BM','PB')){donor_tissue[[i]] = donor_tissue[[i]][!donor_tissue[[i]] %in% donor_tissue$BM_PB]}
+md =  md %>% mutate(tissue = case_when(
+  donor_id %in% donor_tissue$BM ~ "BM",
+  donor_id %in% donor_tissue$PB ~ "PB",
+  donor_id %in% donor_tissue$BM_PB ~ "BM & PB"
+))
+
+# 10x chemistry
+md = md %>% left_join(obs %>% select(donor_id,chem) %>% distinct() %>% 
+                        mutate(chem=ifelse(chem=='3v','3 prime','5 prime')))
+
+# Sort
+md = md %>% left_join(as_tibble(obs) %>% select(donor_id,sort) %>% distinct())
+
+# N cells per donor
+nCellsPerDonor = obs %>% group_by(donor_id) %>% tally(name = 'nCells')
+md = md %>% left_join(nCellsPerDonor)
+md = md %>% filter(!is.na(nCells))
+
+# Has TCR data
+donor_with_TCR = unique(read_csv('../preprocessing/data/import/Tcell-scTCR.csv')$donor_id)
+md = md %>% mutate(has_tcr = ifelse(donor_id %in% donor_with_TCR,'scTCR-seq sample',NA))
+
+# Non-cancer sample
+md = md %>% left_join(donor_md %>% select(donor_id,noncancer_sampling) %>% distinct())
+
+# Donors order
+donors_order = md %>% mutate(diagnosis = factor(diagnosis, c('Non','MGUS','SMM','MM'))) %>% arrange(diagnosis) %>% pull(donor_id)
+md = md %>% mutate(donor_id=factor(donor_id,donors_order))
+  
 ```
 
-## SPACE 
+Plot
+```{r fig.height=4, fig.width=12}
+
+#themes
+th = theme_void()+theme(
+  panel.background = element_blank(),
+  panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+  axis.text.y = element_text(size=10)
+)
+th.y = theme(
+  axis.title.y = element_text(size = 10, colour = "grey30"),
+  axis.text.y = element_text(size = 8, colour = "grey30"),
+  axis.ticks.y = element_line(colour = "grey20"), axis.ticks.length = unit(11/2/2, "pt"),
+)
+
+#plts
+plts=list()
+
+# n cells barchart, custom y axis
+plts[['nCells']] = md %>% 
+  ggplot(aes(donor_id,nCells))+
+  geom_bar(stat='identity',width=1.1, fill='grey50',linewidth=0)+
+  labs(y='log10\ncells')+
+  scale_y_log10(breaks=c(10,100,1000,10000))+
+  geom_segment(aes(x=0.5,xend=0.5,y=0,yend=max(md$nCells)),size=0.1,color='grey20')+
+  th+th.y
+
+#nSamples
+plts[['nSamples']] = md %>% 
+  ggplot(aes(donor_id,'Number of \nsamples ',fill=as.character(nSamples)))+
+  labs(fill='')+geom_tile()+scale_fill_manual(values=c('1'='grey80','2'='grey40'))+th
+
+#sorts
+plts[['sorts']] = md %>% 
+  ggplot(aes(donor_id,'Sort ',fill=sort))+labs(fill='Sample sort')+
+  geom_tile()+scale_fill_manual(values=sort_colors)+th
+
+#chemistry
+plts[['chem']] = md %>% ggplot(aes(donor_id,'scRNA-seq\nchemistry ',fill=chem))+labs(fill='')+
+  geom_tile()+scale_fill_manual(values = as.vector(tissue_colors)[1:2])+th
+
+#tissues sampled, cat
+plts[['tissues']] = md %>% ggplot(aes(donor_id,'Tissue ',fill=tissue))+labs(fill='')+
+  geom_tile()+scale_fill_manual(values=tissue_colors)+th
+
+#diagnosis, cat
+plts[['hm_diag']] = md %>% mutate(diagnosis=factor(diagnosis,c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(donor_id,'Cohort ',fill=diagnosis))+labs(fill='')+
+  geom_tile()+scale_fill_manual(values=diagnosis_col)+th
+
+#has scTCR, cat
+plts[['has_tcr']] = md %>% ggplot(aes(donor_id,'TCR ',fill=has_tcr))+labs(fill='')+
+  geom_tile()+scale_fill_manual(values=c('scTCR-seq sample'='#8DA0CB','FALSE'='grey90'),na.value='grey90')+th
+
+#age, cont
+plts[['age']] = md %>% ggplot(aes(donor_id,'Age ',fill=age))+labs(fill='')+
+  geom_tile()+
+  scale_fill_viridis(option='magma',na.value='grey90')+th
+
+#non-cancer reason for acquisition
+plts[['noncan_sampling']] = md %>% 
+  ggplot(aes(donor_id,'Non-cancer \nsampling ',fill=noncancer_sampling))+labs(fill='')+
+  geom_tile()+scale_fill_manual(values = rev(as.vector(tissue_colors)),na.value='grey90')+th
+
+# study, many
+plts[['study']] = md %>% ggplot(aes(donor_id,'Study  ',fill=study_id))+labs(fill='Study of origin')+
+  geom_tile()+scale_fill_manual(values=study_colors)+th
+
+heights = c(0.25,rep(0.1,length(names(plts))-1))
+pl = ggpubr::ggarrange(plotlist=plts, heights=heights, ncol=1,align='v',common.legend=T,legend='none')
+pl
+ggsave(plot=pl,filename = '../figures/S1/A.pdf',width=12,height=3.8,dpi="retina")
+
+
+# Plot/save legends
+dir.create('../figures/S1/A-legends/')
+for (p in names(plts)) {
+  pl = ggpubr::as_ggplot(ggpubr::get_legend(plts[[p]]+theme(legend.position = 'bottom')))
+  ggsave(plot=pl,filename =
+           paste0('../figures/S1/A-legends/',p,'.pdf'),width=10,height=1,dpi="retina")
+}
+```
+
+## S1B
+
+```{r fig.height=3, fig.width=3, eval=T, hide=T}
+
+obs %>% filter(lineage!='Doublet') %>% 
+  ggplot(aes(UMAP1,UMAP2))+
+  scattermore::geom_scattermore(aes(color=chem))+
+  scale_color_manual(values = as.vector(tissue_colors))+
+  labs(color='',title='10X chemisty')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S1/B-1.png',width=3,height=3, dpi="retina")
+
+obs %>% filter(lineage!='Doublet') %>% 
+  ggplot(aes(UMAP1,UMAP2))+
+  scattermore::geom_scattermore(aes(color=study_id))+
+  scale_color_manual(values = study_colors)+
+  labs(color='',title='Study')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S1/B-2.png',width=3,height=3, dpi="retina")
+
+obs %>% 
+  ggplot(aes(UMAP1,UMAP2))+
+  scattermore::geom_scattermore(aes(color=sort))+
+  scale_color_manual(values=sort_colors)+
+  labs(color='',title='Sort')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S1/B-3.png',width=3,height=3, dpi="retina")
+
+```
+
+
+
 
 
 

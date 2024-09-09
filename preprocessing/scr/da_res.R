@@ -120,9 +120,9 @@ test.comparisons = list(
 # Diagnosis, panImm
 results$Tcell[['cohort']] = list()
 dat = comp$Tcell %>% filter(
-  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>%
   # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
-  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id )
 cohort.n = dat %>% select(donor_id,cohort) %>% distinct() %>% group_by(cohort) %>% tally()
 for (formula in names(test.formulae)) {
   #print(formula)
@@ -235,6 +235,19 @@ results$Tcell[['aspirate_CD138pos']] = celltype.cor(dat,'aspirate_CD138pos') %>%
 
 scr = read_csv('data/tumour_modules_pct.csv')
 
+# pan-Immune
+dat = comp$panImm %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>%
+  left_join(scr) %>% filter(!is.na(pct)) %>%
+  select(sample_id,donor_id,celltype,clr,pathway_neat,pct)
+
+scr_res = list()
+for ( pw in unique(scr$pathway_neat)){
+  scr_res[[pw]] = dat %>% filter(pathway_neat==pw) %>% celltype.cor(.,'pct')
+}
+results$panImm[['tumour_modules_pct']] = bind_rows(scr_res,.id='pathway_neat')
+
+# T cell
 dat = comp$Tcell %>% filter(
   !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>%
   left_join(scr) %>% filter(!is.na(pct)) %>%
@@ -244,8 +257,8 @@ scr_res = list()
 for ( pw in unique(scr$pathway_neat)){
   scr_res[[pw]] = dat %>% filter(pathway_neat==pw) %>% celltype.cor(.,'pct')
 }
-
 results$Tcell[['tumour_modules_pct']] = bind_rows(scr_res,.id='pathway_neat')
+
 
 # Save results #############################################################
 

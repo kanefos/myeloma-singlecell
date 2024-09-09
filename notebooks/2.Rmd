@@ -31,10 +31,320 @@ dir.create('../figures/2')
 
 ```
 
-## .
-
 ```{r fig.height=2, fig.width=2, eval=T, hide=T}
 ```
+
+## 2A
+
+```{r mde-pheno-tcell, fig.height=5, fig.width=5}
+
+obs.median.ph = obs %>% group_by(pheno) %>% 
+  summarise(MDE1=median(MDE1),MDE2=median(MDE2)) %>% 
+  left_join(obs %>% select(pheno,subset) %>% distinct())
+
+obs %>% 
+  select(MDE1, MDE2, subset, pheno) %>% 
+  ggplot(aes(MDE1, MDE2))+
+  scattermore::geom_scattermore(aes(color=pheno))+
+  scattermore::geom_scattermore(data = . %>% filter(pheno=='ISG.ISG15'), aes(color=pheno))+
+  geom_point(data = obs.median.ph, size=3, aes(fill=pheno), shape=21)+
+  scale_color_manual(values=Tcell_pheno_colors)+scale_fill_manual(values=Tcell_pheno_colors)+
+  theme_void()+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/A.png',width=5,height=5, dpi="retina")
+
+```
+
+Legend
+```{r fig.height=3.5, fig.width=2}
+
+obs.median.ph %>%
+  mutate(pheno=factor(pheno,levels=Tcell_order)) %>% 
+  ggplot(aes(1,0,fill=pheno))+
+  geom_bar(stat='identity',width=0)+
+  scale_fill_manual(values=Tcell_pheno_colors)+
+  guides(fill = guide_legend(ncol=1))+
+  theme_void()+
+  theme(
+    legend.title=element_blank(),
+    legend.key.size = unit(0.4, "cm"),
+    legend.text=element_text(size=10),
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/A-legend.svg',width=3,height=4, dpi="retina")
+
+```
+
+
+
+## 2B
+
+Data
+
+Plot
+```{r fig.height=4.25, fig.width=3.75}
+
+dat = obs %>% select(obs_names,MDE1,MDE2,Naive,Cytotoxicity) %>% left_join(
+  read.csv('../preprocessing/data/Tcell_exp.csv') %>% select(obs_names,CD4,CD8A)
+)
+
+dat %>% drop_na() %>% 
+  sample_n(200000) %>% 
+  pivot_longer(!obs_names:MDE2) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  facet_wrap('name',ncol=2)+
+  scattermore::geom_scattermore(data = . %>% filter(value==0), aes(color=value))+
+  scattermore::geom_scattermore(data = . %>% filter(value>0), aes(color=value))+
+  scale_color_distiller(palette = 'Reds',direction = 1)+
+  theme_void()+
+  theme(legend.position = 'none',strip.text.x = element_text(size = 15))->pl
+pl
+ggsave(plot=pl,filename = '../figures/B.png',width=3.75,height=4, dpi="retina")
+
+```
+
+
+## 2C
+
+Left
+```{r mde-scTCR-tcell, fig.height=5, fig.width=5}
+
+dat = obs %>% select(MDE1,MDE2,clone_id) %>% 
+  left_join(obs %>% group_by(clone_id) %>% tally()) %>% filter(clone_id!='')
+
+dat %>% 
+  ggplot(aes(MDE1,MDE2,color=log2(n)))+
+  geom_point(data = . %>% filter(n==1), size=0.01,alpha=0.5)+
+  geom_point(data = . %>% filter(n>1), size=0.01,alpha=0.5)+
+  scale_color_viridis(option='rocket',breaks=c(0,2,4,6,8))+
+  theme_void() -> pl
+
+ggsave(plot=pl+theme(legend.position = 'none'),
+       filename = '../figures/2/C-left.png',width=5,height=5, dpi="retina")
+```
+
+Right
+```{r fig.height=2, fig.width=1.5}
+
+dat = obs %>% select(MDE1,MDE2,clone_id,subset,pheno) %>% 
+  left_join(obs %>% group_by(clone_id) %>% tally(name = 'clone_size')) %>%
+  filter(clone_id!='')
+
+for ( i in c('CD4','CD8')){
+dat %>% filter(subset==i) %>% 
+  select(clone_id,clone_size,pheno) %>% 
+  mutate(clone_group = case_when(
+    clone_size < 2 ~ "1",
+    clone_size >= 2 & clone_size < 6 ~ "2-5",
+    clone_size >= 6 & clone_size < 11 ~ "5-10",
+    clone_size >= 11 & clone_size < 26 ~ "10-25",
+    clone_size >= 25 & clone_size < 51 ~ "25-50",
+    clone_size >= 50 ~ "50+"
+  )) %>% 
+  group_by(clone_group,pheno) %>% tally() %>% ungroup() %>% 
+  group_by(clone_group) %>% mutate(pct=n/sum(n)*100) %>% 
+  mutate(clone_group = factor(clone_group,c("1","2-5","5-10","10-25","25-50","50+"))) %>% 
+  ggplot(aes(clone_group,pct,fill=pheno))+
+  geom_bar(stat='identity',color='black',linewidth=0.3)+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  labs(x='Clone size',y='% cluster',title=paste0(i,'+'))+
+  theme(
+    legend.position = 'none',
+    plot.title = element_text(hjust = 0.5, size=10),
+    axis.text.x = element_text(angle = 90, vjust = 0, hjust=1, size=10)
+  )->pl
+print(pl)
+ggsave(plot=pl,filename = paste0('../figures/2/C-right-',i,'.pdf'),width=1.5,height=2, dpi="retina")
+}
+
+```
+
+
+
+## 2D
+
+```{r fig.height=1.5, fig.width=5.25}
+study.pl = 'Zheng_2021'
+pheno.pl = c('CD8.TemActive','CD8.Tex')
+pheno.pl.order = c('Other CD8','CD8.TemActive','CD8.Tex')
+gene.pl = c('PDCD1','TIGIT','TOX','LAG3','LAYN','CXCL13')
+
+dat.pl = read.csv('../preprocessing/data/Tcell_exp.csv')
+
+dat.pl = obs %>%
+  filter(study_id==study.pl) %>% 
+  filter(subset=='CD8') %>% 
+  left_join(dat.pl %>% select(obs_names,any_of(gene.pl))) %>% 
+  mutate(pheno = replace(pheno, !pheno %in% pheno.pl, 'Other CD8')) %>% 
+  ungroup() %>% group_by(pheno) %>% top_n(1000)
+
+# Expression
+dat.pl %>% 
+  select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% 
+  filter(name %in% gene.pl) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% ungroup() %>% 
+  mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order)) %>% 
+  ggplot(aes(pheno,value,fill=pheno))+facet_grid(~name)+
+  geom_boxplot(outlier.alpha=0)+geom_violin()+
+  geom_jitter(data = . %>% group_by(name,pheno) %>% sample_n(1000), 
+              width=0.15,height=0,size=0.1,alpha=0.2,show.legend=F)+
+  ylim(c(0,1.25))+
+  ggpubr::stat_compare_means(
+    comparisons = list(c('Other CD8','CD8.TemActive'),c('CD8.Tex','CD8.TemActive')), 
+    method = 'wilcox.test', size=3,
+    symnum.args = list(cutpoints = c(0.00001, 0.001, 0.01, Inf), symbols = c("**","*","NS")))+
+  scale_fill_manual(values=c(Tcell_pheno_colors,`Other CD8`='grey80'))+
+  labs(y='Scaled\nexpression', fill='')+
+  theme_classic()+
+  theme(
+    legend.position = 'none',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+    )->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/D-upper.png',width=5.25,height=1.5, dpi="retina")
+
+# % bar
+dat.pl %>% 
+  select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% 
+  filter(name %in% gene.pl) %>% 
+  group_by(pheno,name) %>% summarise(pct_exp = sum(value>0)/n()*100) %>% 
+  mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order)) %>% 
+  ggplot(aes(pheno,pct_exp,fill=pheno))+facet_grid(~name)+
+  geom_bar(stat='identity')+
+  scale_fill_manual(values=c(Tcell_pheno_colors,`Other CD8`='grey80'))+
+  labs(y='\n% expressing', fill='')+
+  theme_classic()+
+  theme(
+    legend.position = 'none',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/D-lower.png',width=5.25,height=1.5, dpi="retina")
+
+
+# Legend
+dat.pl %>% select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% filter(name %in% gene.pl) %>% 
+  group_by(pheno,name) %>% summarise(pct_exp = sum(value>0)/n()*100) %>% 
+  mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order)) %>% 
+  ggplot(aes(pheno,pct_exp,fill=pheno))+facet_grid(~name)+
+  geom_bar(stat='identity')+labs(fill='')+
+  scale_fill_manual(values=c(Tcell_pheno_colors,`Other CD8`='grey80'))+
+  theme_classic()+
+  theme(
+    legend.position = 'bottom',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/D-upper.png',width=5.25,height=1.5, dpi="retina")
+
+```
+
+
+
+
+
+
+
+## 2E
+
+
+```{r fig.height=2, fig.width=3}
+
+dat.pl = comp$Tcell %>% 
+  filter(sampleSize>100, !donor_id %in% donors.longit, !CD8.Tex_outlier) %>% 
+  filter(celltype=='CD8.Tex') %>% arrange(desc(n)) %>% distinct() %>% 
+  mutate(sample_id = factor(sample_id,levels=sample_id)) 
+
+dat.pl %>% 
+  group_by(donor_id,cohort) %>% summarise(prop=sum(n)/sum(sampleSize)) %>% ungroup() %>% 
+  arrange(-prop) %>% mutate(donor_id = factor(donor_id,levels=donor_id)) %>% 
+  head(20) %>% 
+  mutate(pct = prop*100) %>% 
+  mutate(x=factor((as.character(1:20)),rev(as.character(1:20)))) %>% 
+  
+  mutate(is = pct > 10 ) %>% 
+  
+  ggplot(aes(x,pct,fill=cohort))+
+  geom_col()+
+  #facet_grid(is~., space='fixed',scales='free',)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(x='Donor',y='CD8.Tex % CD8+',fill='Diagnosis')+
+  #ggbreak::scale_y_break(c(1, 20))+
+  scale_y_continuous(breaks = c(0,10,20))+
+  theme_classic()+
+  theme(
+    legend.position = 'none',
+    axis.title.x=element_text(size=13),axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+    axis.title.y=element_text(size=13),axis.text.y=element_text(size=12)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/E.pdf',width=3,height=2, dpi="retina")
+```
+
+
+## 2F
+
+```{r fig.height=5, fig.width=5,eval=T, hide=T}
+
+dat = obs %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% mutate(diagnosis=cohort) %>% 
+  mutate(cancer=ifelse(diagnosis!='Non','MGUS, SMM and MM\n','Controls')) %>% 
+  mutate(cancer=factor(cancer,c('Controls','MGUS, SMM and MM\n')))
+  
+print(dat %>% group_by(tissue,cancer) %>% summarise(n=n(), nDonor=length(unique(donor_id))))
+
+dat %>%
+  ggplot(aes(MDE1,MDE2))+
+  facet_grid(tissue~cancer, switch='y')+
+  scattermore::geom_scattermore(aes(color=pheno))+
+  scale_color_manual(values=Tcell_pheno_colors)+
+  guides(colour = guide_legend(override.aes = list(size=5)))+
+  labs(color='')+
+  theme_void()+theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/F.png',width=5,height=5, dpi="retina")
+
+```
+
+
+## 2G
+
+```{r fig.width=2, fig.height=3}
+
+comp$Tcell %>% 
+  filter(celltype=='CD8.TemActive') %>%
+  mutate(cancer=factor(ifelse(cohort=='Non','Non','Cancer'),c('Non','Cancer'))) %>% 
+  mutate(tissue=factor(tissue,c('PB','BM'))) %>% 
+  ggplot(aes(x = tissue, y = clr, fill=tissue))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  facet_grid(~cancer)+
+  ggpubr::stat_compare_means(comparisons = list(c('BM','PB')), method = 'wilcox.test',size=3.5, label.y=4.6)+
+  ylim(c(-2,5.5))+
+  scale_fill_manual(values=tissue_colors)+
+  labs(y='Normalised % T cells',title='CD8.TemActive')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11),
+    strip.text.x = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/G.pdf',width=2,height=3, dpi="retina")
+
+```
+
+
 
 ## SPACE 
 

@@ -15,129 +15,332 @@ params:
 ```{r setup-import, eval=T, hide=T}
 
 library(tidyverse)
+library(SingleCellExperiment)
 library(ggpubr)
 library(RColorBrewer)
 library(viridis)
 source('../resources/aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = '../preprocessing/data/comp.RData')
-load(file = '../preprocessing/data/ords.RData')
-load(file = '../preprocessing/data/tcr_analysis.RData')
-obs = read.csv('../preprocessing/data/Tcell_obs.csv')
-tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
-donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% mutate(diagnosis=cohort)
+obs = read.csv('../preprocessing/data/panImm_obs.csv')
 dir.create('../figures/1')
 '../figures/1'
 
 ```
 
-## .
+## 1B
 
-```{r fig.height=2, fig.width=2, eval=T, hide=T}
+```{r fig.height=3, fig.width=2, eval=T, hide=T}
+
+donor_md %>% 
+  select(donor_id,cohort,age) %>% distinct() %>% 
+  filter(!is.na(age)) %>% 
+  mutate(cohort = factor(cohort, c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(x = cohort, y = age, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  ylim(c(20,115))+
+  scale_fill_manual(values=cohort_col)+
+  labs(x='',y='Age',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+    ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1B.pdf',width=2,height=3, dpi="retina")
+
 ```
 
-## SPACE 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 1C
+
+```{r fig.height=3, fig.width=1.5, eval=T, hide=T}
+
+donor_md %>% 
+  select(donor_id,cohort,Paraprotein) %>% distinct() %>% 
+  filter(!is.na(Paraprotein),cohort %in% c('SMM','MM')) %>% 
+  mutate(cohort = factor(cohort, c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(x = cohort, y = Paraprotein, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=cohort_col)+
+  labs(x='',y='Paraprotein',title='')+
+  ylim(c(0,45))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+    ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1C-left.pdf',width=1.5,height=3, dpi="retina")
+
+donor_md %>% 
+  left_join( comp$Tcell %>% select(donor_id,study_id) %>% distinct() ) %>% 
+  select(study_id,donor_id,cohort,aspirate_CD138pos) %>% distinct() %>% 
+  filter(!is.na(aspirate_CD138pos),cohort %in% c('SMM','MM'),study_id!='Zavidij_2020') %>% 
+  mutate(cohort = factor(cohort, c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(x = cohort, y = aspirate_CD138pos, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=cohort_col)+
+  labs(x='',y='Paraprotein',title='')+
+  ylim(c(0,70))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+    ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1C-right.pdf',width=1.5,height=3, dpi="retina")
+
+```
+
+
+
+## 1D
+
+```{r fig.height=2, fig.width=2,eval=T, hide=T}
+
+dat = obs %>% filter(lineage!='Doublet') %>% 
+  group_by(lineage) %>% tally() %>% 
+  arrange(n) %>% mutate(lineage=factor(lineage,lineage)) 
+
+print(dat %>% mutate(pct=n/sum(n)*100))
+
+dat %>% 
+  ggplot(aes(x="", y=n, fill=lineage))+
+  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.4)+
+  coord_polar("y", start=0)+
+  labs(fill='')+
+  scale_fill_manual(values=bm_lineage_colors)+
+  theme_void()+
+  theme(
+    legend.position = 'none',
+    legend.key.size = unit(0.5, "cm"),
+    legend.text=element_text(size=10),
+    legend.title=element_blank()
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1D-left.pdf',width=5,height=2, dpi="retina")
+
+```
+
+```{r fig.height=5, fig.width=5,eval=T, hide=T}
+
+obs %>% filter(lineage!='Doublet') %>% 
+  ggplot(aes(UMAP1,UMAP2))+
+  scattermore::geom_scattermore(aes(color=lineage))+
+  scale_color_manual(values=bm_lineage_colors)+
+  guides(colour = guide_legend(override.aes = list(size=5)))+
+  labs(color='')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1D-right.png',width=5,height=5, dpi="retina")
+
+```
+
+
+
+## 1E
+
+```{r fig.height=2.5, fig.width=7, eval=T, hide=T}
+
+pct_pheno = obs %>% filter(!lineage %in% c('Doublet')) %>% 
+  group_by(donor_id,lineage) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)) %>% ungroup() %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis = factor(diagnosis, c('Non','MGUS','SMM','MM')))
+
+pct_pheno = pct_pheno %>% 
+  left_join(pct_pheno %>% group_by(diagnosis) %>% summarise(nD=length(unique(donor_id)))) %>% 
+  mutate(d_pl = paste0(diagnosis,'\n(n = ',nD,')')) %>% 
+  arrange(diagnosis) %>% mutate(d_pl = factor(d_pl,unique(d_pl)))
+  
+donor.order = pct_pheno %>% filter(lineage=='T cell') %>% arrange(pct) %>% pull(donor_id)
+
+pct_pheno %>% mutate(pct=pct*100) %>% 
+  mutate(donor_id=factor(donor_id,donor.order)) %>% 
+  ggplot(aes(donor_id,pct))+geom_bar(stat='identity',width=1.1, aes(fill=lineage))+
+  facet_grid(~d_pl,space='free',scales='free')+
+  labs(fill='Cell type')+
+  scale_fill_manual(values = bm_lineage_colors)+
+  geom_segment(aes(x=0.5,xend=0.5,y=0,yend=100),size=0.1,linewidth=0,color='grey20')+
+  theme_void()+theme(
+    legend.position = 'none',
+    strip.text.x = element_text(size = 15),
+    panel.background = element_blank(),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
+  ) -> pl
+pl
+pg=ggplot2::ggplotGrob(pl)
+#TURN OFF CLIPPING
+for(i in which(grepl("strip-t", pg$layout$name))){
+  pg$grobs[[i]]$layout$clip <- "off"
+}
+ggsave(plot=pg,filename = '../figures/1/1E.pdf',width=6,height=2.5, dpi="retina")
+
+# Legend
+pct_pheno %>% 
+  mutate(lineage=replace(lineage,lineage=='PC','Plasma cells')) %>% 
+  ggplot(aes(donor_id,pct))+geom_bar(stat='identity',width=1.1, aes(fill=lineage))+
+  scale_fill_manual(values = c(bm_lineage_colors,'Plasma cells'=bm_lineage_colors[['PC']]))+
+  theme_void()+
+  theme(
+    plot.margin = margin(1,1,1,1, "cm"),
+    legend.position='bottom',
+    legend.key.size = unit(0.25, "cm"),
+    legend.text=element_text(),
+    legend.title=element_blank()
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1E-legend.pdf',width=5,height=1, dpi="retina")
+
+```
+
+## 1F
+
+```{r fig.height=5, fig.width=5,eval=T, hide=T}
+
+dat = obs %>% filter(lineage!='Doublet') %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(cancer=ifelse(diagnosis!='Non','MGUS, SMM and MM\n','Controls')) %>% 
+  mutate(cancer=factor(cancer,c('Controls','MGUS, SMM and MM\n')))
+  
+print(dat %>% group_by(tissue,cancer) %>% summarise(n=n(), nDonor=length(unique(donor_id))))
+
+dat %>%
+  ggplot(aes(UMAP1,UMAP2))+
+  facet_grid(tissue~cancer, switch='y')+
+  scattermore::geom_scattermore(aes(color=lineage))+
+  scale_color_manual(values=bm_lineage_colors)+
+  guides(colour = guide_legend(override.aes = list(size=5)))+
+  ylim(c(-8.7, 17.8))+xlim(c(-6.85, 20.3))+
+  labs(color='')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1F.png',width=5,height=5, dpi="retina")
+
+```
+
+
+
+
+## 1G
+
+```{r fig.height=1.5, fig.width=3, eval=T, hide=T}
+m_id = read.csv('../preprocessing/data/mPC_id.csv')
+
+dat = m_id %>% mutate(mPC=ifelse(mPC,'mPC','hPC')) %>% 
+  group_by(donor_id,mPC) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis=factor(diagnosis,c('MGUS','SMM','MM'))) %>% distinct() %>% 
+  mutate(clonal=factor(ifelse(mPC=='mPC','Clonal','Non-clonal'),c('Non-clonal','Clonal')))
+  
+dat %>% 
+  mutate(donor_id = factor(donor_id,arrange(dat[dat$mPC=='mPC',],pct)$donor_id)) %>% 
+  ggplot(aes(donor_id,pct,fill=clonal))+
+  geom_bar(stat='identity', width = 1)+
+  scale_fill_manual(values = mPC_col)+
+  labs(x='Patient (n = 46)',y='% plasma cells',fill='Immunoglobulin')+
+  scale_y_continuous(limits=c(70,100), breaks = c(75,100),oob = scales::rescale_none)+
+  theme(
+    axis.text.x = element_blank(), axis.ticks.x = element_blank()
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1G.pdf',width=3,height=1.5, dpi="retina")
+```
+
+
+## 1H
+
+```{r fig.width=5, fig.height=2, eval=T, hide=T}
+
+load('../preprocessing/data/tumour_modules_scr.RData')
+pathways = read.csv('../resources/pathways.csv')
+pathways_neat = pathways %>% select(-gene) %>% distinct()
+scr_gavish = scr[1:40,]
+scr_gavish$max = rownames(scr_gavish)[apply(assay(scr_gavish),2,FUN = which.max)]
+
+dat = data.frame(table(scr_gavish$max)) %>% mutate(Var1=as.vector(Var1)) %>% arrange(-Freq) %>% 
+  left_join(pathways_neat[1:40,] %>% mutate(Var1=rownames(scr)[1:40])) %>% 
+  mutate(Var1=replace(pathway_neat, Freq < 2000 ,'Other')) %>% 
+  group_by(Var1) %>% summarise(Freq=sum(Freq)) %>% 
+  arrange(Freq) %>% mutate(Var1=factor(Var1,unique(Var1))) %>% 
+  mutate(pct=round(Freq/sum(Freq)*100,2))
+  
+dat %>% 
+  ggplot(aes(x="", y=Freq, fill=Var1))+
+  geom_bar(stat="identity", size=0.5, color='black',linewidth=0.75)+
+  coord_polar("y", start=0)+
+  labs(fill='Dominant pathway')+
+  scale_fill_brewer(palette = 'Set1',direction = -1, breaks=rev(dat$Var1))+
+  #guides(fill=guide_legend(ncol=2))+
+  theme_void()+
+  theme(
+    #plot.margin = margin(1,1,1,1, "cm"),
+    legend.key.size = unit(0.5, "cm"),
+    legend.text=element_text(size=10),
+    legend.title=element_blank()
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1H.pdf',width=5,height=2, dpi="retina")
+
+```
+
+
+
+## 1I
+
+```{r fig.height=2, fig.width=2.5}
+
+load('../preprocessing/data/da_results.RData')
+res = results$panImm$tumour_modules_pct
+res$fdr = p.adjust(res$pval,'BH')
+
+res %>% 
+  mutate(assoc=ifelse(cor>0,'Positive','Negative')) %>% 
+  ggplot(aes(cor,-log10(fdr)))+
+  geom_point(color='grey70')+
+  geom_point(data = . %>% filter(fdr<0.05), size=2, aes(color=assoc))+
+  scale_color_manual(values=c('Positive'='#77c8e0','Negative'='#eb676e'))+
+  #ylim(c(0,-log10(0.1)))+
+  geom_hline(yintercept = -log10(0.05), linetype='dotted', linewidth=0.5)+
+  annotate("text", x=-0.1, y=1.1, label= "FDR < 0.05")+
+  labs(x='Cancer cell pathway correlation\nwith immune cell abundance',
+       y='-log10 FDR',color='Association')+
+  theme_classic()+
+  theme(
+    axis.text.y=element_blank(),axis.ticks.y=element_blank(),
+    axis.text.x=element_text(size=11)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1I.pdf',width=2.5,height=2, dpi="retina")
+
+```

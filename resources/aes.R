@@ -94,6 +94,19 @@ library(RColorBrewer)
 qual_col_pals = RColorBrewer::brewer.pal.info[brewer.pal.info$category == 'qual',]
 long_col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
 
+# Study colors
+study_colors = setNames(
+  rev(long_col_vector)[1:11],
+  c("Foster_2024","Oetjen_2018","Bailur_2019","Zavidij_2020","Kfoury_2021",
+           "Granja_2019","Zheng_2021","Liu_2021","Maura_2023","Conde_2022","Stephenson_2021"))
+
+# Sort colors
+sort_colors = setNames(
+  long_col_vector[1:7],
+  c("T cell-enriched/depleted","Unsorted","CD138-","CD138-CD45+",
+    "CD235-","T cell-enriched","CD8-enriched")
+)
+
 # Custom ggplot
 library("scales")
 reverselog_trans <- function(base = 10) {
