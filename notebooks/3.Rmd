@@ -21,39 +21,410 @@ source('../resources/aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = '../preprocessing/data/comp.RData')
 load(file = '../preprocessing/data/ords.RData')
-load(file = '../preprocessing/data/tcr_analysis.RData')
+load(file = '../preprocessing/data/da_results.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
-tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
-da_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% 
-  mutate(diagnosis=cohort)
-dir.create('../figures/2')
-'../figures/2'
+sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
+dir.create('../figures/3')
 ```
 
-## When plotting abundance boxplots, remove undesired samples, tissues and sorts
+## 3A
 
-```{r}
+
+```{r fig.height=3, fig.width=10}
+
+# Clusters
+obs %>% 
+  filter(tissue=='BM') %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  group_by(cohort) %>% slice_sample(n = 20000) %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  facet_grid(~cohort)+
+  geom_point(size=0.01, alpha=0.4, aes(color=pheno))+
+  scale_color_manual(values=Tcell_pheno_colors)+
+  theme_void()+
+  theme(legend.position = 'none',strip.text.x = element_text(size = 15)) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/A-upper.png',width=10,height=3, dpi="retina")
+
+# Density
+obs %>% 
+  filter(tissue=='BM') %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  group_by(cohort) %>% slice_sample(n = 20000) %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  facet_grid(~cohort)+
+  geom_density_2d_filled(contour_var = "ndensity", bins=30, contour = FALSE)+
+  scale_color_manual(values=Tcell_pheno_colors)+
+  theme_void()+
+  theme(legend.position = 'none',strip.text.x = element_text(size = 15)) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/A-lower.png',width=10,height=3, dpi="retina")
+
+```
+
+
+
+## 3B
+
+```{r fig.width=2, fig.height=3} 
 
 comp$Tcell %>% filter(
   !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
   # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
-  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id )
-
-
-```
-
-## 2B
-
-```{r}
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='CD8.Tn') %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = clr, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='% T cells',title='CD8.Tn')+
+  ylim(c(-2.7,8))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/B-left.pdf',width=2,height=3, dpi="retina")
 
 comp$Tcell %>% filter(
   !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
   # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
-  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id )
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='CD8.TemTerm') %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = clr, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='% T cells',title='CD8.TemTerm')+
+  #ylim(c(-2.7,8))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/B-right.pdf',width=2,height=3, dpi="retina")
 
 
 ```
+
+
+
+
+
+
+## 3C
+
+```{r fig.width=2, fig.height=3} 
+
+# % explained
+pct.expl = round(summary(ords$Tcell)[["cont"]][["importance"]]['Proportion Explained','PC1'],4)*100
+print('% variance explained by PC1')
+print(pct.expl)
+
+ords$Tcell$PCA %>% 
+  left_join(comp$Tcell %>% select(sample_id,cohort) %>% distinct()) %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = PC1, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='T cell skewing',title=paste0('PC1 (',pct.expl,'%)'))+
+  ylim(c(-0.22,0.43))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/C-left.pdf',width=2,height=3, dpi="retina")
+
+```
+
+```{r fig.height=4, fig.width=2.5}
+
+pheno.pl = c('CD8.TemTerm','CD4.CTL','CD8.TEMRA','CD8.Tem.KLRG1','Prolif.',"CD4.Treg",'CD8.Tn','CD4.Tn','CD4.Tcm','CD4.Th17')
+
+ords$Tcell$CA$v %>% data.frame() %>% .[,1:2] %>% 
+  as.data.frame() %>% rownames_to_column('pheno') %>% select(-PC2) %>% 
+  arrange(-PC1) %>% mutate(pheno=factor(pheno,rev(pheno))) %>% 
+  filter(pheno %in% pheno.pl) %>% 
+  pivot_longer(!pheno) %>% 
+  ggplot(aes(name,pheno))+
+  geom_tile(aes(fill=value),width = 0.5, height = 0.5)+
+  scale_fill_gradient2(low='dodgerblue',mid='white',high='red', breaks=c(-0.33,0.41),labels=c('Min','Max'))+
+  labs(fill='Contribution')+
+  scale_y_discrete(position = "right")+
+  coord_fixed()+
+  theme_void()+
+  theme(
+    legend.position = 'bottom',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), 
+    axis.text.y = element_text(size=14,hjust = 0),
+    legend.key.width = unit(0.3, "cm"), legend.title = element_blank()
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/C-right.pdf',width=3.15,height=4, dpi="retina")
+```
+
+
+
+## 3D
+
+Statistics
+```{r}
+
+dat = ords$Tcell$PCA %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct()) %>% 
+  left_join(donor_md %>% select(donor_id,cohort,age) %>% distinct()) %>% filter(!is.na(age))
+(median_age = median(dat$age))
+dat$age_hi = dat$age > median_age
+
+anova(lm(PC1 ~ cohort + age, dat %>% filter(cohort %in% c('Non','SMM'))))
+anova(lm(PC1 ~ cohort + age, dat %>% filter(cohort %in% c('Non','MM'))))
+
+anova(lm(PC1 ~ cohort + age_hi, dat %>% filter(cohort %in% c('Non','SMM'))))
+anova(lm(PC1 ~ cohort + age_hi, dat %>% filter(cohort %in% c('Non','MM'))))
+
+```
+
+Data
+```{r fig.height=1.75, fig.width=4.5}
+dat = ords$Tcell$PCA %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct()) %>% 
+  left_join(donor_md %>% select(donor_id,cohort,age) %>% distinct()) %>% filter(!is.na(age))
+dat$cohort = factor(dat$cohort,c('Non','MGUS','SMM','MM'))
+(median_age = median(dat$age))
+dat$age_hi = factor(ifelse(dat$age>=median_age,'lo','hi'))
+
+mod = lm(PC1 ~ age_hi + cohort, dat)
+summary_model <- summary(mod)
+coefficients <- summary_model$coefficients
+
+results_df <- data.frame(Term = rownames(coefficients),
+  Estimate = coefficients[, "Estimate"],StdError = coefficients[, "Std. Error"],
+  tValue = coefficients[, "t value"], PValue = coefficients[, "Pr(>|t|)"]
+) %>% as_tibble() %>% filter(Term!='(Intercept)') %>% 
+  mutate(CI=1.96 * StdError)
+
+term.md = data.frame(
+  Term=c('age_hilo',paste0('cohort',c('MGUS','SMM','MM'))),
+  TermPl=c(paste0('Age ≥ ',median_age,' years'),'MGUS (n = 16)','SMM (n = 44)','MM (n = 37)'),
+  Gr=c(paste0('Age\n(versus < ',median_age,')'),rep('Disease stage\n(versus controls)',3))
+  )
+
+```
+
+Plot
+```{r fig.height=1.75, fig.width=4.5}
+require(Cairo) #for Greek letters
+
+results_df %>% 
+  left_join(term.md) %>% 
+  mutate(TermPl=factor(TermPl,rev(term.md$TermPl))) %>% 
+  mutate(Gr=factor(Gr,c(paste0('Age\n(versus < ',median_age,')'),
+                        'Disease stage\n(versus controls)'))) %>% 
+  ggplot(aes(x=Estimate,y=TermPl))+
+  facet_grid(Gr~., space='free',scales='free')+
+  geom_errorbar(
+    aes(xmin = Estimate-CI, xmax = Estimate+CI),
+    width = 0.2)+
+  geom_point(shape=22, fill='grey65', size=5)+
+  geom_text(data = . %>% filter(Term!='diagnosisMM'), 
+    aes(Estimate+CI+0.04, label=paste0(round(PValue,3))))+
+  geom_text(data = . %>% filter(Term=='diagnosisMM'), 
+    aes(Estimate+CI+0.04), label='< 0.001')+
+  geom_vline(xintercept = 0, linetype='dashed')+
+  # Customize given data
+  #scale_x_continuous(
+  #  breaks = c(0,0.05,0.1), labels=c(0,0.05,0.1),
+  #  limits = c(-0.02,0.155))+ 
+  labs(x = "Coefficient (90% CI)")+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=11),
+    axis.title.y=element_blank(), axis.text.y=element_text(size=9.5, color='black'),
+    strip.text.y = element_text(angle = 0, size=10, color='black'),
+    strip.background = element_blank(),
+    panel.background = element_rect(fill = 'grey96')
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/D.pdf',width=4.5,height=1.75, dpi="retina", device=cairo_pdf)
+```
+
+
+
+
+
+
+
+## 3E
+
+```{r fig.width=3, fig.height=3}
+
+dat = ords$Tcell$PCA %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct()) %>% 
+  left_join(donor_md %>% select(donor_id,cohort,age) %>% distinct()) %>% filter(!is.na(age)) %>% 
+  filter(cohort %in% c('Non','MM')) %>% 
+  mutate(cohort=factor(cohort,c('MM','Non')))
+
+mod.Non=lm(PC1 ~ age,dat[dat$cohort=='Non',])
+mod.MM=lm(PC1 ~ age,dat[dat$cohort=='MM',])
+
+dat %>% 
+  ggplot(aes(age,PC1,color=cohort))+geom_point(size=1.5)+
+  
+  geom_abline(intercept=mod.Non$coefficients[1], slope=mod.Non$coefficients[2], 
+              color=diagnosis_col[['Non']], size=1)+
+  geom_abline(intercept=mod.MM$coefficients[1], slope=mod.MM$coefficients[2], 
+              color=diagnosis_col[['MM']], size=1)+
+  #geom_smooth(data = . %>% filter(diagnosis=='Non'), method='lm', se=F, aes(fill=diagnosis),size=1,alpha=0.2)+
+  #geom_smooth(color='black', method='lm',size=1, se=F,linetype='dashed')+
+  
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  scale_y_continuous(breaks=c(-0.2,-0.1,0,0.1,0.2))+
+  labs(x='Age',y='T cell skewing')+
+  theme_classic()+theme(legend.position = "none",
+    axis.title.x = element_text(size=14), axis.text.x = element_text(size=12),
+    axis.title.y = element_text(size=14), axis.text.y = element_text(size=12)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/E.pdf',width=3,height=3, dpi="retina")
+ggsave(plot=pl+ggpubr::stat_cor(show.legend=F)+theme(legend.position = "right"),filename = '../figures/3/E-legend.pdf',width=12,height=5, dpi="retina")
+```
+
+## 3F
+
+```{r fig.width=1.5, fig.height=3} 
+
+
+ords$exag_skewing %>% 
+  left_join(comp$Tcell %>% select(sample_id,cohort) %>% distinct()) %>% 
+  mutate(cohort=factor(cohort,c('MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = PC1, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('MGUS','SMM'),c('SMM','MM'),c('MGUS','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  geom_hline(yintercept = 0,linetype = "dashed")+
+  labs(y='Exaggerated T cell aging',title='')+
+  ylim(c(-0.2,0.35))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/F.pdf',width=1.5,height=3, dpi="retina")
+
+# % >0
+ords$exag_skewing %>% mutate(pos=residuals>0) %>% 
+  left_join(comp$Tcell %>% select(sample_id,cohort) %>% distinct()) %>% 
+  group_by(cohort,pos) %>% tally() %>% mutate(p=n/sum(n)*100)
+```
+
+
+
+## 3G
+
+```{r fig.height=2.75, fig.width=2.5}
+
+donor_both = intersect(comp$Tcell[comp$Tcell$tissue=='BM',]$donor_id,
+                       comp$Tcell[comp$Tcell$tissue=='PB',]$donor_id)
+
+# CD8.TemTerm abundance
+comp$Tcell %>% 
+  filter(donor_id %in% donor_both) %>% 
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='CD8.TemTerm') %>% 
+  
+  select(donor_id,clr,tissue) %>% 
+  pivot_wider(names_from='tissue',values_from='clr') %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct() ) %>% 
+  ggplot(aes(BM,PB))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.x = 1, label.y=-2, label.sep='\n')+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='CD8.TemTerm (BM)',y='CD8.TemTerm (PB)',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=13)
+    )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/G-left.pdf',width=2.25,height=2.5, dpi="retina")
+
+
+```
+
+## 3H
+
+```{r fig.width=1.75, fig.height=2.5}
+
+comp$Tcell %>% 
+  filter(sample_id %in% c('Liu_2021.58408_Primary','Liu_2021.58408_SMM')) %>% 
+  filter(celltype %in% c('CD4.Tn','CD8.Tn','CD8.TemTerm')) %>% 
+  mutate(celltype=factor(celltype,c('CD4.Tn','CD8.Tn','CD8.TemTerm'))) %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>%
+
+  ggplot(aes(celltype,prop*100,fill=cohort))+
+  geom_col(position=position_dodge(),color='black')+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='% T cells')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    strip.background = element_blank(),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=12),
+    axis.title.y = element_text(size=12), axis.text.y = element_text(size=11)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/3/H.pdf',width=1.75,height=2.5, dpi="retina")
+
+```
+
 
 # SPACE 
 

@@ -12,8 +12,7 @@ params:
 
 ## Setup
 
-```{r setup-import, eval=T, hide=T}
-
+```{r eval=T, hide=T}
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
@@ -27,8 +26,82 @@ obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 dir.create('../figures/4')
-'../figures/4'
+```
 
+## 4A
+
+```{r fig.height=2.5, fig.width=2.5}
+
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+div = tcr_analysis$clonality %>% 
+  mutate(cohort = replace(cohort, cohort=='MGUS', 'SMM')) %>% 
+  filter(! donor_id %in% donors.longit)
+
+#all T cells
+div %>% filter(cohort!='Non',group=='all') %>% 
+  left_join(ords$Tcell$PCA %>% 
+    left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  ggplot(aes(PC1, clon))+geom_point(size=1.5, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n', label.y= -1.25)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1',y='Clonality',title='All T cells')+theme_classic()+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/A-left.pdf',width=2.5,height=2.5, dpi="retina")
+
+#CD8+Tm
+div %>% filter(cohort!='Non',group=='CD8.Tm') %>% 
+  left_join(ords$Tcell$PCA %>% 
+    left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  ggplot(aes(PC1,clon))+geom_point(size=1, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x= -0.05, label.y = -0.75)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1',y='Clonality',title='CD8+ memory')+theme_classic()+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/A-right.pdf',width=2.5,height=2.5, dpi="retina")
+
+```
+
+## 4B
+
+clonality, CD8.Tm
+```{r fig.width=1.6, fig.height=3}
+div = tcr_analysis$clonality %>% 
+  mutate(cohort = replace(cohort, cohort=='MGUS', 'SMM')) %>% 
+  filter(! donor_id %in% donors.longit)
+  
+#CD8+Tm
+dat = div %>% mutate(diagnosis=cohort) %>% 
+  filter(group=='CD8.Tm') %>% 
+  filter(diagnosis!='MGUS') %>% 
+  mutate(diagnosis=factor(diagnosis,c('Non','SMM','MM')))
+
+dat %>% 
+  ggplot(aes(diagnosis,clon,fill=diagnosis))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(
+    comparisons = list(c('Non','SMM'),c('Non','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='Clonality',title='CD8+ memory')+
+  ylim(c(-2.7,-0.2))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )-> pl
+pl
+ggsave(plot=pl, filename='../figures/4/B.pdf',width=1.6,height=3, dpi="retina")
 ```
 
 ## 4C
@@ -68,25 +141,30 @@ graph_from_clone2clus = function(input,attach_col=c()){
 }
 
 donors_pl = c('Maura_2023.PT85','Foster_2024.SMM10')
-i=donors_pl[1]
+for ( i in donors_pl ){
 
-as_tibble(obs) %>% select(clone_id,donor_id) %>% distinct() %>% 
+dat = as_tibble(obs) %>% select(clone_id,donor_id) %>% distinct() %>% 
   filter(donor_id==i, clone_id!='',!is.na(clone_id)) %>%
   filter(clone_id %in% tcr[tcr$clone_size>1,]$clone_id) %>% 
-  left_join(tcr_analysis$clus$clon_clus) %>%
+  left_join(tcr_analysis$clus$clon_clus)
+
+print(i)
+print(round(sum(!is.na(dat$clus_id))/dim(dat)[1],3)*100)
+
+dat %>% 
   graph_from_clone2clus() %>%
   ggraph(layout = 'fr')+geom_edge_link()+geom_node_point(size=1.5)+
-  ggtitle('title')+
   coord_fixed()+
-  theme_void()+theme(plot.title = element_text(hjust = 0.5, size=14))
+  theme_void()+theme(plot.title = element_text(hjust = 0.5, size=14))->pl
+print(pl)
+ggsave(plot=pl,filename = paste0('../figures/4/C-',i,'.pdf'),width=2.5,height=2.5, dpi="retina")
 
+}
 ```
-
 
 ## 4D
 
 ```{r fig.width=1.25, fig.height=3}
-
 clustered = tcr_analysis$clus[['pct']] %>% mutate(diagnosis=cohort)
 
 psuedo0 = min(clustered$clustered[clustered$clustered>0])
@@ -115,12 +193,203 @@ clustered %>% filter(diagnosis!='MGUS') %>%
   )-> pl
 pl
 
+ggsave(plot=pl, filename='../figures/4/D-left.pdf',width=1.25,height=3, dpi="retina")
+```
+
+
+```{r fig.width=3, fig.height=3}
+
+clustered %>% 
+  left_join(ords$Tcell$PCA %>% 
+              left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  ggplot(aes(PC1, log10(clustered+psuedo0)))+
+  scale_y_continuous(breaks=c(0,1,log10(50)), 
+    limits=c(0,log10(50)+0.1), labels=c(1,10,50))+
+  annotation_logticks(sides='l',short=unit(0.1,'cm'),mid=unit(0.1,'cm'),long=unit(0.1,'cm'))+
+  geom_point(aes(color=diagnosis), size=1.5)+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y=log10(40),label.x=-0.05)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1',y='% expanded repertoire clustered',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=11)
+    )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/D-right.pdf',width=2.5,height=2.5, dpi="retina")
+
 
 ```
 
 
 
 
+## 4E
+
+% clustered and GZMB+Tem
+```{r fig.height=2.75, fig.width=2.75}
+
+# % clus pheno
+pseudo0=min(tcr_analysis$clus$pct$clustered)
+
+tcr_analysis$clus$pheno %>% 
+  filter(donor_id %in% clustered$donor_id) %>% 
+  #GZMB+Tem
+  mutate(pheno=replace(pheno,pheno %in% c('CD8.TemTerm','CD8.TEMRA','CD4.CTL'),'GZMB+Tem')) %>% 
+  group_by(donor_id,pheno) %>% summarise(n=sum(n)) %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% select(-n) %>% 
+  pivot_wider(names_from='pheno',values_from='pct',values_fill=0) %>% 
+  pivot_longer(!donor_id,names_to='pheno',values_to='pct') %>% 
+  mutate(pct=pct+pseudo0) %>% 
+  left_join(ords$Tcell$PCA %>% left_join(obs %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  distinct() %>% filter(!is.na(PC1)) %>%
+  filter(pheno=='GZMB+Tem') %>% 
+
+  ggplot(aes(PC1, pct))+
+  geom_point(aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y = 90)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1',y='% CD8+Tem among\nclustered clones',title='GZMB+Tem')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=13)
+    )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/E-left.pdf',width=2.75,height=2.75, dpi="retina")
+
+
+```
+
+MDE
+```{r fig.height=3, fig.width=3}
+
+as_tibble(obs) %>%
+  select(clone_id,donor_id) %>% distinct() %>% 
+  filter(donor_id=='Maura_2023.PT85', clone_id!='',!is.na(clone_id)) %>%
+  filter(clone_id %in% tcr[tcr$clone_size>1,]$clone_id) %>% 
+  left_join(tcr_analysis$clus$clon_clus) %>% drop_na() %>% 
+  group_by(clus_id) %>% tally() %>% arrange(-n)
+# 'Maura_2023.PT85-TRB-10'
+
+clone_plot = tcr_analysis$clus$clon_clus %>% 
+  filter(clus_id=='Maura_2023.PT85-TRB-10') %>% pull(clone_id)
+
+obs %>% 
+  mutate(is = clone_id %in% clone_plot) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  geom_point(data = . %>% filter(!is), size=0.01,color='grey75',alpha=0.3)+
+  geom_point(data = . %>% filter(is), size=1, aes(color=clone_id))+
+  scale_color_manual(values = long_col_vector[1:length(clone_plot)])+
+  theme_void()+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/E-right.png',width=2.5,height=2.5, dpi="retina")
+
+```
+
+
+
+
+## 4F
+
+```{r fig.height=2, fig.width=2.5}
+
+dat = tcr_analysis$nonviral$CD8.TemTerm %>% arrange(-logFC)
+
+gene.pl = dat %>% arrange(-logFC) %>% head(10) %>% pull(gene)
+#gene.pl = c(dat %>% arrange(-logFC) %>% head(10) %>% pull(gene),'GZMK','CD37')
+#gene.pl = c('GNLY','FGFBP2','ITGB1','GZMB','ZNF683','LGALS1')
+
+dat %>% arrange(-logFC) %>% 
+  mutate(rank = row_number()) %>% 
+  filter(rank < 100) %>% mutate(rank=rev(rank)) %>% 
+  ggplot(aes(rank,logFC))+
+  geom_point(size=1, aes(color=gene %in% gene.pl))+
+  scale_color_manual(values=c(`TRUE`='dodgerblue',`FALSE`='grey40'))+
+  scale_x_continuous(breaks = c(0,25,50,75,100),labels=c(100,75,50,25,1))+
+  ggrepel::geom_text_repel(data = . %>% filter(gene %in% gene.pl),
+    aes(label=gene), force=50, max.overlaps = 100)+
+  labs(x='Rank', y='log2 fold-change\nnon-viral / viral')+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/4/F.png',height=2,width=2.5,dpi="retina")
+```
+
+
+## 4G
+
+```{r fig.height=3.75, fig.width=3}
+
+dat = obs %>% select(obs_names,MDE1,MDE2,Nonviral)
+
+dat %>% drop_na() %>% 
+  sample_n(200000) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  scattermore::geom_scattermore(aes(color=Nonviral))+
+  scale_color_viridis()+
+  theme_void()+
+  theme(legend.position = 'bottom',strip.text.x = element_text(size = 15))->pl
+pl
+ggsave(plot=pl,filename = '../figures/4/G.png',width=3.75,height=4, dpi="retina")
+
+```
+
+## 4H
+
+plot key correlates
+```{r fig.height=2.5, fig.width=2.25}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=12),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=11))
+
+
+
+
+dat %>% filter(diagnosis!='Non') %>% filter(!is.na(PC1)) %>% 
+  ggplot(aes(PC1,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x =-0.12 , label.y = 0.45)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1\n', y='Non-viral specificity signature',title='')+
+  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
+  theme_classic()+theme(legend.position = 'none')+th->pl
+pl
+ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-PC1.pdf',height=2.5,width=2.25, dpi="retina")
+
+dat %>% filter(diagnosis!='Non') %>% filter(!is.na(Entry.paraprotein)) %>% 
+  ggplot(aes(Entry.paraprotein,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x = 5, label.y = 0.45)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Paraprotein\n', y='Non-viral specificity signature',title='')+
+  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
+  theme_classic()+theme(legend.position = 'none')+th->pl
+pl
+ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-PP.pdf',height=2.5,width=2.25, dpi="retina")
+
+dat %>% filter(diagnosis!='Non') %>% filter(!is.na(MP5.Stress)) %>% 
+  ggplot(aes(MP5.Stress,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y=0.5)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='% tumour expressing\nstress pathway', y='Non-viral specificity signature',title='')+
+  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
+  theme_classic()+theme(legend.position = 'none')+th->pl
+pl
+ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-Str.pdf',height=2.5,width=2.25, dpi="retina")
+```
+
+
+## 4I *
 
 ## SPACE 
 

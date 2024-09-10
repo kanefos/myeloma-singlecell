@@ -31,9 +31,6 @@ dir.create('../figures/2')
 
 ```
 
-```{r fig.height=2, fig.width=2, eval=T, hide=T}
-```
-
 ## 2A
 
 ```{r mde-pheno-tcell, fig.height=5, fig.width=5}
@@ -101,7 +98,7 @@ dat %>% drop_na() %>%
   theme_void()+
   theme(legend.position = 'none',strip.text.x = element_text(size = 15))->pl
 pl
-ggsave(plot=pl,filename = '../figures/B.png',width=3.75,height=4, dpi="retina")
+ggsave(plot=pl,filename = '../figures/2/B.png',width=3.75,height=4, dpi="retina")
 
 ```
 
@@ -121,6 +118,7 @@ dat %>%
   scale_color_viridis(option='rocket',breaks=c(0,2,4,6,8))+
   theme_void() -> pl
 
+pl
 ggsave(plot=pl+theme(legend.position = 'none'),
        filename = '../figures/2/C-left.png',width=5,height=5, dpi="retina")
 ```
@@ -246,11 +244,6 @@ ggsave(plot=pl,filename = '../figures/2/D-upper.png',width=5.25,height=1.5, dpi=
 ```
 
 
-
-
-
-
-
 ## 2E
 
 
@@ -343,111 +336,5 @@ pl
 ggsave(plot=pl,filename = '../figures/2/G.pdf',width=2,height=3, dpi="retina")
 
 ```
-
-
-
-## SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

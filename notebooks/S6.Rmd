@@ -12,63 +12,52 @@ params:
 
 ## Setup
 
-```{r setup-import, eval=T, hide=T}
-
+```{r eval=T, hide=T}
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
 library(viridis)
-source('aes.R')
+source('../resources/aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
-load(file = 'data/abundances/abundances.RData')
-load(file = 'data/ordination/ords.RData')
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+load(file = '../preprocessing/data/da_results.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv') %>% mutate(diagnosis=cohort)
+#sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
+valid_obs = read.csv('../integration/data/validation_Tcell-obs.csv') %>%
+  left_join(read.csv('../integration/data/validation_Tcell.csv')) %>%
+  filter(!pheno_pred %in% c('Unknown','Myeloid','CD3_neg','Doublet')) %>%
+  filter(pheno_uncertainty < 0.2)
+valid_md = as_tibble(read.csv('../integration/data/validation-metadata.csv'))
 dir.create('../figures/S6')
-'../figures/S6'
-
 ```
 
 
-# v1 figures
 
-## Schematic mde
+## S6B
 
-```{r fig.height=2, fig.width=2}
-
-obs %>% 
-  ggplot(aes(X_mde1,X_mde2))+
-  geom_point(size=0.01, color='grey70')+
-  coord_fixed()+
-  theme_void()+
-  theme(legend.position = 'none')-> pl
-pl
-##ggsave(plot=pl,filename = 'figures/Valid/mde-schem.png',width=2,height=2, dpi="retina")
-
-```
-
-## Phenotype mde
-
+Plot
 ```{r fig.height=3, fig.width=3}
 
-obs.pl = obs %>% mutate(pheno_pred = factor(pheno_pred, names(Tcell_pheno_colors))) 
+obs.pl = valid_obs %>% mutate(pheno_pred = factor(pheno_pred, names(Tcell_pheno_colors))) 
 obs.pl.med = obs.pl %>% select(pheno_pred,X_mde1,X_mde2) %>% 
   group_by(pheno_pred) %>% summarise_all(.funs = median)
 
 obs.pl %>% 
   ggplot(aes(X_mde1,X_mde2))+
   geom_point(size=0.1,aes(color=pheno_pred))+coord_fixed()+theme_void()+
-  #ylim(c(-3,3))+xlim(c(-3,3))+
-  #ggrepel::geom_text_repel(data = obs.pl.med, size=3, box.padding = 1, aes(label=pheno_pred), force=10)+
   geom_point(data = obs.pl.med, shape=21, aes(fill=pheno_pred), size=4)+
   scale_color_manual(values = Tcell_pheno_colors)+scale_fill_manual(values = Tcell_pheno_colors)+
   guides(color=guide_legend(ncol=3,override.aes = list(size=3)))+
   theme(legend.position = 'none')-> pl
 pl
-##ggsave(plot=pl,filename = 'figures/Valid/mde-pheno.png',width=3,height=3, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S6/B.png',width=3,height=3, dpi="retina")
 
 ```
 
 Legend
-```{r fig.height=2.2, fig.width=1.25}
+```{r fig.height=4, fig.width=2}
 
 obs.pl.med %>% mutate(pheno_pred=factor(pheno_pred,rev(Tcell_order))) %>% 
   mutate(pheno=replace(pheno_pred,pheno_pred=='Treg','CD4.Treg')) %>% 
@@ -84,58 +73,25 @@ obs.pl.med %>% mutate(pheno_pred=factor(pheno_pred,rev(Tcell_order))) %>%
   )->pl
 pl = ggpubr::as_ggplot(ggpubr::get_legend(pl))
 pl
-##ggsave(plot=pl,filename = 'figures/Valid/umap-legend.pdf',width=1.25,height=2.2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S6/B-legend.pdf',width=3,height=3, dpi="retina")
 
 ```
 
 
 
-## Diagnosis mde
+## S6C
 
-```{r fig.height=5, fig.width=5}
+```{r fig.height=3.5, fig.width=10.25}
 
-dat = obs %>% filter(study=='Botta2023') %>% 
-  filter(!pheno_pred %in% c('Unknown','Myeloid','CD3_neg','Doublet')) %>% 
-  left_join(md %>% select(sample_id,diagnosis)) %>% 
-  left_join(
-    md %>% filter(study=='Botta2023',sample_id %in% obs$sample_id) %>% select(diagnosis,sample_id) %>% 
-    distinct() %>% group_by(diagnosis) %>% tally()) %>% 
-  mutate(diagnosis = factor(diagnosis, names(diagnosis_col))) %>% 
-  mutate(diagnosis_n=paste0(diagnosis,'\nn = ',n)) %>% 
-  arrange(diagnosis) %>% mutate(diagnosis_n=factor(diagnosis_n,unique(diagnosis_n)))
+markers = read.csv('../resources/markers.csv') %>% filter(plot=='Tcell')
 
-dat %>% 
-  group_by(diagnosis) %>% sample_n(min(table(dat$diagnosis)[table(dat$diagnosis)>0])) %>% 
-  ggplot(aes(X_mde1,X_mde2,color=diagnosis))+
-  geom_point(size=0.1)+
-  labs(color='')+
-  facet_wrap('diagnosis_n')+
-  coord_fixed()+theme_void()+
-  scale_color_manual(values = diagnosis_col)+
-  guides(color=guide_legend(override.aes = list(size=3)))+
-  theme(
-    legend.position='none',strip.text.x = element_text(size=15),
-  )-> pl
-pl
-#ggsave(plot=pl,filename = 'figures/Valid/mde-BottaDiag.png',width=5,height=5, dpi="retina")
-
-```
-
-
-## Dotplot markers
-
-Prep
-```{r}
-
-markers = read.csv('data/expression/markers.csv') %>% filter(plot=='panT_pl')
-
-dat = read.csv('data/validation_data/expression.csv') %>% left_join(obs %>% select(X,study,pheno_pred)) %>% 
+dat = read.csv('../integration/data/validation_exp.csv') %>% 
+  left_join(valid_obs %>% select(X,study,pheno_pred)) %>% 
   filter(!is.na(pheno_pred),pheno_pred!='Unknown') %>% 
   select(-X) %>% 
   rename(pheno=pheno_pred) %>% 
   filter(!pheno %in% c('Doublet','CD3_neg','Myeloid')) 
   
-# Prep per-study
 dat.sum = dat %>% 
   group_by(study,pheno) %>% summarise_all(.funs = mean) %>% 
   pivot_longer(!study:pheno,names_to='gene',values_to='mean') %>% 
@@ -153,12 +109,8 @@ dat.sum = dat %>%
   mutate(pheno = factor(pheno,rev(Tcell_order))) %>% 
   mutate(subset = factor(subset,c('CD4+','CD8+','Other')))
 
-```
 
-Botta 2023
-```{r fig.height=3.5, fig.width=10.25}
-
-dat.sum %>% filter(study=='Botta2023') %>% 
+dat.sum %>% 
   ggplot(aes(gene,pheno))+
   geom_point(aes(fill=mean,size=pct_exp),shape=21)+
   scale_fill_distiller(palette = 'Reds',trans = "reverse")+
@@ -179,58 +131,26 @@ dat.sum %>% filter(study=='Botta2023') %>%
     panel.spacing = unit(0, "lines")
   )-> pl
 pl
-ggsave(plot=pl,filename = 'figures/Valid/dot_markers-Botta.pdf',width=10.2,height=3.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S6/C.pdf',width=10.2,height=3.5, dpi="retina")
 
 ```
 
 
 
 
-## Marker mde
+## S6E
 
-```{r fig.height=4, fig.width=4}
-
-dat = read.csv('data/validation_data/expression.csv') %>% 
-  left_join(obs %>% select(X,sample_id,X_mde1,X_mde2,study,pheno_pred)) %>% 
-  filter(!pheno_pred %in% c('Doublet','CD3_neg','Myeloid')) %>% 
-  left_join(scater::makePerCellDF(scr,c('Chu2023_Cytotoxicity','Chu2023_Naive'),assay.type='scores') %>%
-            mutate(X=colnames(scr)) %>% select(X,Chu2023_Cytotoxicity,Chu2023_Naive)) %>% 
-  select(X,X_mde1,X_mde2,CD4,CD8A,Chu2023_Cytotoxicity,Chu2023_Naive)
-
-# Plot
-dat %>% 
-  pivot_longer(!X:X_mde2) %>% 
-  group_by(name) %>% mutate(value=range01(value)) %>% 
-  mutate(name=replace(name,name=='Chu2023_Cytotoxicity','Cytotoxicity score')) %>% 
-  mutate(name=replace(name,name=='Chu2023_Naive','Naive score')) %>% 
-  mutate(name=factor(name,levels=c('CD4','CD8A','Naive score','Cytotoxicity score'))) %>% 
-  ggplot(aes(X_mde1,X_mde2))+
-  facet_wrap('name',ncol=2)+
-  geom_point(data = . %>% filter(value==0), aes(color=value), size=0.01)+
-  geom_point(data = . %>% filter(value>0), aes(color=value), size=0.01)+
-  scale_color_distiller(palette = 'Reds',direction = 1)+
-  theme_void()+
-  theme(legend.position = 'none',strip.text.x = element_text(size = 15))->pl
-pl
-
-#TURN OFF CLIPPING
-pg=ggplot2::ggplotGrob(pl)
-for(i in which(grepl("strip-t", pg$layout$name))){pg$grobs[[i]]$layout$clip <- "off"}
-ggsave(plot=pg,filename = 'figures/Valid/umap-markers.png',width=4,height=4, dpi="retina")
-
-```
-
-
-## Boxplots
-
-PCA - all cohorts atlas/botta
 ```{r fig.width=2.75, fig.height=3}
 
-pca %>% left_join(md %>% select(sample_id,study,diagnosis)) %>% filter(study=='Botta2023') %>% 
+ords$valid %>% 
+  left_join(valid_md %>% select(sample_id,diagnosis)) %>% 
   mutate(source='Botta et al.') %>% 
   select(source,sample_id,diagnosis,PC1) %>% 
-  rbind(ords$tc$pheno$PCA %>% left_join(comp$da_md) %>% mutate(source='Full dataset') %>%
-          select(source,sample_id,diagnosis,PC1) %>% distinct()
+  rbind(ords$Tcell$PCA %>% 
+    left_join(comp$Tcell %>% mutate(diagnosis=cohort) %>% 
+                select(sample_id,diagnosis) %>% distinct()) %>%
+    mutate(source='Full dataset') %>%
+    select(source,sample_id,diagnosis,PC1) %>% distinct()
   ) %>% 
   mutate(source=factor(source,c('Full dataset','Botta et al.'))) %>% 
   #scale by source
@@ -261,22 +181,22 @@ pca %>% left_join(md %>% select(sample_id,study,diagnosis)) %>% filter(study=='B
     axis.title.y = element_text(size=11), axis.text.y = element_text(size=11)
   )-> pl
 pl
-ggsave(plot=pl,filename = 'figures/Valid/box-PC1.pdf',width=2.75,height=3, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S6/E.pdf',width=2.75,height=3, dpi="retina")
 
 ```
 
-CD8.TemTerm, atlas & botta
+## S6F
+
 ```{r fig.width=1.5, fig.height=3}
 
 #All Non vs Botta every diagnosis
 
-valid_comp %>% left_join(md %>% select(sample_id,study,diagnosis)) %>% 
-  filter(study=='Botta2023') %>% 
+comp$valid %>% 
   rename(source=study) %>% 
   select(source,diagnosis,celltype,clr) %>% 
-  rbind(comp$tc$ph %>% 
-    filter(tissue=='BM', sampleSize>100,sample_id!='zhang2021:MM-P20190122-T') %>%  
-    mutate(source='atlas') %>% select(source,diagnosis,celltype,clr)) %>% 
+  rbind(comp$Tcell %>% filter(
+    !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+    mutate(source='atlas',diagnosis=cohort) %>% select(source,diagnosis,celltype,clr)) %>% 
   mutate(source_diag = paste0(source,'_',diagnosis)) %>% 
   filter(source_diag %in% c('atlas_Non','atlas_MM','Botta2023_MM')) %>% 
   
@@ -313,7 +233,7 @@ dat %>%
     axis.title.y = element_text(size=11), axis.text.y = element_text(size=11)
   )-> pl
 pl
-ggsave(plot=pl,filename = 'figures/Valid/box-TemTerm.pdf',width=1.5,height=3, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S6/F.pdf',width=1.5,height=3, dpi="retina")
 ```
 
 

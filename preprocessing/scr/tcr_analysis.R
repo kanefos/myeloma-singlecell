@@ -44,7 +44,7 @@ CD8.Tm = c("CD8.Tem.IL7R","CD8.Tem.KLRG1","CD8.TemActive",
 div.list = list()
 
 # All T cells
-div.list[['all']] = tcr %>%
+div.list[['all']] = obs %>% filter(clone_id!='') %>% 
   group_by(donor_id,clone_id) %>% tally() %>% ungroup() %>%
   group_by(donor_id) %>% summarise(
     counts=sum(n),unique=length(unique(clone_id)),div=simpson.sample(n)
@@ -52,9 +52,8 @@ div.list[['all']] = tcr %>%
   filter(counts>100)
 
 # CD8+ clones, CD8+Tm cluster
-div.list[['CD8.Tm']] = tcr %>%
+div.list[['CD8.Tm']] = obs %>% filter(clone_id!='') %>% 
   filter(clone_id %in% tcr.subset[tcr.subset$type=='CD8',]$clone_id) %>%
-  left_join(obs %>% select(clone_id,pheno) %>% distinct()) %>%
   filter(pheno %in% CD8.Tm) %>%
   group_by(donor_id,clone_id) %>% tally() %>% ungroup() %>%
   group_by(donor_id) %>% summarise(
@@ -82,7 +81,8 @@ tcr_analysis$clus[['clus_id']] = tcr_analysis$clus[['clusters']] %>%
   ungroup()
 
 # clus id to clone_id
-tcr_analysis$clus[['clon_clus']] = tcr_analysis$clus[['clusters']] %>% left_join(metaclone_id) %>%
+tcr_analysis$clus[['clon_clus']] = tcr_analysis$clus[['clusters']] %>% 
+  left_join(tcr_analysis$clus$clus_id) %>%
   mutate(v_gene = str_replace(v_gene, '\\*01', ''), j_gene = str_replace(j_gene, '\\*01', '')) %>%
   rename(donor_id=subject) %>%
   left_join(tcr %>% select(donor_id,clone_id,CDR3aa,v_gene,j_gene) %>% distinct()) %>%
@@ -94,10 +94,10 @@ tcr_analysis$clus[['Nclone']]$exp = tcr_analysis$clus[['Nclone']]$n > 1
 
 # N/pct cells in pheno per cluster
 tcr_analysis$clus[['pheno']] = obs %>%
-  filter(clone_id %in% clone_id.clus_id$clone_id) %>%
+  filter(clone_id %in% tcr_analysis$clus$clon_clus$clone_id) %>%
   group_by(donor_id,clone_id,pheno) %>% tally() %>% ungroup() %>%
   group_by(donor_id,clone_id) %>% mutate(pct=n/sum(n)*100) %>%
-  left_join(clone_id.clus_id)
+  left_join(tcr_analysis$clus$clon_clus)
 
 # % repertoire clustered
 clon_clus.sub = tcr_analysis$clus$clon_clus %>%

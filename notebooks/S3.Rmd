@@ -23,58 +23,274 @@ range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = '../preprocessing/data/comp.RData')
 load(file = '../preprocessing/data/ords.RData')
 load(file = '../preprocessing/data/tcr_analysis.RData')
+load(file = '../preprocessing/data/da_results.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
+exp = read.csv('../preprocessing/data/Tcell_exp.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 dir.create('../figures/S3')
 '../figures/S3'
 
 ```
 
-## .
+## S3A
 
-```{r fig.height=2, fig.width=2, eval=T, hide=T}
+```{r fig.height=3, fig.width=2.75, eval=T, hide=T}
+
+obs %>% 
+  ggplot(aes(MDE1,MDE2))+
+  scattermore::geom_scattermore(aes(color=chem))+
+  scale_color_manual(values = as.vector(tissue_colors))+
+  labs(color='',title='10X chemisty')+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/A-1.png',width=3,height=3, dpi="retina")
+
+obs %>% 
+  ggplot(aes(MDE1,MDE2))+
+  scattermore::geom_scattermore(aes(color=study_id))+
+  scale_color_manual(values = study_colors)+
+  labs(color='',title='Study')+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/A-2.png',width=3,height=3, dpi="retina")
+
+obs %>% 
+  ggplot(aes(MDE1,MDE2))+
+  scattermore::geom_scattermore(aes(color=sort))+
+  scale_color_manual(values=sort_colors)+
+  labs(color='',title='Sort')+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/A-3.png',width=3,height=3, dpi="retina")
+
+```
+
+## S3B
+
+```{r fig.height=5.1, fig.width=10}
+
+markers = read.csv('../resources/markers.csv') %>% filter(plot=='Tcell')
+gene.pl=markers$gene
+gene.gr=markers$gene_group
+
+dat.pl = exp %>% 
+  left_join(obs %>% select(obs_names,pheno)) %>% 
+  select(pheno,any_of(gene.pl)) %>% 
+  filter(!pheno %in% c('CD3_neg','DN','Doublet','FOS_JUN','Myeloid')) 
+
+dat.sum = dat.pl %>% 
+  group_by(pheno) %>% summarise_all(.funs = mean) %>% 
+  pivot_longer(!pheno,names_to='gene',values_to='mean') %>% 
+  group_by(gene) %>% mutate(mean=range01(mean)) %>% ungroup() %>% 
+  left_join(
+    dat.pl %>% 
+      group_by(pheno) %>% summarise_all(.funs = function(i){sum(i>0)/length(i)*100}) %>% 
+      pivot_longer(!pheno,names_to='gene',values_to='pct_exp')
+  ) %>% 
+  left_join(data.frame(gene=gene.pl,gene_group=gene.gr)) %>% 
+  mutate(gene=factor(gene,gene.pl)) %>% 
+  mutate(gene_group=factor(gene_group,unique(gene.gr))) %>% 
+  #mutate(pheno=replace(pheno,pheno=='Treg','CD4.Treg')) %>%
+  #mutate(pheno=replace(pheno,pheno=='ISG.IFIT2','Teff.IFIT2')) %>%
+  left_join(data.frame(pheno=Tcell_order,subset=Tcell_subsets)) %>% 
+  mutate(pheno = factor(pheno,rev(Tcell_order))) %>% 
+  mutate(subset = factor(subset,c('CD4+','CD8+','Other')))
+
+# Plot
+dat.sum %>% 
+  ggplot(aes(gene,pheno))+
+  geom_point(aes(fill=mean,size=pct_exp),shape=21)+
+  facet_grid(subset~gene_group,scales='free',space='free')+
+  scale_fill_distiller(palette = 'Reds',trans = "reverse",breaks=c(0,1),labels=c('Min','Max'))+
+  guides(fill=guide_colourbar(barwidth=3,barheight=0.5,reverse=T))+
+  scale_size_continuous(range = c(0.75,4.5),breaks=c(0.99,50,75),labels=c('<1%','50%','75%'))+
+  labs(x='',y='',size='% expressing',fill='Scaled mean expression   ')+
+  theme_bw()+
+  theme(
+    legend.position = 'bottom',
+    #whole plot
+    axis.text.x = element_text(angle = 90, vjust = 0, hjust=1),
+    panel.grid.major.x=element_blank(),panel.grid.minor.x=element_blank(),
+    #facet boxes    
+    strip.text.x = element_text(face = 'bold',size=8),
+    strip.text.y = element_text(angle = 0,face = 'bold',size=8),
+    strip.background = element_blank(),
+    panel.spacing = unit(0, "lines")
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/B.pdf',width=10,height=5.1, dpi="retina")
 ```
 
 
-## S3A *
+## S3D
+
+CD8+
+```{r fig.height=3, fig.width=3.5}
+min.cells = obs %>% filter(subset=='CD8') %>% group_by(donor_id) %>% tally() %>% 
+  filter(n>30) %>% pull(donor_id)
+
+dat.pl = obs %>% filter(clone_id!='',subset=='CD8') %>% 
+  filter(donor_id %in% min.cells) %>% 
+  group_by(donor_id,pheno,clone_id) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id,pheno) %>% summarise(exp=mean(n)) %>% 
+  mutate(pheno=factor(pheno,Tcell_order))
+
+dat.pl.order = dat.pl %>% group_by(pheno) %>% 
+  summarise(exp=median(exp)) %>% arrange(exp) %>% pull(pheno)
+  
+dat.pl %>% mutate(pheno = factor(pheno,dat.pl.order)) %>% 
+
+  ggplot(aes(x = pheno, y = exp+1, fill=pheno))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  scale_fill_manual(values=Tcell_pheno_colors)+
+  scale_y_log10()+
+  labs(y='Median expansion')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/D-left.pdf',width=3.5,height=3, dpi="retina")
+
+```
+
+
+CD4+
+```{r fig.height=3, fig.width=2.5}
+min.cells = obs %>% filter(subset=='CD4') %>% group_by(donor_id) %>% tally() %>% 
+  filter(n>30) %>% pull(donor_id)
+
+dat.pl = obs %>% filter(clone_id!='',subset=='CD4') %>% 
+  filter(donor_id %in% min.cells) %>% 
+  group_by(donor_id,pheno,clone_id) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id,pheno) %>% summarise(exp=mean(n)) %>% 
+  mutate(pheno=factor(pheno,Tcell_order))
+
+dat.pl.order = dat.pl %>% group_by(pheno) %>% 
+  summarise(exp=median(exp)) %>% arrange(exp) %>% pull(pheno)
+  
+dat.pl %>% mutate(pheno = factor(pheno,dat.pl.order)) %>% 
+
+  ggplot(aes(x = pheno, y = exp+1, fill=pheno))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  scale_fill_manual(values=Tcell_pheno_colors)+
+  scale_y_log10()+
+  labs(y='Median expansion')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/D-right.pdf',width=2.5,height=3, dpi="retina")
+```
 
 
 
-## S3B *
+
+## S3E
 
 
-## S3D *
+```{r fig.height=3.5, fig.width=3.5}
+
+mait_tcr = tcr[tcr$mait_evidence,]$clone_id %>% .[.!='']
+
+#mde
+obs %>% mutate(mait_evidence = clone_id %in% mait_tcr) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  geom_point(data = . %>% filter(!mait_evidence), size=0.01,alpha=0.5, color='grey90')+
+  geom_point(data = . %>% filter(mait_evidence), size=0.01,alpha=0.5, color='forestgreen')+
+  theme_void() -> pl
+pl
+ggsave(plot=pl+theme(legend.position = 'none'),
+  filename = '../figures/S3/E.png',width=3.5,height=3.5, dpi="retina")
+
+```
 
 
-## S3E *
+
+## S3F
+
+Zheng 2021 labels
+```{r fig.height=5, fig.width=6}
+
+# Zhengzhou 2021 labels
+obs_Zheng = obs %>% filter(study_id=='Zheng_2021') %>% 
+  left_join(read.csv('../resources/Zheng_2021_labels.csv')) %>% 
+  filter(!is.na(meta.cluster)) %>% 
+  select(pheno,meta.cluster,meta.cluster.coarse)
+
+mat.pl = obs_Zheng %>% 
+  filter(!is.na(pheno),!is.na(meta.cluster.coarse)) %>% 
+  group_by(pheno,meta.cluster.coarse) %>% summarise(n=n()) %>% 
+  pivot_wider(names_from='pheno',values_from='n',values_fill=0) %>% 
+  data.frame() %>% column_to_rownames('meta.cluster.coarse') 
+
+mat.pl=log10(mat.pl+1)
+
+mat.pl %>% pheatmap::pheatmap(scale='none', treeheight_row = 0, treeheight_col = 0, color=viridis(100)) -> ph
+
+save_pheatmap_pdf(ph, "../figures/S3/F-left.pdf", height=5, width = 6)
+```
+
+Celltypist labels
+```{r fig.height=5, fig.width=6}
+
+celltypist = as_tibble(read.csv('../resources/Celltypist_labels.csv'))
+
+# subset to contains 
+subset_to = c("T cells", 'NKT cells', "Treg", "CD8a/a", "MAIT", "T lymphoid")
+subset_pl = c()
+for (i in subset_to ) {
+  subset_pl = c(subset_pl, str_subset(unique(celltypist$majority_voting),i))
+}
+
+mat.pl = obs %>% filter(obs_names %in% celltypist$obs_names) %>% 
+  filter(! pheno %in% c('Doublet','QC')) %>% 
+  left_join( celltypist %>% select(obs_names, majority_voting) ) %>% 
+  filter(!is.na(pheno),!is.na(majority_voting)) %>% 
+  filter(majority_voting %in% subset_pl) %>% 
+  group_by(pheno,majority_voting) %>% summarise(n=n()) %>% 
+  pivot_wider(names_from='pheno',values_from='n',values_fill=0) %>% 
+  data.frame() %>% column_to_rownames('majority_voting')
+
+mat.pl=log10(mat.pl+1)
+
+mat.pl %>% pheatmap::pheatmap(scale='none', treeheight_row = 0, treeheight_col = 0, color=viridis(100)) -> ph
+
+save_pheatmap_pdf(ph, "../figures/S3/F-right.pdf", height=5, width = 6)
+```
 
 
-## S3F *
 
 
 
 
+## S3G
 
-
-## S3G *
-
-[SUPP] expression in zhang2021:MM-P20190122-T vs others
 ```{r fig.height=2.5, fig.width=5}
 
 pheno.pl = c('CD8.TemActive','CD8.Tex')
 gene.pl = c('PDCD1','TIGIT','LAG3','HAVCR2','TOX','TOX2','LAYN')
-tex.donor = 'zhang2021:MM-P20190122-T'
 
-dat.pl = scater::makePerCellDF(sce[gene.pl,],gene.pl,assay.type="X")
-dat.pl$pheno = NULL
-dat.pl = dat.pl %>% left_join(obs %>% select(index,pheno)) %>% filter(pheno %in% pheno.pl)
-
-dat.pl %>% 
-  select(pheno,sample_id,gene.pl) %>% 
-  pivot_longer(!c(pheno,sample_id)) %>% 
+exp %>% left_join(obs %>% select(obs_names,pheno,donor_id)) %>% 
+  filter(pheno=='CD8.Tex') %>% 
+  select(pheno,donor_id,any_of(gene.pl)) %>% 
+  pivot_longer(!c(pheno,donor_id)) %>% 
   group_by(name) %>% mutate(value=range01(value)) %>% 
-  filter(pheno=='CD8.Tex') %>% mutate(outlier = ifelse(sample_id==tex.donor,'Single donor','Others')) %>% 
+  mutate(outlier = ifelse(donor_id==donor.Tex_hi,'Single donor','Others')) %>% 
   ggplot(aes(outlier,value,fill=outlier))+facet_grid(~name)+
   geom_violin()+geom_boxplot(alpha=0,show.legend=F)+
   scale_fill_manual(values=c('Single donor'='#666666',Others='grey80'))+
@@ -85,13 +301,58 @@ dat.pl %>%
     axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
     ) -> pl
 pl
-ggsave(plot=pl,filename = 'figures/Tcell-ph/vln-Tex-outlier.pdf',width=5,height=2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S3/G.pdf',width=5,height=2, dpi="retina")
 
 ```
 
 
 
-## S3I * 
+## S3I
+
+```{r fig.height=3, fig.width=3.5}
+
+results$Tcell$tissue$cancer %>% 
+  mutate(sig=p.tissue<0.05, change=ifelse(diff>0,'PB','BM')) %>% 
+  mutate(diff=diff*-1) %>% 
+  ggplot(aes(diff, -log10(p.tissue)))+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  geom_vline(xintercept = 0, linewidth=0.2)+
+  geom_point(color='lightgrey',alpha=0.8)+
+  geom_point(data = . %>% filter(sig,change=='BM'), color=tissue_colors['BM'])+
+  geom_point(data = . %>% filter(sig,change=='PB'), color=tissue_colors['PB'])+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3.5)+
+  labs(x='Δ median', y='-log10 FDR', title='SMM and MM')+
+  theme_classic()+theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_text(size=13), axis.text.x = element_text(size=11),
+    axis.title.y = element_text(size=13), axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/H-left.pdf',
+  width=3.5,height=3, dpi="retina",device=cairo_pdf)
+
+results$Tcell$tissue$Non %>% 
+  mutate(sig=p.tissue<0.05, change=ifelse(diff>0,'PB','BM')) %>% 
+  mutate(diff=diff*-1) %>% 
+  ggplot(aes(diff, -log10(p.tissue)))+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  geom_vline(xintercept = 0, linewidth=0.2)+
+  geom_point(color='lightgrey',alpha=0.8)+
+  geom_point(data = . %>% filter(sig,change=='BM'), color=tissue_colors['BM'])+
+  geom_point(data = . %>% filter(sig,change=='PB'), color=tissue_colors['PB'])+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3.5)+
+  labs(x='Δ median', y='-log10 FDR', title='Non-cancer')+
+  theme_classic()+theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_text(size=13), axis.text.x = element_text(size=11),
+    axis.title.y = element_text(size=13), axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/H-right.pdf',
+  width=3.5,height=3, dpi="retina",device=cairo_pdf)
+
+```
+
 ## SPACE 
 
 

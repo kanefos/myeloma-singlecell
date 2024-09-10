@@ -27,7 +27,63 @@ obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 dir.create('../figures/S7')
-'../figures/S7'
+
+```
+
+## S7A
+
+```{r fig.width=3.5, fig.height=2.5}
+
+tcr %>% 
+  ggplot(aes(CD4_Ncells+1,CD8_Ncells+1,fill=type))+
+  geom_abline(slope=1, intercept=0)+
+  labs(x='log10[N+1] cells CD4 detected',y='log10[N+1] cells CD8 detected',fill='Clone\nsubset')+
+  geom_point(size=1.5,shape=21)+scale_x_log10()+scale_y_log10()+
+  scale_fill_brewer(palette = 'Dark2')-> pl
+pl
+ggsave(plot=pl, filename = '../figures/S7/A-left.png',width=3.5,height=2.5, dpi="retina")
+
+```
+
+
+```{r fig.width=6.5, fig.height=2}
+
+obs %>% left_join(tcr %>% select(clone_id,type)) %>% 
+  filter(!is.na(type)) %>% 
+  ggplot(aes(MDE1,MDE2,color=type))+facet_grid(~type)+
+  scattermore::geom_scattermore()+
+  scale_color_brewer(palette = 'Dark2')+
+  theme_void()+theme(legend.position = 'none',strip.text.y = element_text(size = 14))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/A-right.png',width=6.5,height=2, dpi="retina")
+
+```
+
+
+## S7B
+
+```{r fig.height=2.5, fig.width=2.5}
+
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+div = tcr_analysis$clonality %>% 
+  mutate(cohort = replace(cohort, cohort=='MGUS', 'SMM')) %>% 
+  filter(! donor_id %in% donors.longit) #same as DA!
+
+#CD8+Tm
+div %>% filter(cohort=='Non',group=='CD8.Tm') %>% 
+  left_join(ords$Tcell$PCA %>% 
+    left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  ggplot(aes(PC1,clon))+geom_point(size=1, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x= -0.05, label.y = -0.75)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='PC1',y='Clonality',title='CD8+ memory')+theme_classic()+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/B.pdf',width=2.5,height=2.5, dpi="retina")
 
 ```
 

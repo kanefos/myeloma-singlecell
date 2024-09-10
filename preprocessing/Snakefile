@@ -1,19 +1,9 @@
 # ENVS
+#conda snakemake = for running snakemake
 #Rscript ... = default R env, which runs normally. need to package up
 #     collate all R packages/versions?...   
 #conda Increate22 = generic Py scRNA env
 #conda tcrdist3_env = specific for tcrdist3 work
-
-
-#SAMPLES = filenames_df[1].to_list()
-#print(SAMPLES)
-
-#rule all:
-#    input:
-#        #expand("data/TCRseq_processed/{sample}.csv", sample = SAMPLES)
-#        # Some final psuedo-fig when all ran?
-#        "dummy file to include in rule all"
-
 
 rule import_data:
     output:
@@ -44,7 +34,7 @@ rule abundance_prep:
     input:
         "data/panImm_obs.csv"
         "data/Tcell_obs.csv"
-        "data/validation_obs.csv" #???
+        "data/validation_obs.csv" 
     output:
         "data/comp.RData"
         "data/ords.RData"
@@ -105,30 +95,4 @@ rule tcell_tumour:
     output:
         ""
     shell:
-        "Rscript scr/tcell_tumour_associations.R"      
-
-
-# FINAL STEPS ##################################################################
-
-rule notesbooks_and_figures:
-    input:
-        "FIG-x.Rmd"
-        #repeat for all
-    output:
-        "FIG-x.html"
-        directory("figures/FIG-x")
-        #repeat for all figs
-    R:
-        "rmarkdown::render('notebooks/tmp.Rmd',params=list(args = 'myarg'))"
-        #this requires some fidelling to run on cmd line, but is possible:
-        "Rscript -e 'rmarkdown:: ...etc'"
-
-
-rule consolidate_data:
-    input:
-        "ALL PREVIOUS GENERATED FILES? OR JUST THOSE PROCESSED?"
-    output:
-        "dummy file to include in rule all"
-        "i.e. check all others installed?"
-    shell:
-        "dummy line"
+        "Rscript scr/tcell_tumour_associations.R"

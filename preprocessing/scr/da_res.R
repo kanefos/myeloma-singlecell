@@ -5,6 +5,7 @@ source('../resources/aes.R')
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file='data/comp.RData')
 load(file='data/ords.RData')
+sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
 results = list(panImm=list(),Tcell=list())
 
 # Functions ####################################################################
@@ -106,8 +107,23 @@ celltype.cor = function(data.in, cont.var=''){
 results$panImm[['tissue']] = celltype.LMM(
   comp$panImm, 'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
 
-results$Tcell[['tissue']] = celltype.LMM(
-  comp$Tcell, 'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
+results$Tcell[['tissue']] = list()
+
+results$Tcell$tissue[['all']] = comp$Tcell %>% 
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
+  celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
+
+results$Tcell$tissue[['Non']] = comp$Tcell %>% 
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
+  filter(cohort %in% c('Non')) %>% 
+  celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
+
+results$Tcell$tissue[['cancer']] = comp$Tcell %>% 
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
+  filter(cohort %in% c('SMM','MM')) %>% 
+  celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
+
+
 
 # Across cohorts  ##############################################################
 
