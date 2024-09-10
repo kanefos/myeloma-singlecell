@@ -15,6 +15,6 @@ Omitted input data
 - Granja et al. CITE-seq data
 - CoMMpass data (requires controlled access)
 
-## `/notesbooks`, `/figures`
+## 3. `/notesbooks`, `/figures`
 
 One `/preprocessing` is run in entirety, each figure's notebook can be ran to view and save associated figures.
