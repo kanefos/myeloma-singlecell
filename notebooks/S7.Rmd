@@ -90,7 +90,6 @@ ggsave(plot=pl,filename = '../figures/S7/B.pdf',width=2.5,height=2.5, dpi="retin
 ## S7C
 
 ```{r, eval=T, hide=T, fig.height=4, fig.width=8}
-
 dat.ph = tcr_analysis$clus$pheno %>% 
   # >1 clone
   filter(clus_id %in% tcr_analysis$clus$Nclone[tcr_analysis$clus$Nclone$exp,]$clus_id) %>% 
@@ -109,10 +108,11 @@ clus_id.md = data.frame(clus_id=colnames(dat.ph)) %>%
   #Donor
   rename(Donor=donor_id) %>% 
   #A/B
-  left_join(metaclone_id %>% select(clus_id,chain) %>% distinct()) %>% rename(Chain=chain) %>%
+  left_join(tcr_analysis$clus$clus_id %>% 
+    select(clus_id,chain) %>% distinct()) %>% rename(Chain=chain) %>% 
   mutate(Chain=ifelse(Chain=='TRA','Alpha','Beta')) %>% 
   #Clones
-  left_join(clone_id.clus_id.nClone) %>% mutate(Clones = n) %>% select(-n) %>% 
+  left_join(tcr_analysis$clus$Nclone) %>% mutate(Clones = n) %>% select(-n,-exp) %>% 
   #N cells
   #left_join(clone_id.clus_id.ph %>% group_by(clus_id) %>% summarise(Cells=sum(n))) %>% 
   data.frame() %>% column_to_rownames('clus_id')
@@ -129,7 +129,7 @@ annot_col = list(
   Clones = c("grey90", "firebrick"), 
   #Cells = c("grey90", "firebrick"),
   Chain = c('Alpha'='pink','Beta'='skyblue'),
-  Diagnosis=diagnosis_col[c('Non','MGUS','SMM','MM')],
+  Cohort=diagnosis_col[c('Non','MGUS','SMM','MM')],
   Donor=donor_cols
 )
 
@@ -137,12 +137,12 @@ annot_col = list(
 dat.ph %>% pheatmap::pheatmap(
   show_colnames = F, border_color=NA,
   color=viridis::cividis(50,direction=1),
-  annotation_col = clus_id.md %>% select(-exp),
+  annotation_col = clus_id.md,
   annotation_colors= annot_col,
   treeheight_row = 20, treeheight_col = 20
 )-> ph
 
-#save_pheatmap_pdf(ph, "../figures/S6/C.pdf", height=4, width = 8)
+save_pheatmap_pdf(ph, "../figures/S6/C.pdf", height=4, width = 8)
 
 ```
 
@@ -163,7 +163,7 @@ tcr %>%
   geom_jitter(width=0.2,height=0,size=0.5)+
   labs(x='N input chains\nper donor',y="Counts") -> pl
 pl
-#ggsave(plot=pl,filename = '../figures/S6/D-1.pdf',height=2.5,width=2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S7/D-1.pdf',height=2.5,width=2, dpi="retina")
 
 tcr_analysis$clus$pheno %>% ungroup() %>% select(donor_id,clus_id) %>% distinct() %>% 
   group_by(donor_id) %>% tally() %>% arrange(n) %>% 
@@ -171,7 +171,7 @@ tcr_analysis$clus$pheno %>% ungroup() %>% select(donor_id,clus_id) %>% distinct(
   geom_jitter(width=0.2,height=0,size=0.5)+
   labs(x='N clusters\nper donor',y='Counts',title='') -> pl
 pl
-#ggsave(plot=pl,filename = '../figures/S6/D-2.pdf',height=2.5,width=2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S7/D-2.pdf',height=2.5,width=2, dpi="retina")
 
 ```
 
@@ -193,38 +193,108 @@ obs %>% filter(donor_id %in% viral_hits$donor_id) %>%
   labs(x='Annotation', y='Counts per patient repertoire')+
   theme(axis.title.y=element_text(size=10))-> pl
 pl
-#ggsave(plot=pl,filename = '../figures/S6/E-1.pdf',width=1.75,height=2.25, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S7/E-1.pdf',width=1.75,height=2.25, dpi="retina")
 
 ```
 
 Bar chart
-```{r}
+```{r fig.height=4, fig.width=6}
 
 viral_hits = read.csv('../resources/viral_hits.csv')
+#%>% filter(hit=='2match') #much more Tem-specific mapping vs Tn
 
-obs %>% filter(donor_id %in% viral_hits$donor_id, clone_id!='') %>% 
+CD8.Tem = c("CD8.TemActive","CD8.TEMRA","CD8.TemTerm","CD8.Tem.IL7R","CD8.Tem.KLRG1","CD8.Trm",      "CD8.Tex")
+
+dat = obs %>% filter(donor_id %in% viral_hits$donor_id, clone_id!='') %>% 
   left_join(viral_hits %>% select(clone_id,hit,annot)) %>% filter(!is.na(hit)) %>% 
   select(pheno,clone_id,annot) %>% distinct() %>% 
-  group_by(pheno,annot) %>% tally() %>% 
+  mutate(pheno=ifelse(pheno %in% CD8.Tem,'CD8.Tem',pheno)) %>% 
+  group_by(pheno,annot) %>% tally() 
+
+ph.order = dat %>% group_by(pheno) %>% summarise(n=sum(n)) %>% arrange(n) %>% pull(pheno)
+
+tot.pl =  dat %>% group_by(pheno) %>% summarise(n=sum(n)) %>% 
   left_join(
     obs %>% filter(donor_id %in% viral_hits$donor_id, clone_id!='') %>% 
-      group_by(pheno) %>% tally(name='total')
-  ) %>% 
-  ggplot(aes(n/total,pheno))+geom_col(aes(fill=annot))
+        mutate(pheno=ifelse(pheno %in% CD8.Tem,'CD8.Tem',pheno)) %>% 
+        group_by(pheno) %>% tally(name='total') )
 
+dat %>% mutate(pheno=factor(pheno,ph.order)) %>% 
+  ggplot(aes(n,pheno))+
+  geom_col(aes(fill=annot))+
+  geom_point(data = tot.pl, aes(size=total), shape=21)+
+  scale_fill_brewer(palette = 'Set2')+
+  labs(size='Total unique',fill='Annotation',x='N annotated',y='')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/E-2.pdf',width=1.75,height=2.25, dpi="retina")
 
 ```
 
 
 ## S7F
 
-```{r}
+```{r fig.height=3, fig.width=2}
+
 
 viral_hits = read.csv('../resources/viral_hits.csv')
 
+dat = obs %>% filter(donor_id %in% viral_hits$donor_id) %>% 
+  filter(clone_id!='') %>% 
+  left_join(viral_hits %>% select(clone_id,hit)) %>% 
+  mutate(annot=ifelse(!is.na(hit),'Viral','None')) %>% 
+  group_by(clone_id,annot) %>% summarise(n=n(),Nonviral=mean(Nonviral)) %>% 
+  drop_na()
+
+dat %>% filter(n>1) %>% 
+  ggplot(aes(annot,Nonviral))+
+  geom_boxplot(alpha=0)+
+  geom_jitter(height=0,width=0.2, size=0.1)+
+  labs(x='Annotation', y='Mean non-viral specificty\nsignature per-clone')+
+  ggtitle('All expanded (>1)')+
+  ylim(c(0,0.85))+
+  ggpubr::stat_compare_means(comparisons = list(c('None','Viral')))+
+  theme(plot.title = element_text(hjust = 0.5, size=10))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/F-1.pdf',width=2,height=3, dpi="retina")
+
+
+dat %>% filter(n>5) %>% 
+  ggplot(aes(annot,Nonviral))+
+  geom_boxplot(alpha=0)+
+  geom_jitter(height=0,width=0.2, size=0.1)+
+  labs(x='Annotation', y='Mean non-viral specificty\nsignature per-clone')+
+  ggtitle('Highly expanded (>5)')+
+  ylim(c(0,0.85))+
+  ggpubr::stat_compare_means(comparisons = list(c('None','Viral')))+
+  theme(plot.title = element_text(hjust = 0.5, size=10))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/F-2.pdf',width=2,height=3, dpi="retina")
+
 ```
 
+## S7G
 
+```{r fig.height=3, fig.width=5}
+
+dat = obs %>% select(donor_id,pheno,Nonviral) %>% drop_na() %>% 
+  group_by(donor_id,pheno) %>% 
+  summarise(Nonviral=mean(Nonviral))
+  
+pheno.order = dat %>% group_by(pheno) %>% 
+  summarise(m=median(Nonviral)) %>% arrange(-m) %>% pull(pheno)
+
+dat %>% 
+  mutate(pheno=factor(pheno,rev(pheno.order))) %>% 
+  ggplot(aes(pheno,Nonviral,fill=pheno))+
+  geom_boxplot(outlier.alpha=0)+geom_jitter(width=0.2,height=0,size=0.2,alpha=0.2)+
+  scale_fill_manual(values=Tcell_pheno_colors)+
+  labs(y='Mean non-viral score')+
+  theme(legend.position = 'none',axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11)) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S7/G.pdf',width=2,height=3, dpi="retina")
+
+```
 
 # SPACE 
 

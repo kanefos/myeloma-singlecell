@@ -12,7 +12,7 @@ params:
 
 ## Setup
 
-```{r setup-import, eval=T, hide=T}
+```{r eval=T, hide=T}
 
 library(tidyverse)
 library(ggpubr)
@@ -26,8 +26,8 @@ load(file = '../preprocessing/data/tcr_analysis.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
 dir.create('../figures/5')
-'../figures/5'
 
 ```
 
@@ -60,8 +60,120 @@ dat.pl %>%
     axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=10)
   )-> pl
 pl
-##ggsave(plot=pl,filename = '../figures/5/A.pdf',width=5.5,height=3, dpi="retina")
+ggsave(plot=pl,filename = '../figures/5/A.pdf',width=5.5,height=3, dpi="retina")
 ```
+
+
+
+
+
+## 5B
+
+Maura et al. Paraprotein data missing (inquire to authors)
+```{r fig.height=2.5, fig.width=2.5}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+IgG_and_IgA_isotype_tumours = read.csv('../resources/IgG_and_IgA_isotype_tumours.csv')$donor_id
+
+Paraprotein_plot = donor_md %>% select(donor_id,Paraprotein) %>% drop_na() %>% 
+  filter(donor_id %in% IgG_and_IgA_isotype_tumours) %>% 
+  rbind(
+    read_csv('../integration/data/validation-metadata.csv') %>% 
+      mutate(donor_id=donor,Paraprotein=PP_g.dL*10) %>% select(donor_id,Paraprotein) %>% drop_na()
+  )
+
+dat = ords$Tcell$PCA[,1:2] %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id,cohort) %>% distinct()) %>% 
+  select(-sample_id) %>% mutate(source='Full') %>% 
+  rbind(
+    ords$valid[,1:2] %>% 
+      left_join(
+        read_csv('../integration/data/validation-metadata.csv')[,c('sample_id','diagnosis')]) %>%
+      rename(donor_id=sample_id,cohort=diagnosis) %>% mutate(source='Botta')
+  ) %>% 
+  group_by(source) %>% mutate(PC1=scale(PC1)) %>% 
+  left_join(Paraprotein_plot) %>% filter(!is.na(Paraprotein))
+  
+dat %>% 
+  ggplot(aes(Paraprotein,PC1))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n', label.x=38)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Paraprotein',y='T cell skewing',title='')+
+  theme_classic()+theme(legend.position = 'none')+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/B-left.pdf',width=2.5,height=2.5, dpi="retina")
+
+```
+
+```{r fig.height=2.5, fig.width=2.25}
+
+comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='Teff.IFIT2') %>% filter(study_id!='Zavidij_2020') %>% 
+  
+  ggplot(aes(aspirate_CD138pos,clr))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n', label.y=2, label.x=15)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Aspirate % CD138+\n',y=paste0('Normalised % T cells'),title='Teff.IFIT2')+
+  #scale_x_log10()+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=12),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=12)
+    )-> pl
+pl 
+ggsave(plot=pl,filename = '../figures/5/B-right.pdf',width=2.5,height=2.5, dpi="retina")
+```
+
+
+## 5C *
+
+
+
+## 5D *
+
+
+## 5E *
+
+```{r fig.height=2.5, fig.width=2.5}
+
+nart = read_csv('../resources/neoantigen_predictions.csv')
+
+dat.pl = barcode.clone_id %>% 
+  filter(donor %in% comp$da_md[comp$da_md$study=='CARD23',]$donor) %>% 
+  left_join(clone_id.md %>% select(clone_id,aa) %>% distinct()) %>% 
+  mutate(is = aa %in% aa.top) 
+  
+dat.pl %>% ggplot(aes(X_mde1,X_mde2))+
+  #facet_grid(.~donor)+
+  geom_point(data = . %>% filter(!is), size=0.1,color='grey75')+
+  geom_point(data = . %>% filter(is), size=2.5, aes(fill=aa), shape=21)+
+  scale_fill_manual(values = long_col_vector[1:length(unique(dat.pl[dat.pl$is,]$aa))])+
+  theme_void()+theme(legend.position = 'none')->pl
+pl
+ggsave(plot=pl,filename = paste0('figures/TRT/mde-pNART.png'),height=2.5,width=2.5,dpi="retina")
+
+label.='Predicted neoantigen-reactive'
+dat.pl %>% head(1) %>% mutate(is=label.) %>% 
+  ggplot(aes(X_mde1,X_mde2))+geom_point(aes(fill=is),size=2.5,shape=21)+
+  scale_fill_manual(values=setNames('grey80',label.))+theme_void()+
+  theme(legend.position = 'bottom',legend.text=element_text(size=11),legend.title=element_blank())->pl
+pl
+ggsave(plot=pl,filename = paste0('figures/TRT/mdeLegend-pNART.png'),height=2.5,width=2.5,dpi="retina")
+
+```
+
 
 
 ## 5F
@@ -144,17 +256,53 @@ lgd_list = list(
 
 draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
 
-#grDevices::pdf("../figures/5/F.pdf", width = 4, height = 3)
-#draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
-#grDevices::dev.off()
+grDevices::pdf("../figures/5/F.pdf", width = 4, height = 3)
+draw(hm, annotation_legend_list = lgd_list, annotation_legend_side = "bottom")
+grDevices::dev.off()
 
 ```
 
 
 ## 5G
 
-PC_DEG + pw
-_nonviv_
+```{r fig.height=3, fig.width=1.5}
+
+tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
+load(file='../preprocessing/data/tumour_DE_fgsea.RData')
+fgseas.select = fgseas[fgseas$pathway=='KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION',] 
+
+donor.all = unique(fgseas$donor_id)
+donor.sigAPP = fgseas.select[(fgseas.select$pval<0.05)&(fgseas.select$NES>0),]$donor_id
+
+dat = obs %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM') %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(donor_id %in% donor.all) %>% 
+  select(donor_id,Nonviral) %>% drop_na() %>% 
+  group_by(donor_id) %>% summarise(Nonviral=mean(Nonviral)) %>% 
+  mutate(is = ifelse(donor_id %in% donor.sigAPP,'MHC high','MHC low')) %>% 
+  left_join(donor_md %>% select(donor_id,cohort))
+  
+dat %>% 
+  mutate(is=factor(is,c('MHC low','MHC high'))) %>% 
+  ggplot(aes(is,Nonviral))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(aes(fill=cohort), width=0.2,height=0,size=2, shape=21)+
+  scale_fill_manual(values=diagnosis_col)+
+  stat_compare_means(method='wilcox',label.y=0.255,label.x=1.1,
+    aes(label = paste0('P = ',after_stat(p.format))))+
+  scale_y_continuous(breaks=c(.15,.2,.25),limit=c(.12,0.26))+
+  labs(y='Non-viral specificity signature')+
+  theme(
+    legend.position = "none",
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/5/G.pdf',width=1.5,height=3, dpi="retina")
+
+```
+
 
 ## SPACE 
 

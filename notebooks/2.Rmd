@@ -77,9 +77,6 @@ ggsave(plot=pl,filename = '../figures/2/A-legend.svg',width=3,height=4, dpi="ret
 
 ## 2B
 
-Data
-
-Plot
 ```{r fig.height=4.25, fig.width=3.75}
 
 dat = obs %>% select(obs_names,MDE1,MDE2,Naive,Cytotoxicity) %>% left_join(

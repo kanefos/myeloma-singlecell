@@ -93,6 +93,8 @@ rule tcell_tumour:
     input:
         ""
     output:
-        ""
+        "data/tcell_tum_association_results.csv"
+        "data/PC1_tumour_modules.csv"
+        "data/Nonviral_tumour_modules.csv"
     shell:
         "Rscript scr/tcell_tumour_associations.R"

@@ -13,7 +13,6 @@ params:
 ## Setup
 
 ```{r setup-import, eval=T, hide=T}
-
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
@@ -27,9 +26,57 @@ obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 dir.create('../figures/S9')
-'../figures/S9'
+```
+
+## A
+
+```{r fig.height=2.5, fig.width=2.5}
+
+dat = read_csv('../resources/neoantigen_predictions.csv')
+
+dat %>% arrange(-score) %>% group_by(epitope) %>% slice_head(n=1) %>% 
+  ggplot(aes(score))+geom_histogram(bins = 50)+
+  labs(x='Prediction score',y='Count')+
+  geom_vline(xintercept = 0.7, color='red')+
+  scale_y_continuous(breaks=c(0,4,8,12))+
+  theme(axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))->pl
+pl
+ggsave(plot=pl,filename = paste0('../figures/S9/A-left.pdf'),height=2.5,width=2.5,dpi="retina")
 
 ```
+
+```{r fig.height=3.5, fig.width=5.5}
+
+dat = read_csv('../resources/neoantigen_predictions.csv') %>% 
+  arrange(-score) %>% group_by(epitope) %>% slice_head(n=1) %>% ungroup()
+
+dat.pl = obs %>% filter(donor_id %in% dat$donor_id) %>% 
+  left_join(
+    tcr[tcr$chain=='TRB',] %>% select(clone_id,CDR3aa) %>% distinct()
+  ) %>% 
+  left_join(dat %>% select(donor_id,CDR3aa_beta,score), 
+    by=c('donor_id'='donor_id','CDR3aa'='CDR3aa_beta')) %>% 
+  filter(!is.na(score))
+
+dat.exp = dat.pl %>% group_by(CDR3aa) %>% tally() %>% filter(n>1) %>% pull(CDR3aa)
+
+dat.pl %>% filter(CDR3aa %in% dat.exp) %>% 
+  group_by(donor_id,CDR3aa,pheno) %>% tally() %>% 
+  ggplot(aes(n,CDR3aa,fill=pheno))+facet_grid(donor_id~.,space='free',scales='free')+
+  geom_col(color='black')+scale_fill_manual(values = Tcell_pheno_colors)+
+  labs(x='N cells',y='Clone')+
+  theme(
+    axis.text.y = element_blank(),axis.ticks.y=element_blank(),
+    legend.key.size = unit(0.5, "cm"),legend.title=element_blank(),legend.text=element_text(size=9),
+    strip.text.y = element_text(angle = 0), panel.background = element_blank()
+  )->pl
+pl
+ggsave(plot=pl,filename = paste0('../figures/S9/A-right.pdf'),height=3.5,width=5.5,dpi="retina")
+
+```
+
+
 
 ## B
 
@@ -87,110 +134,4 @@ pl
 #ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
 
 ```
-
-
-## SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

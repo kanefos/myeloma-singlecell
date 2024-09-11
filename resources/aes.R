@@ -29,6 +29,7 @@ donors.longit = c('Foster_2024.MM4',"Foster_2024.MM3",'Foster_2024.SMM13',
                   'Liu_2021.37692_SMM','Liu_2021.47491_SMM',
                   'Liu_2021.58408_SMM','Oetjen_2018.C_T2','Oetjen_2018.S_T2')
 donor.Tex_hi = 'Zheng_2021.P20190122'
+donors.remove = c(donors.longit,donor.Tex_hi)
 
 # Cohort colors
 disease_col = c('HD'='#77c8e0','HIP'='cadetblue4','MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e')

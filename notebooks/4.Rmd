@@ -351,11 +351,20 @@ th = theme(legend.position = "none",
   axis.text.x = element_text(size=11),axis.title.x = element_text(size=12),
   axis.text.y = element_text(size=11),axis.title.y = element_text(size=11))
 
+dat = obs %>% 
+  filter(sample_id %in% ords$Tcell$PCA$sample_id) %>% 
+  select(donor_id,Nonviral) %>% drop_na() %>% 
+  group_by(donor_id) %>% summarise_all(.funs = mean) %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  filter(cohort!='Non') %>% 
+  mutate(cohort=factor(cohort,c('MGUS','SMM','MM')))
 
-
-
-dat %>% filter(diagnosis!='Non') %>% filter(!is.na(PC1)) %>% 
-  ggplot(aes(PC1,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+# PC1
+dat %>% 
+  left_join(ords$Tcell$PCA %>% 
+    left_join(comp$Tcell %>% select(sample_id,donor_id) %>% distinct())) %>% 
+  filter(!is.na(PC1)) %>% 
+  ggplot(aes(PC1,Nonviral))+geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
   ggpubr::stat_cor(label.sep='\n',label.x =-0.12 , label.y = 0.45)+
   scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
@@ -363,136 +372,76 @@ dat %>% filter(diagnosis!='Non') %>% filter(!is.na(PC1)) %>%
   scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
   theme_classic()+theme(legend.position = 'none')+th->pl
 pl
-ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-PC1.pdf',height=2.5,width=2.25, dpi="retina")
+ggsave(plot=pl, filename='../figures/4/H-1.pdf',width=2.5,height=2.5, dpi="retina")
 
-dat %>% filter(diagnosis!='Non') %>% filter(!is.na(Entry.paraprotein)) %>% 
-  ggplot(aes(Entry.paraprotein,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+# Clustered
+psuedo0=0.1
+dat %>% 
+  left_join(tcr_analysis$clus$pct %>% select(donor_id,clustered)) %>% distinct() %>% 
+  filter(!is.na(clustered)) %>% 
+  ggplot(aes(log10(clustered+psuedo0),Nonviral))+geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
-  ggpubr::stat_cor(label.sep='\n',label.x = 5, label.y = 0.45)+
+  ggpubr::stat_cor(label.sep='\n',label.x =-0.12 , label.y = 0.45)+
   scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
-  labs(x='Paraprotein\n', y='Non-viral specificity signature',title='')+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
+  scale_x_continuous(breaks=c(0,1,log10(50)), limits=c(0,log10(50)+0.1), labels=c(1,10,50))+
+  annotation_logticks(sides='b',short=unit(0.1,'cm'),mid=unit(0.1,'cm'),long=unit(0.1,'cm'))+
+  labs(x='% expanded repertoire clustered', y='Non-viral specificity signature',title='')+
   theme_classic()+theme(legend.position = 'none')+th->pl
 pl
-ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-PP.pdf',height=2.5,width=2.25, dpi="retina")
+ggsave(plot=pl, filename='../figures/4/H-2.pdf',width=2.5,height=2.5, dpi="retina")
 
-dat %>% filter(diagnosis!='Non') %>% filter(!is.na(MP5.Stress)) %>% 
-  ggplot(aes(MP5.Stress,nonvir_10))+geom_point(size=2, aes(color=diagnosis))+
+# Clonality
+dat %>% 
+  left_join(tcr_analysis$clonality %>% 
+    filter(group=='all') %>% select(donor_id,clon)) %>% distinct() %>% 
+  filter(!is.na(clon)) %>% 
+  ggplot(aes(clon,Nonviral))+geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
-  ggpubr::stat_cor(label.sep='\n',label.y=0.5)+
+  ggpubr::stat_cor(label.sep='\n')+
   scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
-  labs(x='% tumour expressing\nstress pathway', y='Non-viral specificity signature',title='')+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5),limits=c(0.05,0.55))+
+  annotation_logticks(sides='b',short=unit(0.1,'cm'),mid=unit(0.1,'cm'),long=unit(0.1,'cm'))+
+  labs(x='Clonality', y='Non-viral specificity signature',title='')+
   theme_classic()+theme(legend.position = 'none')+th->pl
 pl
-ggsave(plot=pl,filename = 'figures/TRT/cor-nonvir-Str.pdf',height=2.5,width=2.25, dpi="retina")
+ggsave(plot=pl, filename='../figures/4/H-3.pdf',width=2.5,height=2.5, dpi="retina")
+
+
 ```
 
 
-## 4I *
-
-## SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 4I
+
+```{r fig.width=1.6, fig.height=3}
+
+dat = obs %>% 
+  filter(sample_id %in% ords$Tcell$PCA$sample_id) %>% 
+  select(donor_id,Nonviral) %>% drop_na() %>% 
+  group_by(donor_id) %>% summarise_all(.funs = mean) %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  filter(cohort!='Non') %>% 
+  mutate(cohort=factor(cohort,c('MGUS','SMM','MM')))
+
+dat %>% 
+  ggplot(aes(cohort,Nonviral,fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(
+    comparisons = list(c('MGUS','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(y='Non−viral specificity signature')+
+  ylim(c(0.075,0.64))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )-> pl
+pl
+ggsave(plot=pl, filename='../figures/4/I.pdf',width=1.6,height=3, dpi="retina")
+```
 
 

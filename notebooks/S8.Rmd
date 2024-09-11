@@ -23,18 +23,284 @@ range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 load(file = '../preprocessing/data/comp.RData')
 load(file = '../preprocessing/data/ords.RData')
 load(file = '../preprocessing/data/tcr_analysis.RData')
+load(file = '../preprocessing/data/da_results.RData')
 obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+Tcell_exp = read.csv('../preprocessing/data/Tcell_exp.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 dir.create('../figures/S8')
-'../figures/S8'
+```
+
+## S8A
+
+```{r fig.width=2.5, fig.height=2.5}
+
+PC1_tumour_modules = read.csv('data/PC1_tumour_modules.csv')
+
+PC1_tumour_modules %>% 
+  ggplot(aes(r,-log10(fdr)))+
+  geom_point()+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  annotate("text", x=-0.1, y=0.9, label= "FDR < 0.1")+
+  labs(x='Correlation with PC1', y='-log10 FDR')+
+  theme_classic() -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/A.pdf',width=2.5,height=2.5, dpi="retina")
 
 ```
 
-## .
 
-```{r fig.height=2, fig.width=2, eval=T, hide=T}
+## S8B
+
+```{r fig.height=2.5, fig.width=2.5}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+# CD138
+ords$Tcell$PCA[,1:2] %>% 
+  left_join(comp$Tcell %>%
+    select(sample_id,study_id,donor_id,cohort,aspirate_CD138pos) %>% distinct()) %>% 
+  filter(!is.na(aspirate_CD138pos),study_id!='Zavidij_2020') %>% 
+  ggplot(aes(aspirate_CD138pos,PC1))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x=15)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Aspirate % CD138+',y='T cell skewing',title='')+
+  theme_classic()+th -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/B-1.pdf',width=2.5,height=2.5, dpi="retina")
+
+
+# B2M
+ords$Tcell$PCA[,1:2] %>% 
+  left_join(comp$Tcell %>%
+    select(sample_id,study_id,donor_id,cohort,B2m) %>% distinct()) %>% 
+  filter(!is.na(B2m),study_id!='Zavidij_2020') %>% 
+  ggplot(aes(B2m,PC1))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y= 0.10, label.x=3)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='B2m',y='T cell skewing',title='')+
+  theme_classic()+th -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/B-2.pdf',width=2.5,height=2.5, dpi="retina")
+
 ```
+
+
+## S8C
+
+```{r fig.width=3, fig.height=2.5}
+
+res = read.csv('../preprocessing/data/Paraprotein_Tcell_correlation.csv')
+
+res %>% 
+  ggplot(aes(r,-log10(p)))+
+  geom_point()+
+  geom_hline(yintercept = -log10(0.05), linetype='dotted', linewidth=0.5)+
+  annotate("text", x=0, y=1.45, label= "P < 0.05")+
+  ggrepel::geom_text_repel(data = . %>% filter(-log10(p)>1), 
+                           aes(label=celltype), size=3.5, color='grey20')+
+  labs(x='Correlation with paraprotein', y='-log10 FDR')+
+  theme_classic() -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S9/C-1.pdf',width=3,height=2.5, dpi="retina")
+
+```
+
+## S8D
+
+Maura et al. Paraprotein data missing (inquire to authors)
+```{r fig.height=2.5, fig.width=2.5}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+IgG_and_IgA_isotype_tumours = read.csv('../resources/IgG_and_IgA_isotype_tumours.csv')$donor_id
+
+Paraprotein_plot = donor_md %>% select(donor_id,Paraprotein) %>% drop_na() %>% 
+  filter(donor_id %in% IgG_and_IgA_isotype_tumours) %>% 
+  rbind(
+    read_csv('../integration/data/validation-metadata.csv') %>% 
+      mutate(donor_id=donor,Paraprotein=PP_g.dL*10) %>% select(donor_id,Paraprotein) %>% drop_na()
+  ) %>% left_join(comp$Tcell %>% select(donor_id,study_id,cohort) %>% distinct())
+
+dat = ords$Tcell$PCA[,1:2] %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id,cohort) %>% distinct()) %>% 
+  select(-sample_id) %>% mutate(source='Full') %>% 
+  rbind(
+    ords$valid[,1:2] %>% 
+      left_join(
+        read_csv('../integration/data/validation-metadata.csv')[,c('sample_id','diagnosis')]) %>%
+      rename(donor_id=sample_id,cohort=diagnosis) %>% mutate(source='Botta')
+  ) %>% 
+  group_by(source) %>% mutate(PC1=scale(PC1)) %>% 
+  left_join(Paraprotein_plot) %>% filter(!is.na(Paraprotein))
+  
+dat %>% 
+  ggplot(aes(Paraprotein,PC1,color=cohort))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2)+
+  ggpubr::stat_cor(label.sep='\n')+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Paraprotein',y='T cell skewing',title='')+
+  theme_classic()+theme(legend.position = 'none')+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/D-1.pdf',width=2.5,height=2.5, dpi="retina")
+
+  
+dat %>% 
+  ggplot(aes(Paraprotein,PC1,color=study_id))+
+  geom_point(size=2)+
+  geom_smooth(method='lm',size=1,alpha=0.2)+
+  ggpubr::stat_cor(label.sep='\n')+
+  labs(x='Paraprotein',y='T cell skewing',title='')+
+  theme_classic()+theme(legend.position = 'none')+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/D-2.pdf',width=2.5,height=2.5, dpi="retina")
+
+```
+
+
+## S8F
+
+Maura et al. Paraprotein data missing (inquire to authors)
+```{r fig.height=2.5, fig.width=2.5}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=11),axis.title.x = element_text(size=13),
+  axis.text.y = element_text(size=11),axis.title.y = element_text(size=13))
+
+IgG_and_IgA_isotype_tumours = read.csv('../resources/IgG_and_IgA_isotype_tumours.csv')$donor_id
+
+Paraprotein_plot = donor_md %>% select(donor_id,Paraprotein) %>% drop_na() %>% 
+  filter(donor_id %in% IgG_and_IgA_isotype_tumours) %>% 
+  rbind(
+    read_csv('../integration/data/validation-metadata.csv') %>% 
+      mutate(donor_id=donor,Paraprotein=PP_g.dL*10) %>% select(donor_id,Paraprotein) %>% drop_na()
+  )
+
+tcr_analysis$clonality %>% filter(group=='all') %>% 
+  left_join(Paraprotein_plot) %>% filter(!is.na(Paraprotein)) %>% 
+  ggplot(aes(Paraprotein,clon))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n')+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='Paraprotein',y='Clonality',title='')+
+  theme_classic()+theme(legend.position = 'none')+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/F.pdf',width=2.5,height=2.5, dpi="retina")
+
+```
+
+
+## S8H
+
+```{r fig.width=2.5, fig.height=2.5}
+
+results$Tcell$aspirate_CD138pos %>%
+  mutate(sig = pval<0.05) %>% 
+  ggplot(aes(cor,-log10(pval)))+
+  geom_point()+
+  geom_hline(yintercept = -log10(0.05), linetype='dotted', linewidth=0.5)+
+  annotate("text", x=0.05, y=1.45, label= "P < 0.05")+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3.5, max.overlaps = 100)+
+  labs(x='Correlation between aspirate\n% CD138+ and T cell\ncluster abundance', y='-log10 FDR')+
+  theme_classic() -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/H.pdf',width=2.5,height=2.5, dpi="retina")
+
+```
+
+## S8I
+
+```{r fig.height=4, fig.width=5}
+
+res = read.csv('../preprocessing/data/Tcell_abundance_tumour_modules.csv')
+
+res %>% 
+  mutate(assoc=ifelse(r>0,'Positive','Negative')) %>% 
+  ggplot(aes(r,-log10(fdr)))+
+  geom_point(color='grey70')+
+  geom_point(data = . %>% filter(fdr<0.05), size=2, aes(color=assoc))+
+  scale_color_manual(values=c('Positive'='#77c8e0','Negative'='#eb676e'))+
+  ggrepel::geom_text_repel(data = . %>% filter(fdr<0.05),
+                           aes(label=paste0(celltype,'–',pathway_neat)), 
+    size=2.5, max.overlaps = 100, force = 50)+
+  labs(x='Correlation between tumour pathway\nscore and T cell cluster abundance', y='-log10 FDR',color='Association')+
+  theme_classic() -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/I.pdf',width=5,height=4, dpi="retina")
+
+```
+
+## S8J
+
+```{r fig.height=2.5, fig.width=2.25}
+th = theme(legend.position = "none",
+  plot.title = element_text(hjust = 0.5, size=12),
+  axis.text.x = element_text(size=9),axis.title.x = element_text(size=11),
+  axis.text.y = element_text(size=9),axis.title.y = element_text(size=12))
+
+# T effector signature
+Teff_score = Tcell_exp %>%
+  left_join(obs %>% select(obs_names,donor_id)) %>%
+  select(donor_id,CD69,IFNG,TNF) %>%
+  group_by(donor_id) %>% summarise_all(.funs = mean) %>%
+  mutate_at(c('CD69','IFNG','TNF'), funs(c(range01(.)))) %>%
+  rowwise() %>% mutate(Teff_score = TNF+IFNG+CD69 / 3) %>%
+  select(donor_id,Teff_score)
+
+Teff_score %>% 
+  left_join(donor_md %>% select(donor_id,cohort,aspirate_CD138pos) %>% distinct()) %>% 
+  left_join(obs %>% select(donor_id,study_id) %>% distinct()) %>% 
+  filter(!is.na(aspirate_CD138pos),study_id!='Zavidij_2020') %>% 
+  ggplot(aes(aspirate_CD138pos,Teff_score))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y= 0.2, label.x=40)+
+  scale_x_continuous(breaks=c(0,20,40,60,80))+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x="Aspirate % CD138+",y='Effector signature\n(CD69, TNF, IFNG)',title='')+
+  theme_classic()+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/J-1.pdf',width=2.25,height=2.5, dpi="retina")
+
+tumour_modules_pct %>% filter(pathway_neat=='Stress') %>% 
+  left_join(Teff_score) %>% 
+  left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  ggplot(aes(pct,Teff_score))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.y= 0.2, label.x=40)+
+  scale_x_continuous(breaks=c(0,20,40,60,80))+
+  ##scale_x_log10(breaks=c(1,10,50))+
+  ##annotation_logticks(sides='b',short=unit(0.1,'cm'),mid=unit(0.1,'cm'),long=unit(0.1,'cm'))+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x="% tumour expressing\nstress pathway",y='Effector signature\n(CD69, TNF, IFNG)',title='')+
+  theme_classic()+th-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/J-2.pdf',width=2.25,height=2.5, dpi="retina")
+
+
+```
+
+## S8K *
+
+
+
+
+
+
+
+
+
 
 ## SPACE 
 
