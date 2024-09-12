@@ -130,7 +130,7 @@ sce = sce[rownames(sce) %in% unique(c(m_id$lightV1,m_id$lightV2,m_id$IGHC1,m_id$
 # Min expressed one cell
 sce = sce[rowSums(assay(sce))>0,]
 # Remove NULL
-mat=mat[!is.na(rowSums(mat)),]
+sce=sce[!is.na(rowSums(assay(sce))),]
 
 # Select donors
 sce = sce[,sce$donor_id %in% m_id$donor_id]

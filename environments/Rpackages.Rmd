@@ -1,0 +1,47 @@
+---
+title: "Rpackages"
+output:
+  html_document:
+    code_folding: hide
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+params:
+    args: myarg
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(vegan)
+library(matrixStats)
+library(zCompositions)
+library(compositions)
+library(ggpubr)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+library(grid)
+library(RColorBrewer)
+library(scales)
+library(lmerTest)
+library(zellkonverter)
+library(scran)
+library(UCell)
+library(msigdbr)
+library(fgsea)
+library(scran)
+library(scater)
+library(UCell)
+library(scattermore)
+require(Cairo) 
+library(igraph)
+library(ggraph)
+library(ggrepel)
+library(grDevices)
+library(circlize)
+library(ComplexHeatmap)
+library(pheatmap)
+sessionInfo()
+```
+

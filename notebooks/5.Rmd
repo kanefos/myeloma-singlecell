@@ -27,6 +27,7 @@ obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
 sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
+tumour_modules_pct = read.csv('../preprocessing/data/tumour_modules_pct.csv')
 dir.create('../figures/5')
 
 ```
@@ -90,9 +91,10 @@ dat = ords$Tcell$PCA[,1:2] %>%
   select(-sample_id) %>% mutate(source='Full') %>% 
   rbind(
     ords$valid[,1:2] %>% 
-      left_join(
-        read_csv('../integration/data/validation-metadata.csv')[,c('sample_id','diagnosis')]) %>%
-      rename(donor_id=sample_id,cohort=diagnosis) %>% mutate(source='Botta')
+        left_join(
+            read_csv('../integration/data/validation-metadata.csv')[,c('sample_id','diagnosis')]
+        ) %>%
+        dplyr::rename(donor_id='sample_id', cohort='diagnosis') %>% mutate(source='Botta et al.')
   ) %>% 
   group_by(source) %>% mutate(PC1=scale(PC1)) %>% 
   left_join(Paraprotein_plot) %>% filter(!is.na(Paraprotein))
@@ -107,8 +109,8 @@ dat %>%
   theme_classic()+theme(legend.position = 'none')+th-> pl
 pl
 ggsave(plot=pl,filename = '../figures/5/B-left.pdf',width=2.5,height=2.5, dpi="retina")
-
 ```
+
 
 ```{r fig.height=2.5, fig.width=2.25}
 
@@ -137,40 +139,205 @@ ggsave(plot=pl,filename = '../figures/5/B-right.pdf',width=2.5,height=2.5, dpi="
 ```
 
 
-## 5C *
+## 5C
+
+```{r fig.height=2.5, fig.width=2.25}
+
+dat = read.csv('../resources/TEMRA_score.csv') %>% 
+  left_join(obs %>% select(obs_names,sample_id,pheno)) %>% 
+  filter(pheno=='Teff.IFIT2') %>% 
+  group_by(sample_id) %>% summarise(score=median(score)) %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id,tissue,sampleSize,cohort) %>% distinct()) %>% 
+  filter( ! donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  left_join(tumour_modules_pct) %>% drop_na()
+
+dat %>% filter(pathway_neat=='Stress') %>% 
+  ggplot(aes(pct,score))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1, alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n',label.x = 5, label.y= 0.45)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='% tumour expressing\nstress pathway',y='CD8.TEMRA score',title='Teff.IFIT2')+
+  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits=c(0,0.55))+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=11),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=11)
+    )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/C-1.pdf',width=2.25,height=2.5, dpi="retina")
+
+```
+
+```{r fig.height=2.75, fig.width=2.25}
+
+# Clone subsets
+clones.expanded = names(table(obs$clone_id[obs$clone_id!='']) %>% .[.>1])
+clones.Teff_IFIT2 = obs[obs$pheno=='Teff.IFIT2',]$clone_id
+clones.Tem_GZMB = obs %>% 
+  filter(clone_id %in% tcr[tcr$type=='CD8',]$clone_id) %>% 
+  mutate(Tem_GZMB = pheno %in% c('CD8.TemTerm','CD8.TEMRA','CD4.CTL')) %>% 
+  group_by(clone_id,Tem_GZMB) %>% tally() %>% ungroup() %>% 
+  group_by(clone_id) %>% mutate(p=n/sum(n)) %>% 
+  filter(Tem_GZMB,p>0.5)
+
+# Data prep
+dat = read.csv('../resources/TEMRA_score.csv') %>% 
+  left_join(obs %>% select(obs_names,sample_id,pheno,clone_id)) %>% filter(clone_id!='') %>% 
+  
+  filter(pheno=='Teff.IFIT2') %>% 
+  
+  left_join(comp$Tcell %>% select(sample_id,donor_id,tissue,sampleSize,cohort) %>% distinct()) %>% 
+  filter( ! donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  
+  filter(clone_id %in% c(clones.expanded,clones.Teff_IFIT2)) %>% 
+  group_by(clone_id) %>% summarise(score=median(score)) %>% 
+  mutate(Tem_GZMB = ifelse(
+    clone_id %in% clones.Tem_GZMB$clone_id,'GZMB+Tem\nshared','GZMB+Tem\nunshared')) %>% 
+  mutate(Tem_GZMB = factor(Tem_GZMB,c('GZMB+Tem\nunshared','GZMB+Tem\nshared')))
+
+
+# Plot
+dat %>% 
+  ggplot(aes(Tem_GZMB,score))+
+  geom_boxplot(aes(fill=Tem_GZMB),outliers = F)+
+  scale_fill_manual(values = c(
+    'GZMB+Tem\nshared'=Tcell_pheno_colors[['CD8.TemTerm']], 'GZMB+Tem\nunshared'='grey70'))+
+  geom_jitter(width=0.2,height=0,size=0.1)+
+  ggpubr::stat_compare_means(comparisons = list(c('GZMB+Tem\nshared','GZMB+Tem\nunshared')), size=3)+
+  #ylim(c(0,0.65))+
+  labs(y='Clone median\nCD8.TEMRA score',title='Expanded Teff.IFIT2\nclone overlap')+
+  theme(
+    legend.position = 'none',
+    plot.title = element_text(hjust = 0.5, size=11),
+    axis.title.x=element_blank(),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    plot.margin = margin(t = 0, r = 20, b = 0, l = 20, unit = "pt")
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/C-2.pdf',width=2.25,height=2.75, dpi="retina")
+```
 
 
 
-## 5D *
 
+## 5D
+
+```{r fig.width=5, fig.height=3}
+
+# Subset of donors
+dat = obs %>% filter(donor_id %in% paste0('Foster_2024.',c('MM1','MM2','MM5'))) %>% 
+  mutate(donor_id=str_remove(donor_id,'Foster_2024.'))
+
+# Largest Teff.IFIT2 clones
+clones.Teff_IFIT2_top = dat %>% 
+  filter(pheno=='Teff.IFIT2',clone_id!='') %>% 
+  group_by(donor_id,clone_id) %>% tally() %>% arrange(-n) %>% ungroup() %>% 
+  group_by(donor_id) %>% slice_head(n = 15)
+
+# Phenotype of these clones
+pheno_plot = c(unique(obs[obs$subset=='CD8',]$pheno),'Teff.IFIT2','Prolif.','ISG.ISG15')
+dat = dat %>% 
+  filter(clone_id %in% clones.Teff_IFIT2_top$clone_id) %>% 
+  filter(pheno %in% pheno_plot) %>% 
+  mutate(pheno = ifelse(pheno %in% c('CD8.TemTerm','CD8.TEMRA','CD4.CTL'),'GZMB+Tem',pheno)) %>% 
+  group_by(donor_id,clone_id,pheno) %>% tally() %>% arrange(-n) %>% ungroup() 
+
+clone_id.pl = dat %>% group_by(clone_id) %>% summarise(n=sum(n)) %>% arrange(n) %>% pull(clone_id)
+pheno.order.pl = c('Teff.IFIT2','GZMB+Tem',"CD8.Tn","CD8.Tcm","CD8.Trm","CD8.Tem.KLRG1","CD8.Tem.IL7R","CD8.TemActive","ISG.ISG15","Prolif.")
+
+dat %>% 
+  mutate(clone_id=factor(clone_id,clone_id.pl)) %>% 
+  mutate(pheno=factor(pheno,rev(pheno.order.pl))) %>% 
+  
+  
+  ggplot(aes(clone_id,n,fill=pheno))+
+  facet_grid(.~donor_id,space='free',scales='free')+
+  geom_col(color='black')+
+  scale_y_continuous(expand = c(0, 0), limits=c(0,160))+
+  scale_x_discrete(expand = c(0.15, 0.15))+
+  guides(fill=guide_legend(ncol=1))+
+  scale_fill_manual(values = c(Tcell_pheno_colors,'GZMB+Tem'='#377EB8'))+
+  labs(x='Top expanded Teff.IFIT2 clones',y='N cells',fill='Phenotype')+
+  theme(
+    axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    legend.position='right',legend.key.size = unit(0.3, "cm"),
+    legend.text=element_text(),legend.title=element_blank(),
+    strip.text.x = element_text(size=11), strip.background = element_blank(),
+    panel.spacing = unit(0, "lines")
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/D.pdf',width=5,height=2.5, dpi="retina")
+
+```
 
 ## 5E *
 
 ```{r fig.height=2.5, fig.width=2.5}
 
-nart = read_csv('../resources/neoantigen_predictions.csv')
+dat = read_csv('../resources/neoantigen_predictions.csv') %>% 
+  arrange(-score) %>% group_by(epitope) %>% slice_head(n=1) %>% ungroup() %>% 
+  filter(score>0.7)
 
-dat.pl = barcode.clone_id %>% 
-  filter(donor %in% comp$da_md[comp$da_md$study=='CARD23',]$donor) %>% 
-  left_join(clone_id.md %>% select(clone_id,aa) %>% distinct()) %>% 
-  mutate(is = aa %in% aa.top) 
-  
-dat.pl %>% ggplot(aes(X_mde1,X_mde2))+
-  #facet_grid(.~donor)+
+dat.pl = obs %>% filter(donor_id %in% dat$donor_id) %>% 
+  left_join(
+    tcr[tcr$chain=='TRB',] %>% select(clone_id,CDR3aa) %>% distinct()
+  ) %>% 
+  left_join(dat %>% select(donor_id,CDR3aa_beta,score), 
+    by=c('donor_id'='donor_id','CDR3aa'='CDR3aa_beta')) %>% 
+  mutate(is = !is.na(score))
+
+colors = long_col_vector[1:length(unique(dat.pl[dat.pl$is,]$CDR3aa))]
+
+dat.pl %>% ggplot(aes(MDE1,MDE2))+
   geom_point(data = . %>% filter(!is), size=0.1,color='grey75')+
-  geom_point(data = . %>% filter(is), size=2.5, aes(fill=aa), shape=21)+
-  scale_fill_manual(values = long_col_vector[1:length(unique(dat.pl[dat.pl$is,]$aa))])+
+  geom_point(data = . %>% filter(is), size=2.5, aes(fill=CDR3aa), shape=21)+
+  scale_fill_manual(values = colors)+
   theme_void()+theme(legend.position = 'none')->pl
 pl
-ggsave(plot=pl,filename = paste0('figures/TRT/mde-pNART.png'),height=2.5,width=2.5,dpi="retina")
+ggsave(plot=pl,filename = '../figures/5/E-1.png',height=2.5,width=2.5,dpi="retina")
 
-label.='Predicted neoantigen-reactive'
-dat.pl %>% head(1) %>% mutate(is=label.) %>% 
-  ggplot(aes(X_mde1,X_mde2))+geom_point(aes(fill=is),size=2.5,shape=21)+
-  scale_fill_manual(values=setNames('grey80',label.))+theme_void()+
-  theme(legend.position = 'bottom',legend.text=element_text(size=11),legend.title=element_blank())->pl
+
+```
+
+
+```{r fig.height=2.5, fig.width=1.5}
+dat = read_csv('../resources/neoantigen_predictions.csv') %>% 
+  arrange(-score) %>% group_by(epitope) %>% slice_head(n=1) %>% ungroup() %>% 
+  filter(score>0.7)
+
+dat.pl = obs %>% filter(donor_id %in% dat$donor_id) %>% 
+  left_join(
+    tcr[tcr$chain=='TRB',] %>% select(clone_id,CDR3aa) %>% distinct()
+  ) %>% 
+  left_join(dat %>% select(donor_id,CDR3aa_beta,score), 
+    by=c('donor_id'='donor_id','CDR3aa'='CDR3aa_beta')) %>% 
+  mutate(is = as.character(!is.na(score))) %>% 
+  # Expanded
+  filter(clone_id %in% (table(obs$clone_id[obs$clone_id!='']) %>% .[.>1] %>% names())) 
+
+colors = c('FALSE'='grey80','TRUE'=Tcell_pheno_colors[['CD8.TemTerm']])
+
+dat.pl %>% 
+  group_by(is,clone_id) %>% summarise(Nonviral=mean(Nonviral)) %>% 
+  ggplot(aes(is, Nonviral))+
+  geom_boxplot(aes(fill=is), outliers = F)+
+  scale_fill_manual(values = colors)+
+  geom_jitter(eight=0,width=0.2, size=0.5)+
+    ggpubr::stat_compare_means(label.x = 1.1, label.y=0.65,
+      aes(label = paste0("P = ", after_stat(p.format))))+
+  #ylim(c(0.1,0.675))+
+  labs(y='Non-viral specificity signature')+
+  theme(legend.position = 'none',
+    axis.text.y=element_text(size=10),axis.title.y=element_text(size=11),
+    axis.text.x=element_blank(), axis.title.x=element_blank(), axis.ticks.x=element_blank()
+  )->pl
 pl
-ggsave(plot=pl,filename = paste0('figures/TRT/mdeLegend-pNART.png'),height=2.5,width=2.5,dpi="retina")
+ggsave(plot=pl,filename = '../figures/5/E-2.pdf',height=2.5,width=1.5,dpi="retina")
 
 ```
 
@@ -179,7 +346,7 @@ ggsave(plot=pl,filename = paste0('figures/TRT/mdeLegend-pNART.png'),height=2.5,w
 ## 5F
 
 Data prep
-```{r 5F, fig.height=6, fig,width=7, eval=T, hide=T}
+```{r fig.height=6, fig,width=7, eval=T, hide=T}
 library(ComplexHeatmap)
 tumour_DE = read.csv('../preprocessing/data/tumour_DE.csv',row.names=1)
 load(file='../preprocessing/data/tumour_DE_fgsea.RData')
@@ -302,110 +469,5 @@ pl
 ggsave(plot=pl,filename = '../figures/5/G.pdf',width=1.5,height=3, dpi="retina")
 
 ```
-
-
-## SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

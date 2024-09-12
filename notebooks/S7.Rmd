@@ -103,13 +103,14 @@ dat.ph = tcr_analysis$clus$pheno %>%
 clus_id.md = data.frame(clus_id=colnames(dat.ph)) %>% 
   left_join(
     tcr_analysis$clus$pheno %>% ungroup() %>% select(clus_id,donor_id) %>% distinct() %>%
-      left_join(donor_md %>% select(donor_id,cohort)) %>% distinct() %>% rename(Cohort=cohort)
+      left_join(donor_md %>% select(donor_id,cohort)) %>% distinct() %>% 
+      dplyr::rename(Cohort='cohort')
   ) %>% 
   #Donor
-  rename(Donor=donor_id) %>% 
+  dplyr::rename(Donor='donor_id') %>% 
   #A/B
   left_join(tcr_analysis$clus$clus_id %>% 
-    select(clus_id,chain) %>% distinct()) %>% rename(Chain=chain) %>% 
+    select(clus_id,chain) %>% distinct()) %>% dplyr::rename(Chain='chain') %>% 
   mutate(Chain=ifelse(Chain=='TRA','Alpha','Beta')) %>% 
   #Clones
   left_join(tcr_analysis$clus$Nclone) %>% mutate(Clones = n) %>% select(-n,-exp) %>% 
@@ -295,109 +296,3 @@ pl
 ggsave(plot=pl,filename = '../figures/S7/G.pdf',width=2,height=3, dpi="retina")
 
 ```
-
-# SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@ params:
 
 ## Setup
 
-```{r setup-import, eval=T, hide=T}
+```{r eval=T, hide=T}
 
 library(tidyverse)
 library(ggpubr)
@@ -28,6 +28,7 @@ obs = read.csv('../preprocessing/data/Tcell_obs.csv')
 Tcell_exp = read.csv('../preprocessing/data/Tcell_exp.csv')
 tcr = read.csv('../preprocessing/data/import/Tcell-scTCR.csv')
 donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+tumour_modules_pct = read.csv('../preprocessing/data/tumour_modules_pct.csv')
 dir.create('../figures/S8')
 ```
 
@@ -35,7 +36,7 @@ dir.create('../figures/S8')
 
 ```{r fig.width=2.5, fig.height=2.5}
 
-PC1_tumour_modules = read.csv('data/PC1_tumour_modules.csv')
+PC1_tumour_modules = read.csv('../preprocessing/data/PC1_tumour_modules.csv')
 
 PC1_tumour_modules %>% 
   ggplot(aes(r,-log10(fdr)))+
@@ -108,7 +109,7 @@ res %>%
   labs(x='Correlation with paraprotein', y='-log10 FDR')+
   theme_classic() -> pl
 pl
-ggsave(plot=pl,filename = '../figures/S9/C-1.pdf',width=3,height=2.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S8/C-1.pdf',width=3,height=2.5, dpi="retina")
 
 ```
 
@@ -137,7 +138,7 @@ dat = ords$Tcell$PCA[,1:2] %>%
     ords$valid[,1:2] %>% 
       left_join(
         read_csv('../integration/data/validation-metadata.csv')[,c('sample_id','diagnosis')]) %>%
-      rename(donor_id=sample_id,cohort=diagnosis) %>% mutate(source='Botta')
+      dplyr::rename(donor_id='sample_id',cohort='diagnosis') %>% mutate(source='Botta')
   ) %>% 
   group_by(source) %>% mutate(PC1=scale(PC1)) %>% 
   left_join(Paraprotein_plot) %>% filter(!is.na(Paraprotein))
@@ -291,115 +292,90 @@ ggsave(plot=pl,filename = '../figures/S8/J-2.pdf',width=2.25,height=2.5, dpi="re
 
 ```
 
-## S8K *
-
-
-
-
-
-
-
-
-
-
-## SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## S8K
+
+```{r fig.height=2.5, fig.width=3.25}
+
+# Data prep
+dat = read.csv('../resources/TEMRA_score.csv') %>% 
+  left_join(obs %>% select(obs_names,sample_id,pheno,clone_id)) %>% filter(clone_id!='') %>% 
+  filter(pheno=='Teff.IFIT2') %>% 
+  left_join(comp$Tcell %>% select(sample_id,donor_id,cohort) %>% distinct()) %>% 
+  #filter( ! donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  filter(cohort!='Non') %>% 
+  select(donor_id,cohort,clone_id,score)
+
+dat %>% 
+  # Min 10 cells
+  filter(donor_id %in% (table(dat$donor_id) %>% .[.>10] %>% names())) %>% 
+  # Attach if clone expanded
+  left_join(
+    dat %>% group_by(clone_id) %>% tally() %>% mutate(exp = n>1) %>% select(clone_id,exp)
+  ) %>% 
+  group_by(donor_id,cohort) %>%  summarise(n=n(),pct_exp=sum(exp)/n*100) %>% ungroup() %>% 
+  # Attach score
+  left_join(
+    dat %>% group_by(donor_id) %>% summarise(score=median(score))
+  ) %>% arrange(-pct_exp) %>% 
+  # Plot
+  ggplot(aes(pct_exp,score))+
+  geom_point(aes(color=cohort,size=n))+
+  #xlim(c(10,90))+
+  #scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits=c(0,0.55))+
+  geom_smooth(method='lm',size=1, alpha=0.2, color='grey20',show.legend=F)+
+  ggpubr::stat_cor(label.sep='\n',show.legend=F)+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(y='CD8.TEMRA score',x='% expanded (>1)\n',size='N cells',title='Teff.IFIT2')+    
+  theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=11),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=11)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/K-1.pdf',width=3.25,height=2.5, dpi="retina")
+
+```
+
+
+```{r fig.height=2.5, fig.width=2.75}
+
+# Clone subsets
+clones.CD8 = tcr[tcr$type=='CD8',]$clone_id
+clones.expanded = names(table(obs$clone_id[obs$clone_id!='']) %>% .[.>1])
+clones.Teff_IFIT2 = obs[obs$pheno=='Teff.IFIT2',]$clone_id
+clones.expanded_Teff_IFIT2 = c(clones.expanded,clones.Teff_IFIT2)
+
+# Data
+dat = obs %>% filter(clone_id!='',clone_id %in% clones.CD8) %>% 
+  filter(clone_id %in% clones.expanded_Teff_IFIT2, pheno!='Teff.IFIT2') %>% 
+  mutate(pheno = ifelse(pheno %in% c('CD8.TemTerm','CD8.TEMRA','CD4.CTL'),'GZMB+Tem',pheno)) %>% 
+  group_by(donor_id,pheno) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) 
+
+# Plot
+pheno.pl = c(unique(obs[obs$subset=='CD8',]$pheno),'Teff.IFIT2','ISG.ISG15','Prolif.','GZMB+Tem')
+pheno.order = dat %>% group_by(pheno) %>% 
+  summarise(m=median(pct)) %>% arrange(m) %>% pull(pheno)
+
+dat %>% 
+  filter(pheno %in% pheno.pl) %>% 
+  mutate(pheno=factor(pheno,pheno.order)) %>% 
+  ggplot(aes(pheno,pct))+
+  geom_boxplot(aes(fill=pheno), outlier.alpha=0)+geom_point(shape=21)+
+  scale_fill_manual(values = c(Tcell_pheno_colors,'GZMB+Tem'='#377EB8'))+
+  ylim(c(0,115))+
+  labs(title='Phenotype of expanded Teff.IFIT2',y='% cells')+
+  ggpubr::stat_compare_means(
+    comparisons = list(c('CD8.TemActive','GZMB+Tem')),method='wilcox.test',size=3.5)+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=10),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=9),
+    legend.position = 'none'
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S8/K-2.pdf',width=2.75,height=2.5, dpi="retina")
+```
 
 
 

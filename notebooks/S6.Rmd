@@ -34,7 +34,6 @@ dir.create('../figures/S6')
 ```
 
 
-
 ## S6B
 
 Plot
@@ -89,7 +88,7 @@ dat = read.csv('../integration/data/validation_exp.csv') %>%
   left_join(valid_obs %>% select(X,study,pheno_pred)) %>% 
   filter(!is.na(pheno_pred),pheno_pred!='Unknown') %>% 
   select(-X) %>% 
-  rename(pheno=pheno_pred) %>% 
+  dplyr::rename(pheno='pheno_pred') %>% 
   filter(!pheno %in% c('Doublet','CD3_neg','Myeloid')) 
   
 dat.sum = dat %>% 
@@ -192,7 +191,7 @@ ggsave(plot=pl,filename = '../figures/S6/E.pdf',width=2.75,height=3, dpi="retina
 #All Non vs Botta every diagnosis
 
 comp$valid %>% 
-  rename(source=study) %>% 
+  dplyr::rename(source='study') %>% 
   select(source,diagnosis,celltype,clr) %>% 
   rbind(comp$Tcell %>% filter(
     !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
@@ -235,112 +234,6 @@ dat %>%
 pl
 ggsave(plot=pl,filename = '../figures/S6/F.pdf',width=1.5,height=3, dpi="retina")
 ```
-
-
-
-
-
-# SPACE 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

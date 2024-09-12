@@ -5,7 +5,7 @@ Single-cell data from [Sklavenitis-Pistofidis et al.](https://doi.org/10.1016/j.
 ### 1. `/environments`
 
 - `Rpackages.html`, install correct R package versions.
-- `.yml` files used to construct conda env for analysis
+- `.yml` files used to construct conda env for analysis:
 ```shell
 conda env create --name integration_env --file=integration_env.yml
 conda env create --name preprocessing --file=preprocessing.yml
@@ -22,7 +22,7 @@ conda env create --name tcrdist3_env --file=tcrdist3_env.yml
 
 Generates processed and analysed data for constructing figures using data available on [Zenodo](https://doi.org/10.5281/zenodo.13646014).
 
-To run:
+Run:
 ```shell
 # bash shell, within /myeloma-singlecell/preprocessing
 python3 run_preprocessing.py
@@ -36,8 +36,7 @@ Omitted data:
 
 ### 4. `/notebooks` & `/figures`
 
-Requires `/preprocessing` Snakemake file run
-
+Generate all figures
 ```shell
 # bash shell, within /myeloma-singlecell
 Rscript make_figures.R
