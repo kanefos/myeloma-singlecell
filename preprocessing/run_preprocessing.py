@@ -1,10 +1,9 @@
 import os
 
-conda = '/Users/kaneucl/miniconda3/envs/'
-R_loc = '' #keep blank if default R
+conda = '/Users/username/miniconda3/envs/'
+R_loc = '' #keep blank if using default R environment
 
-#preprocessing='preprocessing'
-preprocessing='Increate22'
+preprocessing='preprocessing'
 tcrdist_env="tcrdist3_env"
 
 print('import.R #########################################################')
