@@ -24,7 +24,8 @@ Generates processed and analysed data for constructing figures using data availa
 
 Run:
 ```shell
-# bash shell, within /myeloma-singlecell/preprocessing
+# First, edit `run_preprocessing.py` to user python (from above conda env) and R locations
+# Then, in bash shell, run within /myeloma-singlecell/preprocessing
 python3 run_preprocessing.py
 ```
 
