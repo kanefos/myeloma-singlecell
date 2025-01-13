@@ -7,7 +7,7 @@ preprocessing='preprocessing'
 tcrdist_env="tcrdist3_env"
 
 print('import.R #########################################################')
-os.system(R_loc+"Rscript scr/import.R")
+#os.system(R_loc+"Rscript scr/import.R")
 
 print('process.py #########################################################')
 os.system(conda+preprocessing+"/bin/python scr/process.py")

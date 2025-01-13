@@ -222,6 +222,34 @@ ggsave(plot=pl,filename = '../figures/1/1E-legend.pdf',width=5,height=1, dpi="re
 
 ```
 
+## 1E.1 stacked bar
+
+```{r fig.height=2.5, fig.width=1.5, eval=T, hide=T}
+pct_pheno = obs %>% filter(!lineage %in% c('Doublet')) %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(cancer=ifelse(diagnosis!='Non','c','n'), covar=paste0(cancer,tissue)) %>% 
+  group_by(covar,lineage) %>% tally() %>% ungroup() %>% 
+  group_by(covar) %>% mutate(pct=n/sum(n)) %>% ungroup() %>% 
+  mutate(covar = factor(covar,c('nPB','nBM','cPB','cBM')))
+
+pct_pheno %>% mutate(pct=pct*100) %>% 
+  ggplot(aes(covar,pct))+geom_bar(stat='identity',width=1.1, aes(fill=lineage))+
+  facet_grid(~covar,space='free',scales='free')+
+  labs(fill='Cell type')+
+  scale_fill_manual(values = bm_lineage_colors)+
+  geom_segment(aes(x=0.5,xend=0.5,y=0,yend=100),size=0.1,linewidth=0,color='grey20')+
+  theme_void()+theme(
+    legend.position = 'none',
+    strip.text.x = element_text(size = 9),
+    panel.background = element_blank(),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/1/1E.1.pdf',width=1.5,height=2.5, dpi="retina")
+
+```
+
+
 ## 1F
 
 ```{r fig.height=5, fig.width=5,eval=T, hide=T}

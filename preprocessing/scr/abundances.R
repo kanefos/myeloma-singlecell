@@ -1,5 +1,6 @@
 # Abundance and compositional analysis #########################################
 
+#setwd('preprocessing/')
 library(tidyverse)
 
 # Functions ####################################################################
@@ -110,7 +111,7 @@ donors.remove = c(donors.longit,donor.Tex_hi)
 ords[['Tcell']] = comp$Tcell %>%
   filter(sampleSize>100, !donor_id %in% donors.remove, tissue=='BM') %>%
   # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
-  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>%
   comp.ord() %>% .$ord
 
 ords[['Tcell']]$PCA = ords[['Tcell']]$CA$u[,1:5] %>% data.frame() %>% rownames_to_column('sample_id') %>% as_tibble()

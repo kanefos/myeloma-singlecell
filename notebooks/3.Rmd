@@ -131,6 +131,73 @@ ggsave(plot=pl,filename = '../figures/3/B-right.pdf',width=2,height=3, dpi="reti
 ```
 
 
+## 3B.1 - Tex/GZMK+Tem, % cohorts
+
+
+```{r fig.width=2, fig.height=3} 
+
+p0 = min(comp$Tcell$prop[comp$Tcell$prop>0])*100
+
+comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='CD8.Tex') %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = (prop*100)+p0, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  labs(y='% T cells',title='CD8.Tex')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/B.1-Tex_pct.pdf',width=2,height=3, dpi="retina")
+
+
+comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='CD8.TemActive') %>% 
+  mutate(cohort=factor(cohort,c('Non','MGUS','SMM','MM'))) %>% 
+  
+  ggplot(aes(x = cohort, y = (prop*100)+p0, fill=cohort))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('Non','MGUS'),c('Non','SMM'),c('Non','MM'),c('SMM','MM')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  scale_y_log10(breaks=c(1,10,100), limits=c(1, 500))+annotation_logticks(sides='l')+
+  labs(y='% T cells',title='CD8.TemActive')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/3/B.1-TemK_pct.pdf',width=2,height=3, dpi="retina")
+
+
+```
 
 
 

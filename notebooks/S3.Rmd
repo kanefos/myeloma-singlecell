@@ -64,6 +64,15 @@ obs %>%
 pl
 ggsave(plot=pl,filename = '../figures/S3/A-3.png',width=3,height=3, dpi="retina")
 
+obs %>% 
+  ggplot(aes(MDE1,MDE2))+
+  scattermore::geom_scattermore(aes(color=pct_counts_mt))+
+  scale_color_viridis()+
+  labs(color='',title='% counts MT')+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/A-mt.png',width=3,height=3, dpi="retina")
+
 ```
 
 ## S3B
@@ -131,10 +140,11 @@ min.cells = obs %>% filter(subset=='CD8') %>% group_by(donor_id) %>% tally() %>%
   filter(n>30) %>% pull(donor_id)
 
 dat.pl = obs %>% filter(clone_id!='',subset=='CD8') %>% 
+  left_join(read.csv('../resources/tcell_labels2.csv') %>% select(pheno,labels2)) %>% 
+  mutate(pheno=labels2) %>% 
   filter(donor_id %in% min.cells) %>% 
   group_by(donor_id,pheno,clone_id) %>% tally() %>% ungroup() %>% 
-  group_by(donor_id,pheno) %>% summarise(exp=mean(n)) %>% 
-  mutate(pheno=factor(pheno,Tcell_order))
+  group_by(donor_id,pheno) %>% summarise(exp=mean(n))
 
 dat.pl.order = dat.pl %>% group_by(pheno) %>% 
   summarise(exp=median(exp)) %>% arrange(exp) %>% pull(pheno)
@@ -169,9 +179,9 @@ min.cells = obs %>% filter(subset=='CD4') %>% group_by(donor_id) %>% tally() %>%
 
 dat.pl = obs %>% filter(clone_id!='',subset=='CD4') %>% 
   filter(donor_id %in% min.cells) %>% 
+  left_join(labels2) %>% mutate(pheno=labels2) %>% 
   group_by(donor_id,pheno,clone_id) %>% tally() %>% ungroup() %>% 
-  group_by(donor_id,pheno) %>% summarise(exp=mean(n)) %>% 
-  mutate(pheno=factor(pheno,Tcell_order))
+  group_by(donor_id,pheno) %>% summarise(exp=mean(n))
 
 dat.pl.order = dat.pl %>% group_by(pheno) %>% 
   summarise(exp=median(exp)) %>% arrange(exp) %>% pull(pheno)
@@ -202,7 +212,6 @@ ggsave(plot=pl,filename = '../figures/S3/D-right.pdf',width=2.5,height=3, dpi="r
 
 ## S3E
 
-
 ```{r fig.height=3.5, fig.width=3.5}
 
 mait_tcr = tcr[tcr$mait_evidence,]$clone_id %>% .[.!='']
@@ -217,8 +226,9 @@ pl
 ggsave(plot=pl+theme(legend.position = 'none'),
   filename = '../figures/S3/E.png',width=3.5,height=3.5, dpi="retina")
 
+obs %>% filter(clone_id %in% mait_tcr) %>% group_by(pheno) %>% tally() %>% 
+  mutate(pct=n/sum(n)*100) %>% arrange(-pct) %>% print()
 ```
-
 
 
 ## S3F
@@ -230,6 +240,7 @@ Zheng 2021 labels
 obs_Zheng = obs %>% filter(study_id=='Zheng_2021') %>% 
   left_join(read.csv('../resources/Zheng_2021_labels.csv')) %>% 
   filter(!is.na(meta.cluster)) %>% 
+  left_join(labels2) %>% mutate(pheno=labels2) %>% 
   select(pheno,meta.cluster,meta.cluster.coarse)
 
 mat.pl = obs_Zheng %>% 
@@ -259,6 +270,7 @@ for (i in subset_to ) {
 
 mat.pl = obs %>% filter(obs_names %in% celltypist$obs_names) %>% 
   filter(! pheno %in% c('Doublet','QC')) %>% 
+  left_join(labels2) %>% mutate(pheno=labels2) %>% 
   left_join( celltypist %>% select(obs_names, majority_voting) ) %>% 
   filter(!is.na(pheno),!is.na(majority_voting)) %>% 
   filter(majority_voting %in% subset_pl) %>% 
@@ -290,18 +302,20 @@ exp %>% left_join(obs %>% select(obs_names,pheno,donor_id)) %>%
   select(pheno,donor_id,any_of(gene.pl)) %>% 
   pivot_longer(!c(pheno,donor_id)) %>% 
   group_by(name) %>% mutate(value=range01(value)) %>% 
-  mutate(outlier = ifelse(donor_id==donor.Tex_hi,'Single donor','Others')) %>% 
+  mutate(outlier = ifelse(donor_id==donor.Tex_hi,'Outlier donor','Others')) %>% 
   ggplot(aes(outlier,value,fill=outlier))+facet_grid(~name)+
   geom_violin()+geom_boxplot(alpha=0,show.legend=F)+
-  scale_fill_manual(values=c('Single donor'='#666666',Others='grey80'))+
-  labs(y='Scaled nexpression', fill='Donor')+
+  scale_fill_manual(values=c('Outlier donor'='#666669',Others='grey80'))+
+  ggpubr::stat_compare_means(comparisons = list(c('Outlier donor','Others')),
+  method = 'wilcox.test',size=3.5)+
+  labs(y='Scaled expression', fill='')+
   theme_classic()+
   theme(
     legend.position = 'bottom',
     axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
     ) -> pl
 pl
-ggsave(plot=pl,filename = '../figures/S3/G.pdf',width=5,height=2, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S3/G.pdf',width=4,height=2, dpi="retina")
 
 ```
 
@@ -352,3 +366,4 @@ ggsave(plot=pl,filename = '../figures/S3/H-right.pdf',
   width=3.5,height=3, dpi="retina",device=cairo_pdf)
 
 ```
+

@@ -70,6 +70,13 @@ Tcell_order = c(
   "CD8.Tn","CD8.Tcm","CD8.Tem.IL7R","CD8.Tem.KLRG1","CD8.TemActive","CD8.Trm","CD8.Tex","CD8.TEMRA","CD8.TemTerm",
   "MAIT_gdT","Prolif.","ISG.ISG15","ISG.IFIT2",'Teff.IFIT2'
 )
+#update labels2
+labels2=read.csv('../resources/tcell_labels2.csv') %>% select(pheno,labels2)
+labels2 = labels2 %>% rbind(data.frame(pheno=c('CD4.Treg','Teff.IFIT2'),labels2=c('CD4+Treg','Teff')))
+labels2_colors = labels2 %>%
+  left_join(data.frame(pheno=names(Tcell_pheno_colors),col=Tcell_pheno_colors)) %>% select(labels2,col) %>% deframe()
+Tcell_pheno_colors=c(Tcell_pheno_colors,labels2_colors)
+
 Tcell_subsets = c('CD4+','CD4+','CD4+','CD4+','CD4+','CD4+','CD4+',
                  'CD8+','CD8+','CD8+','CD8+','CD8+','CD8+','CD8+','CD8+','CD8+',
                  'Other','Other','Other','Other','Other')
@@ -97,16 +104,18 @@ long_col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qu
 
 # Study colors
 study_colors = setNames(
-  rev(long_col_vector)[1:11],
+  rev(long_col_vector)[1:12],
   c("Foster_2024","Oetjen_2018","Bailur_2019","Zavidij_2020","Kfoury_2021",
-           "Granja_2019","Zheng_2021","Liu_2021","Maura_2023","Conde_2022","Stephenson_2021"))
+    "Granja_2019","Zheng_2021","Liu_2021","Maura_2023","Conde_2022","Stephenson_2021",
+    "SklavenitisPistofidis_2022"))
 
 # Sort colors
 sort_colors = setNames(
-  long_col_vector[1:7],
+  long_col_vector[1:8],
   c("T cell-enriched/depleted","Unsorted","CD138-","CD138-CD45+",
-    "CD235-","T cell-enriched","CD8-enriched")
+    "CD235-","T cell-enriched","CD8-enriched","BM CD138-, PB unsorted")
 )
+sort_colors[sort_colors=='#666666'] = '#664661'
 
 # Custom ggplot
 library("scales")

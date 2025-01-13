@@ -170,7 +170,7 @@ for (p in names(plts)) {
 ```{r fig.height=3, fig.width=3, eval=T, hide=T}
 
 obs %>% filter(lineage!='Doublet') %>% 
-  ggplot(aes(UMAP1,UMAP2))+
+  ggplot(aes(UMAP1*-1,UMAP2))+
   scattermore::geom_scattermore(aes(color=chem))+
   scale_color_manual(values = as.vector(tissue_colors))+
   labs(color='',title='10X chemisty')+
@@ -180,7 +180,7 @@ pl
 ggsave(plot=pl,filename = '../figures/S1/B-1.png',width=3,height=3, dpi="retina")
 
 obs %>% filter(lineage!='Doublet') %>% 
-  ggplot(aes(UMAP1,UMAP2))+
+  ggplot(aes(UMAP1*-1,UMAP2))+
   scattermore::geom_scattermore(aes(color=study_id))+
   scale_color_manual(values = study_colors)+
   labs(color='',title='Study')+
@@ -190,7 +190,7 @@ pl
 ggsave(plot=pl,filename = '../figures/S1/B-2.png',width=3,height=3, dpi="retina")
 
 obs %>% 
-  ggplot(aes(UMAP1,UMAP2))+
+  ggplot(aes(UMAP1*-1,UMAP2))+
   scattermore::geom_scattermore(aes(color=sort))+
   scale_color_manual(values=sort_colors)+
   labs(color='',title='Sort')+
@@ -198,6 +198,18 @@ obs %>%
   theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
 pl
 ggsave(plot=pl,filename = '../figures/S1/B-3.png',width=3,height=3, dpi="retina")
+
+# +%mt
+obs %>% filter(pct_counts_mt<10) %>% 
+  ggplot(aes(UMAP1*-1,UMAP2))+
+  scattermore::geom_scattermore(aes(color=pct_counts_mt))+
+  scale_color_viridis()+
+  labs(color='',title='% counts MT')+
+  coord_fixed()+
+  theme_void()+theme(legend.position = 'none',plot.title = element_text(hjust = 0.5, size=12))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/S1/B-mt.png',width=3,height=3, dpi="retina")
+
 
 ```
 
