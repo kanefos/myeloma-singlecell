@@ -39,7 +39,7 @@ dir.create('../figures/S6')
 Plot
 ```{r fig.height=3, fig.width=3}
 
-obs.pl = valid_obs %>% mutate(pheno_pred = factor(pheno_pred, names(Tcell_pheno_colors))) 
+obs.pl = valid_obs %>% mutate(pheno_pred = factor(pheno_pred, unique(names(Tcell_pheno_colors))) )
 obs.pl.med = obs.pl %>% select(pheno_pred,X_mde1,X_mde2) %>% 
   group_by(pheno_pred) %>% summarise_all(.funs = median)
 
@@ -75,7 +75,6 @@ pl
 ggsave(plot=pl,filename = '../figures/S6/B-legend.pdf',width=3,height=3, dpi="retina")
 
 ```
-
 
 
 ## S6C
@@ -192,12 +191,12 @@ ggsave(plot=pl,filename = '../figures/S6/E.pdf',width=2.75,height=3, dpi="retina
 
 comp$valid %>% 
   dplyr::rename(source='study') %>% 
-  select(source,diagnosis,celltype,clr) %>% 
+  select(source,diagnosis,celltype,clr,prop) %>% 
   rbind(comp$Tcell %>% filter(
     !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
     mutate(source='atlas',diagnosis=cohort) %>% select(source,diagnosis,celltype,clr)) %>% 
   mutate(source_diag = paste0(source,'_',diagnosis)) %>% 
-  filter(source_diag %in% c('atlas_Non','atlas_MM','Botta2023_MM')) %>% 
+  filter(source_diag %in% c('atlas_Non','atlas_MM','Botta2023_MM','atlas_SMM','Botta2023_SMM')) %>% 
   
   left_join(data.frame(
     source_diag = c('atlas_Non','atlas_MM','Botta2023_MM'),
@@ -206,9 +205,9 @@ comp$valid %>%
   
   mutate(source_diag=factor(source_diag,
     c('Non (full dataset)','MM (full dataset)','MM (Botta et al.)'))) %>% 
-  filter(celltype %in% c('CD8.TemTerm')) %>% #,'CD8.TemActive','CD4.Tn','CD4.Tem','CD8.Tn')) %>% 
+  filter(celltype %in% c('CD8.TemTerm','CD8+Tte')) %>% 
   
-  filter(diagnosis %in% c('Non','MM')) -> dat
+  filter(diagnosis %in% c('Non','SMM','MM')) -> dat
 
 dat %>% 
   ggplot(aes(x = source_diag, y = clr, fill=diagnosis))+

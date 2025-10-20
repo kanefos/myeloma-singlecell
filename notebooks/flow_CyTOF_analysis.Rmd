@@ -1,0 +1,1652 @@
+---
+title: 'Core panel manuscript'
+author: "Kane Foster"
+date: "2025-02-03"
+output: html_document
+---
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(RColorBrewer)
+library(viridis)
+source('../resources/aes.R')
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+load(file = '../preprocessing/data/comp.RData')
+load(file = '../preprocessing/data/ords.RData')
+obs = read.csv('../preprocessing/data/Tcell_obs.csv')
+donor_md = read.csv('../preprocessing/data/import/metadata-donor.csv')
+sort_id = read.csv('../resources/Foster_2024_sort_id.csv')
+dir.create('../figures/flow')
+
+library(lubridate)
+library(survival)
+library(ggsurvfit)
+library(tidycmprsk)
+library(gtsummary)
+library(condsurv)
+#library(maxstat)
+
+# Data
+import = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/data_merged.csv')
+import$CD127n.pct_CD8 = 100-import$CD127p.pct_CD8
+# Treg pct NonTum thr
+#dat = import %>% filter(timepoint=='Baseline', !is.na(event), !is.na(treg.pct_nonTum), days < 3*365)
+#mtHL = maxstat.test(Surv(days, event) ~ treg.pct_nonTum, data=dat, smethod="LogRank", pmethod="HL")
+#mtHL$estimate #0.5288 
+treg.pctNon_thr = 0.5288  
+# CD127nCD8 thr
+#dat = import %>% filter(timepoint=='Baseline',!is.na(event), !is.na(CD127n.pct_CD8), days < 3*365)
+#mtHL = maxstat.test(Surv(days, event) ~ CD127n.pct_CD8, data=dat, smethod="LogRank", pmethod="HL")
+#mtHL$estimate #40.6
+CD127n.pct_thr = 40.6
+# Treg pct CD4+
+#dat = import %>% filter(timepoint=='Baseline', !is.na(event), !is.na(treg.pct_CD4), days < 3*365)
+#mtHL = maxstat.test(Surv(days, event) ~ treg.pct_CD4, data=dat, smethod="LogRank", pmethod="HL")
+#mtHL$estimate #5.64
+treg.pctCD4_thr = 5.64
+
+```
+
+
+## scRNAseq CD127- % CD8+ vs PC1
+
+```{r fig.height=2.5, fig.width=3.5}
+exp = obs %>% select(obs_names,sample_id) %>% 
+  filter(sample_id %in% ords$Tcell$PCA$sample_id) %>% 
+  left_join(read.csv('../preprocessing/data/Tcell_exp.csv') %>% 
+              select(obs_names,CD8A,IL7R)) %>% drop_na()
+
+dat = exp %>% 
+  filter(CD8A > 0) %>% mutate(gr = IL7R>0) %>% 
+  group_by(sample_id) %>% summarise(pct = sum(gr)/n()*100) %>% 
+  left_join(ords$Tcell$PCA) %>% 
+  left_join(comp$Tcell %>% select(sample_id,cohort) %>% distinct())
+
+dat %>% 
+  mutate(cohort = factor(cohort, c('Non','MGUS','SMM','MM'))) %>% 
+  ggplot(aes(PC1 * -1, 100 - pct))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm')+stat_cor()+
+  labs(x = 'T-cell skewing', y='IL7R– % CD8+')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-scRNA_CD127.PC1.pdf',width=3.5,height=2.5, dpi="retina")
+
+```
+
+## scRNAseq CD127-/+ expression
+
+```{r fig.height=3, fig.width=3.75}
+
+exp = read.csv('../preprocessing/data/Tcell_exp.csv') %>% 
+  select(obs_names,CD8A,IL7R,SELL,CCR7,CD28,GZMB,GNLY,CX3CR1)
+  
+dat = exp %>% filter(CD8A > 0) %>% mutate(gr = IL7R>0) %>% 
+  left_join(obs %>% select(obs_names,sample_id)) %>% 
+  select(-CD8A,-IL7R,-obs_names) %>% 
+  group_by(sample_id,gr) %>% summarise_all(.funs = mean)
+
+dat %>% pivot_longer(!c(sample_id:gr)) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% 
+  mutate(name = factor(name, c('SELL','CCR7','CD28','GZMB','GNLY','CX3CR1'))) %>% 
+  mutate(gr=factor(gr,c('TRUE','FALSE'))) %>% 
+  ggplot(aes(gr,value,fill=gr))+facet_wrap('name',ncol=3)+
+  geom_violin()+geom_boxplot(outlier.alpha=0)+
+  ylim(c(0,1.3))+
+  ggpubr::stat_compare_means(comparisons = list(c('FALSE','TRUE')),
+    method = 'wilcox.test',size=3.5,label.y = 1.1)+
+  scale_fill_manual(values=c('FALSE'='dodgerblue','TRUE'='grey80'))-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-scRNA_CD127.markers.pdf',width=3.5,height=2.5, dpi="retina")
+  
+```
+
+
+## CD127- % CD8+ vs PP, with age
+
+```{r fig.height=2.5, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(Entry_LB_paraprotein),!is.na(CD127p.pct_CD8)) 
+
+print(dim(dat)[1])
+
+dat %>% 
+  ggplot(aes(Entry_LB_paraprotein,100 - CD127p.pct_CD8))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  labs(y='IL7R– % CD8+')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-CD127.PP.pdf',width=3.5,height=2.5, dpi="retina")
+
+summary(lm(CD127p.pct_CD8 ~ Entry_LB_paraprotein + age, dat))
+
+summary(lm(CD127p.pct_CD3 ~ Entry_LB_paraprotein + age, dat))
+cor.test(100 - dat$CD127p.pct_CD3, dat$Entry_LB_paraprotein)
+ 
+```
+
+
+## CyTOF TemTerm vs PP
+
+```{r fig.height=2.5, fig.width=3.5}
+
+
+dat = read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv')) 
+
+
+
+
+#var              all     preCOSMOS
+#CD57p_GZMBp_CD8  P=0.84  P=0.29
+#Tem_pctCD8       P=0.14  P=0.05
+#Temra_pctCD8     P=0.56  P=0.2
+#CD57p_GZMBp_CD8  P=0.74  P=0.2
+
+dat %>% 
+  ggplot(aes(paraprotein,Tem_pctCD8))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+
+  ylim(c(5,40))+
+  stat_cor()-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-CD8_Tem.PP.pdf',width=3.5,height=2.5, dpi="retina")
+ 
+```
+
+
+
+
+## COSMOS TTP overview
+
+cohort
+```{r fig.height=3, fig.width=3.5}
+dat = import %>% filter(timepoint=='Baseline',!is.na(event),days < 3*365)
+
+median(dat$days) / 365
+range(dat$days) / 365
+
+dim(dat)[1]
+table(dat$event)
+table(dat$event)/dim(dat)[1]
+```
+
+overall curve
+```{r fig.height=3, fig.width=3.5}
+dat = import %>% filter(timepoint=='Baseline',!is.na(event),days < 3*365)
+
+survfit(Surv(days, event) ~ 1, data = dat) %>% 
+  ggsurvfit(type = "risk", xscale='d_m')+
+  add_confidence_interval()+
+  add_censor_mark(size=1)+
+  scale_ggsurvfit(x_scales = list( 
+    breaks = seq(0,365*3.5,365/2), labels=seq(0,42,6), limits=c(0,365*3) 
+  ))+
+  add_risktable()+
+  scale_y_continuous(breaks=seq(0,1,0.2),labels=seq(0,100,20),limits=c(0,1))+
+  labs(x='Months',y='% progressed')+
+  theme_classic()+
+  theme(legend.position='bottom')->pl
+
+ggsave(plot=print(pl, newpage = FALSE),filename = '../figures/flow/surv-all.pdf',width=3.5,height=3, dpi="retina")
+```
+
+key features associations
+```{r fig.height=3, fig.width=3.5}
+print(survdiff(Surv(days, event) ~ tumour.pct_live, data = dat)$pvalue)
+print(survdiff(Surv(days, event) ~ Entry_LB_paraprotein, data = dat)$pvalue)
+print(survdiff(Surv(days, event) ~ Entry_LB_FLC_ratio, data = dat)$pvalue)
+```
+
+
+
+## SMM risk and TTP, forest plot
+
+Mayo
+```{r fig.height=1.5, fig.width=4.5}
+
+dat = import %>% filter(timepoint=='Baseline',!is.na(event)) %>% 
+  mutate(Entry_Mayo_=ifelse(Entry_Mayo %in% c('high','UHR'),'high/UHR',Entry_Mayo)) %>% 
+  mutate(Entry_Mayo_=factor(Entry_Mayo_,c('MGUS','low','intermediate','high/UHR'))) 
+
+cox_model = coxph(Surv(days, event) ~ Entry_Mayo_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_Mayo_)) %>% mutate(Var1=paste0('Entry_Mayo_',Var1)))
+
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,2)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0('vs MGUS n=',table(dat$Entry_Mayo_)[1]),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/forest-all_Mayo.PP.pdf',width=4.5,height=1.5, dpi="retina")
+
+```
+
+Entry_IMWG 20/2/20
+```{r fig.height=1.5, fig.width=4.5}
+
+dat = import %>% filter(timepoint=='Baseline',!is.na(event)) %>% 
+  mutate(Entry_IMWG_=Entry_IMWG) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('high','UHR'),'high/UHR',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_=='low-intermediate','low',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=factor(Entry_IMWG_,c('MGUS','low','intermediate','high/UHR'))) 
+
+cox_model = coxph(Surv(days, event) ~ Entry_IMWG_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_IMWG_)) %>% mutate(Var1=paste0('Entry_IMWG_',Var1)))
+
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,2)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0('vs MGUS n=',table(dat$Entry_IMWG_)[1]),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/forest-all_IMWG.PP.pdf',width=4.5,height=1.5, dpi="retina")
+
+
+```
+
+
+## CyTOF TemTerm SMM/MM
+
+```{r fig.width=1.25, fig.height=3} 
+
+dat = read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv'))
+
+#CD127n_pctCD8,Tem_pctCD8,Temra_pctCD8,CD57p_GZMBp_CD8
+
+dat %>% 
+  mutate(cohort=factor(cohort,c('SMM','MM'))) %>% 
+  ggplot(aes(cohort,Tem_pctCD8,fill=cohort))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('SMM','MM')), method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  #scale_y_log10()+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  labs(title='')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/box-CyTOF_TemBM.pdf',width=1.25,height=3, dpi="retina")
+
+```
+
+
+
+## flow_CD127- % SMM-prg/non
+
+```{r fig.width=1.65, fig.height=3} 
+
+dat = import %>% filter(timepoint=='Baseline',!is.na(event), !is.na(CD127p.pct_CD8), days<(365*3))
+
+dat$cohort_prg = dat$cohort
+dat$cohort_prg[dat$event==1  ]='SMM_PRG'
+
+dat %>% 
+  ggplot(aes(cohort_prg,CD127n.pct_CD8,fill=cohort_prg))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('MGUS','SMM'),c('MGUS','SMM_PRG'),c('SMM','SMM_PRG')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  #scale_y_log10()+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  geom_hline(yintercept = CD127n.pct_thr, color='blue')+
+  labs(y='IL7R– % CD8+',title='')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/box-flow_IL7Rn.pdf',width=1.65,height=3, dpi="retina")
+
+```
+
+
+
+
+## CD127- TTP
+
+
+```{r fig.height=4, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(CD127p.pct_CD8), days<(3*365))
+
+dat$hi = as.character(dat$CD127n.pct_CD8 > CD127n.pct_thr)
+###dat$hi = as.character(dat$CD127n.pct_CD8 > median(dat$CD127n.pct_CD8))
+
+#pval
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+#hr
+print(
+  summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)']
+)
+
+#pl
+survfit(Surv(days, event) ~ hi, data = dat) %>% 
+  ggsurvfit(type = "risk", xscale='d_m')+
+  add_confidence_interval()+
+  add_censor_mark(size=1)+
+  scale_ggsurvfit(x_scales = list( 
+    breaks = seq(0,365*3.5,365/2), labels=seq(0,42,6), limits=c(0,365*3) 
+  ))+
+  add_risktable()+
+  scale_y_continuous(breaks=seq(0,1,0.2),labels=seq(0,100,20),limits=c(0,1))+
+  scale_color_manual(values = c('grey50','#eb7a09'))+
+  scale_fill_manual(values = c('grey50','#eb7a09'))+
+  labs(x='Months',y='% progressed')+
+  theme_classic()+
+  theme(legend.position='bottom')->pl
+pl
+ggsave(plot=print(pl, newpage = FALSE),filename = '../figures/flow/surv-CD127n.pdf',width=3.5,height=4, dpi="retina")
+
+```
+
+
+CD3+
+```{r}
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(CD127p.pct_CD3))
+
+dat$hi = dat$CD127p.pct_CD3 > median(dat$CD127p.pct_CD3)
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+
+```
+
+
+## CyTOF Treg SMM/MM
+
+```{r fig.width=1.25, fig.height=3} 
+
+dat = read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv'))
+
+dat %>% mutate(cohort=factor(cohort,c('SMM','MM'))) %>% 
+  ggplot(aes(cohort,FOXP3p_CD25p_pctCD4,fill=cohort))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('SMM','MM')), method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  #scale_y_log10()+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  labs(title='')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/box-CyTOF_Treg.pdf',width=1.25,height=3, dpi="retina")
+
+```
+
+
+## flow_Treg vs atlas Treg pseudo-pct non-tumour
+
+```{r fig.height=2.5, fig.width=3.5}
+
+dat = comp$Tcell %>% filter(celltype=='CD4+Treg') %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  select(donor_id,prop,cohort) %>% 
+  left_join(read.csv('../resources/donor_id-flow_scRNA.csv')) %>% drop_na() %>% 
+  left_join(import %>% filter(timepoint=='Baseline') %>% 
+              select(patient,treg.pct_nonTum,T.pct_nonTum)) %>% drop_na()
+
+# Uses import$T.pct_nonTum
+
+dat %>% 
+  ggplot(aes(prop*T.pct_nonTum, treg.pct_nonTum))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_y_log10(breaks=c(0.1,1))+scale_x_log10(breaks=c(0.1,1))+annotation_logticks(sides='lb')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-scRNA_Treg_pctnon.pdf',width=3.5,height=2.5, dpi="retina")
+
+
+```
+
+
+
+## CyTOF two Treg definitions correlation
+
+```{r fig.height=2.5, fig.width=3.5}
+dat = read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv'))
+
+dat %>% 
+  ggplot(aes(FOXP3p_CD25p_pctCD4,CD217n_CD25p_pctCD4))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-CyTOF_Treg.pdf',width=3.5,height=2.5, dpi="retina")
+
+```
+
+
+
+
+
+## flow_Treg loss association atlas Treg subclusters
+
+```{r}
+
+dat = comp$Treg %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  select(donor_id,celltype,prop,cohort) %>% 
+  left_join(read.csv('../resources/donor_id-flow_scRNA.csv')) %>% drop_na() %>% 
+  left_join(import %>% select(patient,treg.pct_nonTum,T.pct_nonTum)) %>% drop_na()
+
+dat %>% 
+  ggplot(aes(prop, treg.pct_nonTum))+
+  facet_grid(~celltype)+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()
+
+
+```
+
+
+
+## flow_Treg pct SMM prg/non
+
+% CD4+
+```{r fig.width=1.65, fig.height=3} 
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_CD4), days<(365*3))
+
+dat$cohort_prg = dat$cohort
+dat$cohort_prg[dat$event==1  ]='SMM_PRG'
+dat$cohort_prg[dat$cohort_prg=='MGUS']
+
+p0 = dat$treg.pct_CD4 %>% .[.>0] %>% min()
+
+dat %>% filter(treg.pct_CD4<50) %>% 
+  ggplot(aes(cohort_prg,treg.pct_CD4+p0,fill=cohort_prg))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('MGUS','SMM'),c('MGUS','SMM_PRG'),c('SMM','SMM_PRG')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  #scale_y_log10()+annotation_logticks(sides='l')+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  geom_hline(yintercept = treg.pctCD4_thr, color='blue')+
+  labs(y='CD4+Treg % CD4+',title='')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/box-flow_Treg_pctCD4.pdf',width=1.65,height=3, dpi="retina")
+
+
+```
+
+
+% non-tumour
+```{r fig.width=1.8, fig.height=3} 
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_nonTum), days<(365*3))
+
+dat$cohort_prg = dat$cohort
+dat$cohort_prg[dat$event==1  ]='SMM_PRG'
+dat$cohort_prg[dat$cohort_prg=='MGUS']
+
+p0 = dat$treg.pct_nonTum %>% .[.>0] %>% min()
+
+dat %>% filter(treg.pct_nonTum<5) %>% 
+  ggplot(aes(cohort_prg,treg.pct_nonTum+p0,fill=cohort_prg))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons =
+    list(c('MGUS','SMM'),c('MGUS','SMM_PRG'),c('SMM','SMM_PRG')),
+  method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  scale_y_log10()+annotation_logticks(sides='l')+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  labs(y='CD4+Treg % non-tumour',title='')+
+  geom_hline(yintercept = treg.pctNon_thr, color='blue')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/box-flow_Treg_pctNon.pdf',width=1.8,height=3, dpi="retina")
+
+```
+
+
+## Supp: Treg vs individual risk metrics
+
+% CD4+
+```{r fig.height=2.5, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(Entry_LB_paraprotein),!is.na(treg.pct_CD4)) 
+dat %>% 
+  ggplot(aes(Entry_LB_paraprotein,treg.pct_CD4))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-treg.pct_CD4.PP.pdf',width=3.5,height=2.5, dpi="retina")
+
+# BM PC %
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(tumour.pct_live),!is.na(treg.pct_CD4),treg.pct_CD4<50) 
+dat %>% 
+  ggplot(aes(tumour.pct_live,treg.pct_CD4))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10()+annotation_logticks(sides='b')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-treg.pct_CD4.BM_PC.pdf',width=3.5,height=2.5, dpi="retina")
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(Entry_LB_FLC_ratio),!is.na(treg.pct_CD4),treg.pct_CD4<50) 
+p0=min(dat$Entry_LB_FLC_ratio %>% .[.>0])
+dat %>% 
+  ggplot(aes(Entry_LB_FLC_ratio+p0,treg.pct_CD4))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10(breaks=c(0.01,0.1,1,10,100),labels=c(0.01,0.1,1,10,100))+
+  annotation_logticks(sides='b')
+#ggsave(plot=pl,filename = '../figures/flow/cor-CD127.PP.pdf',width=3.5,height=2.5, dpi="retina")
+
+
+```
+
+
+
+% non-tumour
+```{r fig.height=2.5, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(Entry_LB_paraprotein),!is.na(treg.pct_nonTum)) 
+dat %>% 
+  ggplot(aes(Entry_LB_paraprotein,treg.pct_nonTum))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-treg.pct_nonTum.PP.pdf',width=3.5,height=2.5, dpi="retina")
+
+# BM PC %
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(tumour.pct_live),!is.na(treg.pct_nonTum),treg.pct_nonTum<5) 
+dat %>% 
+  ggplot(aes(tumour.pct_live,treg.pct_nonTum))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10()+annotation_logticks(sides='b')-> pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/cor-tumour.pct_live.BM_PC.pdf',width=3.5,height=2.5, dpi="retina")
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(Entry_LB_FLC_ratio),!is.na(treg.pct_nonTum),treg.pct_nonTum<5) 
+p0=min(dat$Entry_LB_FLC_ratio %>% .[.>0])
+dat %>% 
+  ggplot(aes(Entry_LB_FLC_ratio+p0,treg.pct_nonTum))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10(breaks=c(0.01,0.1,1,10,100),labels=c(0.01,0.1,1,10,100))+
+  annotation_logticks(sides='b')
+#ggsave(plot=pl,filename = '../figures/flow/cor-CD127.PP.pdf',width=3.5,height=2.5, dpi="retina")
+
+
+```
+
+
+
+
+## flow_Treg TTP
+
+% CD4+
+```{r fig.height=4, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_CD4), days < 3*365)
+
+dat$hi = as.character(dat$treg.pct_CD4 < treg.pctCD4_thr)
+
+#pval
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+
+#hr
+print(
+  summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)']
+)
+
+#pl
+survfit(Surv(days, event) ~ hi, data = dat) %>% 
+  ggsurvfit(type = "risk", xscale='d_m')+
+  add_confidence_interval()+
+  add_censor_mark(size=1)+
+  scale_ggsurvfit(x_scales = list( 
+    breaks = seq(0,365*3.5,365/2), labels=seq(0,42,6), limits=c(0,365*3) 
+  ))+
+  add_risktable()+
+  scale_y_continuous(breaks=seq(0,1,0.2),labels=seq(0,100,20),limits=c(0,1))+
+  scale_color_manual(values = c('grey50','#eb7a09'))+
+  scale_fill_manual(values = c('grey50','#eb7a09'))+
+  labs(x='Months',y='% progressed')+
+  theme_classic()+
+  theme(legend.position='bottom')->pl
+pl
+ggsave(plot=print(pl, newpage = FALSE),filename = '../figures/flow/surv-Treg_pctCD4.pdf',width=3.5,height=4, dpi="retina")
+
+
+```
+
+% non-tumour
+```{r fig.height=4, fig.width=3.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_nonTum), days < 3*365)
+
+#dat$hi = dat$treg.pct_nonTum > median(dat$treg.pct_nonTum)
+dat$hi = as.character(dat$treg.pct_nonTum < treg.pctNon_thr)
+
+#pval
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+
+#hr
+print(
+  summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)']
+)
+
+#pl
+survfit(Surv(days, event) ~ hi, data = dat) %>% 
+  ggsurvfit(type = "risk", xscale='d_m')+
+  add_confidence_interval()+
+  add_censor_mark(size=1)+
+  scale_ggsurvfit(x_scales = list( 
+    breaks = seq(0,365*3.5,365/2), labels=seq(0,42,6), limits=c(0,365*3) 
+  ))+
+  add_risktable()+
+  scale_y_continuous(breaks=seq(0,1,0.2),labels=seq(0,100,20),limits=c(0,1))+
+  scale_color_manual(values = c('grey50','#eb7a09'))+
+  scale_fill_manual(values = c('grey50','#eb7a09'))+
+  labs(x='Months',y='% progressed')+
+  theme_classic()+
+  theme(legend.position='bottom')->pl
+pl
+ggsave(plot=print(pl, newpage = FALSE),filename = '../figures/flow/surv-Treg_pctNon.pdf',width=3.5,height=4, dpi="retina")
+
+
+```
+
+## flow_Treg TPP, no MGUS stats
+
+```{r}
+
+print('treg.pct_CD4')
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_CD4), days < 3*365, cohort=='SMM')
+dat$hi = as.character(dat$treg.pct_CD4 < treg.pctCD4_thr)
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+print(
+  summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)']
+)
+
+print('treg.pct_nonTum')
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event), !is.na(treg.pct_nonTum), days < 3*365, cohort=='SMM')
+dat$hi = as.character(dat$treg.pct_nonTum < treg.pctNon_thr)
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+print(
+  summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)']
+)
+
+
+```
+
+
+## Treg TPP multivariate: individual risk features
+
+### % non-tumour
+
+```{r fig.height=1.75, fig.width=4.5}
+#tumour.pct_live
+#Entry_LB_paraprotein
+#Entry_LB_FLC_ratio
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),days < 3*365,
+         !is.na(treg.pct_nonTum), !is.na(tumour.pct_live)) 
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+dat$tumour_ = factor(ifelse(dat$tumour.pct_live > median(dat$tumour.pct_live),'hi','lo'),c('lo','hi'))
+cox_model = coxph(Surv(days, event) ~ Treg_ + tumour_, data = dat)
+summary(cox_model)$coefficients[1,5] #0.03
+
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),days < 3*365,
+         !is.na(treg.pct_nonTum), !is.na(Entry_LB_paraprotein)) 
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+dat$tumour_ = factor(ifelse(dat$Entry_LB_paraprotein > median(dat$Entry_LB_paraprotein),'hi','lo'),c('lo','hi'))
+cox_model = coxph(Surv(days, event) ~ Treg_ + tumour_, data = dat)
+summary(cox_model)$coefficients[1,5] #0.1
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),days < 3*365,
+         !is.na(treg.pct_nonTum), !is.na(Entry_LB_FLC_ratio)) 
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+dat$tumour_ = factor(ifelse(dat$Entry_LB_FLC_ratio > median(dat$Entry_LB_FLC_ratio),'hi','lo'),c('lo','hi'))
+cox_model = coxph(Surv(days, event) ~ Treg_ + tumour_, data = dat)
+summary(cox_model)$coefficients[1,5] #***
+
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),days < 3*365,
+         !is.na(treg.pct_nonTum), 
+         !is.na(tumour.pct_live), !is.na(Entry_LB_paraprotein), !is.na(Entry_LB_FLC_ratio)) 
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+
+#Treg lo and cont
+cox_model = coxph(Surv(days, event) ~ Treg_ + tumour.pct_live + Entry_LB_paraprotein + Entry_LB_FLC_ratio, data = dat)
+summary(cox_model)$coefficients[1,5]
+#cat
+dat$BM_PC_ = factor(ifelse(dat$tumour.pct_live > median(dat$tumour.pct_live),'hi','lo'),c('lo','hi'))
+dat$PP_ = factor(ifelse(dat$Entry_LB_paraprotein > median(dat$Entry_LB_paraprotein),'hi','lo'),c('lo','hi'))
+dat$FLCr_ = factor(ifelse(dat$Entry_LB_FLC_ratio > median(dat$Entry_LB_FLC_ratio),'hi','lo'),c('lo','hi'))
+cox_model = coxph(Surv(days, event) ~ Treg_ + BM_PC_ + PP_ + FLCr_, data = dat)
+summary(cox_model)$coefficients[1,5]
+
+```
+
+
+```{r fig.height=1.75, fig.width=4.5}
+cox_summary=summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+)
+dat.pl = dat.pl %>% data.frame(Var1=dat.pl$Var1,
+  med=c(median(dat$treg.pct_nonTum),median(dat$tumour.pct_live),
+        median(dat$Entry_LB_paraprotein),median(dat$Entry_LB_FLC_ratio)))
+
+dat.pl %>% 
+  
+  left_join(
+    dat %>% select(Treg_,BM_PC_,PP_,FLCr_) %>% 
+      pivot_longer(everything()) %>% group_by_all() %>% tally() %>% 
+      pivot_wider(names_from=value,values_from=n) %>% 
+      mutate(name=paste0(name,'hi'),name=ifelse(name=='Treg_hi','Treg_lo',name)),
+    by=c('Var1'='name')
+  ) %>% 
+  mutate(Var1=paste0(Var1,', >',med,'\nhi=',hi,', lo=',lo)) %>% 
+  arrange(-hr) %>% mutate(Var1=factor(Var1,Var1)) %>% 
+  
+  ggplot(aes(y = Var1, x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,3)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 2, 5, 10)) +
+  labs(
+    #title = paste0(
+    #  'vs MGUS n=',table(dat$Entry_Mayo_)[1],', ',
+    #  'vs Treg_lo n=',table(dat$Treg_)['hi']
+    #),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=8),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/forest-TregNon_metrics.pdf',width=4.5,height=1.75, dpi="retina")
+```
+
+## Treg TPP multivariate: risk groups
+
+### % non-tumour
+
+Mayo
+```{r fig.height=1.75, fig.width=4.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),
+         !is.na(treg.pct_nonTum), days < 3*365) %>%
+  mutate(Entry_Mayo_=ifelse(Entry_Mayo %in% c('high','UHR'),'high/UHR',Entry_Mayo)) %>% 
+  mutate(Entry_Mayo_=factor(Entry_Mayo_,c('MGUS','low','intermediate','high/UHR')))
+  #with UHR
+  #mutate(Entry_Mayo_=factor(Entry_Mayo,c('MGUS','low','intermediate','high','UHR'))) 
+
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+
+table(dat$Entry_Mayo_, dat$Treg_) #good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_Mayo_ + Treg_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_Mayo_)) %>% mutate(Var1=paste0('Entry_Mayo_',Var1)) %>% 
+              rbind(data.frame(Var1='Treg_lo',Freq=table(dat$Treg_)['lo'])))
+dat.pl
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,3)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0(
+      'vs MGUS n=',table(dat$Entry_Mayo_)[1],', ',
+      'vs Treg_lo n=',table(dat$Treg_)['hi']
+    ),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=8),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/forest-TregNon_Mayo.pdf',width=4.5,height=1.75, dpi="retina")
+
+```
+
+Entry_IMWG 20/2/20
+```{r fig.height=1.75, fig.width=4.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),
+         !is.na(treg.pct_nonTum), days < 3*365) %>%
+  mutate(Entry_IMWG_=Entry_IMWG) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('high','UHR'),'high/UHR',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('low','low-intermediate'),'low/low-int',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=factor(Entry_IMWG_,c('MGUS','low/low-int','intermediate','high/UHR'))) 
+
+dat$Treg_ = factor(ifelse(dat$treg.pct_nonTum > treg.pctNon_thr,'hi','lo'),c('hi','lo'))
+
+#table(dat$Entry_IMWG_, dat$Treg_) good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_IMWG_ + Treg_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_IMWG_)) %>% mutate(Var1=paste0('Entry_IMWG_',Var1)) %>% 
+              rbind(data.frame(Var1='Treg_lo',Freq=table(dat$Treg_)['lo'])))
+dat.pl
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,3)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0(
+      'vs MGUS n=',table(dat$Entry_IMWG_)[1],', ',
+      'vs Treg_lo n=',table(dat$Treg_)['hi']
+    ),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=8),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/flow/forest-TregNon_IMWG.pdf',width=4.5,height=1.75, dpi="retina")
+
+```
+
+
+
+
+### % CD4+
+
+Mayo
+```{r fig.height=1.75, fig.width=4.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),
+         !is.na(treg.pct_CD4), days < 3*365) %>%
+  mutate(Entry_Mayo_=ifelse(Entry_Mayo %in% c('high','UHR'),'high/UHR',Entry_Mayo)) %>% 
+  mutate(Entry_Mayo_=factor(Entry_Mayo_,c('MGUS','low','intermediate','high/UHR')))
+  #with UHR
+  #mutate(Entry_Mayo_=factor(Entry_Mayo,c('MGUS','low','intermediate','high','UHR'))) 
+
+dat$Treg_ = factor(ifelse(dat$treg.pct_CD4 > treg.pctCD4_thr,'hi','lo'),c('hi','lo'))
+
+table(dat$Entry_Mayo_, dat$Treg_) #good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_Mayo_ + Treg_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_Mayo_)) %>% mutate(Var1=paste0('Entry_Mayo_',Var1)) %>% 
+              rbind(data.frame(Var1='Treg_lo',Freq=table(dat$Treg_)['lo'])))
+
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,3)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0(
+      'vs MGUS n=',table(dat$Entry_Mayo_)[1],', ',
+      'vs Treg_lo n=',table(dat$Treg_)['hi']
+    ),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=8),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )
+
+```
+
+Entry_IMWG 20/2/20
+```{r fig.height=1.75, fig.width=4.5}
+
+dat = import %>% 
+  filter(timepoint=='Baseline',!is.na(event),
+         !is.na(treg.pct_CD4), days < 3*365) %>%
+  mutate(Entry_IMWG_=Entry_IMWG) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('high','UHR'),'high/UHR',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('low','low-intermediate'),'low/low-int',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=factor(Entry_IMWG_,c('MGUS','low/low-int','intermediate','high/UHR'))) 
+
+dat$Treg_ = factor(ifelse(dat$treg.pct_CD4 > treg.pctCD4_thr,'hi','lo'),c('hi','lo'))
+
+#table(dat$Entry_IMWG_, dat$Treg_) good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_IMWG_ + Treg_, data = dat)
+cox_summary <- summary(cox_model)
+#Extract hazard ratios, confidence intervals, and p-values
+hazard_ratios <- exp(coef(cox_model))
+conf_int <- exp(confint(cox_model))
+p_values <- cox_summary$coefficients[,5]
+#Plot
+dat.pl = data.frame(
+  Var1 = rownames(cox_summary$conf.int),
+  pvals=p_values,
+  hr = hazard_ratios,
+  lower = conf_int[,1],
+  upper = conf_int[,2]
+) %>% 
+  left_join(data.frame(table(dat$Entry_IMWG_)) %>% mutate(Var1=paste0('Entry_IMWG__',Var1)) %>% 
+              rbind(data.frame(Var1='Treg_lo',Freq=table(dat$Treg_)['lo'])))
+
+dat.pl %>% 
+  ggplot(aes(y = paste0(Var1,' n=',Freq), x = hr)) +
+  geom_point(size = 3, color = "royalblue") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_text(aes(label=round(pvals,3)),color='red')+
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10(breaks = c(0.1, 1, 10)) +
+  labs(
+    title = paste0(
+      'vs MGUS n=',table(dat$Entry_IMWG_)[1],', ',
+      'vs Treg_lo n=',table(dat$Treg_)['hi']
+    ),
+    x = "Hazard ratio (95% CI)",
+    y = "Variable"
+  )+
+  theme(
+    plot.title = element_text(hjust = 0.5, size=8),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )
+
+```
+
+
+
+## Treg % non-tum vs atlas
+
+```{r fig.height=2.5, fig.width=3.5}
+
+dat = comp$Tcell %>% filter(celltype=='CD4+Treg') %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>%
+  select(sample_id,donor_id,prop,cohort) %>% 
+  left_join(read.csv('../resources/donor_id-flow_scRNA.csv')) %>% drop_na() %>% 
+  left_join(import %>% filter(timepoint=='Baseline') %>% 
+              select(patient,treg.pct_nonTum,T.pct_nonTum)) %>% drop_na() %>% 
+  left_join(ords$Tcell$PCA)
+
+dat %>% 
+  ggplot(aes(prop*T.pct_nonTum, PC1*-1))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10(breaks=c(0.1,1))+annotation_logticks(sides='lb')
+
+
+dat = comp$Tcell %>% filter(celltype=='CD4+Treg') %>% 
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>%
+  select(sample_id,donor_id,prop,cohort) %>% 
+  left_join(ords$Tcell$PCA)
+
+dat %>% filter(cohort!='Non') %>% 
+  ggplot(aes(prop, PC1*-1))+
+  geom_point(aes(color=cohort))+scale_color_manual(values=diagnosis_col)+
+  geom_smooth(method='lm',color='black')+stat_cor()+
+  scale_x_log10(breaks=c(0.1,1))+annotation_logticks(sides='lb')
+
+
+```
+
+## Treg longitudinal (*cut*)
+
+```{r fig.height=3, fig.width=5}
+
+dat = import %>% 
+  filter( patient %in% (import %>% filter(longit) %>% pull(patient)) ) %>% 
+  mutate(prg = ifelse(patient %in% import[import$event==1,]$patient,'prg','non'))
+
+dat %>% 
+  ggplot(aes(days_from_last,treg.pct_nonTum))+
+  facet_grid(~prg)+
+  geom_line(aes(group=patient),linewidth=0.5,color='grey70')+geom_point()+
+  geom_smooth(method='lm',se=T,fill='skyblue')+
+  stat_cor(color='red')
+  
+dat %>% 
+  ggplot(aes(days_from_bsl,treg.pct_nonTum))+
+  facet_grid(~prg)+
+  geom_line(aes(group=patient),linewidth=0.5,color='grey70')+geom_point()+
+  geom_smooth(method='lm',se=T,fill='skyblue')+
+  stat_cor(color='red')
+
+```
+
+
+
+
+
+
+## [*unused*] CyTOF TemTerm at baseline vs MRD 
+
+```{r fig.width=1.25, fig.height=3} 
+
+dat = read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv')) %>% select(-MRD)
+
+dat = dat %>% left_join(
+  read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/radar_mrd_Jan25.csv') %>% mutate(patient=str_remove_all(patient,'-')),
+  by=c('radar_real'='patient')
+) %>% filter(!is.na(D100_MRD)) %>% 
+  left_join(read.csv('~/Documents/ResearchProjects/RADAR_CyTOF/R/data/md.csv') %>% 
+              select(patient_id,condition),by=c('radar_file'='patient_id'))
+
+dat = dat %>% left_join(
+  read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF-MRD_CTRU.csv'),by=c('radar_real'='patient_id')
+)
+
+#CD127n_pctCD8,Tem_pctCD8,Temra_pctCD8,CD57p_GZMBp_CD8
+
+dat %>% 
+  #mutate(cohort=factor(cohort,c('SMM','MM'))) %>% 
+  ggplot(aes(MRD,CD57p_GZMBp_Tem+CD57n_GZMBp_Tem,fill=cohort))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('neg','pos')), 
+                             method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  #scale_y_log10()+
+  #scale_y_continuous(breaks=c(0,0.25,0.5),limits=c(0,0.75),labels=c('0','0.25','0.5'))+
+  labs(title='')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )
+#->pl
+#pl
+#ggsave(plot=pl,filename = '../figures/flow/box-CyTOF_TemBM.pdf',width=1.25,height=3, dpi="retina")
+```
+
+
+## [*unused*] core panel MRD
+
+```{r fig.height=3, fig.width=3}
+x = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_combined_flow.csv') %>%
+  #filter(study=='RADAR',timepoint %in% c('Diagnosis','Baseline')) %>% 
+  filter(study=='RADAR',timepoint %in% c('100D','D100')) %>% 
+  group_by(patient) %>% slice_head(n = 1) %>% ungroup()
+
+x %>% left_join(
+  read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/radar_mrd_Jan25.csv')
+) -> x
+
+x %>% mutate(patient_id=str_remove_all(patient,'-')) %>%
+  left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF-MRD_CTRU.csv')
+) -> x
+
+x = x %>% mutate(IL7Rneg_CD8 = 100-(CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8)) 
+
+sum(!is.na(x$MRD))
+
+#tumour.pct_live,CD57p.pct_CD8,CD127p.pct_CD8,treg.pct_nonTum
+#CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8
+#CD38pCD127n.pct_CD3/CD38nCD127p.pct_CD3
+
+x %>% filter(!is.na(MRD)) %>% ggplot(aes(MRD,tumour.pct_live))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()+
+  scale_y_log10()
+#D100=***
+
+x %>% filter(!is.na(MRD)) %>% ggplot(aes(MRD,CD8.pct_CD3))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()
+
+x %>% filter(!is.na(MRD)) %>% ggplot(aes(MRD,CD57p.pct_CD8))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()
+
+#for ( i in colnames(x)[6:52]){
+#x$i=x[[i]]
+#x %>% filter(!is.na(MRD)) %>% ggplot(aes(MRD,i))+
+#  geom_boxplot(outlier.alpha=0)+ggtitle(i)+
+#  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()->pl
+#print(pl)}
+```
+
+age??
+```{r}
+x = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_combined_flow.csv') %>%
+  filter(study=='RADAR',timepoint %in% c('Diagnosis','Baseline')) %>% 
+  #filter(study=='RADAR',timepoint %in% c('100D','D100')) %>% 
+  group_by(patient) %>% slice_head(n = 1) %>% ungroup()
+x = x %>% mutate(IL7Rneg_CD8 = 100-(CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8)) 
+
+x %>% left_join(
+  read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_clinical.csv') %>% select(patient,age) %>% distinct() %>% 
+    group_by(patient) %>% slice_head(n = 1)
+) %>% lm(CD8.pct_CD3 ~ MRD + age, .) %>% summary()
+
+
+```
+
+fold-change
+```{r fig.height=3, fig.width=3}
+
+x = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_combined_flow.csv') %>% 
+  filter(study=='RADAR') %>% 
+  filter(timepoint %in% c('Diagnosis','Baseline','100D','D100')) %>% 
+  mutate(tp=ifelse(timepoint %in% c('100D','D100'),'tp2','tp1')) %>% 
+  group_by(patient,tp) %>% slice_head(n = 1) %>% ungroup()
+
+#tumour.pct_live,CD57p.pct_CD8,CD127p.pct_CD8,treg.pct_nonTum
+#100-CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8
+#CD38pCD127n.pct_CD3/CD38nCD127p.pct_CD3
+
+x = x %>% mutate(IL7Rneg_CD8 = 100-(CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8)) 
+#select(CD8.pct_CD3, CD8.pct_nonTum, IL7Rneg_CD8)
+#CD8.pct_CD3 * IL7Rneg_CD8/100
+
+x %>% 
+  mutate(value= CD8.pct_CD3) %>% 
+  select(patient,tp,value) %>% 
+  pivot_wider(names_from=tp) %>% drop_na() %>% 
+  mutate(fc=tp2/tp1, log2fc = log2(fc)) -> xx
+
+xx %>% mutate(patient_id=str_remove_all(patient,'-')) %>%
+  left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF-MRD_CTRU.csv')
+) -> xx
+
+xx %>% filter(!is.na(MRD)) %>% 
+  ggplot(aes(MRD,log2fc))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.1)+ggpubr::stat_compare_means()
+
+xx %>% ggplot(aes(tp1,tp2))+geom_point(size=0.5)+geom_smooth(method='lm')
+
+xx %>% filter(!is.na(MRD)) %>% 
+  ggplot(aes(tp1,tp2,color=MRD))+geom_point(size=0.5)+geom_smooth(method='lm',se=F)
+
+```
+
+improving
+```{r fig.height=3, fig.width=3}
+
+x = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_combined_flow.csv') %>%
+  #filter(study=='RADAR',timepoint %in% c('Diagnosis','Baseline')) %>% 
+  filter(study=='RADAR',timepoint %in% c('100D','D100')) 
+  
+x = x %>% filter(patient %in% (table(x$patient) %>% .[.<2] %>% names()))
+
+x = x %>% 
+  group_by(patient) %>% slice_head(n = 1) %>% ungroup() %>% 
+  mutate(patient_id=str_remove_all(patient,'-')) %>%
+    left_join(read_csv('/Volumes/ritd-ag-project-rd017s-klyon56/Atlas_analysis_code/R-resub/data/CyTOF/CyTOF-MRD_CTRU.csv')
+    ) %>% 
+  mutate(IL7Rneg_CD8 = 100-(CD38nCD127p.pct_CD8+CD38pCD127p.pct_CD8)) %>% 
+  left_join(
+    read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/all_clinical.csv') %>% select(patient,age) %>% distinct() %>% 
+    group_by(patient) %>% slice_head(n = 1)
+)
+
+x %>% filter(!is.na(MRD)) %>% 
+  ggplot(aes(MRD,treg.pct_nonTum))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()
+
+#summary(lm(CD8.pct_CD3 ~ MRD + age, x))
+
+#only want to remove are
+#after certain date
+#high risk recieved ISA
+#before, had no
+
+#RiskCTRUF50	Disease Risk CTRU	RISKCTRUF50F.	"1 = Standard-risk, 2 = High-risk, 3 = Not viable, 4 = Unknown, 5 = Unable to determine, 999 = Other, 9876 = Missing"
+pt_stnd_risk = read_csv('/Volumes/groupfolders/CI_Haematology_Yong/Kane Foster/manuscript2025-core_panel/radar-risk.csv') %>% filter(RiskCTRUF50==1) %>% pull(patient)
+
+x %>% filter(!is.na(MRD)) %>% 
+  filter(patient_id %in% pt_stnd_risk) %>% 
+  ggplot(aes(MRD,CD8.pct_CD3))+
+  geom_boxplot(outlier.alpha=0)+
+  geom_jitter(width=0.2,height=0,size=0.5)+ggpubr::stat_compare_means()
+
+
+
+```
+
+
+
+
+## [*NK paper*] NK.CD56 TTP
+
+assessment/thr
+```{r}
+#CD56_dim.pct_NK,CD56_br.pct_NK,CD56_dim.pct_nonTum,CD56_br.pct_nonTum
+library(maxstat)
+
+i='CD56_br.pct_nonTum'
+dat = import %>% filter(timepoint=='Baseline', !is.na(event), days < 3*365)
+dat$val = dat[[i]]
+dat = dat[!is.na(dat$val),]
+mtHL = maxstat.test(Surv(days, event) ~ val, data=dat, smethod="LogRank", pmethod="HL")
+dat$hi = dat$val > mtHL$estimate
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+print(summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)'])
+
+#val, p, hr
+#CD56_dim.pct_NK 0.002423281, 0.3165103
+#CD56_br.pct_NK 0.00242, 3.2
+#CD56_dim.pct_nonTum, 0.002, 3.3
+#CD56_br.pct_nonTum, 0.09, 2.2
+```
+
+surv curves
+```{r fig.height=4, fig.width=3.5}
+library(maxstat)
+
+i='CD56_br.pct_NK'
+i='CD56_dim.pct_NK'
+
+dat = import %>% filter(timepoint=='Baseline', !is.na(event), days < 3*365)
+dat$val = dat[[i]]
+dat = dat[!is.na(dat$val),]
+mtHL = maxstat.test(Surv(days, event) ~ val, data=dat, smethod="LogRank", pmethod="HL")
+print(mtHL$estimate)
+dat$hi = dat$val > mtHL$estimate
+
+#p
+print(survdiff(Surv(days, event) ~ hi, data = dat)$pvalue)
+#hr
+print(summary(coxph(Surv(days, event) ~ hi, data = dat))[["coefficients"]][1,'exp(coef)'])
+
+#pl
+survfit(Surv(days, event) ~ hi, data = dat) %>% 
+  ggsurvfit(type = "risk", xscale='d_m')+
+  add_confidence_interval()+
+  add_censor_mark(size=1)+
+  scale_ggsurvfit(x_scales = list( 
+    breaks = seq(0,365*3.5,365/2), labels=seq(0,42,6), limits=c(0,365*3) 
+  ))+
+  add_risktable()+
+  scale_y_continuous(breaks=seq(0,1,0.2),labels=seq(0,100,20),limits=c(0,1))+
+  scale_color_manual(values = c('grey50','#eb7a09'))+
+  scale_fill_manual(values = c('grey50','#eb7a09'))+
+  labs(x='Months',y='% progressed')+
+  theme_classic()+
+  theme(legend.position='bottom')->pl
+pl
+ggsave(plot=print(pl, newpage = FALSE),
+       filename = paste0('../figures/flow/surv-',i,'.pdf'),
+       width=3.5,height=4, dpi="retina")
+
+
+```
+
+
+forest plot multivar risk
+```{r fig.height=1.75, fig.width=4.5}
+
+# mayo
+i='CD56_br.pct_nonTum'
+dat = import %>% filter(timepoint=='Baseline', !is.na(event), days < 3*365) %>% 
+  mutate(Entry_Mayo_=ifelse(Entry_Mayo %in% c('high','UHR'),'high/UHR',Entry_Mayo)) %>% 
+  mutate(Entry_Mayo_=factor(Entry_Mayo_,c('MGUS','low','intermediate','high/UHR')))
+dat$val = dat[[i]]
+dat = dat[!is.na(dat$val),]
+mtHL = maxstat.test(Surv(days, event) ~ val, data=dat, smethod="LogRank", pmethod="HL")
+dat$hi = dat$val > mtHL$estimate
+
+dat$CD56_br_ = factor(ifelse(dat$hi,'hi','lo'),c('hi','lo'))
+
+table(dat$Entry_Mayo_, dat$CD56_br_) #good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_Mayo_ + CD56_br_, data = dat)
+cox_summary <- summary(cox_model)
+
+# imwg
+i='CD56_br.pct_nonTum'
+dat = import %>% filter(timepoint=='Baseline', !is.na(event), days < 3*365) %>% 
+  mutate(Entry_IMWG_=Entry_IMWG) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('high','UHR'),'high/UHR',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=ifelse(Entry_IMWG_ %in% c('low','low-intermediate'),'low/low-int',Entry_IMWG_)) %>% 
+  mutate(Entry_IMWG_=factor(Entry_IMWG_,c('MGUS','low/low-int','intermediate','high/UHR'))) 
+dat$val = dat[[i]]
+dat = dat[!is.na(dat$val),]
+mtHL = maxstat.test(Surv(days, event) ~ val, data=dat, smethod="LogRank", pmethod="HL")
+dat$hi = dat$val > mtHL$estimate
+
+dat$CD56_br_ = factor(ifelse(dat$hi,'hi','lo'),c('hi','lo'))
+
+table(dat$Entry_IMWG_, dat$CD56_br_) #good mix
+
+cox_model = coxph(Surv(days, event) ~ Entry_IMWG_ + CD56_br_, data = dat)
+summary(cox_model)
+
+```
+
+
+
+## CyTOF and MRD
+
+```{r fig.width=1.25, fig.height=3} 
+dat = read_csv('/Users/kaneucl/Library/CloudStorage/OneDrive-Personal/COSMOS.Tcell/R-resub/data/CyTOF/CyTOF_reGateCGK-Proportions.csv') %>% left_join(read_csv('/Users/kaneucl/Library/CloudStorage/OneDrive-Personal/COSMOS.Tcell/R-resub/data/CyTOF/CyTOF_reGateCGK-md.csv')) %>% 
+  left_join(read_csv('/Users/kaneucl/Library/CloudStorage/OneDrive-Personal/COSMOS.Tcell/R-resub/data/CyTOF/CyTOF-MRD_CTRU.csv'), by=c('radar_real'='patient_id'),suffix = c('.v1','.v2')) 
+
+dat %>% filter(!is.na(MRD.v2)) %>% 
+  mutate(cohort=factor(cohort,c('neg','pos'))) %>% 
+  ggplot(aes(MRD.v2,Tem_pctCD8+Temra_pctCD8,fill=cohort))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('neg','pos')), method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(title='')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )
+#->pl
+#pl
+###ggsave(plot=pl,filename = '../figures/flow/box-CyTOF_Treg.pdf',width=1.25,height=3, dpi="retina")
+```
+
+
+```{r fig.width=1.25, fig.height=3} 
+for (i in colnames(dat)[2:22]){
+  
+dat %>% filter(!is.na(MRD.v2)) %>% 
+  mutate(cohort=factor(cohort,c('neg','pos'))) %>% 
+  ggplot(aes_string('MRD.v2',i,fill='cohort'))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('neg','pos')), method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(title=i)+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+print(pl)
+}
+```
+
+```{r fig.width=1.25, fig.height=3} 
+
+dat$tmp = (dat$CD57p_GZMBn_Tem + dat$CD57p_GZMBp_Tem) / dat$Tem_pctCD8
+
+dat %>% filter(!is.na(MRD.v2)) %>% 
+  mutate(cohort=factor(cohort,c('neg','pos'))) %>% 
+  ggplot(aes_string('MRD.v2','tmp',fill='cohort'))+
+  
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('neg','pos')), method = 'wilcox.test',size=3.5)+
+  scale_fill_manual(values=diagnosis_col)+
+  labs(title=i)+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )
+```
+
+
+
+# SPACE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

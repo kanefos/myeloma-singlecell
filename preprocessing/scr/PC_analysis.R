@@ -1,5 +1,6 @@
 # Plasma cell analysis  ########################################################
 
+setwd('preprocessing/')
 library(tidyverse)
 library(zellkonverter)
 library(scran)
@@ -14,6 +15,9 @@ mPC_id = read.csv('data/mPC_id.csv') %>% filter(mPC=='True')
 pathways = read.csv('../resources/pathways.csv')
 gs = list()
 for ( g in unique(pathways$pathway)[1:40]){gs[[g]]=pathways[pathways$pathway==g,]$gene}
+#manually add TNFa pathway
+msig <- msigdbr(species = "human", category = "H")
+gs[['HALLMARK_TNFA_SIGNALING_VIA_NFKB']] = msig[msig$gs_name=='HALLMARK_TNFA_SIGNALING_VIA_NFKB',]$gene_symbol
 
 # UCell scoring
 sce.mat = sce@assays@data@listData[["X"]]
@@ -28,6 +32,7 @@ save(scr, file='data/tumour_modules_scr.RData')
 
 load('data/tumour_modules_scr.RData')
 pathways = read.csv('../resources/pathways.csv')[,1:2] %>% distinct() %>% .[1:40,]
+pathways = pathways %>% rbind(data.frame(pathway='HALLMARK_TNFA_SIGNALING_VIA_NFKB',pathway_neat='TNFa'))
 rowData(scr) = DataFrame(data.frame(
   p=rownames(scr),pathway=pathways$pathway,pathway_neat=pathways$pathway_neat))
 mPC_id = read.csv('data/mPC_id.csv') %>% filter(mPC=='True')

@@ -118,15 +118,15 @@ comp$Tcell %>% filter(
   !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
   # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
   filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
-  filter(celltype=='Teff.IFIT2') %>% filter(study_id!='Zavidij_2020') %>% 
+  filter(celltype=='Teff') %>% filter(study_id!='Zavidij_2020') %>%
   
-  ggplot(aes(aspirate_CD138pos,clr))+
+  ggplot(aes(aspirate_CD138pos,prop*100))+
   geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
-  ggpubr::stat_cor(label.sep='\n', label.y=2, label.x=15)+
+  ggpubr::stat_cor(label.sep='\n')+
   scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
-  labs(x='Aspirate % CD138+\n',y=paste0('Normalised % T cells'),title='Teff.IFIT2')+
-  #scale_x_log10()+
+  labs(x='Aspirate % CD138+',y=paste0('% T cells'),title='Teff')+
+  scale_y_log10()+annotation_logticks(sides='l')+
   theme_classic()+
   theme(
     legend.position = "none",
@@ -136,6 +136,55 @@ comp$Tcell %>% filter(
     )-> pl
 pl 
 ggsave(plot=pl,filename = '../figures/5/B-right.pdf',width=2.5,height=2.5, dpi="retina")
+
+
+comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='Teff') %>% 
+  left_join(tumour_modules_pct) %>% filter(!is.na(pathway)) %>% 
+  filter(pathway_neat=='Stress') %>% 
+  ggplot(aes(pct,prop*100))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n')+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='pct stress',y=paste0('% T cells'),title='Teff')+
+  scale_y_log10()+annotation_logticks(sides='l')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=12),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=12)
+    )-> pl
+pl 
+ggsave(plot=pl,filename = '../figures/5/B-right_str.pdf',width=2.5,height=2.5, dpi="retina")
+
+
+comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='Teff') %>% 
+  left_join(tumour_modules_pct) %>% filter(!is.na(pathway)) %>% 
+  filter(pathway_neat=='TNFa') %>% 
+  ggplot(aes(pct,prop*100))+
+  geom_point(size=2, aes(color=cohort))+
+  geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
+  ggpubr::stat_cor(label.sep='\n')+
+  scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
+  labs(x='pct TNFa',y=paste0('% T cells'),title='Teff')+
+  scale_y_log10()+annotation_logticks(sides='l')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.text.x = element_text(size=11),axis.title.x = element_text(size=12),
+    axis.text.y = element_text(size=11),axis.title.y = element_text(size=12)
+    )-> pl
+pl 
 ```
 
 
@@ -274,6 +323,119 @@ pl
 ggsave(plot=pl,filename = '../figures/5/D.pdf',width=5,height=2.5, dpi="retina")
 
 ```
+
+## 5 - Control vs PCD split by BM PC % <10 & >10%
+
+```{r fig.width=1.75, fig.height=3} 
+
+p0 = min(comp$Tcell$prop[comp$Tcell$prop>0])*100
+
+dat.pl = comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100) %>% 
+  # Remove Foster_2024 samples with T cell depletion/CD8-enrichment
+  filter( ! sample_id %in% sort_id[sort_id$sort_id!='T cell-enriched',]$sample_id ) %>% 
+  filter(celltype=='Teff')
+
+dat.pl$is = (dat.pl$cohort=='Non') | (dat.pl$cohort!='Non' & dat.pl$study_id!='Zavidij_2020' & !is.na(dat.pl$aspirate_CD138pos))
+
+dat.pl %>% filter(is) %>% 
+  mutate(BM_PC_hi = ifelse(aspirate_CD138pos > 10,'hi','lo')) %>% 
+  mutate(BM_PC_hi = ifelse(is.na(BM_PC_hi),'Non',BM_PC_hi)) %>% 
+  
+  
+  ggplot(aes(x = BM_PC_hi, y = (prop*100)+p0, fill=BM_PC_hi))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_jitter(width=0.2,height=0,size=0.2)+
+  ggpubr::stat_compare_means(comparisons = list(c('Non','hi'),c('Non','lo')),method = 'wilcox.test',size=3.5)+
+  #scale_fill_manual(values=c(diagnosis_col,c('Pt'=diagnosis_col[['MM']])))+
+  scale_y_log10()+annotation_logticks(sides='l')+
+  labs(y='% T cells',title='Teff')+
+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11)
+  )->pl
+pl
+###ggsave(plot=pl,filename = '../figures/5/__.pdf',width=1.25,height=3, dpi="retina")
+
+
+```
+
+
+## 5 - Teff overlap extended quantification
+
+Chi2 and dotplot
+
+```{r fig.height=2.5, fig.width=4.25}
+
+# Quant
+query='Teff.IFIT2'
+dat = obs %>% filter(has_tcr=='True',pheno!=query,subset=='CD8')
+dat$query_share = dat$clone_id %in% obs[obs$pheno==query,]$clone_id
+
+out=list()
+for (i in unique(dat$pheno)){
+dat$i = dat$pheno==i
+res = chisq.test(table(dat$i, dat$query_share))
+out[[i]] = data.frame(p=res$p.value,Roe=(res$observed / res$expected)[2,2])
+}
+res = as_tibble(bind_rows(out,.id='pheno')) %>% 
+  mutate(fdr=p.adjust(p,'BH'),sig=fdr<0.1) %>% arrange(p) 
+
+# Plot
+res$fdr[res$fdr==0] = min(res$fdr %>% .[.!=0])
+res %>% left_join(labels2) %>% mutate(pheno=labels2) %>% 
+  arrange(Roe) %>% mutate(pheno=factor(pheno,pheno)) %>% 
+  ggplot(aes(pheno,'Teff share'))+
+  geom_point(data = . %>% filter(sig),aes(fill=log2(Roe), size=-log10(fdr)), shape=21)+
+  scale_fill_gradient2(low='dodgerblue',mid='white',high='red')+
+  theme_bw()+
+  theme(
+    legend.position = 'bottom',
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=9)
+  )-> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/overlap.pdf',width=4.25,height=2.5, dpi="retina")
+  
+print(res %>% left_join(labels2) %>% mutate(pheno=labels2) )
+```
+
+Alluvial
+```{r fig.height=3, fig.width=2}
+library(ggalluvial)
+
+dat.pl = dat %>% group_by(pheno,query_share) %>% tally() %>% 
+  group_by(query_share) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  mutate(share=ifelse(query_share,'Teff','Other')) %>% 
+  left_join(labels2) %>% mutate(pheno=labels2) %>% 
+  select(pheno,share,pct) 
+
+pheno.order = arrange(dat.pl[dat.pl$share=='Teff',],-pct)$pheno
+
+dat.pl %>% 
+  mutate(pheno=factor(pheno,pheno.order)) %>% 
+
+  ggplot(aes(x=share, y=pct, stratum = pheno, alluvium = pheno ,fill = pheno)) +
+  stat_alluvium(geom="flow",color='black', alpha=1, position=position_dodge(width=0))+
+  stat_stratum(width = .1)+
+  geom_text(stat = "stratum", aes(label = after_stat(stratum)))+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  theme(legend.position = 'none')->pl
+pl
+ggsave(plot=pl,filename = '../figures/5/alluvial.pdf',width=2,height=3, dpi="retina")
+
+
+
+```
+
+
+
+
 
 ## 5E *
 
@@ -469,5 +631,170 @@ pl
 ggsave(plot=pl,filename = '../figures/5/G.pdf',width=1.5,height=3, dpi="retina")
 
 ```
+
+
+## ASCT-expanded clones baseline phenotype
+
+Prep
+```{r}
+
+#CAR162_BSL=Foster_2024.MM1
+#CAR197_BSL=Foster_2024.MM2
+pois = read.csv('~/OneDrive/CARD-TCR/R/data/bulkTCR/poissonTesting.csv') %>% 
+  filter(dc %in% c('CAR162_b','CAR197_b'), sig, p2>p1) %>% 
+  select(dc,aa,v_call,j_call)
+pois$dc=ifelse(pois$dc=='CAR162_b','Foster_2024.MM1','Foster_2024.MM2')
+colnames(pois)=c('donor_id','CDR3aa','v_gene','j_gene')
+
+dat = obs %>% filter(donor_id %in% c('Foster_2024.MM1','Foster_2024.MM2'), 
+                     has_tcr=='True', clone_id!='') %>% 
+  left_join(labels2) %>% mutate(pheno=labels2) %>% 
+  select(donor_id,MDE1,MDE2,pheno,Nonviral,clone_id) %>% 
+  left_join(
+    read.csv('../preprocessing/data/import/Tcell-scTCR.csv') %>% filter(chain=='TRB') %>% 
+      select(clone_id,CDR3aa,v_gene,j_gene) %>% distinct()
+  ) %>% as_tibble() %>% 
+  left_join(pois %>% mutate(is=T)) %>% mutate(is=ifelse(is.na(is),F,is))
+
+```
+
+Bar chart
+```{r mde-scTCR-tcell, fig.height=3, fig.width=8}
+
+dat_pl = dat %>% 
+  group_by(donor_id,clone_id,is,pheno) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)*100) %>% ungroup() %>% 
+  filter(is)
+
+order = dat_pl %>% group_by(clone_id) %>% summarise(pct=sum(pct)) %>% arrange(pct) %>% .$clone_id
+
+dat_pl %>% 
+  mutate(clone_id=factor(clone_id,order)) %>% drop_na() %>% 
+  ggplot(aes(clone_id,pct))+
+  facet_grid(.~donor_id,space='free',scales='free')+
+  geom_col(aes(fill=pheno))+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  guides(fill=guide_legend(ncol=2))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=7))->pl
+pl
+ggsave(plot=pl,filename = '../figures/5/CARD-exp_bar.pdf',height=3,width=8, dpi="retina")
+
+dat_pl %>% select(clone_id,donor_id) %>% distinct() %>% pull(donor_id) %>% table()
+```
+
+mde
+```{r fig.height=3, fig.width=3}
+
+clone_plot = dat[dat$is,]$clone_id
+
+obs %>% 
+  mutate(is = clone_id %in% clone_plot) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  #geom_point(data = . %>% filter(!is), size=0.01,color='grey75',alpha=0.1)+
+  scattermore::geom_scattermore(color='grey80')+
+  geom_point(data = . %>% filter(is), size=1, aes(color=clone_id))+
+  scale_color_manual(values = long_col_vector[1:length(clone_plot)])+
+  theme_void()+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/5/CARD-mde.png',width=2.5,height=2.5, dpi="retina")
+```
+
+
+
+Chi2/dotplot
+```{r}
+dat_pl = dat %>% 
+  group_by(is,pheno) %>% tally() %>% ungroup()
+
+out=list()
+for (i in unique(dat$pheno)){
+dat$i = dat$pheno==i
+res = chisq.test(table(exp=dat$is, ph=dat$i))
+out[[i]] = data.frame(p=res$p.value,Roe=(res$observed / res$expected)[2,2])
+}
+res = as_tibble(bind_rows(out,.id='pheno')) %>% 
+  mutate(fdr=p.adjust(p,'BH'),sig=fdr<0.1) %>% arrange(p) 
+
+res
+
+```
+
+
+Non-viral
+```{r fig.height=3, fig.width=3.15}
+#(match style of non-viral boxplot)
+
+dat_pl = dat %>% 
+  group_by(donor_id,clone_id,is) %>% summarise(Nonviral=mean(Nonviral)) %>% 
+  mutate(plt = ifelse(is,'ASCT-expanded',' '))
+  
+dat_pl %>% 
+  ggplot(aes(plt,Nonviral))+
+  geom_violin(aes(fill=plt))+
+  geom_boxplot(aes(fill=plt),outliers=F)+
+  geom_jitter(data=. %>% filter(is),width=0.2,height=0,size=1)+
+  
+  scale_fill_manual(values = c('ASCT-expanded'='dodgerblue',' '='grey80'))+
+  ggpubr::stat_compare_means(comparisons = list(c(' ','ASCT-expanded')),
+  method = 'wilcox.test',size=3.5)+
+  #ylim(c(0,0.9))+
+  labs(y='Non-viral signature per-clone')+
+  theme(
+    axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank(),
+    axis.text.y = element_text(size=11),
+    axis.title.y = element_text(size=12),
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/5/CARD-nonviral.pdf',height=3,width=3.15, dpi="retina")
+
+print(table(dat_pl$plt))
+print(table(dat_pl$donor_id,dat_pl$plt))
+lmerTest::lmer(Nonviral ~ is + (1|donor_id), dat_pl) %>% anova() %>% .[1,6]
+
+```
+
+
+## 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

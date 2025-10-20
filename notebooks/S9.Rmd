@@ -95,7 +95,7 @@ read_csv('../preprocessing/data/Nonviral_tumour_modules.csv') %>%
   labs(x='Correlation with non-viral score', y='-log10 FDR')+
   theme_classic() ->pl
 pl
-#ggsave(plot=pl,filename = 'figures/TRT/vln-nonvir_TumMod.pdf',height=2.5,width=2.5, dpi="retina")
+ggsave(plot=pl,filename = 'figures/S9/vln-nonvir_TumMod.pdf',height=2.5,width=2.5, dpi="retina")
 
 ```
 
@@ -131,7 +131,7 @@ fgseas %>%
     axis.line=element_blank(), panel.border = element_rect(colour = "black", fill=NA, size=1)
   )->pl
 pl
-#ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
+ggsave(plot=pl,filename = paste0('../figures/S9/C.pdf'),height=4,width=6,dpi="retina")
 
 ```
 

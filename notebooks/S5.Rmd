@@ -63,7 +63,7 @@ comp$Tcell %>%
   theme(legend.position='right')+
   theme(strip.background = element_blank())-> pl
 pl
-ggsave(plot=pl,filename = '../figures/S5/A-right.pdf',width=5.5,height=3.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/S5/A-right.pdf',width=6,height=3.5, dpi="retina")
 
 ```
 
@@ -219,14 +219,106 @@ ggsave(plot=pl,filename = '../figures/S5/D.pdf',width=3.5,height=3, dpi="retina"
 ```
 
 
+# S5.subclusters
+
+```{r fig.height=3, fig.width=3.5}
+
+require(Cairo) #for Greek letters
+
+results$Invar$cohort$addAge$Non.MM %>% 
+  mutate(fdr = p.adjust(p.cohort,'BH')) %>% filter(fdr < 0.1)
+results$Invar$cohort$addAge$Non.SMM %>% 
+  mutate(fdr = p.adjust(p.cohort,'BH')) %>% filter(fdr < 0.1)
+
+results$Treg$cohort$addAge$Non.MM %>% 
+  mutate(fdr = p.adjust(p.cohort,'BH')) %>% filter(fdr < 0.1)
+results$Treg$cohort$addAge$Non.SMM %>% 
+  mutate(fdr = p.adjust(p.cohort,'BH')) %>% filter(fdr < 0.1)
+
+
+
+results$Invar$cohort$addAge$Non.SMM %>% 
+  mutate(fdr = p.adjust(p.cohort,'BH')) %>% 
+  mutate(sig=fdr<0.1, change=ifelse(diff>0,'up','down')) %>% 
+  ggplot(aes(diff, -log10(fdr)))+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  geom_vline(xintercept = 0, linewidth=0.2)+
+  geom_point(color='lightgrey',alpha=0.8)+
+  geom_point(data = . %>% filter(sig,change=='down'), color=disease_col['Non'])+
+  geom_point(data = . %>% filter(sig,change=='up'), color=disease_col['SMM'])+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3)+
+  labs(x='Δ median', y='-log10 FDR', title='Non v SMM')+
+  xlim(c(-2.5,2.5))+ylim(c(0,8))+
+  theme_classic()+theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_text(size=13), axis.text.x = element_text(size=11),
+    axis.title.y = element_text(size=13), axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S5/subclus-invarSMM.pdf',width=3.5,height=3, dpi="retina",device=cairo_pdf)
+
+```
+
+
+
+# S5E
+
+
+```{r fig.height=3, fig.width=3.5}
+
+require(Cairo) #for Greek letters
+
+results$Tcell$risk$risk_ISS %>% 
+  mutate(fdr = p.adjust(p.risk_ISS,'BH')) %>% 
+  mutate(sig=fdr<0.1, change=ifelse(diff>0,'up','down')) %>% 
+  ggplot(aes(diff, -log10(fdr)))+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  geom_vline(xintercept = 0, linewidth=0.2)+
+  geom_point(color='lightgrey',alpha=0.8)+
+  geom_point(data = . %>% filter(sig), color=disease_col['MM'])+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3)+
+  labs(x='Δ median', y='-log10 FDR', title='ISS risk')+
+  #xlim(c(-2.5,2.5))+#ylim(c(0,8))+
+  theme_classic()+theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_text(size=13), axis.text.x = element_text(size=11),
+    axis.title.y = element_text(size=13), axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S5/E-1.pdf',width=3.5,height=3, dpi="retina",device=cairo_pdf)
+
+
+results$Tcell$risk$risk_SMM_mayo %>% 
+  mutate(fdr = p.adjust(p.risk_SMM_mayo,'BH')) %>% 
+  mutate(sig=fdr<0.1, change=ifelse(diff>0,'up','down')) %>% 
+  ggplot(aes(diff, -log10(fdr)))+
+  geom_hline(yintercept = -log10(0.1), linetype='dotted', linewidth=0.5)+
+  geom_vline(xintercept = 0, linewidth=0.2)+
+  geom_point(color='lightgrey',alpha=0.8)+
+  geom_point(data = . %>% filter(sig), color=disease_col['MM'])+
+  ggrepel::geom_text_repel(data = . %>% filter(sig), aes(label=celltype), size=3)+
+  labs(x='Δ median', y='-log10 FDR', title='SMM risk (Mayo)')+
+  #xlim(c(-2.5,2.5))+#ylim(c(0,8))+
+  theme_classic()+theme(
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_text(size=13), axis.text.x = element_text(size=11),
+    axis.title.y = element_text(size=13), axis.text.y = element_text(size=11)
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/S5/E-2.pdf',width=3.5,height=3, dpi="retina",device=cairo_pdf)
+
+```
+
+
+
 
 # S5G
 
 PCA
 ```{r fig.height=3, fig.width=4.5}
 
-pc1.pct = pct.expl = round(summary(ords$Tcell)[["cont"]][["importance"]]['Proportion Explained','PC1'],4)*100
-pc2.pct = pct.expl = round(summary(ords$Tcell)[["cont"]][["importance"]]['Proportion Explained','PC2'],4)*100
+pc1.pct = round((ords$Tcell$CA$eig / sum(ords$Tcell$CA$eig) * 100)['PC1'],1)
+pc2.pct = round((ords$Tcell$CA$eig / sum(ords$Tcell$CA$eig) * 100)['PC2'],1)
 
 dat = ords$Tcell$PCA %>% 
   left_join(comp$Tcell %>% select(sample_id,cohort) %>% distinct()) %>% 
@@ -265,13 +357,12 @@ ggsave(plot=pl,filename = '../figures/S5/G-left.pdf',width=4.5,height=3, dpi="re
 Elbow
 ```{r fig.height=1.5, fig.width=2.5}
 
-data.frame(summary(ords$Tcell)[["cont"]][["importance"]])['Proportion Explained',] %>% 
-  t() %>% data.frame() %>% rownames_to_column('PC') %>% 
-  mutate(i = as.numeric(str_remove(PC,'PC'))) %>% 
-  head(5) %>% 
-  arrange(i) %>% mutate(PC=factor(PC,PC)) %>% 
-  ggplot(aes(PC,Proportion.Explained*100))+
-  geom_line(aes(group=1))+geom_point()+
+data.frame(i=round((ords$Tcell$CA$eig / sum(ords$Tcell$CA$eig) * 100),1)) %>% 
+  rownames_to_column('PC') %>% 
+  head(5) %>% mutate(v='v') %>% 
+  arrange(-i) %>% mutate(PC=factor(PC,PC)) %>% 
+  ggplot(aes(PC,i))+
+  geom_line(aes(group=v))+geom_point()+
   labs(y='% variance\nexplained')+
   theme(
     axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
@@ -308,7 +399,7 @@ dat %>%
     axis.title.y = element_text(size=14), axis.text.y = element_text(size=12)
   )-> pl
 pl
-ggsave(plot=pl,filename = '../figures/S5/H.pdf',width=3,height=3, dpi="retina")
+#ggsave(plot=pl,filename = '../figures/S5/H.pdf',width=3,height=3, dpi="retina")
 ```
 
 ## SPACE 

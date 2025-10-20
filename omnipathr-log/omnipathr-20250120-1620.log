@@ -1,0 +1,10 @@
+[2025-01-20 16:20:06] [INFO]    [OmnipathR] Welcome to OmnipathR!
+[2025-01-20 16:20:06] [INFO]    [OmnipathR] Initialized cache: `/Users/kaneucl/Library/Caches/OmnipathR`.
+[2025-01-20 16:20:08] [TRACE]   [OmnipathR] Loaded data from RDS `/Users/kaneucl/Library/Caches/OmnipathR/2a240eab150566b8b5dddf728df660c44a48106a-1.rds`.
+[2025-01-20 16:20:08] [INFO]    [OmnipathR] Loaded from cache: `https://omnipathdb.org/interactions?genesymbols=yes&resources=CellPhoneDB,CellChatDB,ICELLNET,connectomeDB2020,CellTalkDB&datasets=omnipath,pathwayextra,kinaseextra,ligrecextra&organisms=9606&fields=datasets,sources,references,curation_effort&license=academic`
+[2025-01-20 16:23:11] [TRACE]   [OmnipathR] Loaded data from RDS `/Users/kaneucl/Library/Caches/OmnipathR/2a240eab150566b8b5dddf728df660c44a48106a-1.rds`.
+[2025-01-20 16:23:11] [INFO]    [OmnipathR] Loaded from cache: `https://omnipathdb.org/interactions?genesymbols=yes&resources=CellPhoneDB,CellChatDB,ICELLNET,connectomeDB2020,CellTalkDB&datasets=omnipath,pathwayextra,kinaseextra,ligrecextra&organisms=9606&fields=datasets,sources,references,curation_effort&license=academic`
+[2025-01-20 16:23:57] [TRACE]   [OmnipathR] Loaded data from RDS `/Users/kaneucl/Library/Caches/OmnipathR/2a240eab150566b8b5dddf728df660c44a48106a-1.rds`.
+[2025-01-20 16:23:57] [INFO]    [OmnipathR] Loaded from cache: `https://omnipathdb.org/interactions?genesymbols=yes&resources=CellPhoneDB,CellChatDB,ICELLNET,connectomeDB2020,CellTalkDB&datasets=omnipath,pathwayextra,kinaseextra,ligrecextra&organisms=9606&fields=datasets,sources,references,curation_effort&license=academic`
+[2025-01-20 16:24:00] [TRACE]   [OmnipathR] Loaded data from RDS `/Users/kaneucl/Library/Caches/OmnipathR/2a240eab150566b8b5dddf728df660c44a48106a-1.rds`.
+[2025-01-20 16:24:00] [INFO]    [OmnipathR] Loaded from cache: `https://omnipathdb.org/interactions?genesymbols=yes&resources=CellPhoneDB,CellChatDB,ICELLNET,connectomeDB2020,CellTalkDB&datasets=omnipath,pathwayextra,kinaseextra,ligrecextra&organisms=9606&fields=datasets,sources,references,curation_effort&license=academic`

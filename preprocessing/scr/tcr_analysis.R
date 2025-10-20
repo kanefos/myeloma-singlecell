@@ -1,5 +1,6 @@
 # TCR analysis #################################################################
 
+#setwd('preprocessing/')
 library(tidyverse)
 # Simpson's diversity calculation code
 simpson.sample=function(x){
@@ -44,20 +45,20 @@ CD8.Tm = c("CD8.Tem.IL7R","CD8.Tem.KLRG1","CD8.TemActive",
 div.list = list()
 
 # All T cells
-div.list[['all']] = obs %>% filter(clone_id!='') %>% 
+div.list[['all']] = obs %>% filter(clone_id!='',tissue=='BM') %>%
   group_by(donor_id,clone_id) %>% tally() %>% ungroup() %>%
   group_by(donor_id) %>% summarise(
-    counts=sum(n),unique=length(unique(clone_id)),div=simpson.sample(n)
+    counts=sum(n),unique=length(unique(clone_id)),div=simpson.sample(n),n1=sum(n==1)
   ) %>% ungroup() %>%
   filter(counts>100)
 
 # CD8+ clones, CD8+Tm cluster
-div.list[['CD8.Tm']] = obs %>% filter(clone_id!='') %>% 
+div.list[['CD8.Tm']] = obs %>% filter(clone_id!='',tissue=='BM') %>%
   filter(clone_id %in% tcr.subset[tcr.subset$type=='CD8',]$clone_id) %>%
   filter(pheno %in% CD8.Tm) %>%
   group_by(donor_id,clone_id) %>% tally() %>% ungroup() %>%
   group_by(donor_id) %>% summarise(
-    counts=sum(n),unique=length(unique(clone_id)),div=simpson.sample(n)
+    counts=sum(n),unique=length(unique(clone_id)),div=simpson.sample(n),n1=sum(n==1)
   ) %>% ungroup() %>%
   filter(counts>100)
 
@@ -81,7 +82,7 @@ tcr_analysis$clus[['clus_id']] = tcr_analysis$clus[['clusters']] %>%
   ungroup()
 
 # clus id to clone_id
-tcr_analysis$clus[['clon_clus']] = tcr_analysis$clus[['clusters']] %>% 
+tcr_analysis$clus[['clon_clus']] = tcr_analysis$clus[['clusters']] %>%
   left_join(tcr_analysis$clus$clus_id) %>%
   mutate(v_gene = str_replace(v_gene, '\\*01', ''), j_gene = str_replace(j_gene, '\\*01', '')) %>%
   rename(donor_id=subject) %>%

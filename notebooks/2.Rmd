@@ -51,6 +51,27 @@ obs %>%
 pl
 ggsave(plot=pl,filename = '../figures/2/A.png',width=5,height=5, dpi="retina")
 
+obs %>% sample_n(size = 100000) %>% 
+  select(MDE1, MDE2, subset, pheno) %>% 
+  ggplot(aes(MDE1, MDE2))+
+  scattermore::geom_scattermore(aes(color=pheno))+
+  scattermore::geom_scattermore(data = . %>% filter(pheno=='ISG.ISG15'), aes(color=pheno))+
+  scale_color_manual(values=Tcell_pheno_colors)+scale_fill_manual(values=Tcell_pheno_colors)+
+  theme_void()+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/A-noDot-sub.png',width=5,height=5, dpi="retina")
+
+
+obs %>% sample_n(size = 100000) %>% 
+  select(UMAP2, UMAP1, subset, pheno) %>% 
+  ggplot(aes(UMAP2, UMAP1))+
+  scattermore::geom_scattermore(color='grey70')+
+  theme_void()+
+  theme(legend.position = 'none') -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/dimR-example.png',width=5,height=5, dpi="retina")
+
 ```
 
 Legend
@@ -70,6 +91,88 @@ obs.median.ph %>%
   )->pl
 pl
 ggsave(plot=pl,filename = '../figures/2/A-legend.svg',width=3,height=4, dpi="retina")
+
+```
+
+## Tcell pheno stacked bar
+
+```{r fig.height=4, fig.width=7, eval=T, hide=T}
+
+pct_pheno = obs %>% 
+  group_by(donor_id,pheno) %>% tally() %>% ungroup() %>% 
+  group_by(donor_id) %>% mutate(pct=n/sum(n)) %>% ungroup() %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(diagnosis = factor(diagnosis, c('Non','MGUS','SMM','MM')))
+
+pct_pheno = pct_pheno %>% 
+  left_join(pct_pheno %>% group_by(diagnosis) %>% summarise(nD=length(unique(donor_id)))) %>% 
+  mutate(d_pl = paste0(diagnosis,'\n(n = ',nD,')')) %>% 
+  arrange(diagnosis) %>% mutate(d_pl = factor(d_pl,unique(d_pl)))
+  
+donor.order = pct_pheno %>% filter(pheno=='CD4.Tn') %>% arrange(-pct) %>% pull(donor_id)
+
+pct_pheno %>% mutate(pct=pct*100) %>% 
+  mutate(donor_id=factor(donor_id,donor.order)) %>% 
+  mutate(pheno=factor(pheno,Tcell_order)) %>%
+  ggplot(aes(donor_id,pct))+geom_bar(stat='identity',width=1.1, aes(fill=pheno))+
+  facet_grid(~d_pl,space='free',scales='free')+
+  labs(fill='Cell type')+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  geom_segment(aes(x=0.5,xend=0.5,y=0,yend=100),size=0.1,linewidth=0,color='grey20')+
+  theme_void()+theme(
+    legend.position = 'none',
+    strip.text.x = element_text(size = 15),
+    panel.background = element_blank(),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
+  ) -> pl
+pl
+pg=ggplot2::ggplotGrob(pl)
+#TURN OFF CLIPPING
+for(i in which(grepl("strip-t", pg$layout$name))){
+  pg$grobs[[i]]$layout$clip <- "off"
+}
+ggsave(plot=pg,filename = '../figures/2/stackbar.pdf',width=6,height=4, dpi="retina")
+
+# Legend
+pct_pheno %>% 
+  ggplot(aes(donor_id,pct))+geom_bar(stat='identity',width=1.1, aes(fill=pheno))+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  theme_void()+
+  theme(
+    plot.margin = margin(1,1,1,1, "cm"),
+    legend.position='bottom',
+    legend.key.size = unit(0.25, "cm"),
+    legend.text=element_text(),
+    legend.title=element_blank()
+  )->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/stackbar-legend.pdf',width=5,height=2, dpi="retina")
+
+```
+
+stacked bar by cohort
+```{r fig.height=2.5, fig.width=1.5, eval=T, hide=T}
+pct_pheno = obs %>% 
+  left_join(donor_md %>% select(donor_id,diagnosis) %>% distinct()) %>% 
+  mutate(cancer=ifelse(diagnosis!='Non','c','n'), covar=paste0(cancer,tissue)) %>% 
+  group_by(covar,pheno) %>% tally() %>% ungroup() %>% 
+  group_by(covar) %>% mutate(pct=n/sum(n)) %>% ungroup() %>% 
+  mutate(covar = factor(covar,c('nPB','nBM','cPB','cBM')))
+
+pct_pheno %>% mutate(pct=pct*100) %>% 
+  ggplot(aes(covar,pct))+geom_bar(stat='identity',width=1.1, aes(fill=pheno))+
+  facet_grid(~covar,space='free',scales='free')+
+  labs(fill='Cell type')+
+  scale_fill_manual(values = Tcell_pheno_colors)+
+  geom_segment(aes(x=0.5,xend=0.5,y=0,yend=100),size=0.1,linewidth=0,color='grey20')+
+  theme_void()+theme(
+    legend.position = 'none',
+    strip.text.x = element_text(size = 9),
+    panel.background = element_blank(),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
+  ) -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/stackbar_cohort.pdf',width=1.5,height=2.5, dpi="retina")
 
 ```
 
@@ -99,6 +202,29 @@ ggsave(plot=pl,filename = '../figures/2/B.png',width=3.75,height=4, dpi="retina"
 
 ```
 
+wide
+```{r fig.height=2.2, fig.width=8}
+
+dat = obs %>% select(obs_names,MDE1,MDE2,Naive,Cytotoxicity) %>% left_join(
+  read.csv('../preprocessing/data/Tcell_exp.csv') %>% select(obs_names,CD4,CD8A)
+)
+
+dat %>% drop_na() %>% 
+  sample_n(200000) %>% 
+  pivot_longer(!obs_names:MDE2) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% 
+  ggplot(aes(MDE1,MDE2))+
+  facet_wrap('name',ncol=4)+
+  scattermore::geom_scattermore(data = . %>% filter(value==0), aes(color=value))+
+  scattermore::geom_scattermore(data = . %>% filter(value>0), aes(color=value))+
+  scale_color_distiller(palette = 'Reds',direction = 1)+
+  theme_void()+
+  theme(legend.position = 'none',strip.text.x = element_text(size = 17))->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/B-wide.png',height=2.2,width=8, dpi="retina")
+
+```
+
 
 ## 2C
 
@@ -118,6 +244,7 @@ dat %>%
 pl
 ggsave(plot=pl+theme(legend.position = 'none'),
        filename = '../figures/2/C-left.png',width=5,height=5, dpi="retina")
+
 ```
 
 Right
@@ -184,8 +311,8 @@ dat.pl %>%
   mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order)) %>% 
   ggplot(aes(pheno,value,fill=pheno))+facet_grid(~name)+
   geom_boxplot(outlier.alpha=0)+geom_violin()+
-  geom_jitter(data = . %>% group_by(name,pheno) %>% sample_n(1000), 
-              width=0.15,height=0,size=0.1,alpha=0.2,show.legend=F)+
+  #geom_jitter(data = . %>% group_by(name,pheno) %>% sample_n(1000), 
+  #            width=0.15,height=0,size=0.1,alpha=0.2,show.legend=F)+
   ylim(c(0,1.25))+
   ggpubr::stat_compare_means(
     comparisons = list(c('Other CD8','CD8.TemActive'),c('CD8.Tex','CD8.TemActive')), 
@@ -236,13 +363,79 @@ dat.pl %>% select(pheno,sample_id,gene.pl) %>%
     axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
   )->pl
 pl
-ggsave(plot=pl,filename = '../figures/2/D-upper.png',width=5.25,height=1.5, dpi="retina")
+ggsave(plot=pl,filename = '../figures/2/D-legend.png',width=5.25,height=1.5, dpi="retina")
+```
+
+v2
+```{r fig.height=1.5, fig.width=3.5}
+# Expression no points, pdf
+dat.pl %>% 
+  select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% 
+  filter(name %in% gene.pl) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% ungroup() %>% 
+  mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order)) %>% 
+  ggplot(aes(pheno,value,fill=pheno))+facet_grid(~name)+
+  geom_boxplot(outlier.alpha=0)+geom_violin()+
+  ylim(c(0,1.25))+
+  ggpubr::stat_compare_means(
+    comparisons = list(c('Other CD8','CD8.TemActive'),c('CD8.Tex','CD8.TemActive')), 
+    method = 'wilcox.test', size=3,
+    symnum.args = list(cutpoints = c(0.00001, 0.001, 0.01, Inf), symbols = c("**","*","NS")))+
+  scale_fill_manual(values=c(Tcell_pheno_colors,`Other CD8`='grey80'))+
+  labs(y='Scaled\nexpression', fill='')+
+  theme_classic()+
+  theme(
+    legend.position = 'none',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+    )`->pl
+pl
+ggsave(plot=pl,filename = '../figures/2/D-upper.pdf',width=3.5,height=1.5, dpi="retina")`
+```
+
+Only Other CD8+ and CD8+TemActive
+```{r fig.height=2.5, fig.width=4}
+library(ggridges)
+
+dat.pl_ = dat.pl %>% 
+  filter(pheno!='CD8.Tex') %>% 
+  select(pheno,sample_id,gene.pl) %>% 
+  pivot_longer(!c(pheno,sample_id)) %>% 
+  filter(name %in% gene.pl) %>% 
+  group_by(name) %>% mutate(value=range01(value)) %>% ungroup() %>% 
+  mutate(name=factor(name,gene.pl),pheno=factor(pheno,pheno.pl.order))
+  
+dat.pl_ %>% 
+  filter(name %in% c('PDCD1','TIGIT','TOX')) %>% 
+  ggplot(aes(value,pheno, fill=pheno))+ 
+  geom_density_ridges()+
+  facet_grid(~name)+
+  scale_fill_manual(values=c(Tcell_pheno_colors,`Other CD8`='grey80'))+
+  labs(y='Scaled\nexpression', fill='')+
+  theme_classic()+
+  theme(
+    legend.position = 'none',
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+    )->pl
+pl
+ggsave(plot=pl,filename = '../figures/S3/ridge-temactive.pdf',width=4,height=2.5, dpi="retina")
+
+#print stats
+for (g in c('PDCD1','TIGIT','TOX')){
+  p=wilcox.test(
+    dat.pl_[(dat.pl_$name==g)&(dat.pl_$pheno=='Other CD8'),]$value,
+    dat.pl_[(dat.pl_$name==g)&(dat.pl_$pheno=='CD8.TemActive'),]$value
+  )$p.value
+  print(paste0(g,', ',p))
+}
 
 ```
 
 
-## 2E
 
+## 2E
 
 ```{r fig.height=2, fig.width=3}
 
@@ -277,6 +470,38 @@ pl
 ggsave(plot=pl,filename = '../figures/2/E.pdf',width=3,height=2, dpi="retina")
 ```
 
+Pie charts
+```{r fig.height=2, fig.width=2}
+
+dat.pl = comp$Tcell %>% 
+  filter(sampleSize>100, !donor_id %in% donors.longit, !CD8.Tex_outlier) %>% 
+  filter(celltype=='CD8.Tex') %>% arrange(desc(n)) %>% distinct() %>% 
+  filter(n>0) %>% 
+  group_by(donor_id,cohort) %>% summarise(n=sum(n)) %>% ungroup() %>% 
+  arrange(-n) %>% mutate(donor_id = factor(donor_id,levels=donor_id)) 
+dat.pl %>% 
+  ggplot(aes(x="", y=n))+
+  geom_bar(stat="identity", width=1, color='black', linewidth=0.5, fill=diagnosis_col[dat.pl$cohort])+
+  coord_polar("y", start=0)+theme_void()-> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/E-2.Tex.pdf',width=2,height=2, dpi="retina")
+
+dat.pl = comp$Tcell %>% 
+  filter(sampleSize>100, !donor_id %in% donors.longit, !CD8.Tex_outlier) %>% 
+  filter(celltype=='CD8.TemActive') %>% arrange(desc(n)) %>% distinct() %>% 
+  filter(n>0) %>% 
+  group_by(donor_id,cohort) %>% summarise(n=sum(n)) %>% ungroup() %>% 
+  arrange(-n) %>% mutate(donor_id = factor(donor_id,levels=donor_id)) 
+dat.pl %>% 
+  ggplot(aes(x="", y=n))+
+  geom_bar(stat="identity", width=1, color='black', linewidth=0.5, fill=diagnosis_col[dat.pl$cohort])+
+  coord_polar("y", start=0)+theme_void()-> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/E-2.TemK.pdf',width=2,height=2, dpi="retina")
+
+```
+
+
 
 ## 2F
 
@@ -289,10 +514,11 @@ dat = obs %>%
   
 print(dat %>% group_by(tissue,cancer) %>% summarise(n=n(), nDonor=length(unique(donor_id))))
 
-dat %>%
+dat %>% group_by(tissue,cancer) %>% sample_n(size = 35950) %>% 
   ggplot(aes(MDE1,MDE2))+
   facet_grid(tissue~cancer, switch='y')+
-  scattermore::geom_scattermore(aes(color=pheno))+
+  #scattermore::geom_scattermore(aes(color=pheno))+
+  geom_point(aes(color=pheno),size=0.001, alpha=0.1)+
   scale_color_manual(values=Tcell_pheno_colors)+
   guides(colour = guide_legend(override.aes = list(size=5)))+
   labs(color='')+
@@ -308,17 +534,17 @@ ggsave(plot=pl,filename = '../figures/2/F.png',width=5,height=5, dpi="retina")
 ```{r fig.width=2, fig.height=3}
 
 comp$Tcell %>% 
-  filter(celltype=='CD8.TemActive') %>%
+  filter(celltype=='CD8+Tem.CD69+') %>%
   mutate(cancer=factor(ifelse(cohort=='Non','Non','Cancer'),c('Non','Cancer'))) %>% 
   mutate(tissue=factor(tissue,c('PB','BM'))) %>% 
-  ggplot(aes(x = tissue, y = clr, fill=tissue))+
+  ggplot(aes(x = tissue, y = prop*100, fill=tissue))+
   geom_boxplot(outlier.alpha = 0)+
   geom_jitter(width=0.2,height=0,size=0.2)+
   facet_grid(~cancer)+
-  ggpubr::stat_compare_means(comparisons = list(c('BM','PB')), method = 'wilcox.test',size=3.5, label.y=4.6)+
-  ylim(c(-2,5.5))+
+  ggpubr::stat_compare_means(comparisons = list(c('BM','PB')), method = 'wilcox.test',size=3.5, label.y=60)+
+  ylim(c(0,65))+
   scale_fill_manual(values=tissue_colors)+
-  labs(y='Normalised % T cells',title='CD8.TemActive')+
+  labs(y='% T cells',title='CD8+Tem.CD69+')+
   theme_classic()+
   theme(
     legend.position = "none",
@@ -333,5 +559,139 @@ pl
 ggsave(plot=pl,filename = '../figures/2/G.pdf',width=2,height=3, dpi="retina")
 
 ```
+
+Ibid, paired
+```{r fig.width=2, fig.height=3}
+dat.pl = comp$Tcell %>% 
+  filter(celltype=='CD8+Tem.CD69+') %>%
+  mutate(cancer=factor(ifelse(cohort=='Non','Non','Cancer'),c('Non','Cancer'))) %>% 
+  select(donor_id,cancer,tissue,prop) %>% 
+  group_by(donor_id,cancer,tissue) %>% summarise(prop=sum(prop)) %>% 
+  pivot_wider(names_from='tissue',values_from='prop') %>% drop_na() %>% 
+  pivot_longer(!donor_id:cancer) %>% 
+  mutate(cancer=factor(cancer,c('Non','Cancer'))) %>% 
+  mutate(tissue=factor(name,c('PB','BM'))) 
+
+dat.pl %>% 
+  ggplot(aes(x = tissue, y = value*100, fill= tissue))+
+  geom_boxplot(outlier.alpha = 0)+
+  geom_point(size=0.5)+
+  geom_line(aes(group=donor_id),linewidth=0.2)+
+  facet_grid(~cancer)+
+  ggpubr::stat_compare_means(comparisons = list(c('BM','PB')), 
+    method = 'wilcox.test',size=3.5, label.y=40)+
+  ylim(c(0,45))+
+  scale_fill_manual(values=tissue_colors)+
+  labs(y='% T cells',title='CD8+Tem.CD69+')+
+  theme_classic()+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size=12),
+    axis.title.x = element_blank(), 
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=11),
+    axis.title.y = element_text(size=13), 
+    axis.text.y = element_text(size=11),
+    strip.text.x = element_text(size=11)
+  )  -> pl
+pl
+ggsave(plot=pl,filename = '../figures/2/G-paired.pdf',width=2,height=3, dpi="retina")
+
+dat.test = dat.pl %>% select(donor_id,name,value) %>% pivot_wider()
+wilcox.test(dat.test[dat.test$cancer=='Non',]$BM, dat.test[dat.test$cancer=='Non',]$PB,paired=T)
+wilcox.test(dat.test[dat.test$cancer=='Cancer',]$BM, dat.test[dat.test$cancer=='Cancer',]$PB,paired=T)
+
+```
+
+
+## Functional work: CD69+/- stim+/-
+
+```{r fig.height=2.5, fig.width=8}
+
+dat = read_csv('../resources/CD69_exp_data.csv') %>% mutate(x = paste0(sort,'_',cond))
+
+dat %>% 
+  ggplot(aes(x,pct,fill=x))+facet_grid(~marker)+
+  geom_boxplot()+geom_point()+
+  geom_line(aes(group=pt))+
+  ggpubr::stat_compare_means(
+    comparisons = list(c("CD69-_bsl","CD69-_stim"),c("CD69+_bsl","CD69+_stim"),c("CD69-_stim","CD69+_stim")), 
+    method = 't.test', size=3)+
+  scale_fill_manual(values=c('CD69+_bsl'='#d8b8d9','CD69+_stim'='#BC80BD',
+                             'CD69-_bsl'='white','CD69-_stim'='grey80'))+
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=9),
+    legend.position = 'bottom'
+  )->pl
+pl
+
+
+```
+
+
+
+```{r fig.height=3, fig.width=7}
+
+dat = read_csv('../resources/CD69_exp_data.csv') %>% 
+  pivot_wider(names_from = cond, values_from = pct) %>% 
+  mutate(log2_fc = log2(stim/bsl)) 
+
+dat %>% 
+  ggplot(aes(sort,log2_fc,fill=sort))+facet_grid(~marker)+
+  geom_hline(yintercept = 0, linetype='dashed')+
+  geom_boxplot()+geom_point()+geom_line(aes(group=pt))+
+  ggpubr::stat_compare_means(comparisons = list(c('CD69-','CD69+')),
+                             method = 'wilcox.test',paired=T, aes(group=pt))+
+  scale_fill_manual(values=c(`CD69+`='#BC80BD',`CD69-`='white'))+
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=9)
+  )
+
+
+```
+
+## 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

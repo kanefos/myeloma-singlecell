@@ -32,9 +32,14 @@ donor.Tex_hi = 'Zheng_2021.P20190122'
 donors.remove = c(donors.longit,donor.Tex_hi)
 
 # Cohort colors
-disease_col = c('HD'='#77c8e0','HIP'='cadetblue4','MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e')
-diagnosis_col = c('Non'='#77c8e0','Non-cancer'='#77c8e0','HD'='#77c8e0','HIP'='cadetblue4','MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e')
-cohort_col = c('Non'='#77c8e0','Non-cancer'='#77c8e0','HD'='#77c8e0','HIP'='cadetblue4','MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e')
+disease_col = c('HD'='#77c8e0','HIP'='cadetblue4','MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e',
+                'SMM_PRG'='#E1744E','prg'='#E1744E')
+diagnosis_col = c('Non'='#77c8e0','Non-cancer'='#77c8e0','HD'='#77c8e0','HIP'='cadetblue4',
+                  'MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e',
+                  'SMM_PRG'='#E1744E','prg'='#E1744E')
+cohort_col = c('Non'='#77c8e0','Non-cancer'='#77c8e0','HD'='#77c8e0','HIP'='cadetblue4',
+               'MGUS'='#f2d37c','SMM'='#cf8a15','MM'='#eb676e',
+               'SMM_PRG'='#E1744E','prg'='#E1744E')
 smm_risk_col = c('high'='#eb7a09','low'='#e3a336')
 
 # Study colors !!!!!

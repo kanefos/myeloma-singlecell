@@ -13,7 +13,6 @@ params:
 ## Setup
 
 ```{r eval=T, hide=T}
-
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
@@ -226,13 +225,14 @@ ggsave(plot=pl,filename = '../figures/S8/H.pdf',width=2.5,height=2.5, dpi="retin
 res = read.csv('../preprocessing/data/Tcell_abundance_tumour_modules.csv')
 
 res %>% 
+  left_join(labels2,by=c('celltype'='pheno')) %>% distinct() %>% 
   mutate(assoc=ifelse(r>0,'Positive','Negative')) %>% 
   ggplot(aes(r,-log10(fdr)))+
   geom_point(color='grey70')+
   geom_point(data = . %>% filter(fdr<0.05), size=2, aes(color=assoc))+
   scale_color_manual(values=c('Positive'='#77c8e0','Negative'='#eb676e'))+
   ggrepel::geom_text_repel(data = . %>% filter(fdr<0.05),
-                           aes(label=paste0(celltype,'–',pathway_neat)), 
+                           aes(label=paste0(labels2,'–',pathway_neat)), 
     size=2.5, max.overlaps = 100, force = 50)+
   labs(x='Correlation between tumour pathway\nscore and T cell cluster abundance', y='-log10 FDR',color='Association')+
   theme_classic() -> pl
@@ -262,11 +262,12 @@ Teff_score %>%
   left_join(donor_md %>% select(donor_id,cohort,aspirate_CD138pos) %>% distinct()) %>% 
   left_join(obs %>% select(donor_id,study_id) %>% distinct()) %>% 
   filter(!is.na(aspirate_CD138pos),study_id!='Zavidij_2020') %>% 
+  filter(!donor_id %in% donors.longit) %>% 
   ggplot(aes(aspirate_CD138pos,Teff_score))+
   geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+
-  ggpubr::stat_cor(label.sep='\n',label.y= 0.2, label.x=40)+
-  scale_x_continuous(breaks=c(0,20,40,60,80))+
+  ggpubr::stat_cor(label.sep='\n')+
+  #scale_x_continuous(breaks=c(0,20,40,60,80))+
   scale_color_manual(values=diagnosis_col)+scale_fill_manual(values=diagnosis_col)+
   labs(x="Aspirate % CD138+",y='Effector signature\n(CD69, TNF, IFNG)',title='')+
   theme_classic()+th-> pl
@@ -276,6 +277,7 @@ ggsave(plot=pl,filename = '../figures/S8/J-1.pdf',width=2.25,height=2.5, dpi="re
 tumour_modules_pct %>% filter(pathway_neat=='Stress') %>% 
   left_join(Teff_score) %>% 
   left_join(donor_md %>% select(donor_id,cohort) %>% distinct()) %>% 
+  filter(!donor_id %in% donors.longit) %>% 
   ggplot(aes(pct,Teff_score))+
   geom_point(size=2, aes(color=cohort))+
   geom_smooth(method='lm',size=1,alpha=0.2, color='grey20')+

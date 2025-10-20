@@ -58,12 +58,12 @@ comp.ord = function(comp.){
   list(mat=mat, ord=ord)
 }
 
-
-
 # Import #######################################################################
 
 panImm = read.csv('data/panImm_obs.csv')
-Tcell = read.csv('data/Tcell_obs.csv')
+Tcell = read.csv('data/Tcell_obs.csv') %>%
+  left_join(read.csv('../resources/tcell_labels2.csv')[,c('pheno','labels2')]) %>%
+  mutate(pheno=labels2) %>% select(-labels2)
 valid = read.csv('../integration/data/validation_Tcell-obs.csv') %>%
   left_join(read.csv('../integration/data/validation_Tcell.csv')) %>%
   filter(!pheno_pred %in% c('Unknown','Myeloid','CD3_neg','Doublet')) %>%
@@ -96,6 +96,29 @@ comp[['valid']] = valid %>%
   comp.prep(.,'pheno_pred') %>%
   left_join(Tcell %>% select(all_of(md_cols)) %>% distinct()) %>%
   left_join(valid_md)
+
+# Sub-clustering
+#Invar
+Invar = Tcell %>% left_join(read.csv('../resources/Invar_Treg_recl.csv')) %>%
+  filter(!is.na(subclus),subclus=='Invar') %>% mutate(leiden_recl=paste0('cl',leiden_recl))
+comp[['Invar']] = Invar %>%
+  filter(sample_id %in% (table(Invar$sample_id) %>% .[.>50] %>% names()) ) %>% #min cells
+  group_by(sample_id,leiden_recl) %>% tally() %>%
+  comp.prep(.,'leiden_recl') %>%
+  left_join(Tcell %>% select(all_of(md_cols)) %>% distinct()) %>%
+  left_join(read.csv('data/import/metadata-donor.csv') %>% distinct(),
+            relationship = "many-to-many")
+#Treg
+Treg = Tcell %>% left_join(read.csv('../resources/Invar_Treg_recl.csv')) %>%
+  filter(!is.na(subclus),subclus=='Treg') %>% mutate(leiden_recl=paste0('cl',leiden_recl))
+comp[['Treg']] = Treg %>%
+  filter(leiden_recl %in% paste0('cl',c(0,2,4))) %>% #CD4+Treg only
+  filter(sample_id %in% (table(Treg$sample_id) %>% .[.>50] %>% names()) ) %>% #min cells
+  group_by(sample_id,leiden_recl) %>% tally() %>%
+  comp.prep(.,'leiden_recl') %>%
+  left_join(Tcell %>% select(all_of(md_cols)) %>% distinct()) %>%
+  left_join(read.csv('data/import/metadata-donor.csv') %>% distinct(),
+            relationship = "many-to-many")
 
 # Ordination (PCA) #############################################################
 
@@ -133,8 +156,16 @@ model.non = lm(PC1 ~ age, dat.non)
 dat.pcd$predicted = predict(model.non, newdata = dat.pcd)
 dat.pcd$residuals = dat.pcd$PC1 - dat.pcd$predicted
 
-ords[['exag_skewing']] = dat.pcd
+# Calculating by how many years disease ages your T cells
+#To back-calculate the age equivalent of this difference:
+#Use the coefficient of the age term in the original model
+age_coefficient <- coef(model.non)["age"]
+dat.pcd = dat.pcd %>% mutate(
+  pca_delta = PC1 - predicted,
+  age_eqiv_diff = pca_delta / age_coefficient
+)
 
+ords[['exag_skewing']] = dat.pcd
 
 # Validation data PCA re-calculation ###########################################
 

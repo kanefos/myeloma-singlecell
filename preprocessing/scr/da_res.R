@@ -109,20 +109,27 @@ results$panImm[['tissue']] = celltype.LMM(
 
 results$Tcell[['tissue']] = list()
 
-results$Tcell$tissue[['all']] = comp$Tcell %>% 
-  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
+results$Tcell$tissue[['all']] = comp$Tcell %>%
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>%
   celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
 
-results$Tcell$tissue[['Non']] = comp$Tcell %>% 
-  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
-  filter(cohort %in% c('Non')) %>% 
+results$Tcell$tissue[['Non']] = comp$Tcell %>%
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>%
+  filter(cohort %in% c('Non')) %>%
   celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
 
-results$Tcell$tissue[['cancer']] = comp$Tcell %>% 
-  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>% 
-  filter(cohort %in% c('SMM','MM')) %>% 
+results$Tcell$tissue[['cancer']] = comp$Tcell %>%
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>100) %>%
+  filter(cohort %in% c('SMM','MM')) %>%
   celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
 
+results$Tcell$tissue[['all_Invar']] = comp$Invar %>%
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>50) %>%
+  celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
+
+results$Tcell$tissue[['all_Treg']] = comp$Treg %>%
+  filter(!donor_id %in% c(donors.longit,donor.Tex_hi),sampleSize>50) %>%
+  celltype.LMM(.,'clr ~ tissue',cond='tissue') %>% arrange(p.tissue)
 
 
 # Across cohorts  ##############################################################
@@ -185,7 +192,59 @@ for (formula in names(test.formulae)) {
   }
 }
 
-# Diagnosis SMM/MM vs true healthy
+
+# Diagnosis, Invar
+results$Invar[['cohort']] = list()
+dat = comp$Invar %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM')
+cohort.n = dat %>% select(donor_id,cohort) %>% distinct() %>% group_by(cohort) %>% tally()
+for (formula in names(test.formulae)) {
+  #print(formula)
+  #print(test.formulae[[formula]])
+  results$Invar[['cohort']][[formula]]=list()
+  for (test.var in names(test.comparisons)){
+    #print(test.var)
+    #print(test.comparisons[[test.var]])
+    dat.test = dat %>% filter(cohort %in% test.comparisons[[test.var]])
+    dat.test[['cohort']] = factor(dat.test[['cohort']], levels= test.comparisons[[test.var]])
+
+    res = celltype.LMM(dat.test, 'clr ~ cohort',cond='cohort') %>% arrange(p.cohort)
+    res$denom = as.character(test.comparisons[[test.var]][1])
+    res$denom.n = cohort.n[cohort.n$cohort==res$denom[1],]$n
+    res$numer = as.character(test.comparisons[[test.var]][2])
+    res$numer.n = cohort.n[cohort.n$cohort==res$numer[1],]$n
+
+    results$Invar[['cohort']][[formula]][[test.var]] = res
+  }
+}
+
+# Diagnosis, Treg
+results$Treg[['cohort']] = list()
+dat = comp$Treg %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM')
+cohort.n = dat %>% select(donor_id,cohort) %>% distinct() %>% group_by(cohort) %>% tally()
+for (formula in names(test.formulae)) {
+  #print(formula)
+  #print(test.formulae[[formula]])
+  results$Treg[['cohort']][[formula]]=list()
+  for (test.var in names(test.comparisons)){
+    #print(test.var)
+    #print(test.comparisons[[test.var]])
+    dat.test = dat %>% filter(cohort %in% test.comparisons[[test.var]])
+    dat.test[['cohort']] = factor(dat.test[['cohort']], levels= test.comparisons[[test.var]])
+
+    res = celltype.LMM(dat.test, 'clr ~ cohort',cond='cohort') %>% arrange(p.cohort)
+    res$denom = as.character(test.comparisons[[test.var]][1])
+    res$denom.n = cohort.n[cohort.n$cohort==res$denom[1],]$n
+    res$numer = as.character(test.comparisons[[test.var]][2])
+    res$numer.n = cohort.n[cohort.n$cohort==res$numer[1],]$n
+
+    results$Treg[['cohort']][[formula]][[test.var]] = res
+  }
+}
+
+
+# Diagnosis, Tcell, SMM/MM vs true healthy
 test.comparisons = list(
   HD.SMM = c('HD','SMM'), HD.MM = c('HD','MM'))
 dat = comp$Tcell %>% filter(
@@ -211,6 +270,30 @@ for (formula in names(test.formulae)) {
     results$Tcell[['cohort']][[formula]][[test.var]] = res
   }
 }
+
+
+
+# Risk groups #########
+
+# Test several hypothesis
+test.formulae = list(alone="clr ~ test.var",addAge="clr ~ test.var + age")
+test.comparisons = list(ISS = c('ISS_1','ISS_2_3'), Mayo = c('low'))
+
+# Risk groups, Tcell
+results$Tcell[['risk']] = list()
+dat = comp$Tcell %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM',sampleSize>100)
+#ISS
+dat.test = dat %>% filter(!is.na(risk_ISS))
+dat$risk_ISS = ifelse(dat$risk_ISS==1,'ISS_1','ISS_2&3')
+res = celltype.LMM(dat.test, 'clr ~ risk_ISS',cond='risk_ISS') %>% arrange(p.risk_ISS)
+results$Tcell[['risk']][['risk_ISS']] = res
+#Mayo
+dat.test = dat %>% filter(!is.na(risk_SMM_mayo),risk_SMM_mayo!='intermediate')
+res = celltype.LMM(dat.test, 'clr ~ risk_SMM_mayo',cond='risk_SMM_mayo') %>% arrange(p.risk_SMM_mayo)
+results$Tcell[['risk']][['risk_SMM_mayo']] = res
+
+
 
 # With age #####################################################################
 
@@ -275,7 +358,51 @@ for ( pw in unique(scr$pathway_neat)){
 }
 results$Tcell[['tumour_modules_pct']] = bind_rows(scr_res,.id='pathway_neat')
 
+# Invar
+dat = comp$Invar %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM') %>%
+  left_join(scr) %>% filter(!is.na(pct)) %>%
+  select(sample_id,donor_id,celltype,clr,pathway_neat,pct)
+
+scr_res = list()
+for ( pw in unique(scr$pathway_neat)){
+  scr_res[[pw]] = dat %>% filter(pathway_neat==pw) %>% celltype.cor(.,'pct')
+}
+results$Invar[['tumour_modules_pct']] = bind_rows(scr_res,.id='pathway_neat')
+
+# T cell
+dat = comp$Treg %>% filter(
+  !donor_id %in% c(donors.longit,donor.Tex_hi),tissue=='BM') %>%
+  left_join(scr) %>% filter(!is.na(pct)) %>%
+  select(sample_id,donor_id,celltype,clr,pathway_neat,pct)
+
+scr_res = list()
+for ( pw in unique(scr$pathway_neat)){
+  scr_res[[pw]] = dat %>% filter(pathway_neat==pw) %>% celltype.cor(.,'pct')
+}
+results$Treg[['tumour_modules_pct']] = bind_rows(scr_res,.id='pathway_neat')
+
 
 # Save results #############################################################
 
 save(results, file='data/da_results.RData')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
